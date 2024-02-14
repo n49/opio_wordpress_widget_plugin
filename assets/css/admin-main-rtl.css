@@ -1560,7 +1560,6 @@
 }
 
 .pwd-opio-logo {
-    background-image: url('https://op.io/dashboard/graphics/opio-blue-new-1x.png'); 
     display: flex; 
     align-items: center; 
     min-width: 100px; 

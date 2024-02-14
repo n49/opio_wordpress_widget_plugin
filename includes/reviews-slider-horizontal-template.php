@@ -146,23 +146,23 @@
                                 <div class="reviewer-avatar" style="background-color: <?php echo esc_attr(randomColor()); ?>"><?php echo esc_attr(mb_substr(ucfirst($review['user']["firstName"]), 0, 1, 'utf-8')); ?></div>
                             <?php } ?>    
                             <?php if($review['propertyInfo']['name'] === 'facebook') { ?>
-                                <div class="facebook-logo" style="background-image: url(&quot;https://s3.amazonaws.com/files-image-service/original/d38749a7cc26b5a3932ff8906f10f138.png&quot;);"></div>
+                                <div class="facebook-logo" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/facebook-logo.png'; ?>&quot;);"></div>
                             <?php } else if($review['propertyInfo']['name'] === 'google') { ?>
-                                <div class="google-logo" style="background-image: url(&quot;https://op.io/dashboard/graphics/google-slider-logo.svg&quot;);"></div>
+                                <div class="google-logo" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/google-logo.svg'; ?>&quot;);"></div>
                             <?php } else { ?>
-                                <div class="opio-logo" style="background-image: url(&quot;https://op.io/dashboard/graphics/opio-blue-new-1x.png&quot;);"></div>
-                            <?php } ?>  
+                                <div class="opio-logo" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>&quot;);"></div>
+                            <?php } ?> 
                         </div>
                         <div class="rating-container">
                             <?php if($review['propertyInfo']['name'] === 'facebook') { ?>
                                 <?php if($review['rating'] === "positive") { ?>
                                     <div class="fb-rating-div">
-                                        <img class="fb-rating-img" src="https://op.io/dashboard/graphics/facebook-recommends.png" />
+                                        <img class="fb-rating-img" src="<?php echo esc_url(OPIO_ASSETS_URL) . 'img/facebook-recommends.png'; ?>" />
                                         <p class="fb-rating-text-p">Recommends</p>
                                     </div>
                                 <?php } else { ?>
                                     <div class="fb-rating-div">
-                                        <img class="fb-rating-img" src="https://op.io/dashboard/graphics/facebook-recommends-grey.png" />
+                                        <img class="fb-rating-img" src="<?php echo esc_url(OPIO_ASSETS_URL) . 'img/facebook-recommends-grey.png'; ?>"/>
                                         <p class="fb-rating-text-n">Doesn't Recommend</p>
                                     </div>
                                 <?php } ?>  
@@ -295,7 +295,7 @@
     </div>
     <div class="rating-widget-part">
         <div class="w-opio-logo-container">
-            <span id="powered-by-text" class="w-pwd-text">Powered by</span><div class="pwd-opio-logo"></div>
+            <span id="powered-by-text" class="w-pwd-text">Powered by</span><div class="pwd-opio-logo" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>&quot;);"></div>
         </div>
         <div class="vertical-divider"></div>
         <div class="rating-widget">
@@ -497,13 +497,13 @@
             if (reviewData.rating === "positive") {
                 ratingElement.innerHTML = `
                 <div class="lb-fb-rating-div">
-                    <img class="lb-fb-rating-img" src="https://op.io/dashboard/graphics/facebook-recommends.png" />
+                    <img class="lb-fb-rating-img" src="<?php echo esc_url(OPIO_ASSETS_URL) . 'img/facebook-recommends.png'; ?>"/>
                     <p class="lb-fb-rating-text-p">Recommends</p>
                 </div>`;
             } else {
                 ratingElement.innerHTML = `
                 <div class="lb-fb-rating-div>
-                    <img class="lb-fb-rating-img" src="https://op.io/dashboard/graphics/facebook-recommends-grey.png" />
+                    <img class="lb-fb-rating-img" src="<?php echo esc_url(OPIO_ASSETS_URL) . 'img/facebook-recommends-grey.png'; ?>" />
                     <p class="lb-fb-rating-text-n">Doesn't Recommend</p>
                 </div>`;
             }
@@ -523,21 +523,21 @@
         var lbPropertyLogo = document.getElementById('lb-property-logo');
 
         if (reviewData.propertyInfo.name === 'facebook') {
-            lbPropertyLogo.style.backgroundImage = 'url("https://s3.amazonaws.com/files-image-service/original/d38749a7cc26b5a3932ff8906f10f138.png")';
+            lbPropertyLogo.style.backgroundImage = 'url("<?php echo esc_url(OPIO_ASSETS_URL) . 'img/facebook-logo.png'; ?>")';
             lbPropertyLogo.style.width = '66px';
             lbPropertyLogo.style.height = '26px';
             lbPropertyLogo.style.minWidth = '66px';
             lbPropertyLogo.style.minHeight = '26px';
             lbPropertyLogo.style.marginTop = '-5px';
         } else if (reviewData.propertyInfo.name === 'google') {
-            lbPropertyLogo.style.backgroundImage = 'url("https://op.io/dashboard/graphics/google-slider-logo.svg")';
+            lbPropertyLogo.style.backgroundImage = 'url("<?php echo esc_url(OPIO_ASSETS_URL) . 'img/google-logo.svg'; ?>")';
             lbPropertyLogo.style.width = '60px';
             lbPropertyLogo.style.height = '22px';
             lbPropertyLogo.style.minWidth = '60px';
             lbPropertyLogo.style.minHeight = '22px';
             lbPropertyLogo.style.marginTop = '0px';
         } else {
-            lbPropertyLogo.style.backgroundImage = 'url("https://op.io/dashboard/graphics/opio-blue-new-1x.png")';
+            lbPropertyLogo.style.backgroundImage = 'url("<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>")';
             lbPropertyLogo.style.width = '60px';
             lbPropertyLogo.style.height = '24px';
             lbPropertyLogo.style.minWidth = '60px';
