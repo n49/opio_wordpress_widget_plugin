@@ -1,0 +1,594 @@
+#root {
+    outline: none;
+    font-size: 14px;
+    all: initial;
+}
+
+.opioHR {
+    margin-top: 20px !important;
+margin-bottom: 20px !important;
+border: 0 !important;
+border-top: 1px solid #E6E8EB !important;
+background-color: unset !important;
+max-width: unset !important;
+text-align: unset !important;
+height: unset !important;
+
+}
+
+.outer {
+    font-size: 14px;
+    outline: none;
+    max-width: 764px;
+    background-color: #ffffff;
+    color: rgba(84, 86, 90, 1);
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+.logoContainer {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.opioLogo {
+    vertical-align: middle; 
+    text-decoration: none;
+    height: 26px;
+}
+
+.poweredBy {
+    position: absolute;
+    right: 0px;
+    top: -20px;
+    font-size: 12px;
+}
+
+.hr {
+    font-size: 14px;
+    color: rgba(84, 86, 90, 1);
+    outline: none;
+    display: flex;
+    margin-top: 30px;
+    line-height: 16px;
+    height: 16px;
+}
+
+#aggregationOpio {
+    font-size: 14px;
+    color: rgba(84, 86, 90, 1);
+    outline: none;
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    z-index: 1;
+    padding-top: 15px;
+}
+
+.inside1 {
+    font-size: 14px;
+    color: rgba(84, 86, 90, 1);
+    outline: none;
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
+    padding: 0px 10px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#aggregationWidgetOpio {
+    font-size: 14px;
+    color: rgba(84, 86, 90, 1);
+    outline: none;
+    display: inline-block;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    line-height: initial;
+}
+
+.aggregationContainer {
+    font-size: 14px;
+    color: rgba(84, 86, 90, 1);
+    line-height: initial;
+    outline: none;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0px 20px 0px;
+}
+
+.aggregationScore {
+    line-height: initial;
+    text-align: center;
+    outline: none;
+    font-size: 60px;
+    height: 60px;
+    font-weight: 300;
+    color: rgba(84, 86, 90, 1);
+    margin-top: -6px;
+    position: relative;
+    top: -4px;
+}
+
+
+
+.empTagContainer {
+    display: grid; 
+    grid-template-columns: 32% 32% 32%; 
+    margin-top: 10px; 
+    margin-bottom: 10px; 
+    grid-gap: 10px;
+}
+
+.empTagCard {
+    display: grid; 
+    grid-template-columns: 20% 80%; 
+    border: 1px solid #E6E8EB; 
+    border-radius: 5px; 
+    padding: 10px
+}
+
+
+
+@media (max-width: 360px) {
+    
+    #aggregationWidget>div:nth-child(1)>div:nth-child(1) {
+        left: -60px !important;
+    }
+    
+    #aggregationWidget>div:nth-child(1)>div:nth-child(2) {
+        margin-left: -80px !important;
+    }
+    
+    #businessAd {
+        height: 60px !important;
+    }
+    
+    #adBox {
+        height: 60px !important;
+    }
+    
+    #adLogo {
+        width: 20% !important;
+    }
+    
+    #adImg {
+        height: 40px !important;
+        margin: 10px !important;
+    }
+    
+    #adContent {
+        display: grid;
+    }
+    
+    #adTitle {
+        margin: 10px 0px 0px 0px !important;
+        font-size: 15px !important;
+    }
+    
+    #adSubTitle {
+        font-size: 8px !important;
+        margin-bottom: 2px !important;
+    }
+    
+    #adCTA {
+        line-height: 9px !important;
+        height: 12px !important;
+        width: 40% !important;
+        padding: 0px 10px 10px 10px !important;
+    }
+    
+    #btnText {
+        font-size: 7px !important;
+        line-height: 10px !important;
+    }
+    
+    .empTagContainer {
+        display: grid; 
+        grid-template-rows: auto; 
+        grid-template-columns: auto;
+        margin-top: 10px; 
+        margin-bottom: 10px; 
+        grid-gap: 10px;
+    }
+}
+
+
+@media (min-width: 360px) and (max-width: 430px) {
+    
+    #aggregationWidget>div:nth-child(1)>div:nth-child(1) {
+        left: -60px !important;
+    }
+    
+    #aggregationWidget>div:nth-child(1)>div:nth-child(2) {
+        margin-left: -80px !important;
+    }
+    
+    #businessAd {
+        height: 85px !important;
+    }
+    
+    #adBox {
+        height: 85px !important;
+    }
+    
+    #adImg {
+        height: 50px !important;
+        margin: 18px !important;
+    }
+    
+    #adContent {
+        display: grid;
+    }
+    
+    #adTitle {
+        margin: 10px 0px 0px 0px !important;
+        font-size: 20px !important;
+    }
+    
+    #adSubTitle {
+        font-size: 12px !important;
+        margin-bottom: 4px !important;
+    }
+    
+    #adCTA {
+        line-height: 9px !important;
+        height: 18px !important;
+        width: 50% !important;
+        padding: 2px 10px 10px 10px !important;
+    }
+    
+    #btnText {
+        font-size: 8px !important;
+        line-height: 10px !important;
+    }
+    
+    
+    .empTagContainer {
+        display: grid; 
+        grid-template-rows: auto; 
+        grid-template-columns: auto;
+        margin-top: 10px; 
+        margin-bottom: 10px; 
+        grid-gap: 10px;
+    }
+    
+    .empTagCard {
+        display: grid; 
+        width: 70%;
+        grid-template-columns: 20% 80%; 
+        border: 1px solid #E6E8EB; 
+        border-radius: 5px; 
+        padding: 10px
+    }
+    
+    
+    @media (min-width: 430px) and (max-width: 510px) {
+        
+        #root>section>div.outer>div:nth-child(1)>div.multiple-items.slick-initialized.slick-slider>div>div {
+            padding-top: 35%;
+        }
+        
+        #aggregationOpio>div:nth-child(1) {
+            width: 100% !important;
+        }
+        
+        #businessAd {
+            height: 95px !important;
+        }
+        
+        #adBox {
+            height: 95px !important;
+        }
+        
+        #adImg {
+            height: 60px !important;
+            margin: 20px !important;
+        }
+        
+        #adContent {
+            display: grid;
+        }
+        
+        #adTitle {
+            margin: 10px 0px 0px 0px !important;
+            font-size: 24px !important;
+        }
+        
+        #adSubTitle {
+            font-size: 14px !important;
+            margin-bottom: 4px !important;
+        }
+        
+        #adCTA {
+            line-height: 9px !important;
+            height: 18px !important;
+            width: 50% !important;
+            padding: 3px 10px 10px 10px !important;
+        }
+        
+        #btnText {
+            font-size: 10px !important;
+            line-height: 10px !important;
+        }
+        .empTagContainer {
+            display: grid; 
+            grid-template-columns: 50% 50%; 
+            padding: 0px 10px;
+            margin-top: 10px; 
+            margin-bottom: 10px; 
+            grid-gap: 10px;
+        }
+        
+        .empTagCard {
+            display: grid; 
+            grid-template-columns: 35% 65%; 
+            border: 1px solid #E6E8EB; 
+            border-radius: 5px; 
+            padding: 10px
+        }
+    }
+    
+    @media (min-width: 510px) and (max-width: 600px) {
+        
+        #root>section>div.outer>div:nth-child(1)>div.multiple-items.slick-initialized.slick-slider>div>div {
+            padding-top: 35%;
+        }
+        
+        #aggregationOpio>div:nth-child(1) {
+            width: 100% !important;
+        }
+        
+        #businessAd {
+            height: 120px !important;
+        }
+        
+        #adBox {
+            height: 120px !important;
+        }
+        
+        #adImg {
+            height: 70px !important;
+            margin: 25px !important;
+        }
+        
+        #adContent {
+            display: grid;
+        }
+        
+        #adTitle {
+            margin: 15px 0px 0px 0px !important;
+            font-size: 24px !important;
+        }
+        
+        #adSubTitle {
+            font-size: 16px !important;
+            margin-bottom: 4px !important;
+        }
+        
+        #adCTA {
+            line-height: 9px !important;
+            height: 22px !important;
+            width: 50% !important;
+            padding: 5px 10px 10px 10px !important;
+        }
+        
+        #btnText {
+            font-size: 10px !important;
+            line-height: 10px !important;
+        }
+        
+        .empTagContainer {
+            display: grid; 
+            grid-template-columns: 50% 50%; 
+            padding: 0px 10px;
+            margin-top: 10px; 
+            margin-bottom: 10px; 
+            grid-gap: 10px;
+        }
+        
+        .empTagCard {
+            display: grid; 
+            grid-template-columns: 20% 80%; 
+            border: 1px solid #E6E8EB; 
+            border-radius: 5px; 
+            padding: 10px
+        }
+    }
+    
+    @media (min-width: 600px) and (max-width: 650px) {
+        
+        #root>section>div.outer>div:nth-child(1)>div.multiple-items.slick-initialized.slick-slider>div>div {
+            padding-top: 35%;
+        }
+        
+        #aggregationOpio>div:nth-child(1) {
+            width: 100% !important;
+        }
+        
+        #businessAd {
+            height: 130px !important;
+        }
+        
+        #adBox {
+            height: 130px !important;
+        }
+        
+        #adImg {
+            height: 70px !important;
+            margin: 25px !important;
+        }
+        
+        #adContent {
+            display: grid;
+        }
+        
+        #adTitle {
+            margin: 20px 0px 0px 0px !important;
+            font-size: 26px !important;
+        }
+        
+        #adSubTitle {
+            font-size: 16px !important;
+            margin-bottom: 4px !important;
+        }
+        
+        #adCTA {
+            line-height: 9px !important;
+            height: 22px !important;
+            width: 50% !important;
+            padding: 7px 10px 10px 10px !important;
+        }
+        
+        #btnText {
+            font-size: 12px !important;
+            line-height: 10px !important;
+        }
+    }
+    
+    @media (min-width: 650px) and (max-width: 768px) {
+        
+        #root>section>div.outer>div:nth-child(1)>div.multiple-items.slick-initialized.slick-slider>div>div {
+            padding-top: 35%;
+        }
+        
+        #aggregationOpio>div:nth-child(1) {
+            width: 100% !important;
+        }
+        
+        #businessAd {
+            height: 150px !important;
+        }
+        
+        #adBox {
+            height: 150px !important;
+        }
+        
+        #adImg {
+            height: 90px !important;
+            margin: 30px !important;
+        }
+        
+        #adContent {
+            display: grid;
+        }
+        
+        #adSubTitle {
+            margin-bottom: 4px !important;
+        }
+        
+        #adCTA {
+            line-height: 9px !important;
+            height: 30px !important;
+            width: 60% !important;
+            padding: 9px 10px 10px 10px !important;
+        }
+        
+        #btnText {
+            font-size: 16px !important;
+            line-height: 10px !important;
+        }
+    }
+    
+    @media (min-width: 800px) and (max-width: 900px) {
+        
+        #root>section>div.outer>div:nth-child(1)>div.multiple-items.slick-initialized.slick-slider>div>div {
+            padding-top: 35%;
+        }
+        
+        #aggregationOpio>div:nth-child(1) {
+            width: 100% !important;
+        }
+        
+        #businessAd {
+            height: 120px !important;
+        }
+        
+        #adBox {
+            height: 120px !important;
+        }
+        
+        #adImg {
+            height: 80px !important;
+            margin: 25px !important;
+        }
+        
+        #adContent {
+            display: grid;
+        }
+        
+        #adTitle {
+            margin: 10px 0px 0px 0px !important;
+            font-size: 30px !important;
+        }
+        
+        #adSubTitle {
+            font-size: 18px !important;
+            margin-bottom: 4px !important;
+        }
+        
+        #adCTA {
+            line-height: 9px !important;
+            height: 25px !important;
+            width: 60% !important;
+            padding: 7px 10px 10px 10px !important;
+        }
+        
+        #btnText {
+            font-size: 15px !important;
+            line-height: 10px !important;
+        }
+    }
+    
+    @media (min-width: 900px) and (max-width: 1048px) {
+        
+        #root>section>div.outer>div:nth-child(1)>div.multiple-items.slick-initialized.slick-slider>div>div {
+            padding-top: 35%;
+        }
+        
+        #aggregationOpio>div:nth-child(1) {
+            width: 100% !important;
+        }
+        
+        #businessAd {
+            height: 140px !important;
+        }
+        
+        #adBox {
+            height: 140px !important;
+        }
+        
+        #adImg {
+            height: 85px !important;
+            margin: 25px !important;
+        }
+        
+        #adContent {
+            display: grid;
+        }
+        
+        #adTitle {
+            margin: 10px 0px 0px 0px !important;
+        }
+        
+        #adSubTitle {
+            margin-bottom: 6px !important;
+        }
+        
+        #adCTA {
+            line-height: 9px !important;
+            height: 27px !important;
+            width: 60% !important;
+            padding: 8px 10px 10px 10px !important;
+        }
+        
+        #btnText {
+            font-size: 18px !important;
+            line-height: 10px !important;
+        }
+    }
+}

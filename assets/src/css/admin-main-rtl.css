@@ -1,0 +1,702 @@
+/*-------------------------------- WP Overrides --------------------------------*/
+.opio-admin #wpcontent {
+    padding: 0;
+}
+
+.opio-reviews_page_opio-builder #wpcontent,
+.opio-admin.opio-reviews_page_opio-builder #wpcontent {
+    padding-left: 300px;
+}
+
+.toplevel_page_opio .wp-menu-image img {
+    width: 18px;
+}
+
+.opio-admin.edit-php #wpbody {
+    color: #5d6f80;
+    padding-right: 20px;
+    position: relative;
+}
+
+.opio-admin.edit-php #wpbody .wp-header-end,
+.opio-admin.post-new-php #wpbody .wp-header-end,
+.opio-admin.post-php #wpbody .wp-header-end {
+    margin-top: 6px;
+}
+
+.opio-admin .update-nag {
+    margin: 20px 20px 0 0;
+}
+
+.opio-admin.edit-php .update-nag {
+    margin: 20px 0 0 20px;
+}
+
+.opio-admin.edit-php .update-nag ~ .update-nag {
+    margin-right: 0;
+}
+
+.opio-admin #wpbody #screen-meta-links {
+    display:none
+}
+
+.opio-admin #screen-meta {
+    background-color: #ecf0f1;
+    border: 0;
+    margin: 0;
+}
+
+.opio-admin #screen-meta-links {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+/*-------------------------------- Top Header --------------------------------*/
+.opio-tophead {
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -webkit-box-sizing: border-box;
+    align-items: center;
+    background-color: #fff;
+    border-bottom: 1px solid #cfd9db;
+    padding: 15px 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    top: 46px;
+    width: 100%;
+}
+
+@media (min-width: 601px) {
+    .opio-tophead {
+        -ms-flex-align: stretch;
+        -webkit-align-items: stretch;
+        -webkit-box-align: stretch;
+        align-items: stretch;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        top: 0;
+    }
+}
+
+.opio-tophead img {
+    width: 32px;
+    margin: 0 0 0 4px;
+    vertical-align: middle;
+}
+
+.opio-tophead-title {
+    padding: 0;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.4em;
+}
+
+.opio-page-title {
+    font-size: 23px;
+    font-weight: 400;
+    margin: 0;
+    padding: 20px 20px 0 0;
+    line-height: 29px;
+}
+
+.opio-version {
+  position: absolute;
+  top: 6px;
+  left: 16px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  display: inline-block;
+  margin: 12px 0 0;
+  padding: 6px 10px;
+  font-size: 12px;
+  line-height: 14px;
+  color: #FFF;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+  vertical-align: baseline;
+  background-color: #999;
+}
+
+/*-------------------------------- Builder page --------------------------------*/
+.opio-toolbar {
+    padding: 15px 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #cfd9db;
+}
+
+@media (min-width: 783px) {
+    .opio-toolbar {
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+    }
+}
+
+.opio-toolbar-title {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    margin-bottom: 0;
+    margin-left: 20px;
+    min-width: 0;
+}
+
+.opio-toolbar-title-input {
+    background-color: transparent!important;
+    border: none!important;
+    -webkit-box-shadow: none!important;
+    box-shadow: none!important;
+    width: 100%;
+}
+
+.opio-toolbar-title-input {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.4em;
+    margin: 0;
+    padding: 0;
+}
+
+.opio-toolbar-control {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.opio-toolbar-control button {
+    margin-right: 20px!important;
+}
+
+.opio-toolbar-control input[type="text"] {
+    width: 200px;
+    height: 34px;
+    font-size: 14px;
+}
+
+.opio-toolbar-options label {
+    display: block;
+    padding: 0 4px 0 0;
+}
+
+/* hide post content (json) in title column */
+.opio-admin .type-opio_collection .title.column-title {
+    font-size: 0;
+}
+.opio-admin .type-opio_collection .title.column-title strong,
+.opio-admin .type-opio_collection .title.column-title .row-actions {
+    line-height: 1.5em;
+}
+
+.opio-builder-workspace {
+    display: block;
+    position: relative;
+    width: 100%;
+    overflow-y: hidden;
+    box-sizing: border-box;
+}
+
+.opio-builder-preview {
+    font-size: 14px;
+    grid-area: preview;
+    min-height: 0;
+    min-width: 0;
+    padding: 20px;
+    line-height: 1.75;
+}
+
+.opio-builder-options {
+    box-sizing: border-box;
+    position: fixed;
+    top: 32px;
+    bottom: 0;
+    left: 0;
+    width: 300px;
+    overflow: hidden;
+    transition: all 0.3s;
+    z-index: 1;
+    overflow-y: auto;
+    background: #fafafa;
+}
+
+.wp-gr .wp-review-hidden {
+    opacity: .5 !important;
+}
+
+.wp-gr .wp-review-hide {
+    color: #fff !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    line-height: 26px !important;
+    text-decoration: none !important;
+    text-transform: uppercase !important;
+    padding: 2px 8px !important;
+    border-radius: 3px !important;
+    border-color: #0062cc !important;
+    background-color: #427fbf !important;
+}
+
+.wp-gr .wp-review-hide:hover {
+    background-color: #1d62ab !important;
+}
+
+/*-------------------------------- Settings page --------------------------------*/
+.nav-tab.nav-tab-active {
+    box-shadow: none;
+    background: #fff;
+    border-bottom-color: #fff;
+}
+
+.opio-settings-workspace {
+    font-size: 14px;
+    margin: 20px;
+    padding: 20px;
+    background: #fff;
+}
+
+.opio-settings-workspace p {
+    font-size: 14px;
+}
+
+.opio-settings-workspace .opio-alert {
+    max-width: 500px;
+    word-wrap: break-word;
+}
+
+.opio-warn {
+    padding: 10px;
+    margin: 20px 0 10px;
+    font-size: 15px;
+    line-height: 26px;
+    font-weight: 600;
+    color: #000;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #ffeb3b;
+}
+
+/*-------------------------------- Support page --------------------------------*/
+.opio-support-question {
+    padding-bottom: 10px;
+}
+
+.opio-support-workspace {
+    font-size: 15px;
+    line-height: 22px;
+    margin: 20px;
+    padding: 20px;
+    background: #fff;
+}
+
+.opio-support-workspace p {
+    font-size: 15px;
+}
+
+.opio-support-workspace #fig p {
+    line-height: 24px;
+}
+
+.opio-support-workspace img {
+    width: 100%;
+}
+
+.opio-support-workspace .subheader {
+    color: #4b76b7;
+    margin: 40px 0 20px;
+    text-decoration: underline;
+}
+
+.opio-support-workspace .opio-flex-col > b:first-child,
+.opio-support-workspace .opio-flex-col3 > b:first-child {
+    padding: 2px 8px;
+    margin-left: 4px;
+    border-radius: 50%;
+    color: #fff;
+    background: #36ad55;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 26%);
+}
+
+.box-img {
+    padding: 15px;
+    margin: 0 0 10px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+}
+
+/*-------------------------------- Full Installation Guide --------------------------------*/
+#fig hr {
+    border-top: 1px solid #bbb;
+    border-bottom: 2px solid #eee;
+}
+
+#fig .opio-flex-row {
+    align-items: center!important;
+    text-align: right;
+    margin-bottom: 40px;
+}
+
+#fig .opio-flex-col,
+#fig .opio-flex-col3 {
+    padding: 0 20px;
+    line-height: 24px;
+}
+
+#fig .opio-flex-col:first-child,
+#fig .opio-flex-col3:first-child {
+    padding-left: 10px;
+}
+
+#fig img {
+    width: 100%;
+}
+
+#fig .subheader {
+    color: #4b76b7;
+    margin: 40px 0 20px;
+    text-decoration: underline;
+}
+
+#fig .opio-flex-col > b:first-child,
+#fig .opio-flex-col3 > b:first-child {
+    padding: 2px 8px;
+    margin-left: 4px;
+    border-radius: 50%;
+    color: #fff;
+    background: #36ad55;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 26%);
+}
+
+/*-------------------------------- Field --------------------------------*/
+.opio-field,
+.opio-field * {
+    box-sizing: border-box;
+}
+
+.opio-field {
+    padding: 0 0 15px 0;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    border-bottom: 1px dashed #ddd;
+}
+
+@media (min-width: 600px) {
+    .opio-field {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .opio-field-label {
+        flex: 0 0 25%;
+        padding-left: 4%;
+    }
+    .opio-field-option {
+        flex: 0 0 75%;
+    }
+}
+
+.opio-field input[type="text"] {
+    margin: 0;
+    padding: 5px 8px;
+    border-radius: 2px;
+}
+
+.opio-field select {
+    width: 15em;
+    margin-right: 0;
+}
+
+/*-------------------------------- Flex row/col --------------------------------*/
+.opio-flex-row {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+}
+
+.opio-flex-col,
+.opio-flex-col3 {
+    box-sizing: border-box;
+}
+
+.opio-flex-col:first-child,
+.opio-flex-col3:first-child,
+.opio-flex-col3 + .opio-flex-col3 {
+    padding-left: 10px;
+}
+
+@media (min-width: 700px) {
+    .opio-flex-col {
+        width: 50%;
+    }
+    .opio-flex-col3 {
+        width: 30%;
+    }
+    .opio-flex-col6 {
+        width: 66.7%;
+    }
+    .opio-flex-col7 {
+        width: 70%;
+    }
+}
+
+/*-------------------------------- Alert --------------------------------*/
+.opio-alert {
+    font-size: 14px;
+    line-height: 1.846;
+    border: none;
+    color: #fff;
+    padding: 15px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+}
+
+.opio-alert-dismissable,
+.opio-alert-dismissible {
+    padding-left: 35px;
+}
+
+.opio-alert-success {
+    color: #fff;
+    border-color: #d6e9c6;
+    background-color: #4caf50;
+}
+
+.opio-alert-warning {
+    background-color: #a22525;
+}
+
+.opio-alert a:not(.close),
+.opio-alert .alert-link {
+    color: #fff;
+    font-weight: bold;
+}
+
+/*-------------------------------- Widgets Builder --------------------------------*/
+.opio-builder-platforms {
+    position: relative;
+    box-sizing: border-box;
+}
+
+/*.opio-platform-google .opio-builder-top {
+    color: #e7711b;
+}
+
+.opio-platform-facebook .opio-builder-top {
+    color: #3c5b9b;
+}
+
+.opio-platform-yelp .opio-builder-top {
+    color: #d32323;
+}*/
+
+.opio-builder-top {
+    padding: 10px;
+    color: #23282d;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4em;
+    cursor: pointer;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    background: #fafafa url('../img/button-down-black.svg') no-repeat left;
+}
+
+.opio-builder-top:hover {
+    border-color: #999;
+    box-shadow: 0 1px 2px rgba(0,0,0,.1);
+}
+
+.opio-builder-inside {
+    border-top: none;
+    padding: 10px 10px 0;
+    line-height: 16px;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+
+.opio-builder-inside .opio-builder-option {
+    margin: 10px 0 0;
+    position: relative;
+}
+
+.opio-builder-inside .opio-builder-option:first-child {
+    margin-top: 0;
+}
+
+.opio-builder-inside .opio-builder-option:last-child {
+    margin-bottom: 10px;
+}
+
+.opio-builder-inside input[type="text"],
+.opio-builder-inside select,
+.opio-builder-inside button,
+.opio-builder-inside textarea {
+    width: 100%;
+    clear: both;
+    border-spacing: 0;
+}
+
+.opio-builder-inside pre {
+    margin: 0;
+    color: #b73434;
+    font-size: 10px;
+    line-height: 16px;
+    padding: 4px;
+    background: #fff;
+    overflow: auto;
+}
+
+.opio-builder-connect {
+    margin: 0 0 10px;
+    padding: 6px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    background: #eee;
+}
+
+.opio-builder-connect.opio-connect-google {
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    background: #fa8e08;
+}
+
+.opio-connect-google-inside {
+    padding: 0 1px;
+}
+
+.opio-builder-connect.opio-connect-facebook {
+    background: #3c5b9b;
+}
+
+.opio-builder-connect.opio-connect-tripadvisor {
+    background: #3eca77;
+}
+
+.opio-builder-connect.opio-connect-yelp {
+    margin-bottom: 0;
+    background: #d32323;
+}
+
+.opio-builder-connect.opio-connect-google + div,
+.opio-builder-connect.opio-connect-yelp + div {
+    margin-top: 10px;
+}
+
+.opio-connections {
+    padding-bottom: 10px;
+}
+
+.opio-connection {
+    cursor: move;
+}
+
+.opio-connect-business {
+    color: #333;
+    text-align: right;
+    margin: 10px 0 0;
+    border: 1px solid #ccc;
+    background: #fafafa url(../img/button-down-black.svg) no-repeat left;
+}
+
+.opio-connect-business + div {
+    padding: 4px;
+    border: 1px solid rgb(204, 204, 204);
+    border-top: 0;
+}
+
+.opio-connect-select {
+    display: none!important;
+}
+
+.opio-platform-multiple .opio-connect-select {
+    display: inline-block!important;
+}
+
+.opio-connect-photo {
+    width: 24px;
+    height: 24px;
+    margin-left: 10px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    vertical-align: middle;
+}
+
+.opio-connect-photo-change {
+    margin-left: 10px
+}
+
+.opio-connect-error {
+  color: #e60909;
+  font-size: 13px;
+}
+
+.opio-connection-checkbox {
+    display: none;
+    margin: 10px 6px 0 0;
+}
+
+.opio-platform-multiple .opio-connection-checkbox {
+    display: block;
+}
+
+.opio-quest {
+    position: absolute;
+    top: 6px;
+    left: 3px;
+    width: 16px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    background: #eee;
+}
+
+.opio-quest.opio-quest-top {
+    top: 0;
+}
+
+.opio-quest.opio-quest-top22 {
+    top: 22px;
+}
+
+.opio-quest:hover {
+    border: 1px solid #999;
+}
+
+.opio-quest-help {
+    display: none;
+    margin: 0 0 10px 0;
+    padding: 4px;
+    font-size: 13px;
+    line-height: 18px;
+    background: #eee;
+}
+
+.opio-well {
+    padding: 10px;
+    margin: 10px 0px;
+    border-radius: 3px;
+    border: 1px solid #d9d9d9;
+    background: #f1f1f1;
+}
+
+#rating_temp {
+    height: 260px;
+    font-size: 12px;
+    word-break: break-all;
+}
