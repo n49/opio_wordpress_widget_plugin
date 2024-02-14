@@ -21,7 +21,7 @@ class Admin_Menu {
             'OPIO Reviews Plugin',
             'OPIO Reviews',
             'edit_posts',
-            'opio',
+            'grw',
             '',
             OPIO_ASSETS_URL . 'img/logo.jpeg',
             90
@@ -30,20 +30,29 @@ class Admin_Menu {
 
     public function add_subpages() {
         $builder_page = new Admin_Page(
-            'opio',
+            'grw',
             'Reviews Builder',
             'Builder',
             'edit_posts',
-            'opio-builder'
+            'grw-builder'
         );
         $builder_page->add_page();
 
+        $slider_page = new Admin_Page(
+            'grw',
+            'Reviews Builder',
+            'Review Slider',
+            'edit_posts',
+            'grw-slider'
+        );
+        $slider_page->add_page();
+
         $setting_page = new Admin_Page(
-            'opio',
+            'grw',
             'Support',
             'Support',
             'manage_options',
-            'opio-support'
+            'grw-support'
         );
         $setting_page->add_page();
     }
@@ -52,20 +61,23 @@ class Admin_Menu {
         global $plugin_page;
 
         $hidden_pages = array(
-            'opio-builder',
+            'grw-builder',
+            'grw-slider'
         );
 
         if ($plugin_page && in_array($plugin_page, $hidden_pages)) {
-            $submenu_file = 'edit.php?post_type=' . Post_Types::FEED_POST_TYPE;
+            // $submenu_file = 'edit.php?post_type=' . Post_Types::SLIDER_POST_TYPE;
+            // $submenu_file = 'edit.php?post_type=' . Post_Types::FEED_POST_TYPE;
+            $submenu_file = 'edit.php?post_type=' . ($plugin_page === 'grw-slider' ? Post_Types::SLIDER_POST_TYPE : Post_Types::FEED_POST_TYPE);
         }
 
         foreach ($hidden_pages as $page) {
-            remove_submenu_page('opio', $page);
+            remove_submenu_page('grw', $page);
         }
 
         return $submenu_file;
     }
-
+    
     public function add_admin_body_class($classes) {
         $current_screen = get_current_screen();
 
@@ -73,8 +85,8 @@ class Admin_Menu {
             return;
         }
 
-        if (strpos($current_screen->id, 'opio') !== false) {
-            $classes .= ' opio-admin ';
+        if (strpos($current_screen->id, 'grw') !== false) {
+            $classes .= ' grw-admin ';
         }
         return $classes;
     }

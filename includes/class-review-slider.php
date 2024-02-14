@@ -1,17 +1,16 @@
 <?php
 namespace WP_Opio_Reviews\Includes;
 
-class Builder_Page {
+class Review_Slider {
 
 
-    public function __construct(Feed_Deserializer $feed_deserializer) {
+    public function __construct(Slider_Deserializer $slider_deserializer) {
         // error_reporting(0);
-        $this->feed_deserializer = $feed_deserializer;
-        error_reporting(E_ERROR | E_PARSE);
+        $this->slider_deserializer = $slider_deserializer;
     }
 
     public function register() {
-        add_action('grw_admin_page_grw-builder', array($this, 'init'));
+        add_action('grw_admin_page_grw-slider', array($this, 'init'));
     }
 
     public function init() {
@@ -21,11 +20,10 @@ class Builder_Page {
         }
 
         $feed = null;
-        if (isset($_GET[Post_Types::FEED_POST_TYPE . '_id'])) {
-            $feed = $this->feed_deserializer->get_feed(sanitize_text_field(wp_unslash($_GET[Post_Types::FEED_POST_TYPE . '_id'])));
+        if (isset($_GET[Post_Types::SLIDER_POST_TYPE . '_id'])) {
+            $feed = $this->slider_deserializer->get_feed(sanitize_text_field(wp_unslash($_GET[Post_Types::SLIDER_POST_TYPE . '_id'])));
         }
-        // var_dump('$feed value here');
-        // var_dump($feed);
+
         $this->render($feed);
     }
 
@@ -39,18 +37,19 @@ class Builder_Page {
             wp_enqueue_media();
         }
         $review_option = '';
+        $slider_type = '';
         $review_type = '';
         $biz_id = '';
         $feed_id = '';
         $loaded_bizs = "{}";
         $business_name = '';
+        $review_feed_link = '';
         $org_id = '';
         $feed_inited = false;
         $businesses = null;
         $feed_object = '';
         if ($feed != null) {
             $feed_object = json_decode($feed->post_content);
-            // dd($feed_object);
             $feed_id = $feed->ID;
             $loaded_bizs_raw = $feed_object->loaded_bizs;
             $loaded_bizs = json_encode($feed_object->loaded_bizs);
@@ -58,6 +57,8 @@ class Builder_Page {
             $biz_id = ($feed_object->biz_id);
             $org_id = $feed_object->org_id;
             $biz_org_id = $feed_object->biz_org_id;
+            $slider_type = $feed_object->slider_type;
+            $review_feed_link = ($feed_object->review_feed_link);
             $review_type = $feed_object->review_type;
             $review_option = $feed_object->review_option;
             if(isset($biz_org_id)  && $feed_object->review_type == "multiple") {
@@ -79,76 +80,84 @@ class Builder_Page {
         }
 
         ?>
-        <div class="grw-builder">
-            <form id="grw-builder-form" method="post" action="<?php echo esc_url(admin_url('admin-post.php?action=' . Post_Types::FEED_POST_TYPE . '_save')); ?>">
-                <?php wp_nonce_field(Post_Types::FEED_POST_TYPE . '_save', Post_Types::FEED_POST_TYPE . '_nonce'); ?>
-                <input type="hidden" id="grw_post_id" name="<?php echo esc_attr(Post_Types::FEED_POST_TYPE); ?>[post_id]" value="<?php echo esc_attr($feed_id); ?>">
-                <input type="hidden" id="grw_current_url" name="<?php echo esc_attr(Post_Types::FEED_POST_TYPE);?>[current_url]" value="<?php echo esc_url($home_url); ?>">
-                <div class="grw-builder-workspace">
+        <div class="grw-slider">
+            <form id="grw-slider-form" method="post" action="<?php echo esc_url(admin_url('admin-post.php?action=' . Post_Types::SLIDER_POST_TYPE . '_save')); ?>">
+                <?php wp_nonce_field(Post_Types::SLIDER_POST_TYPE . '_save', Post_Types::SLIDER_POST_TYPE . '_nonce'); ?>
+                <input type="hidden" id="grw_post_id" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[post_id]" value="<?php echo esc_attr($feed_id); ?>">
+                <input type="hidden" id="grw_current_url" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE);?>[current_url]" value="<?php echo esc_url($home_url); ?>">
+                <div class="grw-slider-workspace">
                     <div class="grw-toolbar">
                         <div class="grw-toolbar-title">
-                            <input id="grw_title" class="grw-toolbar-title-input" type="text" name="<?php echo esc_attr(Post_Types::FEED_POST_TYPE); ?>[title]" value="<?php if (isset($business_name)) { echo esc_attr($business_name); } ?>" placeholder="Enter a widget name" maxlength="255" autofocus>
+                            <input id="grw_title" class="grw-toolbar-title-input" type="text" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[title]" value="<?php if (isset($business_name)) { echo esc_attr($business_name); } ?>" placeholder="Enter a widget name" maxlength="255" autofocus>
                         </div>
                        
                     </div> 
-                    <div class="grw-builder-preview" style="background-color:white">
-                        <textarea id="grw-builder-connection" name="<?php echo esc_attr(Post_Types::FEED_POST_TYPE); ?>[content]" style="display:none"><?php echo esc_textarea($biz_id); ?></textarea>
+                    <div class="grw-slider-preview" style="background-color:white">
+                        <textarea id="grw-slider-connection" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[content]" style="display:none"><?php echo esc_textarea($biz_id); ?></textarea>
                         <div id="grw_collection_preview">
-                        <?php
-                            // dd($feed_object);
-                            $review_enabled = $feed_object->review_enabled == "yes";
-                            if(!$review_enabled) {
-                                echo wp_kses("<div class='text-center'>Review Feed is Disabled</div>", $this->feed_deserializer->get_allowed_tags());
-                            }
-                            else {
-                                $option = $review_option == "opio" ? "reviewFeed" : "allReviewFeed";
-                                $opio_handler = new Opio_Handler($biz_id, $option);
-                                $reviews = $opio_handler->get_business();
-                                $reviews = $this->feed_deserializer->prepareString($reviews);
-                                echo wp_kses($reviews, $this->feed_deserializer->get_allowed_tags());
-                            }
-                        // dd($biz_id);
-                        ?>
+                            <?php 
+                                $slider_type = $feed_object->slider_type;
+                                $review_feed_link = $feed_object->review_feed_link;
+                            ?>
+                                
+                            <?php if($slider_type == 'horizontal') { ?>
+                                <span style="font-size: 20px;">Horizontal slider: 1140x400px</span>
+                                <?php include_once 'reviews-slider-horizontal-template.php'; ?>
+                            <?php } else if($slider_type == 'horizontal-carousel') { ?>
+                                <span style="font-size: 20px;">Horizontal carousel slider: 1140x240px</span>
+                                <?php include_once 'reviews-slider-horizontal-carousel-template.php'; ?>
+                            <?php } else if($slider_type == 'vertical') { ?>
+                                <span style="font-size: 20px;">Vertical slider: 300x500px</span>
+                                <div style="display: flex; justify-content: center;" >
+                                    <?php include_once include_once 'reviews-slider-vertical-template.php'; ?>
+                                </div>
+                            <?php } ?>
                         </div>
                     </div>
-                </div>
-                <div id="grw-builder-option" class="grw-builder-options">
+                <div id="grw-slider-option" class="grw-slider-options">
                     <div id="grw-loading-spinner" class="grw-loading-spinner">
                         <div class="grw-loading-spinner-inner">
                             <div class="grw-loading-spinner-icon"></div>
                         </div>
-                    <div class="grw-builder-inside">
-                    <div class="grw-builder-first">Review Feed Name</div>
-                        <input id="widget_title" name="<?php echo esc_attr(Post_Types::FEED_POST_TYPE); ?>[title]" value="<?php echo esc_attr($business_name) ?>" type="text"/>
+                    <div class="grw-slider-inside">
+                    <div class="grw-slider-first">Review Feed Name</div>
+                        <input id="widget_title" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[title]" value="<?php echo esc_attr($business_name) ?>" type="text"/>
                     </div>
-                    <div class="grw-builder-inside">
-                        <div class="grw-builder-first">Review Feed Select Options</div>
-                        <select id="reviewTypeSelection" name="<?php echo esc_attr(Post_Types::FEED_POST_TYPE); ?>[review_type]">
-                            <option value="single" <?php if ($review_type == 'single') { echo esc_html('selected'); } ?>>Enter Business ID</option>
-                            <option value="multiple" <?php if ($review_type == 'multiple') { echo esc_html('selected'); } ?>>Enter Organization ID</option>
-                            <option value="orgfeed" <?php if ($review_type == 'orgfeed') { echo esc_html('selected'); } ?>>Organization Feed</option>
+                    <div class="grw-slider-inside">
+                        <div class="grw-slider-first">Slider Type</div>
+                        <select id="sliderTypeSelection" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[slider_type]">
+                            <option value="horizontal" <?php if ($slider_type == 'horizontal') { echo esc_html('selected'); } ?>>Horizontal</option>
+                            <option value="horizontal-carousel" <?php if ($slider_type == 'horizontal-carousel') { echo esc_html('selected'); } ?>>Horizontal-Carousel</option>
+                            <option value="vertical" <?php if ($slider_type == 'vertical') { echo esc_html('selected'); } ?>>Vertical</option>
                             </select>
                     </div>
-                    <div style="display:none" id="bizIDSelector" class="grw-builder-inside">
-                        <div class="grw-builder-first">Business ID</div>
-                        <input name="<?php echo esc_attr(Post_Types::FEED_POST_TYPE); ?>[biz_id]" value="<?php echo esc_attr($biz_id) ?>" type="text"/>
+                    <div class="grw-slider-inside">
+                        <div class="grw-slider-first">Review Feed Select Options</div>
+                        <select id="reviewTypeSelection" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[review_type]">
+                            <option value="single" <?php if ($review_type == 'single') { echo esc_html('selected'); } ?>>Enter Business ID</option>
+                            <option value="orgfeed" <?php if ($review_type == 'orgfeed') { echo esc_html('selected'); } ?>>Enter Organization ID</option>
+                            </select>
+                    </div>
+                    <div style="display:none" id="bizIDSelector" class="grw-slider-inside">
+                        <div class="grw-slider-first">Business ID</div>
+                        <input name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[biz_id]" value="<?php echo esc_attr($biz_id) ?>" type="text"/>
                     </div>
                     <div style="display:none" id="orgStuff">
-                        <div class="grw-builder-inside">
-                            <div class="grw-builder-first">Organization ID</div>
-                            <input id="orgIDSelector"  name="<?php echo esc_attr(Post_Types::FEED_POST_TYPE); ?>[org_id]" value="<?php echo esc_attr($org_id) ?>" type="text"/>
+                        <div class="grw-slider-inside">
+                            <div class="grw-slider-first">Organization ID</div>
+                            <input id="orgIDSelector"  name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[org_id]" value="<?php echo esc_attr($org_id) ?>" type="text"/>
                         </div>
                         <div id="orgSelectStuff">
-                        <div class="grw-builder-inside">
+                        <div class="grw-slider-inside">
                         <div class="text-justify">
                             <button id="orgIDButton" class="button button-primary">Load Businesses</button>
                                 </div>
                     </div>
-                        <input type="hidden" id="loadedBusinsses" name="<?php echo esc_attr(Post_Types::FEED_POST_TYPE); ?>[loaded_bizs]" value="<?php echo esc_attr($loaded_bizs) ?>">
+                        <input type="hidden" id="loadedBusinsses" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[loaded_bizs]" value="<?php echo esc_attr($loaded_bizs) ?>">
 
-                        <div style="display:none" id="businessListSelector" class="grw-builder-inside">
-                            <div class="grw-builder-first">Select Business</div>
-                            <select id="businessSelected" name="<?php echo esc_attr(Post_Types::FEED_POST_TYPE); ?>[biz_org_id]">
+                        <div style="display:none" id="businessListSelector" class="grw-slider-inside">
+                            <div class="grw-slider-first">Select Business</div>
+                            <select id="businessSelected" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[biz_org_id]">
 
                                 </select>
                         </div>
@@ -156,31 +165,37 @@ class Builder_Page {
                         
                     </div>
                     
-                    <div class="grw-builder-inside">
-                        <div class="grw-builder-first">Review Feed Option</div>
-                        <select name="<?php echo esc_attr(Post_Types::FEED_POST_TYPE); ?>[review_option]" value="<?php echo esc_attr($review_option) ?>">
+                    <div class="grw-slider-inside">
+                        <div class="grw-slider-first">Review Feed Option</div>
+                        <select name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[review_option]" value="<?php echo esc_attr($review_option) ?>">
                             <option value="all" <?php if ($review_option == 'all') { echo esc_html('selected'); } ?>>All Reviews Feed</option>
                             <option value="opio" <?php if ($review_option == 'opio') { echo esc_html('selected'); } ?>>Opio Feed</option>
                             </select>
                     </div>
+                    
+                    <div class="grw-slider-inside">
+                        <div class="grw-slider-first">Review Feed Link</div>
+                            <input id="widget_review_feed_link" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[review_feed_link]" value="<?php echo esc_attr($review_feed_link) ?>" type="text"/>
+                        </div>
+                    </div>
                  
-                    <div class="grw-builder-inside">
-                        <div class="grw-builder-first">Review Feed Status</div>
-                        <select name="<?php echo esc_attr(Post_Types::FEED_POST_TYPE); ?>[review_enabled]">
+                    <div class="grw-slider-inside">
+                        <div class="grw-slider-first">Review Feed Status</div>
+                        <select name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[review_enabled]">
                             <option value="yes" <?php if ($feed_object->review_enabled == 'yes') { echo esc_html('selected');} ?>>Enabled</option>
                             <option value="no" <?php if ($feed_object->review_enabled == 'no') { echo esc_html('selected'); } ?>>Disabled</option>
                             </select>
                         </div>
                             <?php if ($feed_inited) { ?>
-                                <div class="grw-builder-inside">
-                                <div class="grw-builder-first">Shortcode</div>
+                                <div class="grw-slider-inside">
+                                <div class="grw-slider-first">Shortcode</div>
 
-                                <input id="grw_sc" type="text" value="[opio_feed id=&quot;<?php echo esc_attr($feed_id); ?>&quot;]" data-grw-shortcode="[opio_feed id=&quot;<?php echo esc_attr($feed_id); ?>&quot;]" onclick="this.select(); document.execCommand('copy'); window.grw_sc_msg.innerHTML = 'Shortcode Copied! ';" readonly/>
+                                <input id="grw_sc" type="text" value="[opio_slider id=&quot;<?php echo esc_attr($feed_id); ?>&quot;]" data-grw-shortcode="[opio_slider id=&quot;<?php echo esc_attr($feed_id); ?>&quot;]" onclick="this.select(); document.execCommand('copy'); window.grw_sc_msg.innerHTML = 'Shortcode Copied! ';" readonly/>
                                 <div class="grw-toolbar-options">
                                     <label title="Sometimes, you need to use this shortcode in PHP, for instance in header.php or footer.php files, in this case use this option"><input type="checkbox" onclick="var el = window.grw_sc; if (this.checked) { el.value = '&lt;?php echo do_shortcode( \'' + el.getAttribute('data-grw-shortcode') + '\' ); ?&gt;'; } else { el.value = el.getAttribute('data-grw-shortcode'); } el.select();document.execCommand('copy'); window.grw_sc_msg.innerHTML = 'Shortcode Copied! ';"/>Use in PHP</label>
                                 </div>
                                 <?php } ?>
-                                <div class="grw-builder-inside">
+                                <div class="grw-slider-inside">
 
                                 <div class="text-justify">
                                     <button id="grw_save" type="submit" class="button button-primary ">Save & Update</button>
@@ -315,6 +330,7 @@ class Builder_Page {
                 });
             });
         </script>
+        
         <style>
             #footer-thankyou {display: none;}
             .update-nag { display: none; }
