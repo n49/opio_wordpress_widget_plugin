@@ -21,7 +21,7 @@ class Admin_Menu {
             'OPIO Reviews Plugin',
             'OPIO Reviews',
             'edit_posts',
-            'grw',
+            'opio',
             '',
             OPIO_ASSETS_URL . 'img/logo.jpeg',
             90
@@ -30,29 +30,29 @@ class Admin_Menu {
 
     public function add_subpages() {
         $builder_page = new Admin_Page(
-            'grw',
+            'opio',
             'Reviews Builder',
             'Builder',
             'edit_posts',
-            'grw-builder'
+            'opio-builder'
         );
         $builder_page->add_page();
 
         $slider_page = new Admin_Page(
-            'grw',
+            'opio',
             'Reviews Builder',
             'Review Slider',
             'edit_posts',
-            'grw-slider'
+            'opio-slider'
         );
         $slider_page->add_page();
 
         $setting_page = new Admin_Page(
-            'grw',
+            'opio',
             'Support',
             'Support',
             'manage_options',
-            'grw-support'
+            'opio-support'
         );
         $setting_page->add_page();
     }
@@ -61,18 +61,18 @@ class Admin_Menu {
         global $plugin_page;
 
         $hidden_pages = array(
-            'grw-builder',
-            'grw-slider'
+            'opio-builder',
+            'opio-slider'
         );
 
         if ($plugin_page && in_array($plugin_page, $hidden_pages)) {
             // $submenu_file = 'edit.php?post_type=' . Post_Types::SLIDER_POST_TYPE;
             // $submenu_file = 'edit.php?post_type=' . Post_Types::FEED_POST_TYPE;
-            $submenu_file = 'edit.php?post_type=' . ($plugin_page === 'grw-slider' ? Post_Types::SLIDER_POST_TYPE : Post_Types::FEED_POST_TYPE);
+            $submenu_file = 'edit.php?post_type=' . ($plugin_page === 'opio-slider' ? Post_Types::SLIDER_POST_TYPE : Post_Types::FEED_POST_TYPE);
         }
 
         foreach ($hidden_pages as $page) {
-            remove_submenu_page('grw', $page);
+            remove_submenu_page('opio', $page);
         }
 
         return $submenu_file;
@@ -85,8 +85,8 @@ class Admin_Menu {
             return;
         }
 
-        if (strpos($current_screen->id, 'grw') !== false) {
-            $classes .= ' grw-admin ';
+        if (strpos($current_screen->id, 'opio') !== false) {
+            $classes .= ' opio-admin ';
         }
         return $classes;
     }

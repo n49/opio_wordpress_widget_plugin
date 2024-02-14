@@ -10,12 +10,12 @@ class Review_Slider {
     }
 
     public function register() {
-        add_action('grw_admin_page_grw-slider', array($this, 'init'));
+        add_action('opio_admin_page_opio-slider', array($this, 'init'));
     }
 
     public function init() {
         // register api endpoints
-        if (isset($_GET['grw_notice'])) {
+        if (isset($_GET['opio_notice'])) {
             $this->add_admin_notice();
         }
 
@@ -80,21 +80,21 @@ class Review_Slider {
         }
 
         ?>
-        <div class="grw-slider">
-            <form id="grw-slider-form" method="post" action="<?php echo esc_url(admin_url('admin-post.php?action=' . Post_Types::SLIDER_POST_TYPE . '_save')); ?>">
+        <div class="opio-slider">
+            <form id="opio-slider-form" method="post" action="<?php echo esc_url(admin_url('admin-post.php?action=' . Post_Types::SLIDER_POST_TYPE . '_save')); ?>">
                 <?php wp_nonce_field(Post_Types::SLIDER_POST_TYPE . '_save', Post_Types::SLIDER_POST_TYPE . '_nonce'); ?>
-                <input type="hidden" id="grw_post_id" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[post_id]" value="<?php echo esc_attr($feed_id); ?>">
-                <input type="hidden" id="grw_current_url" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE);?>[current_url]" value="<?php echo esc_url($home_url); ?>">
-                <div class="grw-slider-workspace">
-                    <div class="grw-toolbar">
-                        <div class="grw-toolbar-title">
-                            <input id="grw_title" class="grw-toolbar-title-input" type="text" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[title]" value="<?php if (isset($business_name)) { echo esc_attr($business_name); } ?>" placeholder="Enter a widget name" maxlength="255" autofocus>
+                <input type="hidden" id="opio_post_id" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[post_id]" value="<?php echo esc_attr($feed_id); ?>">
+                <input type="hidden" id="opio_current_url" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE);?>[current_url]" value="<?php echo esc_url($home_url); ?>">
+                <div class="opio-slider-workspace">
+                    <div class="opio-toolbar">
+                        <div class="opio-toolbar-title">
+                            <input id="opio_title" class="opio-toolbar-title-input" type="text" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[title]" value="<?php if (isset($business_name)) { echo esc_attr($business_name); } ?>" placeholder="Enter a widget name" maxlength="255" autofocus>
                         </div>
                        
                     </div> 
-                    <div class="grw-slider-preview" style="background-color:white">
-                        <textarea id="grw-slider-connection" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[content]" style="display:none"><?php echo esc_textarea($biz_id); ?></textarea>
-                        <div id="grw_collection_preview">
+                    <div class="opio-slider-preview" style="background-color:white">
+                        <textarea id="opio-slider-connection" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[content]" style="display:none"><?php echo esc_textarea($biz_id); ?></textarea>
+                        <div id="opio_collection_preview">
                             <?php 
                                 $slider_type = $feed_object->slider_type;
                                 $review_feed_link = $feed_object->review_feed_link;
@@ -114,49 +114,49 @@ class Review_Slider {
                             <?php } ?>
                         </div>
                     </div>
-                <div id="grw-slider-option" class="grw-slider-options">
-                    <div id="grw-loading-spinner" class="grw-loading-spinner">
-                        <div class="grw-loading-spinner-inner">
-                            <div class="grw-loading-spinner-icon"></div>
+                <div id="opio-slider-option" class="opio-slider-options">
+                    <div id="opio-loading-spinner" class="opio-loading-spinner">
+                        <div class="opio-loading-spinner-inner">
+                            <div class="opio-loading-spinner-icon"></div>
                         </div>
-                    <div class="grw-slider-inside">
-                    <div class="grw-slider-first">Review Feed Name</div>
+                    <div class="opio-slider-inside">
+                    <div class="opio-slider-first">Review Feed Name</div>
                         <input id="widget_title" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[title]" value="<?php echo esc_attr($business_name) ?>" type="text"/>
                     </div>
-                    <div class="grw-slider-inside">
-                        <div class="grw-slider-first">Slider Type</div>
+                    <div class="opio-slider-inside">
+                        <div class="opio-slider-first">Slider Type</div>
                         <select id="sliderTypeSelection" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[slider_type]">
                             <option value="horizontal" <?php if ($slider_type == 'horizontal') { echo esc_html('selected'); } ?>>Horizontal</option>
                             <option value="horizontal-carousel" <?php if ($slider_type == 'horizontal-carousel') { echo esc_html('selected'); } ?>>Horizontal-Carousel</option>
                             <option value="vertical" <?php if ($slider_type == 'vertical') { echo esc_html('selected'); } ?>>Vertical</option>
                             </select>
                     </div>
-                    <div class="grw-slider-inside">
-                        <div class="grw-slider-first">Review Feed Select Options</div>
+                    <div class="opio-slider-inside">
+                        <div class="opio-slider-first">Review Feed Select Options</div>
                         <select id="reviewTypeSelection" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[review_type]">
                             <option value="single" <?php if ($review_type == 'single') { echo esc_html('selected'); } ?>>Enter Business ID</option>
                             <option value="orgfeed" <?php if ($review_type == 'orgfeed') { echo esc_html('selected'); } ?>>Enter Organization ID</option>
                             </select>
                     </div>
-                    <div style="display:none" id="bizIDSelector" class="grw-slider-inside">
-                        <div class="grw-slider-first">Business ID</div>
+                    <div style="display:none" id="bizIDSelector" class="opio-slider-inside">
+                        <div class="opio-slider-first">Business ID</div>
                         <input name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[biz_id]" value="<?php echo esc_attr($biz_id) ?>" type="text"/>
                     </div>
                     <div style="display:none" id="orgStuff">
-                        <div class="grw-slider-inside">
-                            <div class="grw-slider-first">Organization ID</div>
+                        <div class="opio-slider-inside">
+                            <div class="opio-slider-first">Organization ID</div>
                             <input id="orgIDSelector"  name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[org_id]" value="<?php echo esc_attr($org_id) ?>" type="text"/>
                         </div>
                         <div id="orgSelectStuff">
-                        <div class="grw-slider-inside">
+                        <div class="opio-slider-inside">
                         <div class="text-justify">
                             <button id="orgIDButton" class="button button-primary">Load Businesses</button>
                                 </div>
                     </div>
                         <input type="hidden" id="loadedBusinsses" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[loaded_bizs]" value="<?php echo esc_attr($loaded_bizs) ?>">
 
-                        <div style="display:none" id="businessListSelector" class="grw-slider-inside">
-                            <div class="grw-slider-first">Select Business</div>
+                        <div style="display:none" id="businessListSelector" class="opio-slider-inside">
+                            <div class="opio-slider-first">Select Business</div>
                             <select id="businessSelected" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[biz_org_id]">
 
                                 </select>
@@ -165,44 +165,44 @@ class Review_Slider {
                         
                     </div>
                     
-                    <div class="grw-slider-inside">
-                        <div class="grw-slider-first">Review Feed Option</div>
+                    <div class="opio-slider-inside">
+                        <div class="opio-slider-first">Review Feed Option</div>
                         <select name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[review_option]" value="<?php echo esc_attr($review_option) ?>">
                             <option value="all" <?php if ($review_option == 'all') { echo esc_html('selected'); } ?>>All Reviews Feed</option>
                             <option value="opio" <?php if ($review_option == 'opio') { echo esc_html('selected'); } ?>>Opio Feed</option>
                             </select>
                     </div>
                     
-                    <div class="grw-slider-inside">
-                        <div class="grw-slider-first">Review Feed Link</div>
+                    <div class="opio-slider-inside">
+                        <div class="opio-slider-first">Review Feed Link</div>
                             <input id="widget_review_feed_link" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[review_feed_link]" value="<?php echo esc_attr($review_feed_link) ?>" type="text"/>
                         </div>
                     </div>
                  
-                    <div class="grw-slider-inside">
-                        <div class="grw-slider-first">Review Feed Status</div>
+                    <div class="opio-slider-inside">
+                        <div class="opio-slider-first">Review Feed Status</div>
                         <select name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[review_enabled]">
                             <option value="yes" <?php if ($feed_object->review_enabled == 'yes') { echo esc_html('selected');} ?>>Enabled</option>
                             <option value="no" <?php if ($feed_object->review_enabled == 'no') { echo esc_html('selected'); } ?>>Disabled</option>
                             </select>
                         </div>
                             <?php if ($feed_inited) { ?>
-                                <div class="grw-slider-inside">
-                                <div class="grw-slider-first">Shortcode</div>
+                                <div class="opio-slider-inside">
+                                <div class="opio-slider-first">Shortcode</div>
 
-                                <input id="grw_sc" type="text" value="[opio_slider id=&quot;<?php echo esc_attr($feed_id); ?>&quot;]" data-grw-shortcode="[opio_slider id=&quot;<?php echo esc_attr($feed_id); ?>&quot;]" onclick="this.select(); document.execCommand('copy'); window.grw_sc_msg.innerHTML = 'Shortcode Copied! ';" readonly/>
-                                <div class="grw-toolbar-options">
-                                    <label title="Sometimes, you need to use this shortcode in PHP, for instance in header.php or footer.php files, in this case use this option"><input type="checkbox" onclick="var el = window.grw_sc; if (this.checked) { el.value = '&lt;?php echo do_shortcode( \'' + el.getAttribute('data-grw-shortcode') + '\' ); ?&gt;'; } else { el.value = el.getAttribute('data-grw-shortcode'); } el.select();document.execCommand('copy'); window.grw_sc_msg.innerHTML = 'Shortcode Copied! ';"/>Use in PHP</label>
+                                <input id="opio_sc" type="text" value="[opio_slider id=&quot;<?php echo esc_attr($feed_id); ?>&quot;]" data-opio-shortcode="[opio_slider id=&quot;<?php echo esc_attr($feed_id); ?>&quot;]" onclick="this.select(); document.execCommand('copy'); window.opio_sc_msg.innerHTML = 'Shortcode Copied! ';" readonly/>
+                                <div class="opio-toolbar-options">
+                                    <label title="Sometimes, you need to use this shortcode in PHP, for instance in header.php or footer.php files, in this case use this option"><input type="checkbox" onclick="var el = window.opio_sc; if (this.checked) { el.value = '&lt;?php echo do_shortcode( \'' + el.getAttribute('data-opio-shortcode') + '\' ); ?&gt;'; } else { el.value = el.getAttribute('data-opio-shortcode'); } el.select();document.execCommand('copy'); window.opio_sc_msg.innerHTML = 'Shortcode Copied! ';"/>Use in PHP</label>
                                 </div>
                                 <?php } ?>
-                                <div class="grw-slider-inside">
+                                <div class="opio-slider-inside">
 
                                 <div class="text-justify">
-                                    <button id="grw_save" type="submit" class="button button-primary ">Save & Update</button>
+                                    <button id="opio_save" type="submit" class="button button-primary ">Save & Update</button>
                                 </div>
                                 <div style="padding-top: 10px; font-size: 15px">
 
-                                    <a style="text-decoration: none" href="/wp-admin/admin.php?page=grw-support&grw_tab=figFull&grw_tab=welcome">Full Installation Guide </a></div>
+                                    <a style="text-decoration: none" href="/wp-admin/admin.php?page=opio-support&opio_tab=figFull&opio_tab=welcome">Full Installation Guide </a></div>
                             </div>
                             </div>
                             </div>
@@ -217,7 +217,7 @@ class Review_Slider {
                     // empty the select
                     businessSelected.innerHTML = "";
                     var ajaxUrl = "/wp-json/opioreviews/v1/get_businesses?orgID=" + orgID;
-                    var divLoader = document.getElementById("grw-builder-option");
+                    var divLoader = document.getElementById("opio-builder-option");
                     
                     // reduce the opacity of div
                     divLoader.style.opacity = 0.5;
@@ -262,13 +262,13 @@ class Review_Slider {
                     });
             }
             var widget_title = document.getElementById("widget_title");
-            var grw_title = document.getElementById("grw_title");
-            // sync the widget title with the grw_title
+            var opio_title = document.getElementById("opio_title");
+            // sync the widget title with the opio_title
             widget_title.addEventListener("keyup", function() {
-                grw_title.value = widget_title.value;
+                opio_title.value = widget_title.value;
             });
-            grw_title.addEventListener("keyup", function() {
-                widget_title.value = grw_title.value;
+            opio_title.addEventListener("keyup", function() {
+                widget_title.value = opio_title.value;
             });
                 var orgIDButton = document.getElementById("orgIDButton");
                 orgIDButton.addEventListener("click", function(event) {

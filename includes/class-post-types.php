@@ -4,8 +4,8 @@ namespace WP_Opio_Reviews\Includes;
 
 class Post_Types {
 
-    const FEED_POST_TYPE = 'grw_feed';
-    const SLIDER_POST_TYPE = 'grw_slider';
+    const FEED_POST_TYPE = 'opio_feed';
+    const SLIDER_POST_TYPE = 'opio_slider';
 
     public function register() {
         add_action('init', array($this, 'register_post_types'));
@@ -56,7 +56,7 @@ class Post_Types {
             'public'              => false,
             'show_in_rest'        => false,
             'show_ui'             => true,
-            'show_in_menu'        => 'grw',
+            'show_in_menu'        => 'opio',
             'show_in_admin_bar'   => false,
             'show_in_nav_menus'   => false,
             'can_export'          => true,
@@ -110,7 +110,7 @@ class Post_Types {
             'public'              => false,
             'show_in_rest'        => false,
             'show_ui'             => true,
-            'show_in_menu'        => 'grw',
+            'show_in_menu'        => 'opio',
             'show_in_admin_bar'   => false,
             'show_in_nav_menus'   => false,
             'can_export'          => true,

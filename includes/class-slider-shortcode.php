@@ -21,7 +21,7 @@ class Slider_Shortcode {
     public function init($atts) {
 
         ob_start();
-        if (get_option('grw_active') === '0') {
+        if (get_option('opio_active') === '0') {
             return '';
         }
         $feed = $this->slider_deserializer->get_feed($atts['id']);
@@ -59,7 +59,7 @@ class Slider_Shortcode {
     }
 }
 //     public function init($atts) {
-//         if (get_option('grw_active') === '0') {
+//         if (get_option('opio_active') === '0') {
 //             return '';
 //         }
 //         ob_start();

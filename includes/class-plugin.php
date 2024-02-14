@@ -75,7 +75,7 @@ final class Plugin {
 
     public function register_services() {
   
-        $assets = new Assets(OPIO_ASSETS_URL, $this->version, get_option('grw_debug_mode') == '1');
+        $assets = new Assets(OPIO_ASSETS_URL, $this->version, get_option('opio_debug_mode') == '1');
         $assets->register();
 
         $post_types = new Post_Types();
