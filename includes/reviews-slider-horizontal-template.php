@@ -133,7 +133,7 @@
             foreach (array_slice($filteredReviews, 0, 9) as $index => $review) {
                 ?>
                 <?php $currentReview = $review; ?>
-                <div class="testimonial-slide review-tile" data-review-index="<?php echo $index; ?>" onclick="openPhotoLightbox(<?php echo esc_attr(json_encode($currentReview)); ?>)">
+                <div class="testimonial-slide review-tile" data-review-index="<?php echo esc_attr($index); ?>" onclick="openPhotoLightbox(<?php echo esc_attr(json_encode($currentReview)); ?>)">
                     <div id=<?php echo esc_attr($review["_id"]);?> class="reviewer-container">
                         <div class="avatar-container">
                             <?php if(($review['propertyId'] === 1 || $review['propertyId'] === 2) && isset($review['user']['userPic'])) { ?>
@@ -168,7 +168,7 @@
                                 <?php } ?>  
                             <?php } else { ?>
                                 <div class="opio-rating-container">
-                                     <?php echo getStarRating($review['rating']); ?>
+                                     <?php echo wp_kses(getStarRating($review['rating']), $this->slider_deserializer->get_allowed_tags()); ?>
                                 </div>
                             <?php } ?>
                             <div class="reviewer-name-container"><span class="reviewer-name"><?php echo esc_attr($review['user']['firstName']);?> <?php echo esc_attr($review['user']['lastName']);?></span> on <?php echo esc_attr(date('M d, Y', $review['dateCreated']/1000)); ?></div>
@@ -301,7 +301,7 @@
         <div class="rating-widget">
             <div class="w-rating-box">
                 <div class="opio-rating-container">
-                    <?php echo getStarRatingWidget($aggregateRating); ?>
+                    <?php echo wp_kses(getStarRatingWidget($aggregateRating), $this->slider_deserializer->get_allowed_tags()); ?>
                 </div>
                 <div class="rating-text-div"><span class="rating-text"><?php echo esc_attr($aggregateRating); ?>/5</span></div>
             </div>

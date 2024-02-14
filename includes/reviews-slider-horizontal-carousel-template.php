@@ -12,12 +12,6 @@
 
             return "rgb($r, $g, $b)";
         }
-        // Define the function to include the template with parameters
-        function include_template($url, $exampleParam) {
-            // Now you can use $url and $exampleParam as needed
-            echo "URL: $url<br>";
-            echo "Example Parameter: $exampleParam";
-        }
 
         // Example usage:
         $randomColor = randomColor("example");
@@ -100,7 +94,7 @@
                                                 left: 0;
                                                 width: 50%;
                                                 content: attr(data-forhalf);
-                                                color: <?php echo $starColor ?>;
+                                                color: <?php echo esc_attr($starColor); ?>;
                                             }
                                         </style>
                                         <!-- Refactor this later -->
@@ -180,7 +174,7 @@
                             left: 0;
                             width: 50%;
                             content: attr(data-forhalf);
-                            color: <?php echo $starColor ?>;
+                            color: <?php echo esc_attr($starColor); ?>;
                         }
                     </style>
                     <!-- Refactor this later -->

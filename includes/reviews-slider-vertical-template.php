@@ -74,7 +74,7 @@ if (!is_wp_error($api_response) && $api_response['response']['code'] === 200) {
                         left: 0;
                         width: 50%;
                         content: attr(data-forhalf);
-                        color: <?php echo $starColor ?>;
+                        color: <?php echo esc_attr($starColor); ?>;
                     }
                 </style>
                 <!-- Refactor this later -->
@@ -177,7 +177,7 @@ if (!is_wp_error($api_response) && $api_response['response']['code'] === 200) {
                                                 left: 0;
                                                 width: 50%;
                                                 content: attr(data-forhalf);
-                                                color: <?php echo $starColor ?>;
+                                                color: <?php echo esc_attr($starColor); ?>;
                                             }
                                         </style>
                                         <!-- Refactor this later -->
