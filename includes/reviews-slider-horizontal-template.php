@@ -368,6 +368,56 @@
     }
 </style>
 
+<!-- JSON schema starts-->
+
+<script id="jsonldSchema" type="application/ld+json">
+    <?php $count=1; ?>
+    {
+        "@context": "http://schema.org",
+        "@type": "Product",
+        "name": "<?php echo $business["name"]?>",
+        "image": "<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "<?php echo esc_attr($aggregateRating); ?>",
+            "reviewCount": "<?php echo esc_attr($totalReviews); ?>"
+        },
+        "review": [
+            <?php foreach(array_slice($filteredReviews, 0, 7) as $key => $review) { ?>
+
+            {
+                "@type": "Review",
+                <?php if(isset($review['user']['firstName'])) { ?>
+                "author": {
+                    "@type": "Person",
+                    "name": "<?php echo esc_attr($review['user']['firstName']); ?>"
+                },
+                <?php } ?>
+                "datePublished": "<?php echo esc_attr(date('M d, Y', $review["dateCreated"]/1000)); ?>",
+                "reviewBody": "<?php echo esc_attr($review['content']); ?>",
+                "reviewRating": {
+                    "@type": "Rating",
+                    "ratingValue":  <?php echo esc_attr($review['propertyInfo']['name'] === 'facebook' ? $review['rating'] === 'positive' ? 5 : 1 : $review['rating']); ?>
+                },
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "op.io",
+                    "sameAs": "https://www.op.io"
+                }
+            }
+            <?php if($count < count(array_slice($filteredReviews, 0, 7))){
+                echo ",";
+            } 
+            ?>
+            <?php $count = $count + 1; ?>
+            
+            <?php } ?>
+        ]
+    }
+</script>
+
+<!-- JSON schema ends-->
+
 <script>
     var selectedReviewIndex;
 
