@@ -175,7 +175,7 @@
                             <div class="v-reviewer-avatar" style="background-image: url(&quot;https://images.files.ca/200x200/<?php echo esc_attr($review['user']['userPic']['imageId']);?>.jpg?nocrop=1&quot;);">
                             </div>  
                         <?php } else if($review['user']['firstName']) { ?>
-                            <div class="v-reviewer-avatar" style="background-color: <?php echo esc_attr(randomColor(mb_substr(ucfirst($review['user']["firstName"]), 0, 1, 'utf-8'))); ?>"><?php echo esc_attr(mb_substr(ucfirst($review['user']["firstName"]), 0, 1, 'utf-8')); ?></div>
+                            <div class="v-reviewer-avatar" style="background-color: <?php echo esc_attr(randomColor()); ?>"><?php echo esc_attr(mb_substr(ucfirst($review['user']["firstName"]), 0, 1, 'utf-8')); ?></div>
                         <?php } ?> 
                         <?php if($review['propertyInfo']['name'] === 'facebook') { ?>
                             <div class="v-facebook-logo" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/facebook-logo.png'; ?>&quot;);"></div>
@@ -207,12 +207,23 @@
                     </div>
                 </div>
                 <!-- <div class="location-name"><?php echo esc_attr($review['entityInfo']['address']['city']); ?></div> -->
-                <div class="review-content" id="v-reviewContent">
-                <?php if (strlen($review['content']) > 70) { ?>
-                    <?php echo esc_attr(mb_substr($review['content'], 0, 70, 'UTF-8')); ?>...<u>Read more</u>
-                <?php } else { ?>
-                    <?php echo esc_attr($review['content']); ?>
-                <?php } ?>
+                <?php if($review_type === 'orgfeed') { ?>
+                    <div class="location-name"><?php echo esc_attr($review['entityInfo']['name']); ?></div>
+                    <div class="review-content" id="v-reviewContent">
+                    <?php if (strlen($review['content']) > 55) { ?>
+                        <?php echo esc_attr(mb_substr($review['content'], 0, 55, 'UTF-8')); ?>...<u>Read more</u>
+                    <?php } else { ?>
+                        <?php echo esc_attr($review['content']); ?>
+                    <?php } ?>
+                </div>
+                    <?php } else { ?>
+                    <?php } ?>
+                    <div class="review-content" id="v-reviewContent">
+                    <?php if (strlen($review['content']) > 70) { ?>
+                        <?php echo esc_attr(mb_substr($review['content'], 0, 70, 'UTF-8')); ?>...<u>Read more</u>
+                    <?php } else { ?>
+                        <?php echo esc_attr($review['content']); ?>
+                    <?php } ?>
                 </div>
             </div>
     <?php
@@ -695,3 +706,4 @@
         }
     });
 </script>
+

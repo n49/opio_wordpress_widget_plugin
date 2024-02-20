@@ -1,10 +1,11 @@
-<!-- reviews-slider-template.php -->
+<!-- reviews-slider-horizontal-template.php -->
 <?php 
     $review_feed_link = '#';
     if(isset($feed_object->review_feed_link)) {
         $review_feed_link = $feed_object->review_feed_link;
     }
 ?>
+
 <div class="widget-body">
     <div class="slider-container testimonial-slider">
     <?php
@@ -130,7 +131,7 @@
                 $writeReviewUrl = 'https://' .$business["landingPageUsername"]. '.op.io';
             }
             // Display the first 9 reviews
-            foreach (array_slice($filteredReviews, 0, 9) as $index => $review) {
+            foreach (array_slice($filteredReviews, 0, 8) as $index => $review) {
                 ?>
                 <?php $currentReview = $review; ?>
                 <div class="testimonial-slide review-tile" data-review-index="<?php echo esc_attr($index); ?>" onclick="openPhotoLightbox(<?php echo esc_attr(json_encode($currentReview)); ?>)">
@@ -168,7 +169,7 @@
                                 <?php } ?>  
                             <?php } else { ?>
                                 <div class="opio-rating-container">
-                                     <?php echo wp_kses(getStarRating($review['rating']), $this->slider_deserializer->get_allowed_tags()); ?>
+                                    <?php echo wp_kses(getStarRating($review['rating']), $this->slider_deserializer->get_allowed_tags()); ?>
                                 </div>
                             <?php } ?>
                             <div class="reviewer-name-container"><span class="reviewer-name"><?php echo esc_attr($review['user']['firstName']);?> <?php echo esc_attr($review['user']['lastName']);?></span> on <?php echo esc_attr(date('M d, Y', $review['dateCreated']/1000)); ?></div>
@@ -180,8 +181,8 @@
                         <?php if((isset($review['images']) && is_array($review['images']) && count($review['images']) > 0) || 
                              (isset($review['videos']) && is_array($review['videos']) && count($review['videos']) > 0)) { ?>
                         <div class="review-content" id="reviewContent" style="margin-top: 0px;">
-                            <?php if (strlen($review['content']) > 80) { ?>
-                                <?php echo esc_attr(mb_substr($review['content'], 0, 80, 'UTF-8')); ?>...<u>Read more</u>
+                            <?php if (strlen($review['content']) > 55) { ?>
+                                <?php echo esc_attr(mb_substr($review['content'], 0, 55, 'UTF-8')); ?>...<u>Read more</u>
                             <?php } else { ?>
                                 <?php echo esc_attr($review['content']); ?>
                             <?php } ?>
@@ -202,8 +203,8 @@
                         </div>
                     <?php } else if(isset($review['taggedEmployees']) && is_array($review['taggedEmployees']) && count($review['taggedEmployees']) > 0) { ?>
                         <div class="review-content" id="reviewContent" style="margin-top: 0px;">
-                            <?php if (strlen($review['content']) > 80) { ?>
-                                <?php echo esc_attr(mb_substr($review['content'], 0, 80, 'UTF-8')); ?>...<u>Read more</u>
+                            <?php if (strlen($review['content']) > 55) { ?>
+                                <?php echo esc_attr(mb_substr($review['content'], 0, 55, 'UTF-8')); ?>...<u>Read more</u>
                             <?php } else { ?>
                                 <?php echo esc_attr($review['content']); ?>
                             <?php } ?>
@@ -224,8 +225,8 @@
                         </div>
                     <?php } else { ?>
                         <div class="review-content" id="reviewContent" style="margin-top: 0px;">
-                        <?php if (strlen($review['content']) > 200) { ?>
-                            <?php echo esc_attr(mb_substr($review['content'], 0, 200, 'UTF-8')); ?>...<u>Read more</u>
+                        <?php if (strlen($review['content']) > 125) { ?>
+                            <?php echo esc_attr(mb_substr($review['content'], 0, 125, 'UTF-8')); ?>...<u>Read more</u>
                         <?php } else { ?>
                             <?php echo esc_attr($review['content']); ?>
                         <?php } ?>
@@ -405,7 +406,7 @@
                     "sameAs": "https://www.op.io"
                 }
             }
-            <?php if($count < count(array_slice($filteredReviews, 0, 7))){
+            <?php if($count < count(array_slice($filteredReviews, 0, 8))){
                 echo ",";
             } 
             ?>
