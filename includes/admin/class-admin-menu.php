@@ -38,6 +38,15 @@ class Admin_Menu {
         );
         $builder_page->add_page();
 
+        $slider_page = new Admin_Page(
+            'opio',
+            'Reviews Builder',
+            'Review Slider',
+            'edit_posts',
+            'opio-slider'
+        );
+        $slider_page->add_page();
+
         $setting_page = new Admin_Page(
             'opio',
             'Support',
@@ -53,10 +62,13 @@ class Admin_Menu {
 
         $hidden_pages = array(
             'opio-builder',
+            'opio-slider'
         );
 
         if ($plugin_page && in_array($plugin_page, $hidden_pages)) {
-            $submenu_file = 'edit.php?post_type=' . Post_Types::FEED_POST_TYPE;
+            // $submenu_file = 'edit.php?post_type=' . Post_Types::SLIDER_POST_TYPE;
+            // $submenu_file = 'edit.php?post_type=' . Post_Types::FEED_POST_TYPE;
+            $submenu_file = 'edit.php?post_type=' . ($plugin_page === 'opio-slider' ? Post_Types::SLIDER_POST_TYPE : Post_Types::FEED_POST_TYPE);
         }
 
         foreach ($hidden_pages as $page) {
@@ -65,7 +77,7 @@ class Admin_Menu {
 
         return $submenu_file;
     }
-
+    
     public function add_admin_body_class($classes) {
         $current_screen = get_current_screen();
 

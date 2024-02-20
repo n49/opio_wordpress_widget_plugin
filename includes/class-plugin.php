@@ -6,6 +6,7 @@ use WP_Opio_Reviews\Includes\Admin\Admin_Menu;
 use WP_Opio_Reviews\Includes\Admin\Admin_Tophead;
 use WP_Opio_Reviews\Includes\Admin\Admin_Notice;
 use WP_Opio_Reviews\Includes\Admin\Admin_Feed_Columns;
+use WP_Opio_Reviews\Includes\Admin\Admin_Slider_Columns;
 
 final class Plugin {
 
@@ -88,11 +89,23 @@ final class Plugin {
         $builder_page = new Builder_Page($feed_deserializer);
         $builder_page->register();
 
+        $slider_deserializer = new Slider_Deserializer(new \WP_Query());
+
+        $slider_feed_page = new Slider_Feed_Page($slider_deserializer);
+        $slider_feed_page->register();
+
+        $review_slider = new Review_Slider($slider_deserializer);
+        $review_slider->register();
+
         $feed_shortcode = new Feed_Shortcode($feed_deserializer);
         $feed_shortcode->register();
 
+        $slider_shortcode = new Slider_Shortcode($slider_deserializer);
+        $slider_shortcode->register();
+
         if (is_admin()) {
             $feed_serializer = new Feed_Serializer();
+            $slider_serializer = new Slider_Serializer();
             
             $admin_notice = new Admin_Notice();
             $admin_notice->register();
@@ -106,6 +119,8 @@ final class Plugin {
             $admin_feed_columns = new Admin_Feed_Columns($feed_deserializer);
             $admin_feed_columns->register();
 
+            $admin_slider_columns = new Admin_Slider_Columns($slider_deserializer);
+            $admin_slider_columns->register();
 
             $plugin_support = new Plugin_Support();
             $plugin_support->register();

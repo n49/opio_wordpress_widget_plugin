@@ -9,6 +9,12 @@ Text Domain: widget-for-opio-reviews
 Domain Path: /languages
 */
 
+/*
+Another Plugin
+Text Domain: slider-widget-for-opio-reviews
+Domain Path: /languages
+*/
+
 namespace WP_Opio_Reviews;
 if (!defined('ABSPATH')) {
     exit;
