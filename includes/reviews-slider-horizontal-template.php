@@ -109,10 +109,12 @@
             $aggregateRating = 0;
             $totalReviews = 0;
             if($review_option === 'all') {
+                $business = $response;
                 $reviews = $response['reviews'];
                 $aggregateRating = $response['aggregateRating']['3']['average'];
                 $totalReviews = $response['aggregateRating']['3']['total'];
             } else if($review_option === 'opio') {
+                $business = $response[0];
                 $reviews = $response[0]['reviews'];
                 $aggregateRating = $response[0]['aggregateRating']["5734f48a0b64d7382829fdf7"]['average'];
                 $totalReviews = $response[0]['aggregateRating']["5734f48a0b64d7382829fdf7"]['total'];
@@ -126,10 +128,18 @@
                 }
             }
 
-            $writeReviewUrl = 'https://op.io/write-review/5734f48a0b64d7382829fdf7/'.$business["_id"];
-            if(isset($business["landingPageUsername"])) {
-                $writeReviewUrl = 'https://' .$business["landingPageUsername"]. '.op.io';
+            $writeReviewUrl = 'https://op.io';
+            if($review_type === 'orgfeed') {
+                if(isset($business["landingPageUsername"])) {
+                    $writeReviewUrl = 'https://' .$business["landingPageUsername"]. '.op.io';
+                }
+            } else {
+                $writeReviewUrl = 'https://op.io/write-review/5734f48a0b64d7382829fdf7/'.$business["_id"];
+                if(isset($business["landingPageUsername"])) {
+                    $writeReviewUrl = 'https://' .$business["landingPageUsername"]. '.op.io';
+                }
             }
+            
             // Display the first 9 reviews
             foreach (array_slice($filteredReviews, 0, 8) as $index => $review) {
                 ?>
