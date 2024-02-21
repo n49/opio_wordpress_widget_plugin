@@ -188,7 +188,7 @@
                     <div class="location-name"><?php echo esc_attr($review['entityInfo']['name']); ?></div>
                         <?php if((isset($review['images']) && is_array($review['images']) && count($review['images']) > 0) || 
                                 (isset($review['videos']) && is_array($review['videos']) && count($review['videos']) > 0)) { ?>
-                        <div class="review-content" id="reviewContent" style="margin-top: 0px;">
+                        <div class="review-content" id="reviewContent-<?php echo esc_attr($index); ?>" style="margin-top: 0px;">
                             <?php if (strlen($review['content']) > 55) { ?>
                                 <?php echo esc_attr(mb_substr($review['content'], 0, 55, 'UTF-8')); ?>...<u>Read more</u>
                             <?php } else { ?>
@@ -210,7 +210,7 @@
                             <?php } ?>
                         </div>
                         <?php } else if(isset($review['taggedEmployees']) && is_array($review['taggedEmployees']) && count($review['taggedEmployees']) > 0) { ?>
-                            <div class="review-content" id="reviewContent" style="margin-top: 0px;">
+                            <div class="review-content" id="reviewContent-<?php echo esc_attr($index); ?>" style="margin-top: 0px;">
                                 <?php if (strlen($review['content']) > 55) { ?>
                                     <?php echo esc_attr(mb_substr($review['content'], 0, 55, 'UTF-8')); ?>...<u>Read more</u>
                                 <?php } else { ?>
@@ -232,7 +232,7 @@
                                 <?php } ?>
                             </div>
                         <?php } else { ?>
-                            <div class="review-content" id="reviewContent" style="margin-top: 0px;">
+                            <div class="review-content" id="reviewContent-<?php echo esc_attr($index); ?>" style="margin-top: 0px;">
                             <?php if (strlen($review['content']) > 140) { ?>
                                 <?php echo esc_attr(mb_substr($review['content'], 0, 140, 'UTF-8')); ?>...<u>Read more</u>
                             <?php } else { ?>
@@ -243,7 +243,7 @@
                 <?php } else { ?>
                     <?php if((isset($review['images']) && is_array($review['images']) && count($review['images']) > 0) || 
                             (isset($review['videos']) && is_array($review['videos']) && count($review['videos']) > 0)) { ?>
-                    <div class="review-content" id="reviewContent">
+                    <div class="review-content" id="reviewContent-<?php echo esc_attr($index); ?>">
                         <?php if (strlen($review['content']) > 110) { ?>
                             <?php echo esc_attr(mb_substr($review['content'], 0, 110, 'UTF-8')); ?>...<u>Read more</u>
                         <?php } else { ?>
@@ -265,7 +265,7 @@
                         <?php } ?>
                     </div>
                     <?php } else if(isset($review['taggedEmployees']) && is_array($review['taggedEmployees']) && count($review['taggedEmployees']) > 0) { ?>
-                        <div class="review-content" id="reviewContent">
+                        <div class="review-content" id="reviewContent-<?php echo esc_attr($index); ?>">
                             <?php if (strlen($review['content']) > 110) { ?>
                                 <?php echo esc_attr(mb_substr($review['content'], 0, 110, 'UTF-8')); ?>...<u>Read more</u>
                             <?php } else { ?>
@@ -287,7 +287,7 @@
                             <?php } ?>
                         </div>
                     <?php } else { ?>
-                        <div class="review-content" id="reviewContent">
+                        <div class="review-content" id="reviewContent-<?php echo esc_attr($index); ?>">
                         <?php if (strlen($review['content']) > 160) { ?>
                             <?php echo esc_attr(mb_substr($review['content'], 0, 160, 'UTF-8')); ?>...<u>Read more</u>
                         <?php } else { ?>
@@ -366,6 +366,11 @@
         <div class="close-button" onclick="closePhotoLightbox()">x</div>
     </div>
 </div>
+
+<!-- Roboto fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
 <!-- Include jQuery and Slick slider scripts -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
@@ -494,38 +499,38 @@
         elem.style.display = 'none';
     }
 
-    // Function to set character limit based on screen width
-    function setCharacterLimit() {
+    // Function to set character limit and hide powered by text based on screen width
+    function adjustLayout() {
+        // Function to set character limit based on screen width
         var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 
         // Set character limit based on screen width
-        var characterLimit = (screenWidth < 400) ? 85 : 105;
+        var characterLimit = (screenWidth < 430) ? 75 : 100;
 
-        // Update the content with the character limit
-        var reviewContent = document.getElementById('reviewContent');
-        if (reviewContent.textContent.length > characterLimit) {
-            reviewContent.innerHTML = reviewContent.textContent.slice(0, characterLimit) + '...<u>Read more</u>';
-        }
-    }
+        // Update the content with the character limit for each review tile
+        var reviewTiles = document.querySelectorAll('.review-content');
 
-    function hidePoweredByText() {
-        
-        var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        reviewTiles.forEach(function(reviewContent) {
+            var content = reviewContent.textContent.trim();
+            if (content.length > characterLimit) {
+                var truncatedContent = content.substring(0, characterLimit).trim();
+                reviewContent.innerHTML = truncatedContent + '...<u>Read more</u>';
+            }
+        });
 
-        if(screenWidth < 400) {
+        // hide powered by text based on the screen width
+        if(screenWidth < 1024) {
             // hide the text
             document.getElementById('powered-by-text').style.display = 'none'; 
         } else {
             document.getElementById('powered-by-text').style.display = 'block'; 
         }
+
     }
 
     // Call the function on page load and window resize
-    window.onload = setCharacterLimit;
-    window.onresize = setCharacterLimit;
-
-    window.onload = hidePoweredByText;
-    window.onresize = hidePoweredByText;
+    window.onload = adjustLayout;
+    window.onresize = adjustLayout;
 
     async function openPhotoLightbox(reviewData) {
 
@@ -851,4 +856,3 @@
         }
     });
 </script>
-
