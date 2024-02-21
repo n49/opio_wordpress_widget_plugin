@@ -896,7 +896,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 .testimonial {
@@ -999,7 +999,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
     width: 1140px;
     height: 400px;
     overflow: hidden; /* Prevent scrolling when the lightbox is open */
@@ -1859,7 +1859,7 @@
         padding: 0;
         margin: 0;
         box-sizing: border-box;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Roboto', sans-serif;
         margin: 20px auto;
         width: 310px;
         height: 360px;

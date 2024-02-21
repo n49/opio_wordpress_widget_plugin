@@ -650,31 +650,10 @@ height: unset !important;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
     width: 1140px;
     height: 400px;
     overflow: hidden; /* Prevent scrolling when the lightbox is open */
-}
-
-#lightbox {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 999;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.lightbox-container {
-    display: flex;
-    background: #777;
-    padding: 60px;
 }
 
 #photo-lightbox {
@@ -701,21 +680,7 @@ height: unset !important;
     cursor: pointer;
 }
 
-#lightbox img {
-    max-width: 80%;
-    max-height: 80%;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-#open-lightbox-button {
-    margin: 20px;
-    padding: 10px;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-.slider-container {
+.widget-body .slider-container {
     display: flex;
     height: 280px;
     overflow-x: auto;
@@ -728,17 +693,17 @@ height: unset !important;
     transition: transform 0.5s ease-in-out;
 }
 
-.reviewer-container {
+.widget-body .reviewer-container {
     display: flex; 
     position: relative;
 }
 
-.avatar-container {
+.widget-body .avatar-container {
     vertical-align: top; 
     padding-right: 10px;
 }
 
-.reviewer-avatar {
+.widget-body .reviewer-avatar {
     width: 35px; 
     height: 35px; 
     line-height: 35px; 
@@ -750,7 +715,7 @@ height: unset !important;
     background-repeat: no-repeat; 
 }
 
-.facebook-logo {
+.widget-body .facebook-logo {
     position: absolute; 
     right: -1px; 
     top: -2px; 
@@ -763,7 +728,7 @@ height: unset !important;
     margin-right: 0px;
 }
 
-.google-logo {
+.widget-body .google-logo {
     position: absolute; 
     right: -15px; 
     top: 2px; 
@@ -776,7 +741,7 @@ height: unset !important;
     margin-right: 0px;
 }
 
-.opio-logo {
+.widget-body .opio-logo {
     position: absolute; 
     right: -25px; 
     top: 2px; 
@@ -789,25 +754,25 @@ height: unset !important;
     margin-right: 0px;
 }
 
-.rating-container {
+.widget-body .rating-container {
     display: flex;
     flex-direction: column;
 }
 
-.fb-rating-div {
+.widget-body .fb-rating-div {
     display: inline-flex; 
     align-items: center; 
     vertical-align: middle;
 }
 
-.fb-rating-img {
+.widget-body .fb-rating-img {
     padding-right: 5px; 
     width: 20px; 
     height: 20px; 
     padding-top: 2px;
 }
 
-.fb-rating-text-p {
+.widget-body .fb-rating-text-p {
     margin: 0;
     font-weight: 700; 
     font-size: 12px; 
@@ -815,7 +780,7 @@ height: unset !important;
     white-space: nowrap;
 }
 
-.fb-rating-text-n {
+.widget-body .fb-rating-text-n {
     margin: 0;
     font-weight: 700; 
     font-size: 13px; 
@@ -823,12 +788,12 @@ height: unset !important;
     white-space: nowrap;
 }
 
-.opio-rating-container {
+.widget-body .opio-rating-container {
     overflow: hidden; 
     position: relative;
 }
 
-.rating-widget-part {
+.widget-body .rating-widget-part {
     display: flex; 
     background: #ffffff; 
     height: 100px; 
@@ -837,7 +802,7 @@ height: unset !important;
     gap: 10px;
 }
 
-.rating-stars {
+.widget-body .rating-stars {
     position: relative; 
     overflow: hidden; 
     cursor: pointer; 
@@ -847,7 +812,7 @@ height: unset !important;
     height: 22px;
 }
 
-.rating-stars-wd {
+.widget-body .rating-stars-wd {
     position: relative; 
     overflow: hidden; 
     cursor: pointer; 
@@ -857,7 +822,7 @@ height: unset !important;
     height: 22px;
 }
 
-.rating-stars-wd-v {
+.widget-body .rating-stars-wd-v {
     position: relative; 
     overflow: hidden; 
     cursor: pointer; 
@@ -867,27 +832,27 @@ height: unset !important;
     height: 26px;
 }
 
-.rating-stars-wd-c {
+.widget-body .rating-stars-wd-c {
     position: relative; 
     overflow: hidden; 
     cursor: pointer; 
     display: block; 
     float: left; 
-    width: 22px; 
-    height: 22px;
+    width: 20px; 
+    height: 20px;
 }
 
-.reviewer-name-container {
+.widget-body .reviewer-name-container {
     font-size: 12px; 
     color: rgb(99, 114, 130);
 }
 
-.opio-logo-container, .w-opio-logo-container {
+.widget-body .opio-logo-container, .widget-body .w-opio-logo-container {
     display: flex; 
     align-items: center;
 }
 
-.pwd-opio-logo {
+.widget-body .pwd-opio-logo {
     display: flex; 
     align-items: center; 
     min-width: 100px; 
@@ -898,13 +863,12 @@ height: unset !important;
     margin-left: 5px;
 }
 
-.review-tile {
+.widget-body .review-tile {
     /* flex: 0 0 250px; */
     display: flex;
     flex-direction: column;
     height: 200px;
     flex: 0 0 33.33%;
-    height: 260px;
     background-color: #f5f5f7;
     padding: 15px;
     margin: 0 10px;
@@ -913,20 +877,22 @@ height: unset !important;
     transition: transform 0.3s ease-in-out;
 }
 
-.location-name {
+.widget-body .location-name {
     font-size: 14px;
     font-weight: 600;
     color: rgb(99, 114, 130);
 }
 
-.review-content {
+.widget-body .review-content {
     flex: 1;
     font-size: 14px;
     color: rgb(99, 114, 130);
     margin-bottom: 15px;
+    text-align: left;
+    font-family: 'Roboto', sans-serif;
 }
 
-.reviewer-name {
+.widget-body .reviewer-name {
     font-size: 12px;
     font-weight: 700;
     margin-top: 5px;
@@ -934,14 +900,14 @@ height: unset !important;
     margin-bottom: 5px;
 }
 
-.review-media {
+.widget-body .review-media {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-end;
     margin-top: 30px;
 }
 
-.review-media-images {
+.widget-body .review-media-images {
     display: flex;
     gap: 10px;
     position: fixed;
@@ -949,12 +915,12 @@ height: unset !important;
     margin-bottom: 15px;
 }
 
-.review-img {
+.widget-body .review-img img{
     width: 50px; 
     height: 50px;
 }
 
-.video-icon {
+.widget-body .video-icon {
     width: 80px;
     height: 50px;
     position: relative;
@@ -962,7 +928,7 @@ height: unset !important;
     border-radius: 8px;
 }
 
-.play-button {
+.widget-body .play-button {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -974,14 +940,14 @@ height: unset !important;
     border-left: 15px solid #fff;
 }
 
-.tile-tag-container {
+.widget-body .tile-tag-container {
     display: flex;
     gap: 10px;
     position: fixed;
     bottom: 0;
 }
 
-.review-tagged-emps{
+.widget-body .review-tagged-emps{
     display: flex;
     margin-bottom: 15px;
     border: 1px solid #637282;
@@ -989,7 +955,7 @@ height: unset !important;
     padding: 5px;
 }
 
-.emp-avatar {
+.widget-body .emp-avatar {
     width: 40px; 
     height: 40px; 
     line-height: 40px; 
@@ -1001,59 +967,65 @@ height: unset !important;
     background-repeat: no-repeat;
 }
 
-.vertical-divider {
+.widget-body .vertical-divider {
     height: 40%;
     width: 1px;
     background-color: #9b9b9b; /* Change the color as needed */
     margin: 0px 10px;
 }
 
-.rating-widget {
+.widget-body .rating-widget {
     display: flex; 
     flex-direction: column;
 }
 
-.w-rating-box {
+.widget-body .w-rating-box {
     display: flex;
 }
 
-.w-pwd-text {
+.widget-body .w-pwd-text {
     font-size: 12px;
 }
 
-.rating-text-div {
+.widget-body .rating-text-div {
     display: flex; 
     margin-left: 5px;
 }
 
-.rating-text {
+.widget-body .rating-text {
     display: flex; 
     margin-top: -6px; 
     font-size: 24px; 
     font-weight: 700;
 }
 
-.see-all-box {
+.widget-body .see-all-box {
     display: flex; 
-    margin-top: -8px;
+    margin-top: -6px;
 }
 
-.see-all-text {
+.widget-body .see-all-text {
     display: flex; 
     font-size: 14px;
 }
 
-.write-review-btn-box {
+.widget-body a {
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    text-decoration: underline;
+}
+
+.widget-body .write-review-btn-box {
     display: flex; 
     margin-left: 5px;
 }
 
-.write-review-btn-box {
+.widget-body .write-review-btn-box {
     display: flex; 
     margin-left: 5px;
 }
 
-.write-review-btn-div {
+.widget-body .write-review-btn-div {
     width: 100%; 
     display: flex; 
     flex-direction: row; 
@@ -1062,12 +1034,12 @@ height: unset !important;
     text-align: center;
 }
 
-.write-review-btn-a {
+.widget-body .write-review-btn-a {
     text-decoration: none; 
     color:inherit
 }
 
-.write-review-btn {
+.widget-body .write-review-btn {
     border-radius: 2px; 
     display: inline-block; 
     height: 40px; 
@@ -1087,19 +1059,19 @@ height: unset !important;
     user-select: none;
 }
 
-.write-review-text {
+.widget-body .write-review-text {
     display: inline-block; 
     position: relative; 
     height: 100%;
 }
 
-.slider-navigation {
+.widget-body .slider-navigation {
     display: flex;
     align-items: center;
     margin-top: 3px;
 }
 
-.slider-button {
+.widget-body .slider-button {
     width: 34px;
     height: 34px;
     padding: 18px;
@@ -1114,7 +1086,7 @@ height: unset !important;
     font-size: 16px;
 }
 
-.close-button {
+.widget-body .close-button {
     color: white;
     width: 40px;
     height: 40px;
@@ -1131,22 +1103,22 @@ height: unset !important;
     right: 2em;
 }
 
-.star-rating {
+.widget-body .star-rating {
     font-size: 18px;
     color: #FFD700; /* Gold color for stars */
 }
 
-.photo-tiles {
+.widget-body .photo-tiles {
     display: flex;
     margin-top: 10px;
 }
 
-.photo-tile {
+.widget-body .photo-tile {
     flex: 0 0 40px;
     margin-right: 5px;
 }
 
-.photo-tile img {
+.widget-body .photo-tile img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -1204,6 +1176,8 @@ height: unset !important;
 .lb-review-content {
     font-size: 14px; 
     color: rgb(99, 114, 130);
+    text-align: left;
+    font-family: 'Roboto', sans-serif;
 }
 
 .lb-photo-div {
@@ -1448,27 +1422,28 @@ height: unset !important;
     margin: 0;
 }
 
-.testimonial-slider.vertical-slider {
+.widget-body .testimonial-slider.vertical-slider {
     padding: 0px;
     height: 360px;
     overflow: hidden;
     margin-top: 5px;
 }
 
-.v-header {
+.widget-body .v-header {
     display: flex; 
     background: #A9B7BF; 
     padding: 10px 0px 10px 10px; 
     color: white;
 }
 
-.v-h-col-1 {
+.widget-body .v-h-col-1 {
     display: flex; 
     flex-direction: column;
     padding-top: 5px;
+    flex: 60% 0;
 }
 
-.v-h-col-2 {
+.widget-body .v-h-col-2 {
     display: flex; 
     flex-direction: column; 
     align-items: center;
@@ -1477,16 +1452,16 @@ height: unset !important;
     padding-top: 5px;
 }
 
-.v-biz-span {
+.widget-body .v-biz-span {
     font-size: 22px; 
     margin-top: -7px;
 }
 
-.v-pwd-span {
+.widget-body .v-pwd-span {
     font-size: 13px;
 }
 
-.v-h-opio-logo {
+.widget-body .v-h-opio-logo {
     display: flex; 
     align-items: center; 
     min-width: 94px; 
@@ -1496,46 +1471,46 @@ height: unset !important;
     background-repeat: no-repeat;
 }
 
-.v-rating-container {
+.widget-body .v-rating-container {
     display: flex; 
     flex-direction: column; 
     padding: 10px; 
     margin-top: -5px;
 }
 
-.v-r-col-1 {
+.widget-body .v-r-col-1 {
     display: flex;
 }
 
-.v-r-col-2 {
+.widget-body .v-r-col-2 {
     display: flex;
     margin-top: -36px;
     text-align: center;
     justify-content: start;
 }
 
-.v-r-row-1 {
+.widget-body .v-r-row-1 {
     overflow: hidden; 
     position: relative; 
     margin-top: 14px;
 }
 
-.v-r-row-2 {
+.widget-body .v-r-row-2 {
     display: flex; 
     margin-left: 24px;
 }
 
-.v-rating-span {
+.widget-body .v-rating-span {
     display: flex; margin-top: 0px; font-size: 50px; font-weight: 700;
 }
 
-.v-see-all-span {
+.widget-body .v-see-all-span {
     display: flex;
     font-size: 14px;
     align-items: flex-end;
 }
 
-.review-tile-vertical {
+.widget-body .review-tile-vertical {
     flex: 0 0 250px;
     background-color: white;
     height: 120px;
@@ -1547,22 +1522,22 @@ height: unset !important;
     transition: transform 0.3s ease-in-out;
 }
 
-.v-review-tile-container {
+.widget-body .v-review-tile-container {
     display: flex; 
     position: relative;
 }
 
-.v-rev-content {
+.widget-body .v-rev-content {
     vertical-align: top; 
     padding-right: 10px;
 }
 
-.v-rev-rating-container {
+.widget-body .v-rev-rating-container {
     display: flex;
     flex-direction: column;
 }
 
-.v-reviewer-avatar {
+.widget-body .v-reviewer-avatar {
     width: 35px; 
     height: 35px; 
     line-height: 35px; 
@@ -1574,7 +1549,7 @@ height: unset !important;
     background-repeat: no-repeat; 
 }
 
-.v-facebook-logo {
+.widget-body .v-facebook-logo {
     position: absolute; 
     right: -6px; 
     top: -2px; 
@@ -1588,7 +1563,7 @@ height: unset !important;
     margin-right: 0px;
 }
 
-.v-google-logo {
+.widget-body .v-google-logo {
     position: absolute; 
     right: -20px; 
     top: 2px; 
@@ -1602,7 +1577,7 @@ height: unset !important;
     margin-right: 0px;
 }
 
-.v-opio-logo {
+.widget-body .v-opio-logo {
     position: absolute; 
     right: -30px; 
     top: 2px; 
@@ -1616,7 +1591,7 @@ height: unset !important;
     margin-right: 0px;
 }
 
-.v-footer {
+.widget-body .v-footer {
     display: flex;
     background: #ffffff;
     height: 80px;
@@ -1628,19 +1603,19 @@ height: unset !important;
     padding: 15px;
 }
 
-.v-f-col-1 {
+.widget-body .v-f-col-1 {
     display: flex;
     align-items: center;
     margin-top: 3px;
     margin: 0 auto;
 }
 
-.v-f-col-2 {
+.widget-body .v-f-col-2 {
     display: flex; 
     margin-left: 5px;
 }
 
-.v-slider-button {
+.widget-body .v-slider-button {
     width: 34px;
     height: 34px;
     padding: 18px;
@@ -1655,7 +1630,7 @@ height: unset !important;
     font-size: 16px;
 }
 
-.v-wrire-rev-container {
+.widget-body .v-wrire-rev-container {
     width: 100%; 
     display: flex; 
     flex-direction: row; 
@@ -1664,12 +1639,12 @@ height: unset !important;
     text-align: center;
 }
 
-.v-wrire-rev-a {
+.widget-body .v-wrire-rev-a {
     text-decoration: none; 
     color:inherit  
 }
 
-.v-write-rev-div {
+.widget-body .v-write-rev-div {
     border-radius: 2px; 
     display: inline-block; 
     height: 40px; 
@@ -1689,7 +1664,7 @@ height: unset !important;
     user-select: none;
 }
 
-.v-write-rev-div-2 {
+.widget-body .v-write-rev-div-2 {
     display: inline-block; 
     position: relative; 
     height: 100%;
@@ -1704,7 +1679,7 @@ height: unset !important;
     height: 240px;
 }
 
-.c-facebook-logo {
+.widget-body .c-facebook-logo {
     position: absolute; 
     right: -6px; 
     top: -2px; 
@@ -1718,7 +1693,7 @@ height: unset !important;
     margin-right: 0px;
 }
 
-.c-google-logo {
+.widget-body .c-google-logo {
     position: absolute; 
     right: -20px; 
     top: 2px; 
@@ -1732,7 +1707,7 @@ height: unset !important;
     margin-right: 0px;
 }
 
-.c-opio-logo {
+.widget-body .c-opio-logo {
     position: absolute; 
     right: -30px; 
     top: 2px; 
@@ -1746,7 +1721,7 @@ height: unset !important;
     margin-right: 0px;
 }
 
-.c-rating-widget-container {
+.widget-body .c-rating-widget-container {
     display: flex;
     background: #ffffff;
     height: 300px;
@@ -1758,37 +1733,37 @@ height: unset !important;
     margin-top: -20px;
 }
 
-.c-rating-row-1 {
+.widget-body .c-rating-row-1 {
     display: flex;
     align-items: center;
     margin-left: 7px;
 }
 
-.c-rating-row-2 {
+.widget-body .c-rating-row-2 {
     display: flex; 
     flex-direction: column; 
 }
 
-.c-rating-row-3 {
+.widget-body .c-rating-row-3 {
     display: flex; margin-left: 5px;
 }
 
-.c-rating-row-4 {
+.widget-body .c-rating-row-4 {
     display: flex;
     align-items: center;
     margin-top: 3px;
     margin: 0 auto;
 }
 
-.c-vertical-divider {
+.widget-body .c-vertical-divider {
     display: none;
 }
 
-.c-pwd-span {
+.widget-body .c-pwd-span {
     font-size: 12px;
 }
 
-.c-pwd-div {
+.widget-body .c-pwd-div {
     display: flex; 
     align-items: center; 
     min-width: 100px; 
@@ -1798,37 +1773,37 @@ height: unset !important;
     background-repeat: no-repeat;
 }
 
-.c-rating-r-row-1 {
+.widget-body .c-rating-r-row-1 {
     overflow: hidden; 
     position: relative;
 }
 
-.c-rating-r-row-2 {
+.widget-body .c-rating-r-row-2 {
     display: flex; 
     margin-left: 5px;
 }
 
-.c-rating-row-span {
+.widget-body .c-rating-row-span {
     display: flex; 
     margin-top: -6px; 
     font-size: 24px; 
     font-weight: 700;
 }
 
-.c-see-all-div {
+.widget-body .c-see-all-div {
     display: flex;
     margin-top: -8px;
     text-align: center;
     justify-content: center;
 }
 
-.c-see-all-span {
+.widget-body .c-see-all-span {
     display: flex;
     font-size: 14px;
     align-items: flex-end;
 }
 
-.c-write-rev-container {
+.widget-body .c-write-rev-container {
     width: 100%; 
     display: flex; 
     flex-direction: row; 
@@ -1837,7 +1812,7 @@ height: unset !important;
     text-align: center;
 }
 
-.c-write-rev-outer-div {
+.widget-body .c-write-rev-outer-div {
     border-radius: 2px; 
     display: inline-block; 
     height: 40px; 
@@ -1857,13 +1832,13 @@ height: unset !important;
     user-select: none;
 }
 
-.c-write-rev-inner-div {
+.widget-body .c-write-rev-inner-div {
     display: inline-block; 
     position: relative; 
     height: 100%;
 }
 
-.c-slider-button {
+.widget-body .c-slider-button {
     width: 34px;
     height: 34px;
     padding: 18px;
@@ -1881,7 +1856,7 @@ height: unset !important;
 
 /** Slick slider style here */
 
-.testimonial {
+.widget-body .testimonial {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -1971,14 +1946,14 @@ height: unset !important;
         padding: 0;
         margin: 0;
         box-sizing: border-box;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Roboto', sans-serif;
         margin: 20px auto;
         width: 310px;
         height: 360px;
         overflow: hidden; /* Prevent scrolling when the lightbox is open */
     }
 
-    .slider-container {
+    .widget-body .slider-container {
         display: flex;
         height: 240px;
         overflow-x: auto;
@@ -2006,25 +1981,25 @@ height: unset !important;
         padding: 0;
         margin: 0;
         box-sizing: border-box;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Roboto', sans-serif;
         margin: 20px auto;
         width: 310px;
         height: 360px;
         overflow: hidden; /* Prevent scrolling when the lightbox is open */
     }
 
-    .review-tile {
+    .widget-body .review-tile {
         margin: 0;
     }
 
-    .vertical-divider {
+    .widget-body .vertical-divider {
         height: 40%;
         width: 1px;
         background-color: #9b9b9b; /* Change the color as needed */
         margin: 0px 5px;
     }
 
-    .rating-text {
+    .widget-body .rating-text {
         display: flex; 
         margin-top: -6px; 
         font-size: 20px; 
@@ -2032,7 +2007,7 @@ height: unset !important;
     }
 
     /** widget 2nd part */
-    .w-opio-logo-container {
+    .widget-body .w-opio-logo-container {
         display: flex; 
         flex: 30% 0 0;
         justify-content: center;
@@ -2040,29 +2015,29 @@ height: unset !important;
         margin-left: 0px;
     }
 
-    .pwd-opio-logo {
+    .widget-body .pwd-opio-logo {
         min-width: 60px; 
         min-height: 30px; 
         margin-left: 36px;
     }
 
-    .rating-widget {
+    .widget-body .rating-widget {
         display: flex; 
         flex-direction: column;
         flex: 0 0 55%;
     }
 
-    .write-review-btn-box {
+    .widget-body .write-review-btn-box {
         display: flex; 
         margin-left: 5px;
     }
 
-    .rating-stars-wd, .rating-stars-wd-c {
+    .widget-body .rating-stars-wd, .widget-body .rating-stars-wd-c {
         width: 20px; 
         height: 20px;
     }
 
-    .rating-widget-part {
+    .widget-body .rating-widget-part {
         flex-wrap: wrap;
         height: 140px;
         padding-bottom: 40px;
@@ -2086,14 +2061,14 @@ height: unset !important;
     /** Horizontal slider styles ends here*/
 
     /** Horizontal Carousel slider styles starts here */
-    .c-rating-widget-container {
+    .widget-body .c-rating-widget-container {
         flex-direction: row;
         flex-wrap: wrap;
         gap: 0px;
         height: 160px;
     }
 
-    .c-rating-row-1 {
+    .widget-body .c-rating-row-1 {
         display: flex;
         align-items: center;
         margin-left: 7px;
@@ -2101,28 +2076,28 @@ height: unset !important;
         margin-top: 30px;
     }
 
-    .c-rating-row-2 {
+    .widget-body .c-rating-row-2 {
         display: flex;
         flex-direction: column;
         flex: 0 0 55%;
         margin-top: 24px;
     }
 
-    .c-rating-row-3 {
+    .widget-body .c-rating-row-3 {
         display: flex;
         margin-left: 16px;
         margin-top: -24px;
         justify-content: flex-start;
     }
 
-    .c-rating-row-4 {
+    .widget-body .c-rating-row-4 {
         display: flex;
         margin: 0 auto;
         margin-top: -22px;
         justify-content: end;
     }
 
-    .c-pwd-div {
+    .widget-body .c-pwd-div {
         min-width: 60px;
         width: 60px; 
         min-height: 30px; 
@@ -2130,11 +2105,303 @@ height: unset !important;
         margin-left: 36px;
     }
 
-    .c-rating-row-span {
+    .widget-body .c-rating-row-span {
         font-size: 20px;
     }
 
-    .c-vertical-divider {
+    .widget-body .c-vertical-divider {
+        display: block;
+        height: 40%;
+        width: 1px;
+        background-color: #9b9b9b; /* Change the color as needed */
+        margin: 0px 10px;
+    }
+
+}
+
+@media (min-width: 401px) and (max-width: 767px) {
+    /** Horizontal slider styles starts here*/
+
+    .widget-body {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+        margin: 20px auto;
+        width: auto;
+        height: 360px;
+        overflow: hidden; /* Prevent scrolling when the lightbox is open */
+    }
+
+    .widget-body .slider-container {
+        display: flex;
+        height: 240px;
+        overflow-x: auto;
+        scrollbar-width: thin;
+        scrollbar-color: #ccc #f0f0f0;
+        padding: 20px;
+        background: #ffffff;
+        margin: auto;
+        justify-content: center;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .vertical {
+        display: flex;
+        height: 500px;
+        width: 300px;
+        flex-direction: column;
+        border: 2px solid #A9B7BF;
+        border-radius: 3px;
+        margin: 0;
+    }
+
+    .carousel {
+        display: block;
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+        margin: 20px auto;
+        width: auto;
+        height: 360px;
+        overflow: hidden; /* Prevent scrolling when the lightbox is open */
+    }
+
+    .widget-body .review-tile {
+        margin: 0;
+    }
+
+    .widget-body .vertical-divider {
+        height: 40%;
+        width: 1px;
+        background-color: #9b9b9b; /* Change the color as needed */
+        margin: 0px 5px;
+    }
+
+    .widget-body .c-see-all-div {
+        display: flex;
+        margin-top: -8px;
+        justify-content: start;
+    }
+
+    .widget-body .rating-text {
+        display: flex; 
+        margin-top: -6px; 
+        font-size: 20px; 
+        font-weight: 700;
+    }
+
+    /** widget 2nd part */
+    .widget-body .w-opio-logo-container {
+        display: flex; 
+        flex: 30% 0 0;
+        justify-content: center;
+        margin-top: 6px;
+        margin-left: 0px;
+    }
+
+    .widget-body .pwd-opio-logo {
+        min-width: 60px; 
+        min-height: 30px; 
+        margin-left: 36px;
+    }
+
+    .widget-body .rating-widget {
+        display: flex; 
+        flex-direction: column;
+        flex: 0 0 55%;
+    }
+
+    .widget-body .write-review-btn-box {
+        display: flex; 
+        margin-left: 5px;
+    }
+
+    .widget-body .rating-stars-wd, .widget-body .rating-stars-wd-c {
+        width: 20px; 
+        height: 20px;
+    }
+
+    .widget-body .rating-widget-part {
+        flex-wrap: wrap;
+        height: 140px;
+        padding-bottom: 40px;
+    }
+
+    .lb-reviewbox {
+        width: 80%;
+    }
+
+    .lb-empTagContainer {
+        grid-template-columns: auto;
+    }
+
+    .lb-property-logo {
+        width: 60px;
+        height: 24px;
+        min-width: 60px;
+        min-height: 24px;
+    }
+
+    /** Horizontal slider styles ends here*/
+
+    /** Horizontal Carousel slider styles starts here */
+    .widget-body .c-rating-widget-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0px;
+        height: 160px;
+    }
+
+    .widget-body .c-rating-row-1 {
+        display: flex;
+        align-items: center;
+        margin-left: 24px;
+        flex: 30% 0 0;
+        margin-top: 30px;
+    }
+
+    .widget-body .c-rating-row-2 {
+        display: flex;
+        flex-direction: column;
+        flex: 0 0 55%;
+        margin-top: 24px;
+    }
+
+    .widget-body .c-rating-row-3 {
+        display: flex;
+        margin-left: 46px;
+        margin-top: -24px;
+        justify-content: flex-start;
+    }
+
+    .widget-body .c-rating-row-4 {
+        display: flex;
+        margin: 0 auto;
+        margin-top: -22px;
+        justify-content: end;
+    }
+
+    .widget-body .c-pwd-div {
+        min-width: 60px;
+        width: 60px; 
+        min-height: 30px; 
+        height: 30px;
+        margin-left: 36px;
+    }
+
+    .widget-body .c-rating-row-span {
+        font-size: 20px;
+    }
+
+    .widget-body .c-vertical-divider {
+        display: block;
+        height: 40%;
+        width: 1px;
+        background-color: #9b9b9b; /* Change the color as needed */
+        margin: 0px 10px;
+    }
+
+}
+
+/* CSS for tablets (landscape) */
+@media (min-width: 768px) and (max-width: 1140px) {
+    /* Add your tablet-specific styles here */
+    /** Horizontal slider styles starts here*/
+
+    .widget-body {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+        margin: 20px auto;
+        width: auto;
+        height: 310px;
+        overflow: hidden; /* Prevent scrolling when the lightbox is open */
+    }
+
+    .widget-body .slider-container {
+        display: flex;
+        height: 240px;
+        overflow-x: auto;
+        scrollbar-width: thin;
+        scrollbar-color: #ccc #f0f0f0;
+        padding: 20px;
+        background: #ffffff;
+        margin: auto;
+        justify-content: center;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .vertical {
+        display: flex;
+        height: 500px;
+        width: 300px;
+        flex-direction: column;
+        border: 2px solid #A9B7BF;
+        border-radius: 3px;
+        margin: 0;
+    }
+
+    .carousel {
+        display: block;
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+        margin: 20px auto;
+        width: auto;
+        height: 300px;
+        overflow: hidden; /* Prevent scrolling when the lightbox is open */
+    }
+
+    /** Horizontal Carousel slider styles starts here */
+    .widget-body .c-rating-widget-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0px;
+        height: 160px;
+    }
+
+    .widget-body .c-rating-row-1 {
+        display: flex;
+        align-items: center;
+        margin-top: 30px;
+    }
+
+    .widget-body .c-rating-row-2 {
+        display: flex;
+        flex-direction: column;
+        margin-top: 24px;
+    }
+
+    .widget-body .c-rating-row-3 {
+        display: flex;
+        margin-left: 20px;
+        margin-top: 21px;
+        justify-content: flex-start;
+    }
+
+    .widget-body .c-rating-row-4 {
+        display: flex;
+        margin: 0 auto;
+        margin-top: 24px;
+    }
+
+    .widget-body .c-pwd-div {
+        min-width: 80px;
+        width: 80px; 
+        min-height: 30px; 
+        height: 34px;
+        margin-left: 50px;
+    }
+
+    .widget-body .c-rating-row-span {
+        font-size: 20px;
+    }
+
+    .widget-body .c-vertical-divider {
         display: block;
         height: 40%;
         width: 1px;
