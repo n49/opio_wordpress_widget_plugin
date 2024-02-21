@@ -108,10 +108,12 @@
         $aggregateRating = 0;
         $totalReviews = 0;
         if($review_option === 'all') {
+            $business = $response;
             $reviews = $response['reviews'];
             $aggregateRating = $response['aggregateRating']['3']['average'];
             $totalReviews = $response['aggregateRating']['3']['total'];
         } else if($review_option === 'opio') {
+            $business = $response[0];
             $reviews = $response[0]['reviews'];
             $aggregateRating = $response[0]['aggregateRating']["5734f48a0b64d7382829fdf7"]['average'];
             $totalReviews = $response[0]['aggregateRating']["5734f48a0b64d7382829fdf7"]['total'];
@@ -125,9 +127,16 @@
             }
         }
 
-        $writeReviewUrl = 'https://op.io/write-review/5734f48a0b64d7382829fdf7/'.$business["_id"];
-        if(isset($business["landingPageUsername"])) {
-            $writeReviewUrl = 'https://' .$business["landingPageUsername"]. '.op.io';
+        $writeReviewUrl = 'https://op.io';
+        if($review_type === 'orgfeed') {
+            if(isset($business["landingPageUsername"])) {
+                $writeReviewUrl = 'https://' .$business["landingPageUsername"]. '.op.io';
+            }
+        } else {
+            $writeReviewUrl = 'https://op.io/write-review/5734f48a0b64d7382829fdf7/'.$business["_id"];
+            if(isset($business["landingPageUsername"])) {
+                $writeReviewUrl = 'https://' .$business["landingPageUsername"]. '.op.io';
+            }
         }
 
     }
@@ -505,7 +514,7 @@
         var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 
         // Set character limit based on screen width
-        var characterLimit = (screenWidth < 430) ? 75 : 100;
+        var characterLimit = (screenWidth < 430) ? 75 : 90;
 
         // Update the content with the character limit for each review tile
         var reviewTiles = document.querySelectorAll('.review-content');
