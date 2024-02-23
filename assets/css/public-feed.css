@@ -889,6 +889,7 @@ height: unset !important;
 .widget-body .review-content {
     flex: 1;
     font-size: 14px;
+    font-weight: 400;
     color: #333333;
     margin-bottom: 15px;
     text-align: left;
@@ -1443,8 +1444,8 @@ height: unset !important;
 
 .widget-body .v-h-col-1 {
     display: flex; 
-    flex-direction: column;
-    padding-top: 5px;
+    justify-content: flex-start;
+    align-items: center;
     flex: 60% 0;
 }
 
@@ -1509,7 +1510,10 @@ height: unset !important;
 }
 
 .widget-body .v-rating-span {
-    display: flex; margin-top: 0px; font-size: 50px; font-weight: 700;
+    display: flex; 
+    margin-top: 30px; 
+    font-size: 50px; 
+    font-weight: 700;
 }
 
 .widget-body .v-see-all-span {
