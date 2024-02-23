@@ -199,7 +199,7 @@
                                 (isset($review['videos']) && is_array($review['videos']) && count($review['videos']) > 0)) { ?>
                         <div class="review-content" id="reviewContent-<?php echo esc_attr($index); ?>" style="margin-top: 0px;">
                             <?php if (strlen($review['content']) > 55) { ?>
-                                <?php echo esc_attr(mb_substr($review['content'], 0, 55, 'UTF-8')); ?>...<u>Read more</u>
+                                <?php echo esc_attr(mb_substr($review['content'], 0, 55, 'UTF-8')); ?> <u>Read more</u>
                             <?php } else { ?>
                                 <?php echo esc_attr($review['content']); ?>
                             <?php } ?>
@@ -221,7 +221,7 @@
                         <?php } else if(isset($review['taggedEmployees']) && is_array($review['taggedEmployees']) && count($review['taggedEmployees']) > 0) { ?>
                             <div class="review-content" id="reviewContent-<?php echo esc_attr($index); ?>" style="margin-top: 0px;">
                                 <?php if (strlen($review['content']) > 55) { ?>
-                                    <?php echo esc_attr(mb_substr($review['content'], 0, 55, 'UTF-8')); ?>...<u>Read more</u>
+                                    <?php echo esc_attr(mb_substr($review['content'], 0, 55, 'UTF-8')); ?> <u>Read more</u>
                                 <?php } else { ?>
                                     <?php echo esc_attr($review['content']); ?>
                                 <?php } ?>
@@ -243,7 +243,7 @@
                         <?php } else { ?>
                             <div class="review-content" id="reviewContent-<?php echo esc_attr($index); ?>" style="margin-top: 0px;">
                             <?php if (strlen($review['content']) > 140) { ?>
-                                <?php echo esc_attr(mb_substr($review['content'], 0, 140, 'UTF-8')); ?>...<u>Read more</u>
+                                <?php echo esc_attr(mb_substr($review['content'], 0, 140, 'UTF-8')); ?> <u>Read more</u>
                             <?php } else { ?>
                                 <?php echo esc_attr($review['content']); ?>
                             <?php } ?>
@@ -254,7 +254,7 @@
                             (isset($review['videos']) && is_array($review['videos']) && count($review['videos']) > 0)) { ?>
                     <div class="review-content" id="reviewContent-<?php echo esc_attr($index); ?>">
                         <?php if (strlen($review['content']) > 110) { ?>
-                            <?php echo esc_attr(mb_substr($review['content'], 0, 110, 'UTF-8')); ?>...<u>Read more</u>
+                            <?php echo esc_attr(mb_substr($review['content'], 0, 110, 'UTF-8')); ?> <u>Read more</u>
                         <?php } else { ?>
                             <?php echo esc_attr($review['content']); ?>
                         <?php } ?>
@@ -276,7 +276,7 @@
                     <?php } else if(isset($review['taggedEmployees']) && is_array($review['taggedEmployees']) && count($review['taggedEmployees']) > 0) { ?>
                         <div class="review-content" id="reviewContent-<?php echo esc_attr($index); ?>">
                             <?php if (strlen($review['content']) > 110) { ?>
-                                <?php echo esc_attr(mb_substr($review['content'], 0, 110, 'UTF-8')); ?>...<u>Read more</u>
+                                <?php echo esc_attr(mb_substr($review['content'], 0, 110, 'UTF-8')); ?> <u>Read more</u>
                             <?php } else { ?>
                                 <?php echo esc_attr($review['content']); ?>
                             <?php } ?>
@@ -298,7 +298,7 @@
                     <?php } else { ?>
                         <div class="review-content" id="reviewContent-<?php echo esc_attr($index); ?>">
                         <?php if (strlen($review['content']) > 160) { ?>
-                            <?php echo esc_attr(mb_substr($review['content'], 0, 160, 'UTF-8')); ?>...<u>Read more</u>
+                            <?php echo esc_attr(mb_substr($review['content'], 0, 160, 'UTF-8')); ?> <u>Read more</u>
                         <?php } else { ?>
                             <?php echo esc_attr($review['content']); ?>
                         <?php } ?>
@@ -523,7 +523,7 @@
             var content = reviewContent.textContent.trim();
             if (content.length > characterLimit) {
                 var truncatedContent = content.substring(0, characterLimit).trim();
-                reviewContent.innerHTML = truncatedContent + '...<u>Read more</u>';
+                reviewContent.innerHTML = truncatedContent + ' <u>Read more</u>';
             }
         });
 

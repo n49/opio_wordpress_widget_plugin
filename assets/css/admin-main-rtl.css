@@ -902,13 +902,6 @@
 
 /** Slick slider style */
 
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-}
-
 .testimonial {
     width: 100%;
     display: flex;
@@ -1827,12 +1820,6 @@
 }
 
 /** Slick slider style here */
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-}
 
 .testimonial {
     width: 100%;
