@@ -220,7 +220,7 @@
                     <div class="location-name"><?php echo esc_attr($review['entityInfo']['name']); ?></div>
                     <div class="review-content" id="v-reviewContent">
                     <?php if (strlen($review['content']) > 55) { ?>
-                        <?php echo esc_attr(mb_substr($review['content'], 0, 55, 'UTF-8')); ?>...<u>Read more</u>
+                        <?php echo esc_attr(mb_substr($review['content'], 0, 55, 'UTF-8')); ?> <u>Read more</u>
                     <?php } else { ?>
                         <?php echo esc_attr($review['content']); ?>
                     <?php } ?>
@@ -229,7 +229,7 @@
                     <?php } ?>
                     <div class="review-content" id="v-reviewContent">
                     <?php if (strlen($review['content']) > 70) { ?>
-                        <?php echo esc_attr(mb_substr($review['content'], 0, 70, 'UTF-8')); ?>...<u>Read more</u>
+                        <?php echo esc_attr(mb_substr($review['content'], 0, 70, 'UTF-8')); ?> <u>Read more</u>
                     <?php } else { ?>
                         <?php echo esc_attr($review['content']); ?>
                     <?php } ?>
