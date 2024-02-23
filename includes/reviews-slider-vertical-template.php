@@ -146,12 +146,7 @@
 <div class="widget-body vertical">
     <div class="v-header">
         <div class="v-h-col-1">
-            <span style="font-size: 14px; margin-top: -6px;">Reviews for</span>
-            <?php if (strlen($business['name']) > 14) { ?>
-                <span class="v-biz-span"><?php echo esc_attr(mb_substr($business['name'], 0, 14, 'UTF-8')); ?>...</span>
-            <?php } else { ?>
-                <span class="v-biz-span"><?php echo esc_attr($business['name']); ?></span>
-            <?php } ?>
+            <span style="font-size: 22px; font-weight: 700;">Our reviews</span>
         </div>
         <div class="v-h-col-2">
             <span class="v-pwd-span">Powered by</span>
