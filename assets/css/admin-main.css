@@ -1426,19 +1426,25 @@
     margin-top: 3px;
 }
 
-.slider-button {
-    width: 34px;
-    height: 34px;
-    padding: 18px;
-    background-color: #F5F5F7;
-    color: #919191;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.widget-body .slider-button {
+    width: 36px;
+    height: 36px;
+    margin: 0 2px;
     cursor: pointer;
-    margin: 0 4px;
-    font-size: 16px;
+}
+
+.widget-body .c-slider-button {
+    width: 36px;
+    height: 36px;
+    margin: 0 2px;
+    cursor: pointer;
+}
+
+.widget-body .v-slider-button {
+    width: 36px;
+    height: 36px;
+    margin: 0 2px;
+    cursor: pointer;
 }
 
 .close-button {

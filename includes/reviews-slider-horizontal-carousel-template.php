@@ -142,7 +142,7 @@
     }
 ?>
 
-<div class="widget-body carousel">
+<div class="widget-body opio-carousel">
     <div class="slider-container testimonial-slider">
     <?php
         // Display the first 9 reviews
@@ -340,9 +340,8 @@
             </div>
         </div>
         <div class="c-rating-row-4">
-            <div class="c-slider-button left">&lt;</div>
-            <!-- Your slider content goes here -->
-            <div class="c-slider-button right">&gt;</div>
+            <div class="c-slider-button left" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/left-arrow.svg'; ?>&quot;);" ></div>
+            <div class="c-slider-button right" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/right-arrow.svg'; ?>&quot;);" ></div>
         </div>
     </div>
 
@@ -391,7 +390,7 @@
     .slider-container.testimonial-slider {
         padding: 20px;
     }
-    .slick-slide {
+    .widget-body .slick-slide {
         display: flex;
         flex-direction: column;
         height: 200px;

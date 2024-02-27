@@ -143,7 +143,7 @@
 ?>
 <?php $currentReview = $review; ?>
 
-<div class="widget-body vertical">
+<div class="widget-body opio-vertical">
     <div class="v-header">
         <div class="v-h-col-1">
             <span style="font-size: 22px; font-weight: 700;">Our reviews</span>
@@ -219,16 +219,16 @@
                     <?php } else { ?>
                         <?php echo esc_attr($review['content']); ?>
                     <?php } ?>
-                </div>
-                    <?php } else { ?>
-                    <?php } ?>
+                    </div>
+                <?php } else { ?>
                     <div class="review-content" id="v-reviewContent">
                     <?php if (strlen($review['content']) > 70) { ?>
                         <?php echo esc_attr(mb_substr($review['content'], 0, 70, 'UTF-8')); ?> <u>Read more</u>
                     <?php } else { ?>
                         <?php echo esc_attr($review['content']); ?>
                     <?php } ?>
-                </div>
+                    </div>
+                <?php } ?>
             </div>
     <?php
         }
@@ -236,9 +236,8 @@
     </div>
     <div class="v-footer">
         <div class="v-f-col-1">
-            <div class="v-slider-button left">&lt;</div>
-            <!-- Your slider content goes here -->
-            <div class="v-slider-button right">&gt;</div>
+            <div class="v-slider-button left" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/up-arrow.svg'; ?>&quot;);" ></div>
+            <div class="v-slider-button right" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/down-arrow.svg'; ?>&quot;);" ></div>
         </div>
         <div class="v-f-col-2">
             <div class="v-wrire-rev-container">
