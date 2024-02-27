@@ -1079,8 +1079,9 @@ height: unset !important;
 }
 
 .widget-body .slider-button {
-    width: auto;
-    height: auto;
+    width: 36px;
+    height: 36px;
+    margin: 0 2px;
     cursor: pointer;
 }
 

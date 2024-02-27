@@ -236,7 +236,7 @@
     </div>
     <div class="v-footer">
         <div class="v-f-col-1">
-            <div class="v-slider-button left" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/up-arrow.svg'; ?>&quot;);" ></div>
+            <div class="v-slider-button left" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/top-arrow.svg'; ?>&quot;);" ></div>
             <div class="v-slider-button right" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/down-arrow.svg'; ?>&quot;);" ></div>
         </div>
         <div class="v-f-col-2">
