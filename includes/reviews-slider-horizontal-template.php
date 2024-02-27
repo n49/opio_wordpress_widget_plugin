@@ -329,9 +329,8 @@
             </div>
         </div>
         <div class="slider-navigation">
-            <div class="slider-button left">&lt;</div>
-            <!-- Your slider content goes here -->
-            <div class="slider-button right">&gt;</div>
+            <div class="slider-button left" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/left-arrow.svg'; ?>&quot;);" ></div>
+            <div class="slider-button right" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/right-arrow.svg'; ?>&quot;);" ></div>
         </div>
     </div>
 
@@ -377,7 +376,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 
 <style>
-    .slick-slide {
+    .widget-body .slick-slide {
         display: flex;
         flex-direction: column;
         height: 200px;

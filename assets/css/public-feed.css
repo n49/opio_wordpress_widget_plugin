@@ -652,7 +652,7 @@ height: unset !important;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
     width: 1140px;
-    height: 400px;
+    height: auto;
     overflow: hidden; /* Prevent scrolling when the lightbox is open */
 }
 
@@ -682,11 +682,11 @@ height: unset !important;
 
 .widget-body .slider-container {
     display: flex;
-    height: 280px;
+    height: auto;
     overflow-x: auto;
     scrollbar-width: thin;
     scrollbar-color: #ccc #f0f0f0;
-    padding: 40px;
+    padding: 0px;
     background: #ffffff;
     margin: auto;
     justify-content: center;
@@ -801,6 +801,7 @@ height: unset !important;
     justify-content: center; 
     gap: 10px;
     line-height: 18px;
+    margin-top: 20px;
 }
 
 .widget-body .rating-stars {
@@ -1078,18 +1079,9 @@ height: unset !important;
 }
 
 .widget-body .slider-button {
-    width: 34px;
-    height: 34px;
-    padding: 18px;
-    background-color: #F5F5F7;
-    color: #919191;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: auto;
+    height: auto;
     cursor: pointer;
-    margin: 0 4px;
-    font-size: 16px;
 }
 
 .widget-body .close-button {
@@ -1418,7 +1410,7 @@ height: unset !important;
 
 /** Vertical slider styles starts here*/
 
-.vertical {
+.opio-vertical {
     display: flex;
     height: 500px;
     width: 300px;
@@ -1511,15 +1503,17 @@ height: unset !important;
 
 .widget-body .v-rating-span {
     display: flex; 
-    margin-top: 30px; 
+    margin-top: 0px; 
     font-size: 50px; 
     font-weight: 700;
+    color: #333333;
 }
 
 .widget-body .v-see-all-span {
     display: flex;
     font-size: 14px;
     align-items: flex-end;
+    color: #333333;
 }
 
 .widget-body .review-tile-vertical {
@@ -1628,18 +1622,10 @@ height: unset !important;
 }
 
 .widget-body .v-slider-button {
-    width: 34px;
-    height: 34px;
-    padding: 18px;
-    background-color: #F5F5F7;
-    color: #919191;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 36px;
+    height: 36px;
+    margin: 0 2px;
     cursor: pointer;
-    margin: 0 4px;
-    font-size: 16px;
 }
 
 .widget-body .v-wrire-rev-container {
@@ -1686,7 +1672,7 @@ height: unset !important;
 
 /** Horizontal carousel slider styles starts here*/
 
-.carousel {
+.opio-carousel {
     display: flex;
     height: 240px;
 }
@@ -1852,18 +1838,9 @@ height: unset !important;
 }
 
 .widget-body .c-slider-button {
-    width: 34px;
-    height: 34px;
-    padding: 18px;
-    background-color: #F5F5F7;
-    color: #919191;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: auto;
+    height: auto;
     cursor: pointer;
-    margin: 0 4px;
-    font-size: 16px;
 }
 /** Horizontal carousel slider styles ends here*/
 
@@ -1961,25 +1938,25 @@ height: unset !important;
         box-sizing: border-box;
         font-family: 'Roboto', sans-serif;
         margin: 20px auto;
-        width: 310px;
+        width: 350px;
         height: 360px;
         overflow: hidden; /* Prevent scrolling when the lightbox is open */
     }
 
     .widget-body .slider-container {
         display: flex;
-        height: 240px;
+        height: auto;
         overflow-x: auto;
         scrollbar-width: thin;
         scrollbar-color: #ccc #f0f0f0;
-        padding: 20px;
+        padding: 0px;
         background: #ffffff;
         margin: auto;
         justify-content: center;
         transition: transform 0.5s ease-in-out;
     }
 
-    .vertical {
+    .opio-vertical {
         display: flex;
         height: 500px;
         width: 300px;
@@ -1989,7 +1966,7 @@ height: unset !important;
         margin: 0;
     }
 
-    .carousel {
+    .opio-carousel {
         display: block;
         padding: 0;
         margin: 0;
@@ -2022,16 +1999,15 @@ height: unset !important;
     /** widget 2nd part */
     .widget-body .w-opio-logo-container {
         display: flex; 
-        flex: 30% 0 0;
-        justify-content: center;
+        flex: 35% 0 0;
+        justify-content: end;
         margin-top: 6px;
         margin-left: 0px;
     }
 
     .widget-body .pwd-opio-logo {
-        min-width: 60px; 
-        min-height: 30px; 
-        margin-left: 36px;
+        min-width: 80px; 
+        min-height: 35px; 
     }
 
     .widget-body .rating-widget {
@@ -2054,6 +2030,7 @@ height: unset !important;
         flex-wrap: wrap;
         height: 140px;
         padding-bottom: 40px;
+        margin-top: 20px;
     }
 
     .lb-reviewbox {
@@ -2148,18 +2125,18 @@ height: unset !important;
 
     .widget-body .slider-container {
         display: flex;
-        height: 240px;
+        height: auto;
         overflow-x: auto;
         scrollbar-width: thin;
         scrollbar-color: #ccc #f0f0f0;
-        padding: 20px;
+        padding: 0px;
         background: #ffffff;
         margin: auto;
         justify-content: center;
         transition: transform 0.5s ease-in-out;
     }
 
-    .vertical {
+    .opio-vertical {
         display: flex;
         height: 500px;
         width: 300px;
@@ -2169,7 +2146,7 @@ height: unset !important;
         margin: 0;
     }
 
-    .carousel {
+    .opio-carousel {
         display: block;
         padding: 0;
         margin: 0;
@@ -2208,16 +2185,15 @@ height: unset !important;
     /** widget 2nd part */
     .widget-body .w-opio-logo-container {
         display: flex; 
-        flex: 30% 0 0;
-        justify-content: center;
+        flex: 35% 0 0;
+        justify-content: end;
         margin-top: 6px;
         margin-left: 0px;
     }
 
     .widget-body .pwd-opio-logo {
-        min-width: 60px; 
-        min-height: 30px; 
-        margin-left: 36px;
+        min-width: 80px; 
+        min-height: 35px; 
     }
 
     .widget-body .rating-widget {
@@ -2240,6 +2216,7 @@ height: unset !important;
         flex-wrap: wrap;
         height: 140px;
         padding-bottom: 40px;
+        margin-top: 20px;
     }
 
     .lb-reviewbox {
@@ -2319,7 +2296,60 @@ height: unset !important;
 }
 
 /* CSS for tablets (landscape) */
-@media (min-width: 768px) and (max-width: 1140px) {
+
+@media (min-width: 768px) and (max-width: 800px) {
+    .widget-body {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+        margin: 20px auto;
+        width: 750px;
+        height: 310px;
+        overflow: hidden; /* Prevent scrolling when the lightbox is open */
+    }
+}
+
+@media (min-width: 801px) and (max-width: 860px) {
+    .widget-body {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+        margin: 20px auto;
+        width: 780px;
+        height: 310px;
+        overflow: hidden; /* Prevent scrolling when the lightbox is open */
+    }
+}
+
+@media (min-width: 861px) and (max-width: 950px) {
+    .widget-body {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+        margin: 20px auto;
+        width: 860px;
+        height: 310px;
+        overflow: hidden; /* Prevent scrolling when the lightbox is open */
+    }
+}
+
+@media (min-width: 951px) and (max-width: 1024px) {
+    .widget-body {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+        margin: 20px auto;
+        width: 1000px;
+        height: 310px;
+        overflow: hidden; /* Prevent scrolling when the lightbox is open */
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1140px) {
     /* Add your tablet-specific styles here */
     /** Horizontal slider styles starts here*/
 
@@ -2336,18 +2366,18 @@ height: unset !important;
 
     .widget-body .slider-container {
         display: flex;
-        height: 240px;
+        height: auto;
         overflow-x: auto;
         scrollbar-width: thin;
         scrollbar-color: #ccc #f0f0f0;
-        padding: 20px;
+        padding: 0px;
         background: #ffffff;
         margin: auto;
         justify-content: center;
         transition: transform 0.5s ease-in-out;
     }
 
-    .vertical {
+    .opio-vertical {
         display: flex;
         height: 500px;
         width: 300px;
@@ -2357,7 +2387,7 @@ height: unset !important;
         margin: 0;
     }
 
-    .carousel {
+    .opio-carousel {
         display: block;
         padding: 0;
         margin: 0;
