@@ -23,6 +23,12 @@ class Slider_Serializer {
         if (!in_array($raw_data_array['review_enabled'], array('yes', 'no'))) {
             wp_die('Sorry! You are not allowed to access this page.');
         }
+        if (!in_array($raw_data_array['schema_enabled'], array('yes', 'no'))) {
+            wp_die('Sorry! You are not allowed to access this page.');
+        }
+        if (!in_array($raw_data_array['schema_type'], array('local', 'product'))) {
+            wp_die('Sorry! You are not allowed to access this page.');
+        }
         // slider type should be either horizontal, horizontal-carousel or vertical
         if (!in_array($raw_data_array['slider_type'], array('horizontal', 'horizontal-carousel', 'vertical'))) {
             wp_die('Sorry! You are not allowed to access this page.');
@@ -47,6 +53,10 @@ class Slider_Serializer {
         if (empty($raw_data_array['review_feed_link'])) {
             wp_die('Sorry! Review feed link is necessary.');
         }
+        // Background color cannot be empty
+        if (empty($raw_data_array['widget_background_color'])) {
+            wp_die('Sorry! Background color is necessary.');
+        }
 
         // sanitize the data, everything is a string
         $raw_data_array = array_map('sanitize_text_field', $raw_data_array);
@@ -62,8 +72,11 @@ class Slider_Serializer {
             'slider_type' => $raw_data_array['slider_type'],
             'review_type' => $raw_data_array['review_type'],
             'review_feed_link' => $raw_data_array['review_feed_link'],
+            'widget_background_color' => $raw_data_array['widget_background_color'],
             'review_option' => $raw_data_array['review_option'],
             'review_enabled' => $raw_data_array['review_enabled'],
+            'schema_enabled' => $raw_data_array['schema_enabled'],
+            'schema_type' => $raw_data_array['schema_type'],
             'loaded_bizs' => $decodedBizs
         ));
         $post_id = wp_insert_post(array(

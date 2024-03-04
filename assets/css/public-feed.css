@@ -647,13 +647,14 @@ height: unset !important;
 
 .widget-body {
     /* margin: 0 240px; */
-    padding: 0;
+    padding: 40px;
     margin: 0;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
     width: 1140px;
     height: auto;
     overflow: hidden; /* Prevent scrolling when the lightbox is open */
+    background-color: white;
 }
 
 #photo-lightbox {
@@ -741,6 +742,32 @@ height: unset !important;
     margin-right: 0px;
 }
 
+.widget-body .yelp-logo {
+    position: absolute; 
+    right: -25px; 
+    top: 2px; 
+    text-align: right; 
+    min-width: 100px; 
+    min-height: 24px; 
+    background-size: contain; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    margin-right: 0px;
+}
+
+.widget-body .tripadvisor-logo {
+    position: absolute; 
+    right: -2px; 
+    top: 0px; 
+    text-align: right; 
+    min-width: 100px; 
+    min-height: 24px; 
+    background-size: contain; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    margin-right: 0px;
+}
+
 .widget-body .opio-logo {
     position: absolute; 
     right: -25px; 
@@ -796,12 +823,12 @@ height: unset !important;
 .widget-body .rating-widget-part {
     display: flex; 
     background: #ffffff; 
-    height: 100px; 
+    height: 40px; 
     align-items: flex-start; 
     justify-content: center; 
     gap: 10px;
     line-height: 18px;
-    margin-top: 20px;
+    padding: 20px 20px 0px 20px;
 }
 
 .widget-body .rating-stars {
@@ -929,7 +956,7 @@ height: unset !important;
     width: 80px;
     height: 50px;
     position: relative;
-    background-color: #333;
+    background-color: grey;
     border-radius: 8px;
 }
 
@@ -973,7 +1000,7 @@ height: unset !important;
 }
 
 .widget-body .vertical-divider {
-    height: 40%;
+    height: 100%;
     width: 1px;
     background-color: #9b9b9b; /* Change the color as needed */
     margin: 0px 10px;
@@ -1014,12 +1041,24 @@ height: unset !important;
     font-size: 14px;
 }
 
-.widget-body a {
+.widget-body a,
+.widget-body a:visited {
     font-size: 14px;
     font-family: 'Roboto', sans-serif;
     text-decoration: underline;
     color: #333333;
     font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+.widget-body a:hover,
+.widget-body a:visited:hover {
+    color: #333333;
+}
+
+.widget-body ::selection {
+    background-color: #555555; /* Change the background color for selected text */
+    color: #ffffff; /* Change the text color for selected text */
 }
 
 .widget-body .write-review-btn-box {
@@ -1098,8 +1137,8 @@ height: unset !important;
     font-size: 18px;
     cursor: pointer;
     position: fixed;
-    top: 3em;
-    right: 2em;
+    top: 24em;
+    right: 22em;
 }
 
 .widget-body .star-rating {
@@ -1180,7 +1219,7 @@ height: unset !important;
 }
 
 .lb-photo-div {
-    display: block; 
+    display: flex; 
 }
 
 .lb-review-property {
@@ -1407,6 +1446,63 @@ height: unset !important;
     object-fit: cover;
     border-radius: 4px;
 }
+
+.lb-comment-header {
+    display: flex;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 10px;
+    color: #333333;
+}
+
+.lb-comment-box {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+}
+
+.lb-comment-avatar {
+    width: 35px; 
+    height: 35px; 
+    min-width: 35px; 
+    min-height: 35px;
+    line-height: 35px; 
+    border-radius: 50%; 
+    color: rgb(255, 255, 255); 
+    font-size: 20px; 
+    text-align: center; 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+}
+
+.lb-comment-content-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    margin-left: 10px;
+}
+
+.lb-by-comment-name {
+    display: flex;
+    justify-content: start;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333333;
+}
+
+.lb-by-name-span {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333333;
+}
+
+.lb-comment-content {
+    font-size: 14px;
+    font-weight: 400;
+    color: #333333;
+    text-align: left;
+}
 /** Horizontal slider styles ends here*/
 
 /** Vertical slider styles starts here*/
@@ -1419,6 +1515,7 @@ height: unset !important;
     border: 2px solid #A9B7BF;
     border-radius: 3px;
     margin: 0;
+    padding: 0;
 }
 
 .widget-body .testimonial-slider.vertical-slider {
@@ -1446,7 +1543,7 @@ height: unset !important;
     display: flex; 
     flex-direction: column; 
     align-items: center;
-    margin-left: 7px; 
+    margin-left: 20px; 
     margin-top: -7px;
     padding-top: 5px;
 }
@@ -1471,67 +1568,63 @@ height: unset !important;
 }
 
 .widget-body .v-rating-container {
-    display: flex; 
-    flex-direction: column; 
-    padding: 10px; 
-    height: 90px;
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+    padding-top: 5px;
+    height: 75px;
+    justify-content: space-around;
 }
 
 .widget-body .v-r-col-1 {
     display: flex;
-    height: 80px;
+    height: auto;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .widget-body .v-r-col-2 {
     display: flex;
-    margin-top: -48px;
-    text-align: center;
-    justify-content: start;
+    align-content: flex-end;
+    justify-content: center;
 }
 
 .widget-body .v-r-row-1 {
-    overflow: hidden;
-    position: relative;
-    margin-top: 5px;
-    line-height: 40px;
-}
-
-.widget-body .v-r-row-2 {
-    display: flex;
-    margin-left: 24px;
-    margin-top: -12px;
+    display: flex; 
+    flex-direction: row;
 }
 
 .widget-body .v-rating-span {
-    display: flex; 
-    margin-top: 0px; 
-    font-size: 50px; 
+    display: flex;
+    margin-top: 0px;
+    font-size: 50px;
     font-weight: 700;
     color: #333333;
+    justify-content: flex-end;
 }
 
 .widget-body .v-see-all-span {
     display: flex;
     font-size: 14px;
-    align-items: flex-end;
     color: #333333;
 }
 
 .widget-body .review-tile-vertical {
     flex: 0 0 250px;
     background-color: white;
-    height: 120px;
+    height: 110px !important;
     padding: 10px;
     margin: 0 10px;
     cursor: pointer;
-    border-top: 2px solid #E6E6E6;
-    border-bottom: 2px solid #E6E6E6;
+    border-top: 2px solid #E6E6E6 !important;
+    border-bottom: 2px solid #E6E6E6 !important;
     transition: transform 0.3s ease-in-out;
 }
 
 .widget-body .v-review-tile-container {
     display: flex; 
     position: relative;
+    width: 260px;
 }
 
 .widget-body .v-rev-content {
@@ -1584,6 +1677,34 @@ height: unset !important;
     margin-right: 0px;
 }
 
+.widget-body .v-yelp-logo {
+    position: absolute; 
+    right: -20px; 
+    top: 2px; 
+    display: flex; 
+    text-align: right; 
+    min-width: 90px; 
+    min-height: 20px; 
+    background-size: contain; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    margin-right: 0px;
+}
+
+.widget-body .v-tripadvisor-logo {
+    position: absolute; 
+    right: -6px; 
+    top: 2px; 
+    display: flex; 
+    text-align: right; 
+    min-width: 90px; 
+    min-height: 20px; 
+    background-size: contain; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    margin-right: 0px;
+}
+
 .widget-body .v-opio-logo {
     position: absolute; 
     right: -30px; 
@@ -1601,7 +1722,7 @@ height: unset !important;
 .widget-body .v-footer {
     display: flex;
     background: #ffffff;
-    height: 80px;
+    height: 60px;
     align-items: flex-end;
     justify-content: center;
     gap: 10px;
@@ -1675,7 +1796,8 @@ height: unset !important;
 
 .opio-carousel {
     display: flex;
-    height: 240px;
+    height: 320px;
+    padding: 20px;
 }
 
 .widget-body .c-facebook-logo {
@@ -1706,6 +1828,34 @@ height: unset !important;
     margin-right: 0px;
 }
 
+.widget-body .c-yelp-logo {
+    position: absolute; 
+    right: -30px; 
+    top: 2px; 
+    display: flex; 
+    text-align: right; 
+    min-width: 90px; 
+    min-height: 20px; 
+    background-size: contain; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    margin-right: 0px;
+}
+
+.widget-body .c-tripadvisor-logo {
+    position: absolute; 
+    right: -10px; 
+    top: 2px; 
+    display: flex; 
+    text-align: right; 
+    min-width: 90px; 
+    min-height: 20px; 
+    background-size: contain; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    margin-right: 0px;
+}
+
 .widget-body .c-opio-logo {
     position: absolute; 
     right: -30px; 
@@ -1723,12 +1873,12 @@ height: unset !important;
 .widget-body .c-rating-widget-container {
     display: flex;
     background: #ffffff;
-    height: 300px;
+    height: 320px;
     align-items: flex-start;
     justify-content: center;
     gap: 10px;
     flex-direction: column; 
-    padding-right: 30px; 
+    padding-right: 20px; 
     margin-top: -20px;
 }
 
@@ -1839,8 +1989,9 @@ height: unset !important;
 }
 
 .widget-body .c-slider-button {
-    width: auto;
-    height: auto;
+    width: 36px;
+    height: 36px;
+    margin: 0 2px;
     cursor: pointer;
 }
 /** Horizontal carousel slider styles ends here*/
@@ -1965,6 +2116,7 @@ height: unset !important;
         border: 2px solid #A9B7BF;
         border-radius: 3px;
         margin: 0;
+        padding: 0;
     }
 
     .opio-carousel {
@@ -1984,7 +2136,7 @@ height: unset !important;
     }
 
     .widget-body .vertical-divider {
-        height: 40%;
+        height: 100%;
         width: 1px;
         background-color: #9b9b9b; /* Change the color as needed */
         margin: 0px 5px;
@@ -2108,6 +2260,12 @@ height: unset !important;
         margin: 0px 10px;
     }
 
+    .widget-body .close-button {
+        top: 3em;
+        right: 1em;
+    }
+
+
 }
 
 @media (min-width: 401px) and (max-width: 767px) {
@@ -2145,6 +2303,7 @@ height: unset !important;
         border: 2px solid #A9B7BF;
         border-radius: 3px;
         margin: 0;
+        padding: 0;
     }
 
     .opio-carousel {
@@ -2164,7 +2323,7 @@ height: unset !important;
     }
 
     .widget-body .vertical-divider {
-        height: 40%;
+        height: 100%;
         width: 1px;
         background-color: #9b9b9b; /* Change the color as needed */
         margin: 0px 5px;
@@ -2294,6 +2453,11 @@ height: unset !important;
         margin: 0px 10px;
     }
 
+    .widget-body .close-button {
+        top: 3em;
+        right: 1em;
+    }
+
 }
 
 /* CSS for tablets (landscape) */
@@ -2386,6 +2550,7 @@ height: unset !important;
         border: 2px solid #A9B7BF;
         border-radius: 3px;
         margin: 0;
+        padding: 0;
     }
 
     .opio-carousel {
