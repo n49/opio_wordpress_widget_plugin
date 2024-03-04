@@ -44,6 +44,7 @@ class Review_Slider {
         $loaded_bizs = "{}";
         $business_name = '';
         $review_feed_link = '';
+        $widget_background_color = '#ffffff';
         $org_id = '';
         $feed_inited = false;
         $businesses = null;
@@ -59,6 +60,7 @@ class Review_Slider {
             $biz_org_id = $feed_object->biz_org_id;
             $slider_type = $feed_object->slider_type;
             $review_feed_link = ($feed_object->review_feed_link);
+            $widget_background_color = ($feed_object->widget_background_color);
             $review_type = $feed_object->review_type;
             $review_option = $feed_object->review_option;
             if(isset($biz_org_id)  && $feed_object->review_type == "multiple") {
@@ -98,13 +100,14 @@ class Review_Slider {
                             <?php 
                                 $slider_type = $feed_object->slider_type;
                                 $review_feed_link = $feed_object->review_feed_link;
+                                $widget_background_color = $feed_object->widget_background_color;
                             ?>
                                 
                             <?php if($slider_type == 'horizontal') { ?>
                                 <span style="font-size: 20px;">Horizontal slider: 1140x400px</span>
                                 <?php include_once 'reviews-slider-horizontal-template.php'; ?>
                             <?php } else if($slider_type == 'horizontal-carousel') { ?>
-                                <span style="font-size: 20px;">Horizontal carousel slider: 1140x240px</span>
+                                <span style="font-size: 20px;">Horizontal carousel slider: 1140x320px</span>
                                 <?php include_once 'reviews-slider-horizontal-carousel-template.php'; ?>
                             <?php } else if($slider_type == 'vertical') { ?>
                                 <span style="font-size: 20px;">Vertical slider: 300x500px</span>
@@ -172,41 +175,62 @@ class Review_Slider {
                             <option value="opio" <?php if ($review_option == 'opio') { echo esc_html('selected'); } ?>>Opio Feed</option>
                             </select>
                     </div>
-                    
+
                     <div class="opio-slider-inside">
-                        <div class="opio-slider-first">Review Feed Link</div>
-                            <input id="widget_review_feed_link" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[review_feed_link]" value="<?php echo esc_attr($review_feed_link) ?>" type="text"/>
-                        </div>
+                        <div class="opio-slider-first">Review Page URL</div>
+                        <input id="widget_review_feed_link" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[review_feed_link]" value="<?php echo esc_attr($review_feed_link) ?>" type="text"/>
+                    </div>
                     </div>
                  
+                    <div class="opio-slider-inside">
+                        <div class="opio-slider-first">Widget Background Color</div>
+                        <input id="widget_background_color" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[widget_background_color]" value="<?php echo esc_attr($widget_background_color) ?>" type="text"/>
+                    </div>
+
                     <div class="opio-slider-inside">
                         <div class="opio-slider-first">Review Feed Status</div>
                         <select name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[review_enabled]">
                             <option value="yes" <?php if ($feed_object->review_enabled == 'yes') { echo esc_html('selected');} ?>>Enabled</option>
                             <option value="no" <?php if ($feed_object->review_enabled == 'no') { echo esc_html('selected'); } ?>>Disabled</option>
-                            </select>
+                        </select>
+                    </div>
+
+                    <div class="opio-slider-inside">
+                        <div class="opio-slider-first">JSON Schema</div>
+                        <select name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[schema_enabled]">
+                            <option value="yes" <?php if ($feed_object->schema_enabled == 'yes') { echo esc_html('selected');} ?>>Enabled</option>
+                            <option value="no" <?php if ($feed_object->schema_enabled == 'no') { echo esc_html('selected'); } ?>>Disabled</option>
+                        </select>
+                    </div>
+
+                    <div class="opio-slider-inside">
+                        <div class="opio-slider-first">Schema Type</div>
+                        <select name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[schema_type]">
+                            <option value="product" <?php if ($feed_object->schema_type == 'product') { echo esc_html('selected'); } ?>>Product Schema</option>
+                            <option value="local" <?php if ($feed_object->schema_type == 'local') { echo esc_html('selected');} ?>>Local schema</option>
+                        </select>
+                    </div>
+
+                    <?php if ($feed_inited) { ?>
+                        <div class="opio-slider-inside">
+                            <div class="opio-slider-first">Shortcode</div>
+
+                            <input id="opio_sc" type="text" value="[opio_slider id=&quot;<?php echo esc_attr($feed_id); ?>&quot;]" data-opio-shortcode="[opio_slider id=&quot;<?php echo esc_attr($feed_id); ?>&quot;]" onclick="this.select(); document.execCommand('copy'); window.opio_sc_msg.innerHTML = 'Shortcode Copied! ';" readonly/>
+                            <div class="opio-toolbar-options">
+                                <label title="Sometimes, you need to use this shortcode in PHP, for instance in header.php or footer.php files, in this case use this option"><input type="checkbox" onclick="var el = window.opio_sc; if (this.checked) { el.value = '&lt;?php echo do_shortcode( \'' + el.getAttribute('data-opio-shortcode') + '\' ); ?&gt;'; } else { el.value = el.getAttribute('data-opio-shortcode'); } el.select();document.execCommand('copy'); window.opio_sc_msg.innerHTML = 'Shortcode Copied! ';"/>Use in PHP</label>
+                            </div>
                         </div>
-                            <?php if ($feed_inited) { ?>
-                                <div class="opio-slider-inside">
-                                <div class="opio-slider-first">Shortcode</div>
-
-                                <input id="opio_sc" type="text" value="[opio_slider id=&quot;<?php echo esc_attr($feed_id); ?>&quot;]" data-opio-shortcode="[opio_slider id=&quot;<?php echo esc_attr($feed_id); ?>&quot;]" onclick="this.select(); document.execCommand('copy'); window.opio_sc_msg.innerHTML = 'Shortcode Copied! ';" readonly/>
-                                <div class="opio-toolbar-options">
-                                    <label title="Sometimes, you need to use this shortcode in PHP, for instance in header.php or footer.php files, in this case use this option"><input type="checkbox" onclick="var el = window.opio_sc; if (this.checked) { el.value = '&lt;?php echo do_shortcode( \'' + el.getAttribute('data-opio-shortcode') + '\' ); ?&gt;'; } else { el.value = el.getAttribute('data-opio-shortcode'); } el.select();document.execCommand('copy'); window.opio_sc_msg.innerHTML = 'Shortcode Copied! ';"/>Use in PHP</label>
-                                </div>
-                                <?php } ?>
-                                <div class="opio-slider-inside">
-
-                                <div class="text-justify">
-                                    <button id="opio_save" type="submit" class="button button-primary ">Save & Update</button>
-                                </div>
-                                <div style="padding-top: 10px; font-size: 15px">
-
-                                    <a style="text-decoration: none" href="/wp-admin/admin.php?page=opio-support&opio_tab=figFull&opio_tab=welcome">Full Installation Guide </a></div>
-                            </div>
-                            </div>
-                            </div>
+                    <?php } ?>
+                    <div class="opio-slider-inside">
+                        <div class="text-justify">
+                            <button id="opio_save" type="submit" class="button button-primary ">Save & Update</button>
                         </div>
+                        <div style="padding-top: 10px; font-size: 15px">
+                            <a style="text-decoration: none" href="/wp-admin/admin.php?page=opio-support&opio_tab=figFull&opio_tab=welcome">Full Installation Guide </a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
             </form>
         </div>
 

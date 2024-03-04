@@ -147,7 +147,7 @@
                 <div class="testimonial-slide review-tile" data-review-index="<?php echo esc_attr($index); ?>" onclick="openPhotoLightbox(<?php echo esc_attr(json_encode($currentReview)); ?>)">
                     <div id=<?php echo esc_attr($review["_id"]);?> class="reviewer-container">
                         <div class="avatar-container">
-                            <?php if(($review['propertyId'] === 1 || $review['propertyId'] === 2) && isset($review['user']['userPic'])) { ?>
+                            <?php if(($review['propertyId'] === 1 || $review['propertyId'] === 2 || $review['propertyId'] === 3 || $review['propertyId'] === 5) && isset($review['user']['userPic'])) { ?>
                                 <div class="reviewer-avatar" style="background-image: url(&quot;<?php echo esc_attr($review['user']['userPic']);?>&quot;);">
                                 </div>  
                             <?php } else if(isset($review['user']['userPic']) && isset($review['user']['userPic']['imageId'])) { ?>
@@ -160,6 +160,10 @@
                                 <div class="facebook-logo" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/facebook-logo.png'; ?>&quot;);"></div>
                             <?php } else if($review['propertyInfo']['name'] === 'google') { ?>
                                 <div class="google-logo" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/google-logo.svg'; ?>&quot;);"></div>
+                            <?php } else if($review['propertyInfo']['name'] === 'yelp') { ?>
+                                <div class="yelp-logo" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/yelp-logo.png'; ?>&quot;);"></div>
+                            <?php } else if($review['propertyInfo']['name'] === 'Trip Advisor') { ?>
+                                <div class="tripadvisor-logo" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/tripadvisor-logo.png'; ?>&quot;);"></div>
                             <?php } else { ?>
                                 <div class="opio-logo" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>&quot;);"></div>
                             <?php } ?>  
@@ -306,7 +310,7 @@
     </div>
     <div class="rating-widget-part">
         <div class="w-opio-logo-container">
-            <span id="powered-by-text" class="w-pwd-text">Powered by</span><div class="pwd-opio-logo" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>&quot;);"></div>
+            <span id="powered-by-text" class="w-pwd-text">Powered by</span><a href="https://www.opioapp.com"><div class="pwd-opio-logo" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>&quot;);"></div></a>
         </div>
         <div class="vertical-divider"></div>
         <div class="rating-widget">
@@ -354,6 +358,7 @@
                     <div class="lb-emp-tag" id="lb-empTag"></div>
                     <div id="lb-photo-container" class="lb-photo-div"></div>
                     <div id="lb-video-container" class="lb-video-div"></div>
+                    <div id="lb-comment-container" class="lb-comment-div"></div>
                 </div>
                 <div class="lb-review-property">
                     <div id="lb-property-logo" class="lb-property-logo"></div>
@@ -382,15 +387,29 @@
         height: 200px;
         margin: 0 10px;
     }
+    <?php if(isset($feed_object->widget_background_color)) { ?>
+        .widget-body {
+            background-color: <?php echo esc_attr($feed_object->widget_background_color); ?>
+        }
+        .widget-body .rating-widget-part {
+            background-color: <?php echo esc_attr($feed_object->widget_background_color); ?>
+        }
+        .widget-body .slider-container {
+            background-color: <?php echo esc_attr($feed_object->widget_background_color); ?>
+        }
+    <?php } ?>
 </style>
+
+<?php if(isset($feed_object->schema_enabled) && $feed_object->schema_enabled == 'yes') { ?>
 
 <!-- JSON schema starts-->
 
-<script id="jsonldSchema" type="application/ld+json">
+<?php if(isset($feed_object->schema_type) && $feed_object->schema_type == 'local') { ?>
+    <script id="jsonldSchema" type="application/ld+json">
     <?php $count=1; ?>
     {
         "@context": "http://schema.org",
-        "@type": "Product",
+        "@type": "LocalBusiness",
         "name": "<?php echo $business["name"]?>",
         "image": "<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>",
         "aggregateRating": {
@@ -399,7 +418,58 @@
             "reviewCount": "<?php echo esc_attr($totalReviews); ?>"
         },
         "review": [
-            <?php foreach(array_slice($filteredReviews, 0, 7) as $key => $review) { ?>
+            <?php foreach(array_slice($filteredReviews, 0, 8) as $key => $review) { ?>
+            {
+                "@type": "Review",
+                <?php if(isset($review['user']['firstName'])) { ?>
+                "author": {
+                    "@type": "Person",
+                    "name": "<?php echo esc_attr($review['user']['firstName']); ?>"
+                },
+                <?php } ?>
+                "datePublished": "<?php echo esc_attr(date('M d, Y', $review["dateCreated"]/1000)); ?>",
+                "reviewBody": "<?php echo esc_attr($review['content']); ?>",
+                "reviewRating": {
+                    "@type": "Rating",
+                    "ratingValue": <?php echo esc_attr($review['propertyInfo']['name'] === 'facebook' ? $review['rating'] === 'positive' ? 5 : 1 : $review['rating']); ?>
+                },
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "op.io",
+                    "sameAs": "https://www.op.io"
+                }
+            }
+            <?php if($count < count(array_slice($filteredReviews, 0, 8))){
+                echo ",";
+            } 
+            ?>
+            <?php $count = $count + 1; ?>
+            <?php } ?>
+        ]
+    }
+    </script>
+
+<?php } else { ?>
+    <script id="jsonldSchema" type="application/ld+json">
+    <?php $count=1; ?>
+    {
+        "@context": "http://schema.org",
+        "@type": "Product",
+        "name": "<?php echo $business["name"]?>",
+        "image": "<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "<?php echo esc_attr($business["address"]["address1"]); ?>",
+            "addressRegion": "<?php echo esc_attr($business["address"]["province"]); ?>",
+            "postalCode": "<?php echo esc_attr($business["address"]["postalCode"]); ?>"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "<?php echo esc_attr($aggregateRating); ?>",
+            "reviewCount": "<?php echo esc_attr($totalReviews); ?>"
+        },
+        "review": [
+            <?php foreach(array_slice($filteredReviews, 0, 8) as $key => $review) { ?>
 
             {
                 "@type": "Review",
@@ -431,8 +501,11 @@
         ]
     }
 </script>
+<?php } ?>
 
 <!-- JSON schema ends-->
+
+<?php } ?>
 
 <script>
     var selectedReviewIndex;
@@ -479,6 +552,17 @@
     }
 
     function displayLargeImage(imageId, revId) {
+        var photoContainer = document.querySelector(`#lb-photo-container`);
+        photoContainer.style.display = 'block';
+
+        // Select all elements with the class name 'photo-a-tag'
+        var photoATags = document.querySelectorAll('.photo-a-tag');
+
+        // Iterate through each element and change its display property
+        photoATags.forEach(function(photoATag) {
+            photoATag.style.display = 'inline-block';
+        });
+
         var elem = document.querySelector(`#largerevimg-${revId}`);
         elem.style.display = 'flex';
         elem.innerHTML = `
@@ -492,6 +576,17 @@
     function hideLargeImage(revId) {
         var elem = document.querySelector(`#largerevimg-${revId}`);
         elem.style.display = 'none';
+
+        var photoContainer = document.querySelector(`#lb-photo-container`);
+        photoContainer.style.display = 'flex';
+
+        // Select all elements with the class name 'photo-a-tag'
+        var photoATags = document.querySelectorAll('.photo-a-tag');
+
+        // Iterate through each element and change its display property
+        photoATags.forEach(function(photoATag) {
+            photoATag.style.display = 'flex';
+        });
     }
 
     // Function to set character limit and hide powered by text based on screen width
@@ -538,7 +633,7 @@
         // Update reviewer avatar
         var avatarImage = document.getElementById('avatar-image');
 
-        if ((reviewData.propertyId === 1 || reviewData.propertyId === 2)) {
+        if ((reviewData.propertyId === 1 || reviewData.propertyId === 2 || reviewData.propertyId === 3 || reviewData.propertyId === 5)) {
             if(reviewData.user.userPic) {
                 avatarImage.innerHTML = '';
                 avatarImage.style.backgroundImage = 'url("' + reviewData.user.userPic + '")';
@@ -601,6 +696,20 @@
             lbPropertyLogo.style.height = '22px';
             lbPropertyLogo.style.minWidth = '60px';
             lbPropertyLogo.style.minHeight = '22px';
+            lbPropertyLogo.style.marginTop = '0px';
+        } else if (reviewData.propertyInfo.name === 'yelp') {
+            lbPropertyLogo.style.backgroundImage = 'url("<?php echo esc_url(OPIO_ASSETS_URL) . 'img/yelp-logo.png'; ?>")';
+            lbPropertyLogo.style.width = '70px';
+            lbPropertyLogo.style.height = '26px';
+            lbPropertyLogo.style.minWidth = '70px';
+            lbPropertyLogo.style.minHeight = '26px';
+            lbPropertyLogo.style.marginTop = '0px';
+        } else if (reviewData.propertyInfo.name === 'Trip Advisor') {
+            lbPropertyLogo.style.backgroundImage = 'url("<?php echo esc_url(OPIO_ASSETS_URL) . 'img/tripadvisor-logo.png'; ?>")';
+            lbPropertyLogo.style.width = '110px';
+            lbPropertyLogo.style.height = '25px';
+            lbPropertyLogo.style.minWidth = '110px';
+            lbPropertyLogo.style.minHeight = '25px';
             lbPropertyLogo.style.marginTop = '0px';
         } else {
             lbPropertyLogo.style.backgroundImage = 'url("<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>")';
@@ -737,6 +846,7 @@
                 anchor.setAttribute("onclick", `displayLargeImage('${imageId}', '${revId}')`);
                 anchor.style.borderBottom = "none";
                 anchor.style.display = "flex";
+                anchor.classList.add("photo-a-tag");
 
                 var imageDiv = document.createElement("div");
                 imageDiv.classList.add("lb-small-img");
@@ -773,6 +883,55 @@
             });
 
         }
+
+        // Update comments
+        if(reviewData.comments && reviewData.comments.length > 0) {
+            console.log('coming in comments',reviewData.comments);
+            var commentContainer = document.getElementById('lb-comment-container');
+            commentContainer.style.marginTop = '5px';
+            commentContainer.innerHTML = '';
+
+            var commentHeader = document.createElement("div");
+            commentHeader.classList.add('lb-comment-header');
+            commentHeader.textContent = 'Comments';
+            commentContainer.appendChild(commentHeader);
+
+            var commentBox = document.createElement("div");
+            commentBox.classList.add('lb-comment-box');
+
+            var commentAvatar = document.createElement("div");
+            commentAvatar.classList.add('lb-comment-avatar');
+
+            var commenterName = reviewData.entityInfo.name; // business name by default
+
+            if(reviewData.comments[0].users && reviewData.comments[0].users[0].fullName) {
+                commenterName = reviewData.comments[0].users[0].fullName
+            }
+
+            // Update comment avatar
+            commentAvatar.style.backgroundImage = 'none'; // Set to none if there is a background color
+            commentAvatar.style.backgroundColor = randomColor();
+            commentAvatar.innerHTML = commenterName.charAt(0).toUpperCase();
+            commentBox.appendChild(commentAvatar);
+
+            var commentContentDiv = document.createElement("div");
+            commentContentDiv.classList.add('lb-comment-content-div');
+
+            var byCommentName = document.createElement("div");
+            byCommentName.classList.add("lb-by-comment-name");
+
+            byCommentName.innerHTML = `<span class="lb-by-name-span">By ${commenterName} </span>&nbsp;on ${moment(reviewData.comments[0].dateCreated).format("MMM D, YYYY")}`;
+            commentContentDiv.appendChild(byCommentName);
+
+            var commentContent = document.createElement("div");
+            commentContent.classList.add("lb-comment-content");
+            commentContent.innerText =reviewData.comments[0].content;
+            commentContentDiv.appendChild(commentContent);
+
+            commentBox.appendChild(commentContentDiv);
+            commentContainer.appendChild(commentBox);
+
+        }
     }
 
     function closePhotoLightbox() {
@@ -780,6 +939,8 @@
         photoContainer.innerHTML = '';
         var mediaContainer = document.getElementById('lb-video-container');
         mediaContainer.innerHTML = '';
+        var commentContainer = document.getElementById('lb-comment-container');
+        commentContainer.innerHTML = '';
         document.getElementById('photo-lightbox').style.display = 'none';
         // Clear the cookie
         document.cookie = 'reviewIndex=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
