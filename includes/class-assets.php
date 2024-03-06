@@ -20,7 +20,6 @@ class Assets {
     private static $js_assets = array(
         'opio-main-js'    => 'js/opio-main',
         'moment-js'            => 'js/moment.min',
-        'jQuery-noConflict-js'            => 'js/jquery-noConflict',
         'jQuery-3.6.0-js'            => 'js/jquery-3.6.0.min',
         'slick-carousel-js'            => 'js/slick-carousel.min'
     );
@@ -46,7 +45,10 @@ class Assets {
     }
 
     public function register_scripts() {
-        $scripts = array('opio-main-js', 'moment-js', 'jQuery-3.6.0-js', 'jQuery-noConflict-js', 'slick-carousel-js');
+        $scripts = array('opio-main-js', 'moment-js', 'slick-carousel-js');
+        if (!wp_script_is('jquery', 'enqueued')) {
+            $scripts = array('opio-main-js', 'moment-js', 'jQuery-3.6.0-js', 'slick-carousel-js');
+        }
         $this->register_scripts_loop($scripts);
     }
 
