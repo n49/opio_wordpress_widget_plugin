@@ -392,7 +392,7 @@
 
 <style>
     .slider-container.testimonial-slider {
-        padding: 20px;
+        padding: 0px;
     }
     .widget-body .slick-slide {
         display: flex;
