@@ -523,7 +523,7 @@
 <script>
 
     // Use jQuery.noConflict() to avoid conflicts with other libraries
-    var opio_slider_c_jq = jQuery.noConflict(true);
+    // var opio_slider_c_jq = jQuery.noConflict(true);
 
     var selectedReviewIndex;
 
@@ -963,9 +963,9 @@
         document.cookie = 'reviewIndex=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     }
 
-    opio_slider_c_jq(document).ready(function () {
+    $(document).ready(function () {
         // Initialize the Slick slider
-        var slider = opio_slider_c_jq('.testimonial-slider').slick({
+        var slider = $('.testimonial-slider').slick({
             autoplay: true,
             autoplaySpeed: 2000,
             speed: 600,
@@ -1001,12 +1001,12 @@
         });
 
         // Move to the next slide on clicking the ">" button
-        opio_slider_c_jq('.c-slider-button.right').click(function () {
+        $('.c-slider-button.right').click(function () {
             slider.slick('slickNext');
         });
 
         // Move to the previous slide on clicking the "<" button
-        opio_slider_c_jq('.c-slider-button.left').click(function () {
+        $('.c-slider-button.left').click(function () {
             slider.slick('slickPrev');
         });
     });
