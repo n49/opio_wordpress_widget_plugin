@@ -47,6 +47,10 @@ class Assets {
     public function register_scripts() {
         $scripts = array('opio-main-js', 'moment-js');
         $this->register_scripts_loop($scripts);
+        if (!wp_script_is('slick', 'enqueued')) {
+            // If not, enqueue Slick Slider
+            wp_enqueue_script('slick');
+        }
     }
 
     public function enqueue_admin_styles() {
@@ -62,7 +66,7 @@ class Assets {
         wp_enqueue_script('jquery-ui-sortable');
         wp_enqueue_script('jquery-ui-dialog');
         wp_enqueue_script('opio-main-js');
-
+        
     }
     
     private function register_styles_loop($styles) {
