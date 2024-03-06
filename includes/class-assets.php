@@ -9,6 +9,8 @@ class Assets {
     private $debug;
 
     private static $css_assets = array(
+        'opio-slick-theme-css' => 'css/slick-theme.min',
+        'opio-slick-min-css' => 'css/slick-min',
         'opio-admin-main-css'   => 'css/admin-main',
         'opio-public-clean-css' => 'css/public-clean',
         'opio-public-main-css'  => 'css/public-main',
@@ -17,7 +19,9 @@ class Assets {
 
     private static $js_assets = array(
         'opio-main-js'    => 'js/opio-main',
-        'moment-js'            => 'js/moment.min'
+        'moment-js'            => 'js/moment.min',
+        'jQuery-3.6.0-js'            => 'js/jquery-3.6.0.min',
+        'slick-carousel-js'            => 'js/slick-carousel.min'
     );
 
     public function __construct($url, $version, $debug) {
@@ -33,26 +37,26 @@ class Assets {
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
         add_action('wp_enqueue_scripts', array($this, 'register_styles'));
         add_action('wp_enqueue_scripts', array($this, 'register_scripts'));        
-
-        // load robonto font from fonts fonts/roboto.css
-        wp_enqueue_style('roboto-font', $this->url . 'fonts/roboto.css', array(), $this->version);
-        
     }
 
     public function register_styles() {
-        $styles = array('opio-admin-main-css', 'opio-public-main-css', 'opio-feed-css');
+        $styles = array('opio-admin-main-css', 'opio-public-main-css', 'opio-feed-css', 'opio-slick-theme-css', 'opio-slick-min-css');
         $this->register_styles_loop($styles);
     }
 
     public function register_scripts() {
-        $scripts = array('opio-main-js', 'moment-js');
+        $scripts = array('opio-main-js', 'moment-js', 'jQuery-3.6.0-js','slick-carousel-js');
         $this->register_scripts_loop($scripts);
     }
 
     public function enqueue_admin_styles() {
         wp_enqueue_style('wp-jquery-ui-dialog');
+        wp_enqueue_style('roboto-font', $this->url . 'fonts/roboto.css', array(), $this->version);
+        wp_enqueue_style('opio-slick-theme-css');
+        wp_enqueue_style('opio-slick-min-css');
         wp_enqueue_style('opio-admin-main-css');
         wp_enqueue_style('opio-public-main-css');
+
     }
 
     public function enqueue_admin_scripts() {
