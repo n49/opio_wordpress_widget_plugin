@@ -524,7 +524,7 @@
 <script>
 
     // Use jQuery.noConflict() to avoid conflicts with other libraries
-    var opio_slider_c_jq = jQuery.noConflict();
+    var opio_slider_c_jq = jQuery.noConflict(true);
 
     var selectedReviewIndex;
 
