@@ -46,7 +46,7 @@ class Assets {
     }
 
     public function register_scripts() {
-        $scripts = array('opio-main-js', 'moment-js', 'jQuery-noConflict-js', 'jQuery-3.6.0-js', 'slick-carousel-js');
+        $scripts = array('opio-main-js', 'moment-js', 'jQuery-3.6.0-js', 'jQuery-noConflict-js', 'slick-carousel-js');
         $this->register_scripts_loop($scripts);
     }
 
