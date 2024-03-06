@@ -949,9 +949,9 @@
         document.cookie = 'reviewIndex=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     }
 
-    $(document).ready(function () {
+    jQuery(document).ready(function () {
         // Initialize the Slick slider
-        var slider = $('.testimonial-slider').slick({
+        var slider = jQuery('.testimonial-slider').slick({
             autoplay: true,
             autoplaySpeed: 2000,
             speed: 600,
@@ -994,12 +994,12 @@
         });
 
         // Move to the next slide on clicking the ">" button
-        $('.slider-button.right').click(function () {
+        jQuery('.slider-button.right').click(function () {
             slider.slick('slickNext');
         });
 
         // Move to the previous slide on clicking the "<" button
-        $('.slider-button.left').click(function () {
+        jQuery('.slider-button.left').click(function () {
             slider.slick('slickPrev');
         });
     });
