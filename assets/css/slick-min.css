@@ -1,0 +1,106 @@
+.widget-body .slick-slider {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -ms-touch-action: pan-y;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent
+}
+
+.widget-body .slick-list {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin: 0;
+    padding: 0
+}
+
+.widget-body .slick-list:focus {
+    outline: 0
+}
+
+.widget-body .slick-list.dragging {
+    cursor: pointer;
+    cursor: hand
+}
+
+.widget-body .slick-slider .widget-body .slick-list,
+.widget-body .slick-slider .widget-body .slick-track {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0)
+}
+
+.widget-body .slick-track {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.widget-body .slick-track:after,
+.widget-body .slick-track:before {
+    display: table;
+    content: ''
+}
+
+.widget-body .slick-track:after {
+    clear: both
+}
+
+.widget-body .slick-loading .widget-body .slick-track {
+    visibility: hidden
+}
+
+.widget-body .slick-slide {
+    display: none;
+    float: left;
+    height: 100%;
+    min-height: 1px
+}
+
+[dir=rtl] .widget-body .slick-slide {
+    float: right
+}
+
+.widget-body .slick-slide img {
+    display: block
+}
+
+.widget-body .slick-slide.slick-loading img {
+    display: none
+}
+
+.widget-body .slick-slide.dragging img {
+    pointer-events: none
+}
+
+.widget-body .slick-initialized .widget-body .slick-slide {
+    display: block
+}
+
+.widget-body .slick-loading .widget-body .slick-slide {
+    visibility: hidden
+}
+
+.widget-body .slick-vertical .widget-body .slick-slide {
+    display: block;
+    height: auto;
+    border: 1px solid transparent
+}
+
+.widget-body .slick-arrow.slick-hidden {
+    display: none
+}
+
+/*# sourceMappingURL=slick.min.css.map */
