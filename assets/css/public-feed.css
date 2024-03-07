@@ -783,6 +783,7 @@ height: unset !important;
 .widget-body .rating-container {
     display: flex;
     flex-direction: column;
+    gap: 5px;
 }
 
 .widget-body .fb-rating-div {
@@ -836,8 +837,18 @@ height: unset !important;
     cursor: pointer; 
     display: block; 
     float: left; 
-    width:22px; 
-    height: 22px;
+    width: 15px; 
+    height: 15px;
+}
+
+.widget-body .rating-stars-v {
+    position: relative; 
+    overflow: hidden; 
+    cursor: pointer; 
+    display: block; 
+    float: left; 
+    width: 18px; 
+    height: 18px;
 }
 
 .widget-body .rating-stars-wd {
@@ -846,8 +857,8 @@ height: unset !important;
     cursor: pointer; 
     display: block; 
     float: left; 
-    width:22px; 
-    height: 22px;
+    width: 18px; 
+    height: 18px;
 }
 
 .widget-body .rating-stars-wd-v {
@@ -856,8 +867,8 @@ height: unset !important;
     cursor: pointer; 
     display: block; 
     float: left; 
-    width: 26px; 
-    height: 26px;
+    width: 24px; 
+    height: 24px;
 }
 
 .widget-body .rating-stars-wd-c {
@@ -898,7 +909,7 @@ height: unset !important;
     height: 200px;
     flex: 0 0 33.33%;
     background-color: #f5f5f7;
-    padding: 15px;
+    padding: 20px;
     margin: 0 10px;
     border-radius: 5px;
     cursor: pointer;
@@ -911,6 +922,8 @@ height: unset !important;
     color: #333333;
     text-align: left;
     font-family: 'Roboto', sans-serif;
+    padding-top: 3px;
+    padding-bottom: 5px;
 }
 
 .widget-body .review-content {
@@ -918,6 +931,7 @@ height: unset !important;
     font-size: 14px;
     font-weight: 400;
     color: #333333;
+    margin-top: 10px;
     margin-bottom: 15px;
     text-align: left;
     font-family: 'Roboto', sans-serif;
@@ -947,13 +961,13 @@ height: unset !important;
 }
 
 .widget-body .review-img{
-    width: 50px; 
-    height: 50px;
+    width: 48px; 
+    height: 48px;
 }
 
 .widget-body .video-icon {
     width: 80px;
-    height: 50px;
+    height: 48px;
     position: relative;
     background-color: grey;
     border-radius: 8px;
@@ -999,7 +1013,7 @@ height: unset !important;
 }
 
 .widget-body .vertical-divider {
-    height: 100%;
+    height: 42px;
     width: 1px;
     background-color: #9b9b9b; /* Change the color as needed */
     margin: 0px 10px;
@@ -1008,6 +1022,7 @@ height: unset !important;
 .widget-body .rating-widget {
     display: flex; 
     flex-direction: column;
+    gap: 5px;
 }
 
 .widget-body .w-rating-box {
@@ -1025,7 +1040,7 @@ height: unset !important;
 
 .widget-body .rating-text {
     display: flex; 
-    margin-top: 4px; 
+    margin-top: 1px; 
     font-size: 24px; 
     font-weight: 700;
 }
@@ -1519,15 +1534,15 @@ height: unset !important;
 
 .widget-body .testimonial-slider.vertical-slider {
     padding: 0px;
-    height: 360px;
+    height: 280px;
     overflow: hidden;
-    margin-top: 5px;
+    margin-top: 0px;
 }
 
 .widget-body .v-header {
     display: flex; 
     background: #A9B7BF; 
-    padding: 10px 0px 10px 10px; 
+    padding:  15px; 
     color: white;
 }
 
@@ -1553,14 +1568,15 @@ height: unset !important;
 }
 
 .widget-body .v-pwd-span {
-    font-size: 13px;
+    font-size: 12px;
+    font-weight: 700;
 }
 
 .widget-body .v-h-opio-logo {
     display: flex; 
     align-items: center; 
-    min-width: 94px; 
-    min-height: 30px; 
+    min-width: 100px; 
+    min-height: 32px; 
     background-size: contain; 
     background-position: center center; 
     background-repeat: no-repeat;
@@ -1611,7 +1627,7 @@ height: unset !important;
 .widget-body .review-tile-vertical {
     flex: 0 0 250px;
     background-color: white;
-    height: 110px !important;
+    height: 140px !important;
     padding: 10px;
     margin: 0 10px;
     cursor: pointer;
@@ -1726,8 +1742,8 @@ height: unset !important;
     justify-content: center;
     gap: 10px;
     flex-direction: row; 
-    padding-right: 30px; 
     padding: 15px;
+    margin-top: 13px;
 }
 
 .widget-body .v-f-col-1 {
@@ -1797,6 +1813,7 @@ height: unset !important;
     display: flex;
     height: 200px;
     padding: 0px;
+    gap: 20px;
 }
 
 .widget-body .c-facebook-logo {
@@ -1915,8 +1932,8 @@ height: unset !important;
 .widget-body .c-pwd-div {
     display: flex; 
     align-items: center; 
-    min-width: 100px; 
-    min-height: 35px; 
+    min-width: 80; 
+    min-height: 30px; 
     background-size: contain; 
     background-position: center center; 
     background-repeat: no-repeat;
@@ -1934,8 +1951,8 @@ height: unset !important;
 
 .widget-body .c-rating-row-span {
     display: flex; 
-    margin-top: -4px; 
-    font-size: 22px; 
+    margin-top: -2px; 
+    font-size: 20px; 
     font-weight: 700;
 }
 
@@ -2135,7 +2152,7 @@ height: unset !important;
     }
 
     .widget-body .vertical-divider {
-        height: 100%;
+        height: 42px;
         width: 1px;
         background-color: #9b9b9b; /* Change the color as needed */
         margin: 0px 5px;
@@ -2182,7 +2199,7 @@ height: unset !important;
         flex-wrap: wrap;
         height: 140px;
         padding-bottom: 40px;
-        margin-top: 20px;
+        /* margin-top: 20px; */
     }
 
     .lb-reviewbox {
@@ -2208,21 +2225,22 @@ height: unset !important;
         flex-wrap: wrap;
         gap: 0px;
         height: 160px;
+        margin-top: -10px;
     }
 
     .widget-body .c-rating-row-1 {
         display: flex;
         align-items: center;
         margin-left: 7px;
-        flex: 30% 0 0;
-        margin-top: 30px;
+        flex: 25% 0 0;
+        margin-top: 0px;
     }
 
     .widget-body .c-rating-row-2 {
         display: flex;
         flex-direction: column;
         flex: 0 0 55%;
-        margin-top: 24px;
+        margin-top: 10px;
     }
 
     .widget-body .c-rating-row-3 {
@@ -2253,10 +2271,16 @@ height: unset !important;
 
     .widget-body .c-vertical-divider {
         display: block;
-        height: 40%;
+        height: 42px;
         width: 1px;
         background-color: #9b9b9b; /* Change the color as needed */
         margin: 0px 10px;
+    }
+
+    .widget-body .c-see-all-div {
+        display: flex;
+        margin-top: -8px;
+        justify-content: start;
     }
 
     .widget-body .close-button {
@@ -2322,7 +2346,7 @@ height: unset !important;
     }
 
     .widget-body .vertical-divider {
-        height: 100%;
+        height: 42px;
         width: 1px;
         background-color: #9b9b9b; /* Change the color as needed */
         margin: 0px 5px;
@@ -2375,7 +2399,7 @@ height: unset !important;
         flex-wrap: wrap;
         height: 140px;
         padding-bottom: 40px;
-        margin-top: 20px;
+        /* margin-top: 20px; */
     }
 
     .lb-reviewbox {
@@ -2401,21 +2425,22 @@ height: unset !important;
         flex-wrap: wrap;
         gap: 0px;
         height: 160px;
+        margin-top: -10px;
     }
 
     .widget-body .c-rating-row-1 {
         display: flex;
         align-items: center;
-        margin-left: 24px;
-        flex: 30% 0 0;
-        margin-top: 30px;
+        margin-left: 7px;
+        flex: 25% 0 0;
+        margin-top: 0px;
     }
 
     .widget-body .c-rating-row-2 {
         display: flex;
         flex-direction: column;
         flex: 0 0 55%;
-        margin-top: 24px;
+        margin-top: 10px;
     }
 
     .widget-body .c-rating-row-3 {
@@ -2446,7 +2471,7 @@ height: unset !important;
 
     .widget-body .c-vertical-divider {
         display: block;
-        height: 40%;
+        height: 42px;
         width: 1px;
         background-color: #9b9b9b; /* Change the color as needed */
         margin: 0px 10px;
@@ -2611,7 +2636,7 @@ height: unset !important;
 
     .widget-body .c-vertical-divider {
         display: block;
-        height: 40%;
+        height: 42px;
         width: 1px;
         background-color: #9b9b9b; /* Change the color as needed */
         margin: 0px 10px;
