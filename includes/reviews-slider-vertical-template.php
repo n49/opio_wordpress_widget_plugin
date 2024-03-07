@@ -235,8 +235,8 @@
                     </div>
                 <?php } else { ?>
                     <div class="review-content" id="v-reviewContent">
-                    <?php if (strlen($review['content']) > 70) { ?>
-                        <?php echo esc_attr(mb_substr($review['content'], 0, 70, 'UTF-8')); ?> <u>Read more</u>
+                    <?php if (strlen($review['content']) > 60) { ?>
+                        <?php echo esc_attr(mb_substr($review['content'], 0, 60, 'UTF-8')); ?> <u>Read more</u>
                     <?php } else { ?>
                         <?php echo esc_attr($review['content']); ?>
                     <?php } ?>
@@ -795,7 +795,7 @@
             var byCommentName = document.createElement("div");
             byCommentName.classList.add("lb-by-comment-name");
 
-            byCommentName.innerHTML = `<span class="lb-by-name-span">By ${commenterName} </span>&nbsp;on ${moment(reviewData.comments[0].dateCreated).format("MMM D, YYYY")}`;
+            byCommentName.innerHTML = `<span>By</span>&nbsp;<span class="lb-by-name-span">${commenterName} </span>&nbsp;on ${moment(reviewData.comments[0].dateCreated).format("MMM D, YYYY")}`;
             commentContentDiv.appendChild(byCommentName);
 
             var commentContent = document.createElement("div");

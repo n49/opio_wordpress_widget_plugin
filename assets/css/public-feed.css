@@ -1468,6 +1468,7 @@ height: unset !important;
     font-weight: 500;
     margin-left: 10px;
     color: #333333;
+    margin-top: 10px;
 }
 
 .lb-comment-box {
@@ -1500,13 +1501,13 @@ height: unset !important;
 .lb-by-comment-name {
     display: flex;
     justify-content: start;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
     color: #333333;
 }
 
 .lb-by-name-span {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
     color: #333333;
 }
@@ -1616,6 +1617,7 @@ height: unset !important;
     font-weight: 700;
     color: #333333;
     justify-content: flex-end;
+    line-height: 65px;
 }
 
 .widget-body .v-see-all-span {
@@ -1680,8 +1682,8 @@ height: unset !important;
 
 .widget-body .v-google-logo {
     position: absolute; 
-    right: -20px; 
-    top: 2px; 
+    right: -15px; 
+    top: 0px; 
     display: flex; 
     text-align: right; 
     min-width: 90px; 
@@ -1694,7 +1696,7 @@ height: unset !important;
 
 .widget-body .v-yelp-logo {
     position: absolute; 
-    right: -20px; 
+    right: -15px; 
     top: 2px; 
     display: flex; 
     text-align: right; 
@@ -1722,7 +1724,7 @@ height: unset !important;
 
 .widget-body .v-opio-logo {
     position: absolute; 
-    right: -30px; 
+    right: -25px; 
     top: 2px; 
     display: flex; 
     text-align: right; 
