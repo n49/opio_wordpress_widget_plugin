@@ -12,11 +12,11 @@
         $starColor = ($average > 0.5) ? '#ffc600' : '#E6E8EB';
         $starGrey = '#E6E8EB';
 
-        $fullStar = '<div class="rating-stars"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.04 22.83"><defs><style>.str-1{fill: ' . $starColor . ';}</style></defs><title>yellow</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="str-1" d="M12,18.36l7.43,4.48-2-8.44L24,8.71,15.39,8,12,0,8.64,8,0,8.71l6.55,5.68-2,8.44Zm0,0"/></g></g></svg></div>';
+        $fullStar = '<div class="rating-stars-v"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.04 22.83"><defs><style>.str-1{fill: ' . $starColor . ';}</style></defs><title>yellow</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="str-1" d="M12,18.36l7.43,4.48-2-8.44L24,8.71,15.39,8,12,0,8.64,8,0,8.71l6.55,5.68-2,8.44Zm0,0"/></g></g></svg></div>';
         
-        $halfStar = '<div class="rating-stars"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.04 22.83"><defs><style>.str-2{fill:' . $starGrey . ';}.str-1{fill: ' . $starColor . ';}</style></defs><title>yellow-grey</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="str-2" d="M12,18.36l7.43,4.48-2-8.44L24,8.71,15.39,8,12,0m0,18.36"/><path class="str-1" d="M12,0,8.64,8,0,8.71l6.55,5.68-2,8.44L12,18.36m0,0"/></g></g></svg></div>';
+        $halfStar = '<div class="rating-stars-v"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.04 22.83"><defs><style>.str-2{fill:' . $starGrey . ';}.str-1{fill: ' . $starColor . ';}</style></defs><title>yellow-grey</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="str-2" d="M12,18.36l7.43,4.48-2-8.44L24,8.71,15.39,8,12,0m0,18.36"/><path class="str-1" d="M12,0,8.64,8,0,8.71l6.55,5.68-2,8.44L12,18.36m0,0"/></g></g></svg></div>';
         
-        $emptyStar = '<div class="rating-stars"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.04 22.83"><defs><style>.str0-1{fill:' . $starGrey . ';}</style></defs><title>grey</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="str0-1" d="M12,18.36l7.43,4.48-2-8.44L24,8.71,15.39,8,12,0,8.64,8,0,8.71l6.55,5.68-2,8.44Zm0,0"/></g></g></svg></div>';
+        $emptyStar = '<div class="rating-stars-v"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.04 22.83"><defs><style>.str0-1{fill:' . $starGrey . ';}</style></defs><title>grey</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="str0-1" d="M12,18.36l7.43,4.48-2-8.44L24,8.71,15.39,8,12,0,8.64,8,0,8.71l6.55,5.68-2,8.44Zm0,0"/></g></g></svg></div>';
         
         $stars = '';
         for ($i = 1; $i <= 5; $i++) {
@@ -146,7 +146,7 @@
 <div class="widget-body opio-vertical">
     <div class="v-header">
         <div class="v-h-col-1">
-            <span style="font-size: 22px; font-weight: 700;">Our reviews</span>
+            <span style="font-size: 22px; font-weight: 700;">Our Reviews</span>
         </div>
         <div class="v-h-col-2">
             <span class="v-pwd-span">Powered by</span>
@@ -201,7 +201,13 @@
                                 <?php echo wp_kses(getStarRating($review['rating']), $this->slider_deserializer->get_allowed_tags()); ?>
                             </div>
                         <?php } ?>
-                        <div class="reviewer-name-container"><span class="reviewer-name"><?php echo esc_attr($review['user']['firstName']);?> <?php echo esc_attr($review['user']['lastName']);?></span> on <?php echo esc_attr(date('M d, Y', $review['dateCreated']/1000)); ?></div>
+                        <?php 
+                            $reviewer_name = $review['user']['firstName'] . " " . $review['user']['lastName']; 
+                            if(isset($reviewer_name) && strlen($reviewer_name) > 12) {
+                                $reviewer_name = mb_substr($reviewer_name, 0, 12, 'UTF-8');
+                            }
+                        ?>
+                        <div class="reviewer-name-container"><span class="reviewer-name"><?php echo esc_attr($reviewer_name); ?></span> on <?php echo esc_attr(date('M d, Y', $review['dateCreated']/1000)); ?></div>
                     </div>
                     <div>
                         <?php if($review['propertyInfo']['name'] === 'facebook') { ?>
@@ -291,6 +297,12 @@
 </div>
 
 <style>
+    .widget-body .slick-slide {
+        display: block;
+        float: none;
+        height: 137px !important;
+        min-height: 1px;
+    }
 </style>
 
 <?php if(isset($feed_object->schema_enabled) && $feed_object->schema_enabled == 'yes') { ?>

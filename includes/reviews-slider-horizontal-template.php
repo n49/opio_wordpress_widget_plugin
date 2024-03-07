@@ -186,7 +186,13 @@
                                     <?php echo wp_kses(getStarRating($review['rating']), $this->slider_deserializer->get_allowed_tags()); ?>
                                 </div>
                             <?php } ?>
-                            <div class="reviewer-name-container"><span class="reviewer-name"><?php echo esc_attr($review['user']['firstName']);?> <?php echo esc_attr($review['user']['lastName']);?></span> on <?php echo esc_attr(date('M d, Y', $review['dateCreated']/1000)); ?></div>
+                            <?php 
+                                $reviewer_name = $review['user']['firstName'] . " " . $review['user']['lastName']; 
+                                if(isset($reviewer_name) && strlen($reviewer_name) > 30) {
+                                    $reviewer_name = mb_substr($reviewer_name, 0, 30, 'UTF-8');
+                                }
+                            ?>
+                            <div class="reviewer-name-container"><span class="reviewer-name"><?php echo esc_attr($reviewer_name);?></span> on <?php echo esc_attr(date('M d, Y', $review['dateCreated']/1000)); ?></div>
                         </div>
 
                     </div>
@@ -586,6 +592,7 @@
 
         // Set character limit based on screen width
         var characterLimit = (screenWidth < 430) ? 75 : 100;
+        console.log('characterLimit: ',characterLimit);
 
         // Update the content with the character limit for each review tile
         var reviewTiles = document.querySelectorAll('.review-content');

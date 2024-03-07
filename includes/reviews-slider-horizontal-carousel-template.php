@@ -193,7 +193,13 @@
                                 <?php echo wp_kses(getStarRating($review['rating']), $this->slider_deserializer->get_allowed_tags()); ?>
                             </div>
                         <?php } ?>
-                        <div class="reviewer-name-container"><span class="reviewer-name"><?php echo esc_attr($review['user']['firstName']);?> <?php echo esc_attr($review['user']['lastName']);?></span> on <?php echo esc_attr(date('M d, Y', $review['dateCreated']/1000)); ?></div>
+                        <?php 
+                            $reviewer_name = $review['user']['firstName'] . " " . $review['user']['lastName']; 
+                            if(isset($reviewer_name) && strlen($reviewer_name) > 28) {
+                                $reviewer_name = mb_substr($reviewer_name, 0, 28, 'UTF-8');
+                            }
+                        ?>
+                        <div class="reviewer-name-container"><span class="reviewer-name"><?php echo esc_attr($reviewer_name);?></span> on <?php echo esc_attr(date('M d, Y', $review['dateCreated']/1000)); ?></div>
                     </div>
 
                 </div>
@@ -320,7 +326,7 @@
         </div>
         <div class="c-vertical-divider"></div>
         <div class="c-rating-row-2">
-            <div style="display: flex;">
+            <div style="display: flex; gap: 5px;">
                 <div class="c-rating-r-row-1">
                     <?php echo wp_kses(getStarRatingWidget($aggregateRating), $this->slider_deserializer->get_allowed_tags()); ?>
                 </div>
