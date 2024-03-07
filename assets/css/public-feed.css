@@ -1143,16 +1143,17 @@ height: unset !important;
     width: 40px;
     height: 40px;
     line-height: 40px;
-    border: 2px solid #ccc;
+    border: 5px solid #ccc;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 18px;
+    font-weight: 700;
     cursor: pointer;
     position: fixed;
-    top: 24em;
-    right: 22em;
+    top: 10em;
+    right: 10em;
 }
 
 .widget-body .star-rating {
@@ -1892,7 +1893,7 @@ height: unset !important;
     display: flex;
     background: #ffffff;
     height: 200px;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     gap: 10px;
     flex-direction: column; 
@@ -1934,7 +1935,7 @@ height: unset !important;
 .widget-body .c-pwd-div {
     display: flex; 
     align-items: center; 
-    min-width: 80; 
+    min-width: 80px; 
     min-height: 30px; 
     background-size: contain; 
     background-position: center center; 
