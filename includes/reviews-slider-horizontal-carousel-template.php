@@ -212,12 +212,12 @@
                 </div>
                 <?php if($review_type === 'orgfeed') { ?>
                     <?php 
-                        $contentWithMedia_org = 52;
-                        $contentWithoutMedia_org = 110;
+                        $contentWithMedia_org = 40;
+                        $contentWithoutMedia_org = 90;
 
                         if($isMobile) {
-                            $contentWithMedia_org = 75;
-                            $contentWithoutMedia_org = 130;
+                            $contentWithMedia_org = 60;
+                            $contentWithoutMedia_org = 110;
                         }
                     ?>
                     <div class="location-name"><?php echo esc_attr($review['entityInfo']['name']); ?></div>
@@ -277,12 +277,12 @@
                         <?php } ?>
                 <?php } else { ?>
                     <?php 
-                        $contentWithMedia_biz = 65;
-                        $contentWithoutMedia_biz = 175;
+                        $contentWithMedia_biz = 55;
+                        $contentWithoutMedia_biz = 155;
 
                         if($isMobile) {
-                            $contentWithMedia_biz = 75;
-                            $contentWithoutMedia_biz = 190;
+                            $contentWithMedia_biz = 60;
+                            $contentWithoutMedia_biz = 170;
                         }
                     ?>
                     <?php if((isset($review['images']) && is_array($review['images']) && count($review['images']) > 0) || 
