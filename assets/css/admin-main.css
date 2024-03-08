@@ -987,36 +987,18 @@
     content: attr(data-forhalf);
 }
 
+/** Horizontal slider styles starts here*/
+
 .widget-body {
-    /* margin: 0 240px; */
-    padding: 0;
+    /* padding: 40px; */
     margin: 0;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
-    width: 1140px;
-    height: 400px;
+    max-width: 1140px;
+    width: auto;
+    height: 260px;
     overflow: hidden; /* Prevent scrolling when the lightbox is open */
-}
-
-#lightbox {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 999;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.lightbox-container {
-    display: flex;
-    background: #777;
-    padding: 60px;
+    background-color: white;
 }
 
 #photo-lightbox {
@@ -1043,44 +1025,30 @@
     cursor: pointer;
 }
 
-#lightbox img {
-    max-width: 80%;
-    max-height: 80%;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-#open-lightbox-button {
-    margin: 20px;
-    padding: 10px;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-.slider-container {
+.widget-body .slider-container {
     display: flex;
-    height: 280px;
+    height: auto;
     overflow-x: auto;
     scrollbar-width: thin;
     scrollbar-color: #ccc #f0f0f0;
-    padding: 40px;
+    padding: 0px;
     background: #ffffff;
-    margin: auto;
+    margin: 0 -0.7% 0 -0.9%;
     justify-content: center;
     transition: transform 0.5s ease-in-out;
 }
 
-.reviewer-container {
+.widget-body .reviewer-container {
     display: flex; 
     position: relative;
 }
 
-.avatar-container {
+.widget-body .avatar-container {
     vertical-align: top; 
     padding-right: 10px;
 }
 
-.reviewer-avatar {
+.widget-body .reviewer-avatar {
     width: 35px; 
     height: 35px; 
     line-height: 35px; 
@@ -1092,7 +1060,7 @@
     background-repeat: no-repeat; 
 }
 
-.facebook-logo {
+.widget-body .facebook-logo {
     position: absolute; 
     right: -1px; 
     top: -2px; 
@@ -1105,7 +1073,7 @@
     margin-right: 0px;
 }
 
-.google-logo {
+.widget-body .google-logo {
     position: absolute; 
     right: -15px; 
     top: 2px; 
@@ -1118,7 +1086,7 @@
     margin-right: 0px;
 }
 
-.opio-logo {
+.widget-body .yelp-logo {
     position: absolute; 
     right: -25px; 
     top: 2px; 
@@ -1131,85 +1099,144 @@
     margin-right: 0px;
 }
 
-.rating-container {
-    display: flex;
-    flex-direction: column;
+.widget-body .tripadvisor-logo {
+    position: absolute; 
+    right: -2px; 
+    top: 0px; 
+    text-align: right; 
+    min-width: 100px; 
+    min-height: 24px; 
+    background-size: contain; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    margin-right: 0px;
 }
 
-.fb-rating-div {
+.widget-body .opio-logo {
+    position: absolute; 
+    right: -25px; 
+    top: 2px; 
+    text-align: right; 
+    min-width: 100px; 
+    min-height: 24px; 
+    background-size: contain; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    margin-right: 0px;
+}
+
+.widget-body .rating-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.widget-body .fb-rating-div {
     display: inline-flex; 
     align-items: center; 
     vertical-align: middle;
 }
 
-.fb-rating-img {
+.widget-body .fb-rating-img {
     padding-right: 5px; 
     width: 20px; 
     height: 20px; 
     padding-top: 2px;
 }
 
-.fb-rating-text-p {
+.widget-body .fb-rating-text-p {
     margin: 0;
     font-weight: 700; 
     font-size: 12px; 
-    color: #637282;
+    color: #333333;
     white-space: nowrap;
 }
 
-.fb-rating-text-n {
+.widget-body .fb-rating-text-n {
     margin: 0;
     font-weight: 700; 
     font-size: 13px; 
-    color: #637282;
+    color: #333333;
     white-space: nowrap;
 }
 
-.opio-rating-container {
+.widget-body .opio-rating-container {
     overflow: hidden; 
     position: relative;
 }
 
-.rating-widget-part {
+.widget-body .rating-widget-part {
     display: flex; 
     background: #ffffff; 
-    height: 100px; 
+    height: 40px; 
     align-items: flex-start; 
     justify-content: center; 
     gap: 10px;
+    line-height: 18px;
+    padding: 20px 20px 0px 20px;
 }
 
-.rating-stars {
+.widget-body .rating-stars {
     position: relative; 
     overflow: hidden; 
     cursor: pointer; 
     display: block; 
     float: left; 
-    width:22px; 
-    height: 22px;
+    width: 15px; 
+    height: 15px;
 }
 
-.rating-stars-wd {
+.widget-body .rating-stars-v {
     position: relative; 
     overflow: hidden; 
     cursor: pointer; 
     display: block; 
     float: left; 
-    width:22px; 
-    height: 22px;
+    width: 18px; 
+    height: 18px;
 }
 
-.reviewer-name-container {
+.widget-body .rating-stars-wd {
+    position: relative; 
+    overflow: hidden; 
+    cursor: pointer; 
+    display: block; 
+    float: left; 
+    width: 18px; 
+    height: 18px;
+}
+
+.widget-body .rating-stars-wd-v {
+    position: relative; 
+    overflow: hidden; 
+    cursor: pointer; 
+    display: block; 
+    float: left; 
+    width: 24px; 
+    height: 24px;
+}
+
+.widget-body .rating-stars-wd-c {
+    position: relative; 
+    overflow: hidden; 
+    cursor: pointer; 
+    display: block; 
+    float: left; 
+    width: 20px; 
+    height: 20px;
+}
+
+.widget-body .reviewer-name-container {
     font-size: 12px; 
-    color: rgb(99, 114, 130);
+    color: #333333;
 }
 
-.opio-logo-container, .w-opio-logo-container {
+.widget-body .opio-logo-container, .widget-body .w-opio-logo-container {
     display: flex; 
     align-items: center;
 }
 
-.pwd-opio-logo {
+.widget-body .pwd-opio-logo {
     display: flex; 
     align-items: center; 
     min-width: 100px; 
@@ -1220,55 +1247,57 @@
     margin-left: 5px;
 }
 
-.review-tile {
+.widget-body .review-tile {
     /* flex: 0 0 250px; */
     display: flex;
     flex-direction: column;
     height: 200px;
     flex: 0 0 33.33%;
-    height: 260px;
     background-color: #f5f5f7;
-    padding: 15px;
+    padding: 20px;
     margin: 0 10px;
     border-radius: 5px;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
 }
 
-.review-tile-vertical {
-    flex: 0 0 250px;
-    background-color: white;
-    height: 120px;
-    padding: 10px;
-    margin: 0 10px;
-    cursor: pointer;
-    border-top: 2px solid #E6E6E6;
-    border-bottom: 2px solid #E6E6E6;
-    transition: transform 0.3s ease-in-out;
-}
-
-.location-name {
+.widget-body .location-name {
     font-size: 14px;
     font-weight: 600;
-    color: rgb(99, 114, 130);
+    color: #333333;
+    text-align: left;
+    font-family: 'Roboto', sans-serif;
+    padding-top: 3px;
+    padding-bottom: 5px;
 }
 
-.reviewer-name {
+.widget-body .review-content {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333333;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    text-align: left;
+    font-family: 'Roboto', sans-serif;
+}
+
+.widget-body .reviewer-name {
     font-size: 12px;
     font-weight: 700;
     margin-top: 5px;
-    color: rgb(99, 114, 130);
+    color: #333333;
     margin-bottom: 5px;
 }
 
-.review-media {
+.widget-body .review-media {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-end;
     margin-top: 30px;
 }
 
-.review-media-images {
+.widget-body .review-media-images {
     display: flex;
     gap: 10px;
     position: fixed;
@@ -1276,20 +1305,20 @@
     margin-bottom: 15px;
 }
 
-.review-img {
-    width: 50px; 
-    height: 50px;
+.widget-body .review-img{
+    width: 48px; 
+    height: 48px;
 }
 
-.video-icon {
+.widget-body .video-icon {
     width: 80px;
-    height: 50px;
+    height: 48px;
     position: relative;
-    background-color: #333;
+    background-color: grey;
     border-radius: 8px;
 }
 
-.play-button {
+.widget-body .play-button {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1301,22 +1330,22 @@
     border-left: 15px solid #fff;
 }
 
-.tile-tag-container {
+.widget-body .tile-tag-container {
     display: flex;
     gap: 10px;
     position: fixed;
     bottom: 0;
 }
 
-.review-tagged-emps{
+.widget-body .review-tagged-emps{
     display: flex;
     margin-bottom: 15px;
-    border: 1px solid #637282;
+    border: 1px solid #333333;
     border-radius: 4px;
     padding: 5px;
 }
 
-.emp-avatar {
+.widget-body .emp-avatar {
     width: 40px; 
     height: 40px; 
     line-height: 40px; 
@@ -1328,59 +1357,80 @@
     background-repeat: no-repeat;
 }
 
-.vertical-divider {
-    height: 40%;
+.widget-body .vertical-divider {
+    height: 42px;
     width: 1px;
     background-color: #9b9b9b; /* Change the color as needed */
     margin: 0px 10px;
 }
 
-.rating-widget {
+.widget-body .rating-widget {
     display: flex; 
     flex-direction: column;
+    gap: 5px;
 }
 
-.w-rating-box {
+.widget-body .w-rating-box {
     display: flex;
 }
 
-.w-pwd-text {
+.widget-body .w-pwd-text {
     font-size: 12px;
 }
 
-.rating-text-div {
+.widget-body .rating-text-div {
     display: flex; 
     margin-left: 5px;
 }
 
-.rating-text {
+.widget-body .rating-text {
     display: flex; 
-    margin-top: -6px; 
+    margin-top: 1px; 
     font-size: 24px; 
     font-weight: 700;
 }
 
-.see-all-box {
+.widget-body .see-all-box {
     display: flex; 
-    margin-top: -14px;
+    margin-top: 0px;
 }
 
-.see-all-text {
+.widget-body .see-all-text {
     display: flex; 
     font-size: 14px;
 }
 
-.write-review-btn-box {
+.widget-body a,
+.widget-body a:visited {
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    text-decoration: underline;
+    color: #333333;
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+.widget-body a:hover,
+.widget-body a:visited:hover {
+    color: #333333;
+}
+
+.widget-body ::selection {
+    background-color: #555555; /* Change the background color for selected text */
+    color: #ffffff; /* Change the text color for selected text */
+}
+
+.widget-body .write-review-btn-box {
     display: flex; 
     margin-left: 5px;
 }
 
-.write-review-btn-box {
+.widget-body .write-review-btn-box {
     display: flex; 
     margin-left: 5px;
 }
 
-.write-review-btn-div {
+.widget-body .write-review-btn-div {
     width: 100%; 
     display: flex; 
     flex-direction: row; 
@@ -1389,12 +1439,12 @@
     text-align: center;
 }
 
-.write-review-btn-a {
+.widget-body .write-review-btn-a {
     text-decoration: none; 
     color:inherit
 }
 
-.write-review-btn {
+.widget-body .write-review-btn {
     border-radius: 2px; 
     display: inline-block; 
     height: 40px; 
@@ -1414,13 +1464,13 @@
     user-select: none;
 }
 
-.write-review-text {
+.widget-body .write-review-text {
     display: inline-block; 
     position: relative; 
     height: 100%;
 }
 
-.slider-navigation {
+.widget-body .slider-navigation {
     display: flex;
     align-items: center;
     margin-top: 3px;
@@ -1433,53 +1483,40 @@
     cursor: pointer;
 }
 
-.widget-body .c-slider-button {
-    width: 36px;
-    height: 36px;
-    margin: 0 2px;
-    cursor: pointer;
-}
-
-.widget-body .v-slider-button {
-    width: 36px;
-    height: 36px;
-    margin: 0 2px;
-    cursor: pointer;
-}
-
-.close-button {
+.widget-body .close-button {
     color: white;
     width: 40px;
     height: 40px;
     line-height: 40px;
-    border: 2px solid #ccc;
+    border: 5px solid #ccc;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 18px;
+    font-weight: 700;
     cursor: pointer;
     position: fixed;
-    top: 3em;
-    right: 2em;
+    top: 15%;
+    right: 20%;
 }
 
-.star-rating {
+.widget-body .star-rating {
     font-size: 18px;
     color: #FFD700; /* Gold color for stars */
 }
 
-.photo-tiles {
+.widget-body .photo-tiles {
     display: flex;
     margin-top: 10px;
 }
 
-.photo-tile {
+.widget-body .photo-tile {
     flex: 0 0 40px;
     margin-right: 5px;
 }
 
-.photo-tile img {
+.widget-body .photo-tile img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -1531,16 +1568,18 @@
 
 .lb-reviewer-div {
     font-size: 12px; 
-    color: rgb(99, 114, 130);
+    color: #333333;
 }
 
 .lb-review-content {
     font-size: 14px; 
-    color: rgb(99, 114, 130);
+    color: #333333;
+    text-align: left;
+    font-family: 'Roboto', sans-serif;
 }
 
 .lb-photo-div {
-    display: block; 
+    display: flex; 
 }
 
 .lb-review-property {
@@ -1565,7 +1604,7 @@
 .lb-reviewer-name {
     font-size: 14px;
     font-weight: 700;
-    color: rgb(99, 114, 130);
+    color: #333333;
     margin-bottom: 5px;
 }
 
@@ -1573,7 +1612,7 @@
     display: flex;
     margin-left: 10px;
     font-size: 14px;
-    color: #637282;
+    color: #333333;
     text-align: left;
     margin-top: 5px;
     max-height: 300px;
@@ -1653,7 +1692,7 @@
     margin: 0;
     font-weight: 700; 
     font-size: 12px; 
-    color: #637282;
+    color: #333333;
     white-space: nowrap;
 }
 
@@ -1661,7 +1700,7 @@
     margin: 0;
     font-weight: 700; 
     font-size: 13px; 
-    color: #637282;
+    color: #333333;
     white-space: nowrap;
 }
 
@@ -1703,7 +1742,7 @@
     align-self: end;
     justify-self: left;
     margin-left: 10px;
-    color: #637282;
+    color: #333333;
     font-size: 14px;
 }
 
@@ -1716,7 +1755,7 @@
     align-self: end;
     justify-self: left;
     margin-left: 10px;
-    color: #637282;
+    color: #333333;
     font-size: 14px;
 }
 
@@ -1725,13 +1764,13 @@
     justify-self: left;
     margin-left: 10px;
     margin-top: -2px;
-    color: #637282;
+    color: #333333;
     font-size: 12px;
 }
 
 .lb-emp-mention {
     display: flex; 
-    color: #637282; 
+    color: #333333; 
     font-size: 14px; 
     font-weight: 500; 
     margin-top: 5px;
@@ -1768,9 +1807,563 @@
     border-radius: 4px;
 }
 
+.lb-comment-header {
+    display: flex;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 10px;
+    color: #333333;
+    margin-top: 10px;
+}
+
+.lb-comment-box {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.lb-comment-avatar {
+    width: 35px; 
+    height: 35px; 
+    min-width: 35px; 
+    min-height: 35px;
+    line-height: 35px; 
+    border-radius: 50%; 
+    color: rgb(255, 255, 255); 
+    font-size: 20px; 
+    text-align: center; 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+}
+
+.lb-comment-content-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    margin-left: 10px;
+}
+
+.lb-by-comment-name {
+    display: flex;
+    justify-content: start;
+    font-size: 12px;
+    font-weight: 400;
+    color: #333333;
+}
+
+.lb-by-name-span {
+    font-size: 12px;
+    font-weight: 600;
+    color: #333333;
+}
+
+.lb-comment-content {
+    font-size: 14px;
+    font-weight: 400;
+    color: #333333;
+    text-align: left;
+}
+/** Horizontal slider styles ends here*/
+
+/** Vertical slider styles starts here*/
+
+.opio-vertical {
+    display: flex;
+    height: 500px;
+    width: 300px;
+    flex-direction: column;
+    border: 2px solid #A9B7BF;
+    border-radius: 3px;
+    margin: 0;
+    padding: 0;
+}
+
+.widget-body .testimonial-slider.vertical-slider {
+    padding: 0px;
+    height: 280px;
+    overflow: hidden;
+    margin-top: 0px;
+}
+
+.widget-body .v-header {
+    display: flex; 
+    background: #A9B7BF; 
+    padding:  15px; 
+    color: white;
+}
+
+.widget-body .v-h-col-1 {
+    display: flex; 
+    justify-content: flex-start;
+    align-items: center;
+    flex: 60% 0;
+}
+
+.widget-body .v-h-col-2 {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+    margin-left: 20px; 
+    margin-top: -7px;
+    padding-top: 5px;
+}
+
+.widget-body .v-biz-span {
+    font-size: 22px; 
+    margin-top: -7px;
+}
+
+.widget-body .v-pwd-span {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.widget-body .v-h-opio-logo {
+    display: flex; 
+    align-items: center; 
+    min-width: 100px; 
+    min-height: 32px; 
+    background-size: contain; 
+    background-position: center center; 
+    background-repeat: no-repeat;
+}
+
+.widget-body .v-rating-container {
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+    padding-top: 5px;
+    height: 75px;
+    justify-content: space-around;
+}
+
+.widget-body .v-r-col-1 {
+    display: flex;
+    height: auto;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.widget-body .v-r-col-2 {
+    display: flex;
+    align-content: flex-end;
+    justify-content: center;
+}
+
+.widget-body .v-r-row-1 {
+    display: flex; 
+    flex-direction: row;
+}
+
+.widget-body .v-rating-span {
+    display: flex;
+    margin-top: 0px;
+    font-size: 50px;
+    font-weight: 700;
+    color: #333333;
+    justify-content: flex-end;
+    line-height: 65px;
+}
+
+.widget-body .v-see-all-span {
+    display: flex;
+    font-size: 14px;
+    color: #333333;
+}
+
+.widget-body .review-tile-vertical {
+    flex: 0 0 250px;
+    background-color: white;
+    height: 140px !important;
+    padding: 10px;
+    margin: 0 10px;
+    cursor: pointer;
+    border-top: 2px solid #E6E6E6 !important;
+    border-bottom: 2px solid #E6E6E6 !important;
+    transition: transform 0.3s ease-in-out;
+}
+
+.widget-body .v-review-tile-container {
+    display: flex; 
+    position: relative;
+    width: 260px;
+}
+
+.widget-body .v-rev-content {
+    vertical-align: top; 
+    padding-right: 10px;
+}
+
+.widget-body .v-rev-rating-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.widget-body .v-reviewer-avatar {
+    width: 35px; 
+    height: 35px; 
+    line-height: 35px; 
+    border-radius: 50%; 
+    color: rgb(255, 255, 255); 
+    font-size: 20px; 
+    text-align: center; 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+}
+
+.widget-body .v-facebook-logo {
+    position: absolute; 
+    right: -6px; 
+    top: -2px; 
+    display: flex; 
+    text-align: right; 
+    min-width: 70px; 
+    min-height: 24px; 
+    background-size: contain; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    margin-right: 0px;
+}
+
+.widget-body .v-google-logo {
+    position: absolute; 
+    right: -15px; 
+    top: 0px; 
+    display: flex; 
+    text-align: right; 
+    min-width: 90px; 
+    min-height: 20px; 
+    background-size: contain; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    margin-right: 0px;
+}
+
+.widget-body .v-yelp-logo {
+    position: absolute; 
+    right: -15px; 
+    top: 2px; 
+    display: flex; 
+    text-align: right; 
+    min-width: 90px; 
+    min-height: 20px; 
+    background-size: contain; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    margin-right: 0px;
+}
+
+.widget-body .v-tripadvisor-logo {
+    position: absolute; 
+    right: -6px; 
+    top: 2px; 
+    display: flex; 
+    text-align: right; 
+    min-width: 90px; 
+    min-height: 20px; 
+    background-size: contain; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    margin-right: 0px;
+}
+
+.widget-body .v-opio-logo {
+    position: absolute; 
+    right: -25px; 
+    top: 2px; 
+    display: flex; 
+    text-align: right; 
+    min-width: 100px; 
+    min-height: 24px; 
+    background-size: contain; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    margin-right: 0px;
+}
+
+.widget-body .v-footer {
+    display: flex;
+    background: #ffffff;
+    height: 60px;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 10px;
+    flex-direction: row; 
+    padding: 15px;
+    margin-top: 13px;
+}
+
+.widget-body .v-f-col-1 {
+    display: flex;
+    align-items: center;
+    margin-top: 3px;
+    margin: 0 auto;
+}
+
+.widget-body .v-f-col-2 {
+    display: flex; 
+    margin-left: 5px;
+}
+
+.widget-body .v-slider-button {
+    width: 36px;
+    height: 36px;
+    margin: 0 2px;
+    cursor: pointer;
+}
+
+.widget-body .v-wrire-rev-container {
+    width: 100%; 
+    display: flex; 
+    flex-direction: row; 
+    justify-content: center; 
+    padding: 0px 8px; 
+    text-align: center;
+}
+
+.widget-body .v-wrire-rev-a {
+    text-decoration: none; 
+    color:inherit  
+}
+
+.widget-body .v-write-rev-div {
+    border-radius: 2px; 
+    display: inline-block; 
+    height: 40px; 
+    line-height: 40px; 
+    margin-left: 0px; 
+    text-align: center; 
+    cursor: pointer; 
+    padding: 0px; 
+    font-weight: 400; 
+    font-size: 14px; 
+    color: #ffffff; 
+    border: none; 
+    background-color: #0078ca; 
+    width: 150px; 
+    position: relative; 
+    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1); 
+    user-select: none;
+}
+
+.widget-body .v-write-rev-div-2 {
+    display: inline-block; 
+    position: relative; 
+    height: 100%;
+}
+
+/** Vertical slider styles ends here*/
+
+/** Horizontal carousel slider styles starts here*/
+
+.opio-carousel {
+    display: flex;
+    height: 200px;
+    padding: 0px;
+    gap: 20px;
+}
+
+.widget-body .c-facebook-logo {
+    position: absolute; 
+    right: -6px; 
+    top: -2px; 
+    display: flex; 
+    text-align: right; 
+    min-width: 70px; 
+    min-height: 24px; 
+    background-size: contain; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    margin-right: 0px;
+}
+
+.widget-body .c-google-logo {
+    position: absolute; 
+    right: -20px; 
+    top: 2px; 
+    display: flex; 
+    text-align: right; 
+    min-width: 90px; 
+    min-height: 20px; 
+    background-size: contain; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    margin-right: 0px;
+}
+
+.widget-body .c-yelp-logo {
+    position: absolute; 
+    right: -30px; 
+    top: 2px; 
+    display: flex; 
+    text-align: right; 
+    min-width: 90px; 
+    min-height: 20px; 
+    background-size: contain; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    margin-right: 0px;
+}
+
+.widget-body .c-tripadvisor-logo {
+    position: absolute; 
+    right: -10px; 
+    top: 2px; 
+    display: flex; 
+    text-align: right; 
+    min-width: 90px; 
+    min-height: 20px; 
+    background-size: contain; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    margin-right: 0px;
+}
+
+.widget-body .c-opio-logo {
+    position: absolute; 
+    right: -30px; 
+    top: 2px; 
+    display: flex; 
+    text-align: right; 
+    min-width: 100px; 
+    min-height: 24px; 
+    background-size: contain; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    margin-right: 0px;
+}
+
+.widget-body .c-rating-widget-container {
+    display: flex;
+    background: #ffffff;
+    height: 200px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-direction: column; 
+    padding-right: 0px; 
+    margin-top: 0px;
+}
+
+.widget-body .c-rating-row-1 {
+    display: flex;
+    align-items: center;
+    margin-left: 7px;
+}
+
+.widget-body .c-rating-row-2 {
+    display: flex; 
+    flex-direction: column;
+    line-height: 30px; 
+}
+
+.widget-body .c-rating-row-3 {
+    display: flex; margin-left: 5px;
+}
+
+.widget-body .c-rating-row-4 {
+    display: flex;
+    align-items: center;
+    margin-top: 3px;
+    margin: 0 auto;
+}
+
+.widget-body .c-vertical-divider {
+    display: none;
+}
+
+.widget-body .c-pwd-span {
+    font-size: 12px;
+}
+
+.widget-body .c-pwd-div {
+    display: flex; 
+    align-items: center; 
+    min-width: 80px; 
+    min-height: 30px; 
+    background-size: contain; 
+    background-position: center center; 
+    background-repeat: no-repeat;
+}
+
+.widget-body .c-rating-r-row-1 {
+    overflow: hidden; 
+    position: relative;
+}
+
+.widget-body .c-rating-r-row-2 {
+    display: flex; 
+    margin-left: 5px;
+}
+
+.widget-body .c-rating-row-span {
+    display: flex; 
+    margin-top: -2px; 
+    font-size: 20px; 
+    font-weight: 700;
+}
+
+.widget-body .c-see-all-div {
+    display: flex;
+    margin-top: -8px;
+    text-align: center;
+    justify-content: center;
+}
+
+.widget-body .c-see-all-span {
+    display: flex;
+    font-size: 14px;
+    align-items: flex-end;
+}
+
+.widget-body .c-write-rev-container {
+    width: 100%; 
+    display: flex; 
+    flex-direction: row; 
+    justify-content: center; 
+    padding: 0px 8px; 
+    text-align: center;
+}
+
+.widget-body .c-write-rev-outer-div {
+    border-radius: 2px; 
+    display: inline-block; 
+    height: 40px; 
+    line-height: 40px; 
+    margin-left: 0px; 
+    text-align: center; 
+    cursor: pointer; 
+    padding: 0px; 
+    font-weight: 400; 
+    font-size: 14px; 
+    color: #ffffff; 
+    border: none; 
+    background-color: #0078ca; 
+    width: 150px; 
+    position: relative; 
+    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1); 
+    user-select: none;
+}
+
+.widget-body .c-write-rev-inner-div {
+    display: inline-block; 
+    position: relative; 
+    height: 100%;
+}
+
+.widget-body .c-slider-button {
+    width: 36px;
+    height: 36px;
+    margin: 0 2px;
+    cursor: pointer;
+}
+/** Horizontal carousel slider styles ends here*/
+
 /** Slick slider style here */
 
-.testimonial {
+.widget-body .testimonial {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -1854,7 +2447,46 @@
 
 /* Add your other styles here */
 @media (min-width: 280px) and (max-width: 400px) {
+    /** Horizontal slider styles starts here*/
+
     .widget-body {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+        margin: 20px auto;
+        width: auto;
+        max-width: 350px;
+        height: 360px;
+        overflow: hidden; /* Prevent scrolling when the lightbox is open */
+    }
+
+    .widget-body .slider-container {
+        display: flex;
+        height: auto;
+        overflow-x: auto;
+        scrollbar-width: thin;
+        scrollbar-color: #ccc #f0f0f0;
+        padding: 0px;
+        background: #ffffff;
+        margin: auto;
+        justify-content: center;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .opio-vertical {
+        display: flex;
+        height: 500px;
+        width: 300px;
+        flex-direction: column;
+        border: 2px solid #A9B7BF;
+        border-radius: 3px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .opio-carousel {
+        display: block;
         padding: 0;
         margin: 0;
         box-sizing: border-box;
@@ -1865,72 +2497,59 @@
         overflow: hidden; /* Prevent scrolling when the lightbox is open */
     }
 
-    .slider-container {
-        display: flex;
-        height: 240px;
-        overflow-x: auto;
-        scrollbar-width: thin;
-        scrollbar-color: #ccc #f0f0f0;
-        padding: 20px;
-        background: #ffffff;
-        margin: auto;
-        justify-content: center;
-        transition: transform 0.5s ease-in-out;
-    }
-
-    .review-tile {
+    .widget-body .review-tile {
         margin: 0;
     }
 
-    .vertical-divider {
-        height: 40%;
+    .widget-body .vertical-divider {
+        height: 42px;
         width: 1px;
         background-color: #9b9b9b; /* Change the color as needed */
         margin: 0px 5px;
     }
 
-    .rating-text {
+    .widget-body .rating-text {
         display: flex; 
-        margin-top: -6px; 
+        margin-top: 0px; 
         font-size: 20px; 
         font-weight: 700;
     }
 
     /** widget 2nd part */
-    .w-opio-logo-container {
+    .widget-body .w-opio-logo-container {
         display: flex; 
-        flex: 30% 0 0;
-        justify-content: center;
+        flex: 35% 0 0;
+        justify-content: end;
         margin-top: 6px;
         margin-left: 0px;
     }
 
-    .pwd-opio-logo {
-        min-width: 60px; 
-        min-height: 30px; 
-        margin-left: 36px;
+    .widget-body .pwd-opio-logo {
+        min-width: 80px; 
+        min-height: 35px; 
     }
 
-    .rating-widget {
+    .widget-body .rating-widget {
         display: flex; 
         flex-direction: column;
         flex: 0 0 55%;
     }
 
-    .write-review-btn-box {
+    .widget-body .write-review-btn-box {
         display: flex; 
         margin-left: 5px;
     }
 
-    .rating-stars-wd {
+    .widget-body .rating-stars-wd, .widget-body .rating-stars-wd-c {
         width: 20px; 
         height: 20px;
     }
 
-    .rating-widget-part {
+    .widget-body .rating-widget-part {
         flex-wrap: wrap;
         height: 140px;
         padding-bottom: 40px;
+        /* margin-top: 20px; */
     }
 
     .lb-reviewbox {
@@ -1947,4 +2566,435 @@
         min-width: 60px;
         min-height: 24px;
     }
+
+    /** Horizontal slider styles ends here*/
+
+    /** Horizontal Carousel slider styles starts here */
+    .widget-body .c-rating-widget-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0px;
+        height: 160px;
+        margin-top: -10px;
+    }
+
+    .widget-body .c-rating-row-1 {
+        display: flex;
+        align-items: center;
+        margin-left: 7px;
+        flex: 25% 0 0;
+        margin-top: 0px;
+    }
+
+    .widget-body .c-rating-row-2 {
+        display: flex;
+        flex-direction: column;
+        flex: 0 0 55%;
+        margin-top: 10px;
+    }
+
+    .widget-body .c-rating-row-3 {
+        display: flex;
+        margin-left: 16px;
+        margin-top: -24px;
+        justify-content: flex-start;
+    }
+
+    .widget-body .c-rating-row-4 {
+        display: flex;
+        margin: 0 auto;
+        margin-top: -22px;
+        justify-content: end;
+    }
+
+    .widget-body .c-pwd-div {
+        min-width: 60px;
+        width: 60px; 
+        min-height: 30px; 
+        height: 30px;
+        margin-left: 36px;
+    }
+
+    .widget-body .c-rating-row-span {
+        font-size: 20px;
+    }
+
+    .widget-body .c-vertical-divider {
+        display: block;
+        height: 42px;
+        width: 1px;
+        background-color: #9b9b9b; /* Change the color as needed */
+        margin: 0px 10px;
+    }
+
+    .widget-body .c-see-all-div {
+        display: flex;
+        margin-top: -8px;
+        justify-content: start;
+    }
+
+    .widget-body .close-button {
+        top: 15%;
+        right: 10%;
+    }
+
+
+}
+
+@media (min-width: 401px) and (max-width: 767px) {
+    /** Horizontal slider styles starts here*/
+
+    .widget-body {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+        margin: 20px auto;
+        width: auto;
+        max-width: 390px;
+        height: 360px;
+        overflow: hidden; /* Prevent scrolling when the lightbox is open */
+    }
+
+    .widget-body .slider-container {
+        display: flex;
+        height: auto;
+        overflow-x: auto;
+        scrollbar-width: thin;
+        scrollbar-color: #ccc #f0f0f0;
+        padding: 0px;
+        background: #ffffff;
+        margin: auto;
+        justify-content: center;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .opio-vertical {
+        display: flex;
+        height: 500px;
+        width: 300px;
+        flex-direction: column;
+        border: 2px solid #A9B7BF;
+        border-radius: 3px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .opio-carousel {
+        display: block;
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+        margin: 20px auto;
+        width: 390px;
+        height: 360px;
+        overflow: hidden; /* Prevent scrolling when the lightbox is open */
+    }
+
+    .widget-body .review-tile {
+        margin: 0;
+    }
+
+    .widget-body .vertical-divider {
+        height: 42px;
+        width: 1px;
+        background-color: #9b9b9b; /* Change the color as needed */
+        margin: 0px 5px;
+    }
+
+    .widget-body .c-see-all-div {
+        display: flex;
+        margin-top: -8px;
+        justify-content: start;
+    }
+
+    .widget-body .rating-text {
+        display: flex; 
+        margin-top: 0px; 
+        font-size: 20px; 
+        font-weight: 700;
+    }
+
+    /** widget 2nd part */
+    .widget-body .w-opio-logo-container {
+        display: flex; 
+        flex: 35% 0 0;
+        justify-content: end;
+        margin-top: 6px;
+        margin-left: 0px;
+    }
+
+    .widget-body .pwd-opio-logo {
+        min-width: 80px; 
+        min-height: 35px; 
+    }
+
+    .widget-body .rating-widget {
+        display: flex; 
+        flex-direction: column;
+        flex: 0 0 55%;
+    }
+
+    .widget-body .write-review-btn-box {
+        display: flex; 
+        margin-left: 5px;
+    }
+
+    .widget-body .rating-stars-wd, .widget-body .rating-stars-wd-c {
+        width: 20px; 
+        height: 20px;
+    }
+
+    .widget-body .rating-widget-part {
+        flex-wrap: wrap;
+        height: 140px;
+        padding-bottom: 40px;
+        /* margin-top: 20px; */
+    }
+
+    .lb-reviewbox {
+        width: 80%;
+    }
+
+    .lb-empTagContainer {
+        grid-template-columns: auto;
+    }
+
+    .lb-property-logo {
+        width: 60px;
+        height: 24px;
+        min-width: 60px;
+        min-height: 24px;
+    }
+
+    /** Horizontal slider styles ends here*/
+
+    /** Horizontal Carousel slider styles starts here */
+    .widget-body .c-rating-widget-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0px;
+        height: 160px;
+        margin-top: -10px;
+    }
+
+    .widget-body .c-rating-row-1 {
+        display: flex;
+        align-items: center;
+        margin-left: 7px;
+        flex: 25% 0 0;
+        margin-top: 0px;
+    }
+
+    .widget-body .c-rating-row-2 {
+        display: flex;
+        flex-direction: column;
+        flex: 0 0 55%;
+        margin-top: 10px;
+    }
+
+    .widget-body .c-rating-row-3 {
+        display: flex;
+        margin-left: 46px;
+        margin-top: -24px;
+        justify-content: flex-start;
+    }
+
+    .widget-body .c-rating-row-4 {
+        display: flex;
+        margin: 0 auto;
+        margin-top: -22px;
+        justify-content: end;
+    }
+
+    .widget-body .c-pwd-div {
+        min-width: 60px;
+        width: 60px; 
+        min-height: 30px; 
+        height: 30px;
+        margin-left: 36px;
+    }
+
+    .widget-body .c-rating-row-span {
+        font-size: 20px;
+    }
+
+    .widget-body .c-vertical-divider {
+        display: block;
+        height: 42px;
+        width: 1px;
+        background-color: #9b9b9b; /* Change the color as needed */
+        margin: 0px 10px;
+    }
+
+    .widget-body .close-button {
+        top: 15%;
+        right: 10%;
+    }
+
+}
+
+/* CSS for tablets (landscape) */
+
+@media (min-width: 768px) and (max-width: 800px) {
+    .widget-body {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+        margin: 20px auto;
+        width: auto;
+        max-width: 750px;
+        height: 310px;
+        overflow: hidden; /* Prevent scrolling when the lightbox is open */
+    }
+}
+
+@media (min-width: 801px) and (max-width: 860px) {
+    .widget-body {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+        margin: 20px auto;
+        width: auto;
+        max-width: 780px;
+        height: 310px;
+        overflow: hidden; /* Prevent scrolling when the lightbox is open */
+    }
+}
+
+@media (min-width: 861px) and (max-width: 950px) {
+    .widget-body {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+        margin: 20px auto;
+        width: auto;
+        max-width: 860px;
+        height: 310px;
+        overflow: hidden; /* Prevent scrolling when the lightbox is open */
+    }
+}
+
+@media (min-width: 951px) and (max-width: 1024px) {
+    .widget-body {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+        margin: 20px auto;
+        width: 1000px;
+        height: 310px;
+        overflow: hidden; /* Prevent scrolling when the lightbox is open */
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1140px) {
+    /* Add your tablet-specific styles here */
+    /** Horizontal slider styles starts here*/
+
+    .widget-body {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+        margin: 20px auto;
+        width: auto;
+        max-width: 1140px;
+        height: 310px;
+        overflow: hidden; /* Prevent scrolling when the lightbox is open */
+    }
+
+    .widget-body .slider-container {
+        display: flex;
+        height: auto;
+        overflow-x: auto;
+        scrollbar-width: thin;
+        scrollbar-color: #ccc #f0f0f0;
+        padding: 0px;
+        background: #ffffff;
+        margin: auto;
+        justify-content: center;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .opio-vertical {
+        display: flex;
+        height: 500px;
+        width: 300px;
+        flex-direction: column;
+        border: 2px solid #A9B7BF;
+        border-radius: 3px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .opio-carousel {
+        display: block;
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+        margin: 20px auto;
+        width: auto;
+        height: 300px;
+        overflow: hidden; /* Prevent scrolling when the lightbox is open */
+    }
+
+    /** Horizontal Carousel slider styles starts here */
+    .widget-body .c-rating-widget-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0px;
+        height: 160px;
+    }
+
+    .widget-body .c-rating-row-1 {
+        display: flex;
+        align-items: center;
+        margin-top: 30px;
+    }
+
+    .widget-body .c-rating-row-2 {
+        display: flex;
+        flex-direction: column;
+        margin-top: 24px;
+    }
+
+    .widget-body .c-rating-row-3 {
+        display: flex;
+        margin-left: 20px;
+        margin-top: 21px;
+        justify-content: flex-start;
+    }
+
+    .widget-body .c-rating-row-4 {
+        display: flex;
+        margin: 0 auto;
+        margin-top: 24px;
+    }
+
+    .widget-body .c-pwd-div {
+        min-width: 80px;
+        width: 80px; 
+        min-height: 30px; 
+        height: 34px;
+        margin-left: 50px;
+    }
+
+    .widget-body .c-rating-row-span {
+        font-size: 20px;
+    }
+
+    .widget-body .c-vertical-divider {
+        display: block;
+        height: 42px;
+        width: 1px;
+        background-color: #9b9b9b; /* Change the color as needed */
+        margin: 0px 10px;
+    }
+
 }
