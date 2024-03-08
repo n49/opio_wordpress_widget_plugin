@@ -650,7 +650,8 @@ height: unset !important;
     margin: 0;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
-    width: 1140px;
+    max-width: 1140px;
+    width: auto;
     height: 260px;
     overflow: hidden; /* Prevent scrolling when the lightbox is open */
     background-color: white;
@@ -803,7 +804,7 @@ height: unset !important;
     margin: 0;
     font-weight: 700; 
     font-size: 12px; 
-    color: #637282;
+    color: #333333;
     white-space: nowrap;
 }
 
@@ -811,7 +812,7 @@ height: unset !important;
     margin: 0;
     font-weight: 700; 
     font-size: 13px; 
-    color: #637282;
+    color: #333333;
     white-space: nowrap;
 }
 
@@ -995,7 +996,7 @@ height: unset !important;
 .widget-body .review-tagged-emps{
     display: flex;
     margin-bottom: 15px;
-    border: 1px solid #637282;
+    border: 1px solid #333333;
     border-radius: 4px;
     padding: 5px;
 }
@@ -1152,8 +1153,8 @@ height: unset !important;
     font-weight: 700;
     cursor: pointer;
     position: fixed;
-    top: 0em;
-    right: 0em;
+    top: 15%;
+    right: 20%;
 }
 
 .widget-body .star-rating {
@@ -1267,7 +1268,7 @@ height: unset !important;
     display: flex;
     margin-left: 10px;
     font-size: 14px;
-    color: #637282;
+    color: #333333;
     text-align: left;
     margin-top: 5px;
     max-height: 300px;
@@ -1347,7 +1348,7 @@ height: unset !important;
     margin: 0;
     font-weight: 700; 
     font-size: 12px; 
-    color: #637282;
+    color: #333333;
     white-space: nowrap;
 }
 
@@ -1355,7 +1356,7 @@ height: unset !important;
     margin: 0;
     font-weight: 700; 
     font-size: 13px; 
-    color: #637282;
+    color: #333333;
     white-space: nowrap;
 }
 
@@ -1397,7 +1398,7 @@ height: unset !important;
     align-self: end;
     justify-self: left;
     margin-left: 10px;
-    color: #637282;
+    color: #333333;
     font-size: 14px;
 }
 
@@ -1410,7 +1411,7 @@ height: unset !important;
     align-self: end;
     justify-self: left;
     margin-left: 10px;
-    color: #637282;
+    color: #333333;
     font-size: 14px;
 }
 
@@ -1419,13 +1420,13 @@ height: unset !important;
     justify-self: left;
     margin-left: 10px;
     margin-top: -2px;
-    color: #637282;
+    color: #333333;
     font-size: 12px;
 }
 
 .lb-emp-mention {
     display: flex; 
-    color: #637282; 
+    color: #333333; 
     font-size: 14px; 
     font-weight: 500; 
     margin-top: 5px;
@@ -2110,7 +2111,8 @@ height: unset !important;
         box-sizing: border-box;
         font-family: 'Roboto', sans-serif;
         margin: 20px auto;
-        width: 350px;
+        width: auto;
+        max-width: 350px;
         height: 360px;
         overflow: hidden; /* Prevent scrolling when the lightbox is open */
     }
@@ -2288,8 +2290,8 @@ height: unset !important;
     }
 
     .widget-body .close-button {
-        top: 3em;
-        right: 1em;
+        top: 15%;
+        right: 10%;
     }
 
 
@@ -2304,7 +2306,8 @@ height: unset !important;
         box-sizing: border-box;
         font-family: 'Roboto', sans-serif;
         margin: 20px auto;
-        width: 390px;
+        width: auto;
+        max-width: 390px;
         height: 360px;
         overflow: hidden; /* Prevent scrolling when the lightbox is open */
     }
@@ -2482,8 +2485,8 @@ height: unset !important;
     }
 
     .widget-body .close-button {
-        top: 3em;
-        right: 1em;
+        top: 15%;
+        right: 10%;
     }
 
 }
@@ -2497,7 +2500,8 @@ height: unset !important;
         box-sizing: border-box;
         font-family: 'Roboto', sans-serif;
         margin: 20px auto;
-        width: 750px;
+        width: auto;
+        max-width: 750px;
         height: 310px;
         overflow: hidden; /* Prevent scrolling when the lightbox is open */
     }
@@ -2510,7 +2514,8 @@ height: unset !important;
         box-sizing: border-box;
         font-family: 'Roboto', sans-serif;
         margin: 20px auto;
-        width: 780px;
+        width: auto;
+        max-width: 780px;
         height: 310px;
         overflow: hidden; /* Prevent scrolling when the lightbox is open */
     }
@@ -2523,7 +2528,8 @@ height: unset !important;
         box-sizing: border-box;
         font-family: 'Roboto', sans-serif;
         margin: 20px auto;
-        width: 860px;
+        width: auto;
+        max-width: 860px;
         height: 310px;
         overflow: hidden; /* Prevent scrolling when the lightbox is open */
     }
@@ -2553,6 +2559,7 @@ height: unset !important;
         font-family: 'Roboto', sans-serif;
         margin: 20px auto;
         width: auto;
+        max-width: 1140px;
         height: 310px;
         overflow: hidden; /* Prevent scrolling when the lightbox is open */
     }

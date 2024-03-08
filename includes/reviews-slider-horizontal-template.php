@@ -9,6 +9,15 @@
 <div class="widget-body">
     <div class="slider-container testimonial-slider">
     <?php
+
+        // Function to check if the user is on a mobile device
+        function isMobileDevice() {
+            return (isset($_SERVER['HTTP_USER_AGENT']) && 
+                    preg_match('/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i', $_SERVER['HTTP_USER_AGENT']));
+        }
+        // Check if it's a mobile device
+        $isMobile = isMobileDevice();
+
         function getStarRating($average) {
             $starColor = ($average > 0.5) ? '#ffc600' : '#E6E8EB';
             $starGrey = '#E6E8EB';
@@ -197,12 +206,21 @@
 
                     </div>
                     <?php if($review_type === 'orgfeed') { ?>
+                        <?php 
+                            $contentWithMedia_org = 70;
+                            $contentWithoutMedia_org = 175;
+
+                            if($isMobile) {
+                                $contentWithMedia_org = 75;
+                                $contentWithoutMedia_org = 150;
+                            }
+                        ?>
                         <div class="location-name"><?php echo esc_attr($review['entityInfo']['name']); ?></div>
                         <?php if((isset($review['images']) && is_array($review['images']) && count($review['images']) > 0) || 
                              (isset($review['videos']) && is_array($review['videos']) && count($review['videos']) > 0)) { ?>
                         <div class="review-content" id="reviewContent-<?php echo esc_attr($index); ?>" style="margin-top: 0px;">
-                            <?php if (strlen($review['content']) > 55) { ?>
-                                <?php echo esc_attr(mb_substr($review['content'], 0, 55, 'UTF-8')); ?> <u>Read more</u>
+                            <?php if (strlen($review['content']) > $contentWithMedia_org) { ?>
+                                <?php echo esc_attr(mb_substr($review['content'], 0, $contentWithMedia_org, 'UTF-8')); ?> <u>Read more</u>
                             <?php } else { ?>
                                 <?php echo esc_attr($review['content']); ?>
                             <?php } ?>
@@ -223,8 +241,8 @@
                         </div>
                     <?php } else if(isset($review['taggedEmployees']) && is_array($review['taggedEmployees']) && count($review['taggedEmployees']) > 0) { ?>
                         <div class="review-content" id="reviewContent-<?php echo esc_attr($index); ?>" style="margin-top: 0px;">
-                            <?php if (strlen($review['content']) > 55) { ?>
-                                <?php echo esc_attr(mb_substr($review['content'], 0, 55, 'UTF-8')); ?> <u>Read more</u>
+                            <?php if (strlen($review['content']) > $contentWithMedia_org) { ?>
+                                <?php echo esc_attr(mb_substr($review['content'], 0, $contentWithMedia_org, 'UTF-8')); ?> <u>Read more</u>
                             <?php } else { ?>
                                 <?php echo esc_attr($review['content']); ?>
                             <?php } ?>
@@ -245,19 +263,28 @@
                         </div>
                     <?php } else { ?>
                         <div class="review-content" id="reviewContent-<?php echo esc_attr($index); ?>" style="margin-top: 0px;">
-                        <?php if (strlen($review['content']) > 125) { ?>
-                            <?php echo esc_attr(mb_substr($review['content'], 0, 125, 'UTF-8')); ?> <u>Read more</u>
+                        <?php if (strlen($review['content']) > $contentWithoutMedia_org) { ?>
+                            <?php echo esc_attr(mb_substr($review['content'], 0, $contentWithoutMedia_org, 'UTF-8')); ?> <u>Read more</u>
                         <?php } else { ?>
                             <?php echo esc_attr($review['content']); ?>
                         <?php } ?>
                     </div>
                     <?php } ?>
                     <?php } else { ?>
+                        <?php 
+                            $contentWithMedia_biz = 75;
+                            $contentWithoutMedia_biz = 200;
+
+                            if($isMobile) {
+                                $contentWithMedia_biz = 75;
+                                $contentWithoutMedia_biz = 175;
+                            }
+                        ?>
                         <?php if((isset($review['images']) && is_array($review['images']) && count($review['images']) > 0) || 
                              (isset($review['videos']) && is_array($review['videos']) && count($review['videos']) > 0)) { ?>
                         <div class="review-content" id="reviewContent-<?php echo esc_attr($index); ?>">
-                            <?php if (strlen($review['content']) > 110) { ?>
-                                <?php echo esc_attr(mb_substr($review['content'], 0, 110, 'UTF-8')); ?> <u>Read more</u>
+                            <?php if (strlen($review['content']) > $contentWithMedia_biz) { ?>
+                                <?php echo esc_attr(mb_substr($review['content'], 0, $contentWithMedia_biz, 'UTF-8')); ?> <u>Read more</u>
                             <?php } else { ?>
                                 <?php echo esc_attr($review['content']); ?>
                             <?php } ?>
@@ -278,8 +305,8 @@
                         </div>
                     <?php } else if(isset($review['taggedEmployees']) && is_array($review['taggedEmployees']) && count($review['taggedEmployees']) > 0) { ?>
                         <div class="review-content" id="reviewContent-<?php echo esc_attr($index); ?>">
-                            <?php if (strlen($review['content']) > 110) { ?>
-                                <?php echo esc_attr(mb_substr($review['content'], 0, 110, 'UTF-8')); ?> <u>Read more</u>
+                            <?php if (strlen($review['content']) > $contentWithMedia_biz) { ?>
+                                <?php echo esc_attr(mb_substr($review['content'], 0, $contentWithMedia_biz, 'UTF-8')); ?> <u>Read more</u>
                             <?php } else { ?>
                                 <?php echo esc_attr($review['content']); ?>
                             <?php } ?>
@@ -300,8 +327,8 @@
                         </div>
                     <?php } else { ?>
                         <div class="review-content" id="reviewContent-<?php echo esc_attr($index); ?>">
-                        <?php if (strlen($review['content']) > 240) { ?>
-                            <?php echo esc_attr(mb_substr($review['content'], 0, 240, 'UTF-8')); ?> <u>Read more</u>
+                        <?php if (strlen($review['content']) > $contentWithoutMedia_biz) { ?>
+                            <?php echo esc_attr(mb_substr($review['content'], 0, $contentWithoutMedia_biz, 'UTF-8')); ?> <u>Read more</u>
                         <?php } else { ?>
                             <?php echo esc_attr($review['content']); ?>
                         <?php } ?>
@@ -591,19 +618,19 @@
         var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 
         // Set character limit based on screen width
-        var characterLimit = (screenWidth < 430) ? 75 : 100;
-        console.log('characterLimit: ',characterLimit);
+        // var characterLimit = (screenWidth < 430) ? 75 : 100;
+        // console.log('characterLimit: ',characterLimit);
 
         // Update the content with the character limit for each review tile
-        var reviewTiles = document.querySelectorAll('.review-content');
+        // var reviewTiles = document.querySelectorAll('.review-content');
 
-        reviewTiles.forEach(function(reviewContent) {
-            var content = reviewContent.textContent.trim();
-            if (content.length > characterLimit) {
-                var truncatedContent = content.substring(0, characterLimit).trim();
-                reviewContent.innerHTML = truncatedContent + ' <u>Read more</u>';
-            }
-        });
+        // reviewTiles.forEach(function(reviewContent) {
+        //     var content = reviewContent.textContent.trim();
+        //     if (content.length > characterLimit) {
+        //         var truncatedContent = content.substring(0, characterLimit).trim();
+        //         reviewContent.innerHTML = truncatedContent + ' <u>Read more</u>';
+        //     }
+        // });
 
         // hide powered by text based on the screen width
         if(screenWidth < 1024) {
