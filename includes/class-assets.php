@@ -36,7 +36,9 @@ class Assets {
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_styles'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
         add_action('wp_enqueue_scripts', array($this, 'register_styles'));
-        add_action('wp_enqueue_scripts', array($this, 'register_scripts'));        
+        add_action('wp_enqueue_scripts', array($this, 'register_scripts'));
+        // load Roboto font from fonts fonts/roboto.css
+        wp_enqueue_style('roboto-font', $this->url . 'fonts/roboto.css', array(), $this->version);    
     }
 
     public function register_styles() {
