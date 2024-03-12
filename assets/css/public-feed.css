@@ -632,6 +632,18 @@ height: unset !important;
 
 /** Slider css*/
 
+.opio-more-reviews-required {
+    display: flex;
+    justify-content: start;
+}
+
+.opio-more-error-note {
+    font-size: 24px;
+    font-weight: 500;
+    color: rgb(220, 78, 65);
+    font-family: 'Roboto', 'Sans-sarif';
+}
+
 .react-stars-04811029757080685:before {
     position: absolute;
     overflow: hidden;
@@ -1822,6 +1834,7 @@ height: unset !important;
 }
 
 .widget-body .c-facebook-logo {
+    background-image: url('../img/facebook-logo.png');
     position: absolute; 
     right: -6px; 
     top: -2px; 
@@ -1836,6 +1849,7 @@ height: unset !important;
 }
 
 .widget-body .c-google-logo {
+    background-image: url('../img/google-logo.svg');
     position: absolute; 
     right: -20px; 
     top: 2px; 
@@ -1850,6 +1864,7 @@ height: unset !important;
 }
 
 .widget-body .c-yelp-logo {
+    background-image: url('../img/yelp-logo.png');
     position: absolute; 
     right: -30px; 
     top: 2px; 
@@ -1864,6 +1879,7 @@ height: unset !important;
 }
 
 .widget-body .c-tripadvisor-logo {
+    background-image: url('../img/tripadvisor-logo.png');
     position: absolute; 
     right: -10px; 
     top: 2px; 
@@ -1878,6 +1894,7 @@ height: unset !important;
 }
 
 .widget-body .c-opio-logo {
+    background-image: url('../img/opio-blue-logo.png');
     position: absolute; 
     right: -30px; 
     top: 2px; 

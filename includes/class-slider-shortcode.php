@@ -51,9 +51,10 @@ class Slider_Shortcode {
         } else if($slider_type == 'vertical') {
             include_once 'reviews-slider-vertical-template.php'; 
         }
-        // Include the template file
-        // include_once('reviews-slider-vertical-template.php');
-    
+
+        $output = $this->slider_deserializer->prepareString($output);
+
+        echo wp_kses($output, $this->slider_deserializer->get_allowed_tags());
         return ob_get_clean();
 
     }

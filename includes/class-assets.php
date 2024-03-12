@@ -21,7 +21,8 @@ class Assets {
         'opio-main-js'    => 'js/opio-main',
         'moment-js'            => 'js/moment.min',
         'jQuery-3.6.0-js'            => 'js/jquery-3.6.0.min',
-        'slick-carousel-js'            => 'js/slick-carousel.min'
+        'slick-carousel-js'            => 'js/slick-carousel.min',
+        'slider-main-js'    => 'js/slider-main',
     );
 
     public function __construct($url, $version, $debug) {
@@ -37,6 +38,7 @@ class Assets {
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
         add_action('wp_enqueue_scripts', array($this, 'register_styles'));
         add_action('wp_enqueue_scripts', array($this, 'register_scripts'));
+
         // load Roboto font from fonts fonts/roboto.css
         wp_enqueue_style('roboto-font', $this->url . 'fonts/roboto.css', array(), $this->version);    
     }
@@ -47,9 +49,9 @@ class Assets {
     }
 
     public function register_scripts() {
-        $scripts = array('opio-main-js', 'moment-js', 'slick-carousel-js');
+        $scripts = array('opio-main-js', 'moment-js', 'slick-carousel-js', 'slider-main-js');
         if (!wp_script_is('jquery', 'enqueued')) {
-            $scripts = array('opio-main-js', 'moment-js', 'jQuery-3.6.0-js', 'slick-carousel-js');
+            $scripts = array('opio-main-js', 'moment-js', 'jQuery-3.6.0-js', 'slick-carousel-js', 'slider-main-js');
         }
         $this->register_scripts_loop($scripts);
     }
