@@ -105,17 +105,17 @@ class Review_Slider {
                                 
                             <?php if($slider_type == 'horizontal') { ?>
                                 <span style="font-size: 20px;">Horizontal slider: 1140x400px</span>
-                                <span style="font-size: 18px;">Please design your website's section to fit above resolution</span>
-                                <?php include_once 'reviews-slider-horizontal-template.php'; ?>
+                                <span style="font-size: 18px; margin: 20px 0; font-weight: 600;">Note: Please design your website's section to fit above resolution</span>
+                                <?php include_once 'admin-reviews-slider-horizontal-template.php'; ?>
                             <?php } else if($slider_type == 'horizontal-carousel') { ?>
                                 <span style="font-size: 20px;">Horizontal carousel slider: 1140x320px</span>
-                                <span style="font-size: 18px;">Please design your website's section to fit above resolution</span>
-                                <?php include_once 'reviews-slider-horizontal-carousel-template.php'; ?>
+                                <span style="font-size: 18px; margin: 20px 0; font-weight: 600;">Note: Please design your website's section to fit above resolution</span>
+                                <?php include_once 'admin-reviews-slider-horizontal-carousel-template.php'; ?>
                             <?php } else if($slider_type == 'vertical') { ?>
                                 <span style="font-size: 20px;">Vertical slider: 300x500px</span>
-                                <span style="font-size: 18px;">Please design your website's section to fit above resolution</span>
+                                <span style="font-size: 18px; margin: 20px 0; font-weight: 600;">Note: Please design your website's section to fit above resolution</span>
                                 <div style="display: flex; justify-content: center;" >
-                                    <?php include_once include_once 'reviews-slider-vertical-template.php'; ?>
+                                    <?php include_once include_once 'admin-reviews-slider-vertical-template.php'; ?>
                                 </div>
                             <?php } ?>
 
