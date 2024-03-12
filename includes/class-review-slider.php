@@ -96,7 +96,7 @@ class Review_Slider {
                     </div> 
                     <div class="opio-slider-preview" style="background-color:white">
                         <textarea id="opio-slider-connection" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[content]" style="display:none"><?php echo esc_textarea($biz_id); ?></textarea>
-                        <div id="opio_collection_preview">
+                        <div id="opio_collection_preview" style="display: flex; flex-direction: column;">
                             <?php 
                                 $slider_type = $feed_object->slider_type;
                                 $review_feed_link = $feed_object->review_feed_link;
@@ -105,16 +105,24 @@ class Review_Slider {
                                 
                             <?php if($slider_type == 'horizontal') { ?>
                                 <span style="font-size: 20px;">Horizontal slider: 1140x400px</span>
+                                <span style="font-size: 18px;">Please design your website's section to fit above resolution</span>
                                 <?php include_once 'reviews-slider-horizontal-template.php'; ?>
                             <?php } else if($slider_type == 'horizontal-carousel') { ?>
                                 <span style="font-size: 20px;">Horizontal carousel slider: 1140x320px</span>
+                                <span style="font-size: 18px;">Please design your website's section to fit above resolution</span>
                                 <?php include_once 'reviews-slider-horizontal-carousel-template.php'; ?>
                             <?php } else if($slider_type == 'vertical') { ?>
                                 <span style="font-size: 20px;">Vertical slider: 300x500px</span>
+                                <span style="font-size: 18px;">Please design your website's section to fit above resolution</span>
                                 <div style="display: flex; justify-content: center;" >
                                     <?php include_once include_once 'reviews-slider-vertical-template.php'; ?>
                                 </div>
                             <?php } ?>
+
+                            <?php 
+                                $output = $this->slider_deserializer->prepareString($output);
+                                echo wp_kses($output, $this->slider_deserializer->get_allowed_tags());
+                            ?>
                         </div>
                     </div>
                 <div id="opio-slider-option" class="opio-slider-options">
