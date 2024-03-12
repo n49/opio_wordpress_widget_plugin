@@ -717,264 +717,18 @@
 }
 
 /** Slider css*/
-.slick-slide {
-    height: 240px;
-}
 
-.widget-body {
-    margin: 20px auto;
-    width: 1140px;
-    height: 400px;
-    padding: 0;
-    overflow: hidden; /* Prevent scrolling when the lightbox is open */
-}
-
-#lightbox {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 999;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.lightbox-container {
+.opio-more-reviews-required {
     display: flex;
-    background: #777;
-    padding: 60px;
+    justify-content: start;
 }
 
-#photo-lightbox {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 999;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+.opio-more-error-note {
+    font-size: 24px;
+    font-weight: 500;
+    color: rgb(220, 78, 65);
+    font-family: 'Roboto', 'Sans-sarif';
 }
-
-#close-button {
-    position: absolute;
-    top: 10px;
-    right: 0px;
-    font-size: 20px;
-    color: white;
-    cursor: pointer;
-}
-
-#lightbox img {
-    max-width: 80%;
-    max-height: 80%;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-#open-lightbox-button {
-    margin: 20px;
-    padding: 10px;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-.slider-container {
-    display: flex;
-    height: 280px;
-    overflow-x: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #ccc #f0f0f0;
-    padding: 40px;
-    background: #ffffff;
-    margin: auto;
-    justify-content: center;
-    transition: transform 0.5s ease-in-out;
-}
-.review-tile {
-    display: flex;
-    flex-direction: column;
-    height: 200px;
-    flex: 0 0 250px;
-    background-color: #f5f5f7;
-    height: 260px;
-    padding: 15px;
-    margin: 0 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: transform 0.3s ease-in-out;
-}
-
-.review-tile-vertical {
-    flex: 0 0 250px;
-    background-color: white;
-    height: 120px;
-    padding: 10px;
-    margin: 0 10px;
-    cursor: pointer;
-    border-top: 2px solid #E6E6E6;
-    border-bottom: 2px solid #E6E6E6;
-    transition: transform 0.3s ease-in-out;
-}
-
-.location-name {
-    font-size: 14px;
-    font-weight: 600;
-    color: rgb(99, 114, 130);
-}
-
-.review-content {
-    flex: 1;
-    font-size: 14px;
-    margin-top: 5px;
-    color: rgb(99, 114, 130);
-    margin-bottom: 15px;
-    line-height: 1.5em;
-}
-
-.reviewer-name {
-    font-size: 12px;
-    font-weight: 700;
-    color: rgb(99, 114, 130);
-    margin-bottom: 5px;
-}
-
-.lb-reviewer-name {
-    font-size: 14px;
-    font-weight: 700;
-    color: rgb(99, 114, 130);
-    margin-bottom: 5px;
-}
-
-.star-rating {
-    font-size: 18px;
-    color: #FFD700; /* Gold color for stars */
-}
-
-.photo-tiles {
-    display: flex;
-    margin-top: 10px;
-}
-
-.photo-tile {
-    flex: 0 0 40px;
-    margin-right: 5px;
-}
-
-.photo-tile img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 4px;
-}
-
-.lightbox-photo-tile {
-    width: 400px;
-    height: 400px;
-    margin-right: 5px;
-}
-
-.lightbox-photo-tile img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 4px;
-}
-
-/** Slick slider style here */
-
-.testimonial {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #3d5a80;
-    color: #3d5a80;
-
-    &-slide {
-        padding: 40px 20px;
-        height: 260px;
-    }
-
-    &_box {
-        &-top {
-            background-color: #e0fbfc;
-            padding: 30px;
-            border-radius: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            text-align: center;
-            box-shadow: 5px 5px 20px rgba(152, 193, 217, 0.493);
-        }
-
-        &-icon {
-            padding: 10px 0;
-            i {
-                font-size: 25px;
-                color: #14213d;
-            }
-        }
-
-        &-text {
-            padding: 10px 0;
-            p {
-                color: #293241;
-                font-size: 14px;
-                line-height: 20px;
-                margin-bottom: 0;
-            }
-        }
-
-        &-img {
-            padding: 20px 0 10px;
-            display: flex;
-            justify-content: center;
-
-            img {
-                width: 70px;
-                height: 70px;
-                border-radius: 50px;
-                border: 2px solid #e5e5e5;
-            }
-        }
-
-        &-name {
-            padding-top: 10px;
-
-            h4 {
-                font-size: 20px;
-                line-height: 25px;
-                color: #293241;
-                margin-bottom: 0;
-            }
-        }
-
-        &-job {
-            p {
-                color: #293241;
-                font-size: 14px;
-                text-transform: uppercase;
-                letter-spacing: 3px;
-                line-height: 20px;
-                font-weight: 300;
-                margin-bottom: 0;
-            }
-        }
-    }
-}
-
-/** Slider css*/
 
 .react-stars-04811029757080685:before {
     position: absolute;
@@ -989,14 +743,14 @@
 
 /** Horizontal slider styles starts here*/
 
-.widget-body {
+.admin-widget-body {
     /* padding: 40px; */
     margin: 0;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
     max-width: 1140px;
     width: auto;
-    height: 260px;
+    height: auto;
     overflow: hidden; /* Prevent scrolling when the lightbox is open */
     background-color: white;
 }
@@ -1025,7 +779,7 @@
     cursor: pointer;
 }
 
-.widget-body .slider-container {
+.admin-widget-body .slider-container {
     display: flex;
     height: auto;
     overflow-x: auto;
@@ -1038,17 +792,17 @@
     transition: transform 0.5s ease-in-out;
 }
 
-.widget-body .reviewer-container {
+.admin-widget-body .reviewer-container {
     display: flex; 
     position: relative;
 }
 
-.widget-body .avatar-container {
+.admin-widget-body .avatar-container {
     vertical-align: top; 
     padding-right: 10px;
 }
 
-.widget-body .reviewer-avatar {
+.admin-widget-body .reviewer-avatar {
     width: 35px; 
     height: 35px; 
     line-height: 35px; 
@@ -1060,7 +814,7 @@
     background-repeat: no-repeat; 
 }
 
-.widget-body .facebook-logo {
+.admin-widget-body .facebook-logo {
     position: absolute; 
     right: -1px; 
     top: -2px; 
@@ -1073,7 +827,7 @@
     margin-right: 0px;
 }
 
-.widget-body .google-logo {
+.admin-widget-body .google-logo {
     position: absolute; 
     right: -15px; 
     top: 2px; 
@@ -1086,7 +840,7 @@
     margin-right: 0px;
 }
 
-.widget-body .yelp-logo {
+.admin-widget-body .yelp-logo {
     position: absolute; 
     right: -25px; 
     top: 2px; 
@@ -1099,7 +853,7 @@
     margin-right: 0px;
 }
 
-.widget-body .tripadvisor-logo {
+.admin-widget-body .tripadvisor-logo {
     position: absolute; 
     right: -2px; 
     top: 0px; 
@@ -1112,7 +866,7 @@
     margin-right: 0px;
 }
 
-.widget-body .opio-logo {
+.admin-widget-body .opio-logo {
     position: absolute; 
     right: -25px; 
     top: 2px; 
@@ -1125,26 +879,26 @@
     margin-right: 0px;
 }
 
-.widget-body .rating-container {
+.admin-widget-body .rating-container {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-.widget-body .fb-rating-div {
+.admin-widget-body .fb-rating-div {
     display: inline-flex; 
     align-items: center; 
     vertical-align: middle;
 }
 
-.widget-body .fb-rating-img {
+.admin-widget-body .fb-rating-img {
     padding-right: 5px; 
     width: 20px; 
     height: 20px; 
     padding-top: 2px;
 }
 
-.widget-body .fb-rating-text-p {
+.admin-widget-body .fb-rating-text-p {
     margin: 0;
     font-weight: 700; 
     font-size: 12px; 
@@ -1152,7 +906,7 @@
     white-space: nowrap;
 }
 
-.widget-body .fb-rating-text-n {
+.admin-widget-body .fb-rating-text-n {
     margin: 0;
     font-weight: 700; 
     font-size: 13px; 
@@ -1160,12 +914,12 @@
     white-space: nowrap;
 }
 
-.widget-body .opio-rating-container {
+.admin-widget-body .opio-rating-container {
     overflow: hidden; 
     position: relative;
 }
 
-.widget-body .rating-widget-part {
+.admin-widget-body .rating-widget-part {
     display: flex; 
     background: #ffffff; 
     height: 40px; 
@@ -1176,17 +930,17 @@
     padding: 20px 20px 0px 20px;
 }
 
-.widget-body .rating-stars {
+.admin-widget-body .rating-stars {
     position: relative; 
     overflow: hidden; 
     cursor: pointer; 
     display: block; 
     float: left; 
     width: 15px; 
-    height: 15px;
+    height: 16px;
 }
 
-.widget-body .rating-stars-v {
+.admin-widget-body .rating-stars-v {
     position: relative; 
     overflow: hidden; 
     cursor: pointer; 
@@ -1196,7 +950,7 @@
     height: 18px;
 }
 
-.widget-body .rating-stars-wd {
+.admin-widget-body .rating-stars-wd {
     position: relative; 
     overflow: hidden; 
     cursor: pointer; 
@@ -1206,7 +960,7 @@
     height: 18px;
 }
 
-.widget-body .rating-stars-wd-v {
+.admin-widget-body .rating-stars-wd-v {
     position: relative; 
     overflow: hidden; 
     cursor: pointer; 
@@ -1216,7 +970,7 @@
     height: 24px;
 }
 
-.widget-body .rating-stars-wd-c {
+.admin-widget-body .rating-stars-wd-c {
     position: relative; 
     overflow: hidden; 
     cursor: pointer; 
@@ -1226,17 +980,17 @@
     height: 20px;
 }
 
-.widget-body .reviewer-name-container {
+.admin-widget-body .reviewer-name-container {
     font-size: 12px; 
     color: #333333;
 }
 
-.widget-body .opio-logo-container, .widget-body .w-opio-logo-container {
+.admin-widget-body .opio-logo-container, .admin-widget-body .w-opio-logo-container {
     display: flex; 
     align-items: center;
 }
 
-.widget-body .pwd-opio-logo {
+.admin-widget-body .pwd-opio-logo {
     display: flex; 
     align-items: center; 
     min-width: 100px; 
@@ -1247,7 +1001,7 @@
     margin-left: 5px;
 }
 
-.widget-body .review-tile {
+.admin-widget-body .review-tile {
     /* flex: 0 0 250px; */
     display: flex;
     flex-direction: column;
@@ -1261,7 +1015,7 @@
     transition: transform 0.3s ease-in-out;
 }
 
-.widget-body .location-name {
+.admin-widget-body .location-name {
     font-size: 14px;
     font-weight: 600;
     color: #333333;
@@ -1271,7 +1025,7 @@
     padding-bottom: 5px;
 }
 
-.widget-body .review-content {
+.admin-widget-body .review-content {
     flex: 1;
     font-size: 14px;
     font-weight: 400;
@@ -1282,7 +1036,7 @@
     font-family: 'Roboto', sans-serif;
 }
 
-.widget-body .reviewer-name {
+.admin-widget-body .reviewer-name {
     font-size: 12px;
     font-weight: 700;
     margin-top: 5px;
@@ -1290,14 +1044,14 @@
     margin-bottom: 5px;
 }
 
-.widget-body .review-media {
+.admin-widget-body .review-media {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-end;
     margin-top: 30px;
 }
 
-.widget-body .review-media-images {
+.admin-widget-body .review-media-images {
     display: flex;
     gap: 10px;
     position: fixed;
@@ -1305,12 +1059,12 @@
     margin-bottom: 15px;
 }
 
-.widget-body .review-img{
+.admin-widget-body .review-img{
     width: 48px; 
     height: 48px;
 }
 
-.widget-body .video-icon {
+.admin-widget-body .video-icon {
     width: 80px;
     height: 48px;
     position: relative;
@@ -1318,7 +1072,7 @@
     border-radius: 8px;
 }
 
-.widget-body .play-button {
+.admin-widget-body .play-button {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1330,14 +1084,14 @@
     border-left: 15px solid #fff;
 }
 
-.widget-body .tile-tag-container {
+.admin-widget-body .tile-tag-container {
     display: flex;
     gap: 10px;
     position: fixed;
     bottom: 0;
 }
 
-.widget-body .review-tagged-emps{
+.admin-widget-body .review-tagged-emps{
     display: flex;
     margin-bottom: 15px;
     border: 1px solid #333333;
@@ -1345,7 +1099,7 @@
     padding: 5px;
 }
 
-.widget-body .emp-avatar {
+.admin-widget-body .emp-avatar {
     width: 40px; 
     height: 40px; 
     line-height: 40px; 
@@ -1357,51 +1111,51 @@
     background-repeat: no-repeat;
 }
 
-.widget-body .vertical-divider {
+.admin-widget-body .vertical-divider {
     height: 42px;
     width: 1px;
     background-color: #9b9b9b; /* Change the color as needed */
     margin: 0px 10px;
 }
 
-.widget-body .rating-widget {
+.admin-widget-body .rating-widget {
     display: flex; 
     flex-direction: column;
     gap: 5px;
 }
 
-.widget-body .w-rating-box {
+.admin-widget-body .w-rating-box {
     display: flex;
 }
 
-.widget-body .w-pwd-text {
+.admin-widget-body .w-pwd-text {
     font-size: 12px;
 }
 
-.widget-body .rating-text-div {
+.admin-widget-body .rating-text-div {
     display: flex; 
     margin-left: 5px;
 }
 
-.widget-body .rating-text {
+.admin-widget-body .rating-text {
     display: flex; 
     margin-top: 1px; 
     font-size: 24px; 
     font-weight: 700;
 }
 
-.widget-body .see-all-box {
+.admin-widget-body .see-all-box {
     display: flex; 
     margin-top: 0px;
 }
 
-.widget-body .see-all-text {
+.admin-widget-body .see-all-text {
     display: flex; 
     font-size: 14px;
 }
 
-.widget-body a,
-.widget-body a:visited {
+.admin-widget-body a,
+.admin-widget-body a:visited {
     font-size: 14px;
     font-family: 'Roboto', sans-serif;
     text-decoration: underline;
@@ -1410,27 +1164,27 @@
     transition: color 0.3s ease;
 }
 
-.widget-body a:hover,
-.widget-body a:visited:hover {
+.admin-widget-body a:hover,
+.admin-widget-body a:visited:hover {
     color: #333333;
 }
 
-.widget-body ::selection {
+.admin-widget-body ::selection {
     background-color: #555555; /* Change the background color for selected text */
     color: #ffffff; /* Change the text color for selected text */
 }
 
-.widget-body .write-review-btn-box {
+.admin-widget-body .write-review-btn-box {
     display: flex; 
     margin-left: 5px;
 }
 
-.widget-body .write-review-btn-box {
+.admin-widget-body .write-review-btn-box {
     display: flex; 
     margin-left: 5px;
 }
 
-.widget-body .write-review-btn-div {
+.admin-widget-body .write-review-btn-div {
     width: 100%; 
     display: flex; 
     flex-direction: row; 
@@ -1439,12 +1193,12 @@
     text-align: center;
 }
 
-.widget-body .write-review-btn-a {
+.admin-widget-body .write-review-btn-a {
     text-decoration: none; 
     color:inherit
 }
 
-.widget-body .write-review-btn {
+.admin-widget-body .write-review-btn {
     border-radius: 2px; 
     display: inline-block; 
     height: 40px; 
@@ -1464,26 +1218,26 @@
     user-select: none;
 }
 
-.widget-body .write-review-text {
+.admin-widget-body .write-review-text {
     display: inline-block; 
     position: relative; 
     height: 100%;
 }
 
-.widget-body .slider-navigation {
+.admin-widget-body .slider-navigation {
     display: flex;
     align-items: center;
     margin-top: 3px;
 }
 
-.widget-body .slider-button {
+.admin-widget-body .slider-button {
     width: 36px;
     height: 36px;
     margin: 0 2px;
     cursor: pointer;
 }
 
-.widget-body .close-button {
+.admin-widget-body .close-button {
     color: white;
     width: 40px;
     height: 40px;
@@ -1501,22 +1255,22 @@
     right: 20%;
 }
 
-.widget-body .star-rating {
+.admin-widget-body .star-rating {
     font-size: 18px;
     color: #FFD700; /* Gold color for stars */
 }
 
-.widget-body .photo-tiles {
+.admin-widget-body .photo-tiles {
     display: flex;
     margin-top: 10px;
 }
 
-.widget-body .photo-tile {
+.admin-widget-body .photo-tile {
     flex: 0 0 40px;
     margin-right: 5px;
 }
 
-.widget-body .photo-tile img {
+.admin-widget-body .photo-tile img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -1880,28 +1634,28 @@
     padding: 0;
 }
 
-.widget-body .testimonial-slider.vertical-slider {
+.admin-widget-body .testimonial-slider.vertical-slider {
     padding: 0px;
     height: 280px;
     overflow: hidden;
     margin-top: 0px;
 }
 
-.widget-body .v-header {
+.admin-widget-body .v-header {
     display: flex; 
     background: #A9B7BF; 
     padding:  15px; 
     color: white;
 }
 
-.widget-body .v-h-col-1 {
+.admin-widget-body .v-h-col-1 {
     display: flex; 
     justify-content: flex-start;
     align-items: center;
     flex: 60% 0;
 }
 
-.widget-body .v-h-col-2 {
+.admin-widget-body .v-h-col-2 {
     display: flex; 
     flex-direction: column; 
     align-items: center;
@@ -1910,17 +1664,17 @@
     padding-top: 5px;
 }
 
-.widget-body .v-biz-span {
+.admin-widget-body .v-biz-span {
     font-size: 22px; 
     margin-top: -7px;
 }
 
-.widget-body .v-pwd-span {
+.admin-widget-body .v-pwd-span {
     font-size: 12px;
     font-weight: 700;
 }
 
-.widget-body .v-h-opio-logo {
+.admin-widget-body .v-h-opio-logo {
     display: flex; 
     align-items: center; 
     min-width: 100px; 
@@ -1930,7 +1684,7 @@
     background-repeat: no-repeat;
 }
 
-.widget-body .v-rating-container {
+.admin-widget-body .v-rating-container {
     display: flex;
     flex-direction: row;
     padding: 0px;
@@ -1939,25 +1693,25 @@
     justify-content: space-around;
 }
 
-.widget-body .v-r-col-1 {
+.admin-widget-body .v-r-col-1 {
     display: flex;
     height: auto;
     flex-direction: column;
     justify-content: center;
 }
 
-.widget-body .v-r-col-2 {
+.admin-widget-body .v-r-col-2 {
     display: flex;
     align-content: flex-end;
     justify-content: center;
 }
 
-.widget-body .v-r-row-1 {
+.admin-widget-body .v-r-row-1 {
     display: flex; 
     flex-direction: row;
 }
 
-.widget-body .v-rating-span {
+.admin-widget-body .v-rating-span {
     display: flex;
     margin-top: 0px;
     font-size: 50px;
@@ -1967,13 +1721,13 @@
     line-height: 65px;
 }
 
-.widget-body .v-see-all-span {
+.admin-widget-body .v-see-all-span {
     display: flex;
     font-size: 14px;
     color: #333333;
 }
 
-.widget-body .review-tile-vertical {
+.admin-widget-body .review-tile-vertical {
     flex: 0 0 250px;
     background-color: white;
     height: 140px !important;
@@ -1985,23 +1739,23 @@
     transition: transform 0.3s ease-in-out;
 }
 
-.widget-body .v-review-tile-container {
+.admin-widget-body .v-review-tile-container {
     display: flex; 
     position: relative;
     width: 260px;
 }
 
-.widget-body .v-rev-content {
+.admin-widget-body .v-rev-content {
     vertical-align: top; 
     padding-right: 10px;
 }
 
-.widget-body .v-rev-rating-container {
+.admin-widget-body .v-rev-rating-container {
     display: flex;
     flex-direction: column;
 }
 
-.widget-body .v-reviewer-avatar {
+.admin-widget-body .v-reviewer-avatar {
     width: 35px; 
     height: 35px; 
     line-height: 35px; 
@@ -2013,7 +1767,7 @@
     background-repeat: no-repeat; 
 }
 
-.widget-body .v-facebook-logo {
+.admin-widget-body .v-facebook-logo {
     position: absolute; 
     right: -6px; 
     top: -2px; 
@@ -2027,7 +1781,7 @@
     margin-right: 0px;
 }
 
-.widget-body .v-google-logo {
+.admin-widget-body .v-google-logo {
     position: absolute; 
     right: -15px; 
     top: 0px; 
@@ -2041,7 +1795,7 @@
     margin-right: 0px;
 }
 
-.widget-body .v-yelp-logo {
+.admin-widget-body .v-yelp-logo {
     position: absolute; 
     right: -15px; 
     top: 2px; 
@@ -2055,7 +1809,7 @@
     margin-right: 0px;
 }
 
-.widget-body .v-tripadvisor-logo {
+.admin-widget-body .v-tripadvisor-logo {
     position: absolute; 
     right: -6px; 
     top: 2px; 
@@ -2069,7 +1823,7 @@
     margin-right: 0px;
 }
 
-.widget-body .v-opio-logo {
+.admin-widget-body .v-opio-logo {
     position: absolute; 
     right: -25px; 
     top: 2px; 
@@ -2083,7 +1837,7 @@
     margin-right: 0px;
 }
 
-.widget-body .v-footer {
+.admin-widget-body .v-footer {
     display: flex;
     background: #ffffff;
     height: 60px;
@@ -2092,29 +1846,28 @@
     gap: 10px;
     flex-direction: row; 
     padding: 15px;
-    margin-top: 13px;
 }
 
-.widget-body .v-f-col-1 {
+.admin-widget-body .v-f-col-1 {
     display: flex;
     align-items: center;
     margin-top: 3px;
     margin: 0 auto;
 }
 
-.widget-body .v-f-col-2 {
+.admin-widget-body .v-f-col-2 {
     display: flex; 
     margin-left: 5px;
 }
 
-.widget-body .v-slider-button {
+.admin-widget-body .v-slider-button {
     width: 36px;
     height: 36px;
     margin: 0 2px;
     cursor: pointer;
 }
 
-.widget-body .v-wrire-rev-container {
+.admin-widget-body .v-wrire-rev-container {
     width: 100%; 
     display: flex; 
     flex-direction: row; 
@@ -2123,12 +1876,12 @@
     text-align: center;
 }
 
-.widget-body .v-wrire-rev-a {
+.admin-widget-body .v-wrire-rev-a {
     text-decoration: none; 
     color:inherit  
 }
 
-.widget-body .v-write-rev-div {
+.admin-widget-body .v-write-rev-div {
     border-radius: 2px; 
     display: inline-block; 
     height: 40px; 
@@ -2148,7 +1901,7 @@
     user-select: none;
 }
 
-.widget-body .v-write-rev-div-2 {
+.admin-widget-body .v-write-rev-div-2 {
     display: inline-block; 
     position: relative; 
     height: 100%;
@@ -2158,14 +1911,15 @@
 
 /** Horizontal carousel slider styles starts here*/
 
-.opio-carousel {
+.admin-opio-carousel {
     display: flex;
-    height: 200px;
+    height: auto;
     padding: 0px;
     gap: 20px;
 }
 
-.widget-body .c-facebook-logo {
+.admin-widget-body .c-facebook-logo {
+    background-image: url('../img/facebook-logo.png');
     position: absolute; 
     right: -6px; 
     top: -2px; 
@@ -2179,7 +1933,8 @@
     margin-right: 0px;
 }
 
-.widget-body .c-google-logo {
+.admin-widget-body .c-google-logo {
+    background-image: url('../img/google-logo.svg');
     position: absolute; 
     right: -20px; 
     top: 2px; 
@@ -2193,7 +1948,8 @@
     margin-right: 0px;
 }
 
-.widget-body .c-yelp-logo {
+.admin-widget-body .c-yelp-logo {
+    background-image: url('../img/yelp-logo.png');
     position: absolute; 
     right: -30px; 
     top: 2px; 
@@ -2207,7 +1963,8 @@
     margin-right: 0px;
 }
 
-.widget-body .c-tripadvisor-logo {
+.admin-widget-body .c-tripadvisor-logo {
+    background-image: url('../img/tripadvisor-logo.png');
     position: absolute; 
     right: -10px; 
     top: 2px; 
@@ -2221,7 +1978,8 @@
     margin-right: 0px;
 }
 
-.widget-body .c-opio-logo {
+.admin-widget-body .c-opio-logo {
+    background-image: url('../img/opio-blue-logo.png');
     position: absolute; 
     right: -30px; 
     top: 2px; 
@@ -2235,10 +1993,10 @@
     margin-right: 0px;
 }
 
-.widget-body .c-rating-widget-container {
+.admin-widget-body .c-rating-widget-container {
     display: flex;
     background: #ffffff;
-    height: 200px;
+    height: auto;
     align-items: center;
     justify-content: center;
     gap: 10px;
@@ -2247,38 +2005,38 @@
     margin-top: 0px;
 }
 
-.widget-body .c-rating-row-1 {
+.admin-widget-body .c-rating-row-1 {
     display: flex;
     align-items: center;
     margin-left: 7px;
 }
 
-.widget-body .c-rating-row-2 {
+.admin-widget-body .c-rating-row-2 {
     display: flex; 
     flex-direction: column;
     line-height: 30px; 
 }
 
-.widget-body .c-rating-row-3 {
+.admin-widget-body .c-rating-row-3 {
     display: flex; margin-left: 5px;
 }
 
-.widget-body .c-rating-row-4 {
+.admin-widget-body .c-rating-row-4 {
     display: flex;
     align-items: center;
     margin-top: 3px;
     margin: 0 auto;
 }
 
-.widget-body .c-vertical-divider {
+.admin-widget-body .c-vertical-divider {
     display: none;
 }
 
-.widget-body .c-pwd-span {
+.admin-widget-body .c-pwd-span {
     font-size: 12px;
 }
 
-.widget-body .c-pwd-div {
+.admin-widget-body .c-pwd-div {
     display: flex; 
     align-items: center; 
     min-width: 80px; 
@@ -2288,37 +2046,37 @@
     background-repeat: no-repeat;
 }
 
-.widget-body .c-rating-r-row-1 {
+.admin-widget-body .c-rating-r-row-1 {
     overflow: hidden; 
     position: relative;
 }
 
-.widget-body .c-rating-r-row-2 {
+.admin-widget-body .c-rating-r-row-2 {
     display: flex; 
     margin-left: 5px;
 }
 
-.widget-body .c-rating-row-span {
+.admin-widget-body .c-rating-row-span {
     display: flex; 
     margin-top: -2px; 
     font-size: 20px; 
     font-weight: 700;
 }
 
-.widget-body .c-see-all-div {
+.admin-widget-body .c-see-all-div {
     display: flex;
     margin-top: -8px;
     text-align: center;
     justify-content: center;
 }
 
-.widget-body .c-see-all-span {
+.admin-widget-body .c-see-all-span {
     display: flex;
     font-size: 14px;
     align-items: flex-end;
 }
 
-.widget-body .c-write-rev-container {
+.admin-widget-body .c-write-rev-container {
     width: 100%; 
     display: flex; 
     flex-direction: row; 
@@ -2327,7 +2085,7 @@
     text-align: center;
 }
 
-.widget-body .c-write-rev-outer-div {
+.admin-widget-body .c-write-rev-outer-div {
     border-radius: 2px; 
     display: inline-block; 
     height: 40px; 
@@ -2347,13 +2105,13 @@
     user-select: none;
 }
 
-.widget-body .c-write-rev-inner-div {
+.admin-widget-body .c-write-rev-inner-div {
     display: inline-block; 
     position: relative; 
     height: 100%;
 }
 
-.widget-body .c-slider-button {
+.admin-widget-body .c-slider-button {
     width: 36px;
     height: 36px;
     margin: 0 2px;
@@ -2363,7 +2121,7 @@
 
 /** Slick slider style here */
 
-.widget-body .testimonial {
+.admin-widget-body .testimonial {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -2449,7 +2207,7 @@
 @media (min-width: 280px) and (max-width: 400px) {
     /** Horizontal slider styles starts here*/
 
-    .widget-body {
+    .admin-widget-body {
         padding: 0;
         margin: 0;
         box-sizing: border-box;
@@ -2461,7 +2219,7 @@
         overflow: hidden; /* Prevent scrolling when the lightbox is open */
     }
 
-    .widget-body .slider-container {
+    .admin-widget-body .slider-container {
         display: flex;
         height: auto;
         overflow-x: auto;
@@ -2485,7 +2243,7 @@
         padding: 0;
     }
 
-    .opio-carousel {
+    .admin-opio-carousel {
         display: block;
         padding: 0;
         margin: 0;
@@ -2497,18 +2255,18 @@
         overflow: hidden; /* Prevent scrolling when the lightbox is open */
     }
 
-    .widget-body .review-tile {
+    .admin-widget-body .review-tile {
         margin: 0;
     }
 
-    .widget-body .vertical-divider {
+    .admin-widget-body .vertical-divider {
         height: 42px;
         width: 1px;
         background-color: #9b9b9b; /* Change the color as needed */
         margin: 0px 5px;
     }
 
-    .widget-body .rating-text {
+    .admin-widget-body .rating-text {
         display: flex; 
         margin-top: 0px; 
         font-size: 20px; 
@@ -2516,7 +2274,7 @@
     }
 
     /** widget 2nd part */
-    .widget-body .w-opio-logo-container {
+    .admin-widget-body .w-opio-logo-container {
         display: flex; 
         flex: 35% 0 0;
         justify-content: end;
@@ -2524,28 +2282,28 @@
         margin-left: 0px;
     }
 
-    .widget-body .pwd-opio-logo {
+    .admin-widget-body .pwd-opio-logo {
         min-width: 80px; 
         min-height: 35px; 
     }
 
-    .widget-body .rating-widget {
+    .admin-widget-body .rating-widget {
         display: flex; 
         flex-direction: column;
         flex: 0 0 55%;
     }
 
-    .widget-body .write-review-btn-box {
+    .admin-widget-body .write-review-btn-box {
         display: flex; 
         margin-left: 5px;
     }
 
-    .widget-body .rating-stars-wd, .widget-body .rating-stars-wd-c {
+    .admin-widget-body .rating-stars-wd, .admin-widget-body .rating-stars-wd-c {
         width: 20px; 
         height: 20px;
     }
 
-    .widget-body .rating-widget-part {
+    .admin-widget-body .rating-widget-part {
         flex-wrap: wrap;
         height: 140px;
         padding-bottom: 40px;
@@ -2570,15 +2328,15 @@
     /** Horizontal slider styles ends here*/
 
     /** Horizontal Carousel slider styles starts here */
-    .widget-body .c-rating-widget-container {
+    .admin-widget-body .c-rating-widget-container {
         flex-direction: row;
         flex-wrap: wrap;
         gap: 0px;
-        height: 160px;
+        height: auto;
         margin-top: -10px;
     }
 
-    .widget-body .c-rating-row-1 {
+    .admin-widget-body .c-rating-row-1 {
         display: flex;
         align-items: center;
         margin-left: 7px;
@@ -2586,28 +2344,28 @@
         margin-top: 0px;
     }
 
-    .widget-body .c-rating-row-2 {
+    .admin-widget-body .c-rating-row-2 {
         display: flex;
         flex-direction: column;
         flex: 0 0 55%;
         margin-top: 10px;
     }
 
-    .widget-body .c-rating-row-3 {
+    .admin-widget-body .c-rating-row-3 {
         display: flex;
         margin-left: 16px;
         margin-top: -24px;
         justify-content: flex-start;
     }
 
-    .widget-body .c-rating-row-4 {
+    .admin-widget-body .c-rating-row-4 {
         display: flex;
         margin: 0 auto;
         margin-top: -22px;
         justify-content: end;
     }
 
-    .widget-body .c-pwd-div {
+    .admin-widget-body .c-pwd-div {
         min-width: 60px;
         width: 60px; 
         min-height: 30px; 
@@ -2615,11 +2373,11 @@
         margin-left: 36px;
     }
 
-    .widget-body .c-rating-row-span {
+    .admin-widget-body .c-rating-row-span {
         font-size: 20px;
     }
 
-    .widget-body .c-vertical-divider {
+    .admin-widget-body .c-vertical-divider {
         display: block;
         height: 42px;
         width: 1px;
@@ -2627,13 +2385,13 @@
         margin: 0px 10px;
     }
 
-    .widget-body .c-see-all-div {
+    .admin-widget-body .c-see-all-div {
         display: flex;
         margin-top: -8px;
         justify-content: start;
     }
 
-    .widget-body .close-button {
+    .admin-widget-body .close-button {
         top: 15%;
         right: 10%;
     }
@@ -2644,7 +2402,7 @@
 @media (min-width: 401px) and (max-width: 767px) {
     /** Horizontal slider styles starts here*/
 
-    .widget-body {
+    .admin-widget-body {
         padding: 0;
         margin: 0;
         box-sizing: border-box;
@@ -2656,7 +2414,7 @@
         overflow: hidden; /* Prevent scrolling when the lightbox is open */
     }
 
-    .widget-body .slider-container {
+    .admin-widget-body .slider-container {
         display: flex;
         height: auto;
         overflow-x: auto;
@@ -2680,7 +2438,7 @@
         padding: 0;
     }
 
-    .opio-carousel {
+    .admin-opio-carousel {
         display: block;
         padding: 0;
         margin: 0;
@@ -2692,24 +2450,24 @@
         overflow: hidden; /* Prevent scrolling when the lightbox is open */
     }
 
-    .widget-body .review-tile {
+    .admin-widget-body .review-tile {
         margin: 0;
     }
 
-    .widget-body .vertical-divider {
+    .admin-widget-body .vertical-divider {
         height: 42px;
         width: 1px;
         background-color: #9b9b9b; /* Change the color as needed */
         margin: 0px 5px;
     }
 
-    .widget-body .c-see-all-div {
+    .admin-widget-body .c-see-all-div {
         display: flex;
         margin-top: -8px;
         justify-content: start;
     }
 
-    .widget-body .rating-text {
+    .admin-widget-body .rating-text {
         display: flex; 
         margin-top: 0px; 
         font-size: 20px; 
@@ -2717,7 +2475,7 @@
     }
 
     /** widget 2nd part */
-    .widget-body .w-opio-logo-container {
+    .admin-widget-body .w-opio-logo-container {
         display: flex; 
         flex: 35% 0 0;
         justify-content: end;
@@ -2725,28 +2483,28 @@
         margin-left: 0px;
     }
 
-    .widget-body .pwd-opio-logo {
+    .admin-widget-body .pwd-opio-logo {
         min-width: 80px; 
         min-height: 35px; 
     }
 
-    .widget-body .rating-widget {
+    .admin-widget-body .rating-widget {
         display: flex; 
         flex-direction: column;
         flex: 0 0 55%;
     }
 
-    .widget-body .write-review-btn-box {
+    .admin-widget-body .write-review-btn-box {
         display: flex; 
         margin-left: 5px;
     }
 
-    .widget-body .rating-stars-wd, .widget-body .rating-stars-wd-c {
+    .admin-widget-body .rating-stars-wd, .admin-widget-body .rating-stars-wd-c {
         width: 20px; 
         height: 20px;
     }
 
-    .widget-body .rating-widget-part {
+    .admin-widget-body .rating-widget-part {
         flex-wrap: wrap;
         height: 140px;
         padding-bottom: 40px;
@@ -2771,15 +2529,15 @@
     /** Horizontal slider styles ends here*/
 
     /** Horizontal Carousel slider styles starts here */
-    .widget-body .c-rating-widget-container {
+    .admin-widget-body .c-rating-widget-container {
         flex-direction: row;
         flex-wrap: wrap;
         gap: 0px;
-        height: 160px;
+        height: auto;
         margin-top: -10px;
     }
 
-    .widget-body .c-rating-row-1 {
+    .admin-widget-body .c-rating-row-1 {
         display: flex;
         align-items: center;
         margin-left: 7px;
@@ -2787,28 +2545,28 @@
         margin-top: 0px;
     }
 
-    .widget-body .c-rating-row-2 {
+    .admin-widget-body .c-rating-row-2 {
         display: flex;
         flex-direction: column;
         flex: 0 0 55%;
         margin-top: 10px;
     }
 
-    .widget-body .c-rating-row-3 {
+    .admin-widget-body .c-rating-row-3 {
         display: flex;
         margin-left: 46px;
         margin-top: -24px;
         justify-content: flex-start;
     }
 
-    .widget-body .c-rating-row-4 {
+    .admin-widget-body .c-rating-row-4 {
         display: flex;
         margin: 0 auto;
         margin-top: -22px;
         justify-content: end;
     }
 
-    .widget-body .c-pwd-div {
+    .admin-widget-body .c-pwd-div {
         min-width: 60px;
         width: 60px; 
         min-height: 30px; 
@@ -2816,11 +2574,11 @@
         margin-left: 36px;
     }
 
-    .widget-body .c-rating-row-span {
+    .admin-widget-body .c-rating-row-span {
         font-size: 20px;
     }
 
-    .widget-body .c-vertical-divider {
+    .admin-widget-body .c-vertical-divider {
         display: block;
         height: 42px;
         width: 1px;
@@ -2828,7 +2586,7 @@
         margin: 0px 10px;
     }
 
-    .widget-body .close-button {
+    .admin-widget-body .close-button {
         top: 15%;
         right: 10%;
     }
@@ -2838,7 +2596,7 @@
 /* CSS for tablets (landscape) */
 
 @media (min-width: 768px) and (max-width: 800px) {
-    .widget-body {
+    .admin-widget-body {
         padding: 0;
         margin: 0;
         box-sizing: border-box;
@@ -2852,7 +2610,7 @@
 }
 
 @media (min-width: 801px) and (max-width: 860px) {
-    .widget-body {
+    .admin-widget-body {
         padding: 0;
         margin: 0;
         box-sizing: border-box;
@@ -2866,7 +2624,7 @@
 }
 
 @media (min-width: 861px) and (max-width: 950px) {
-    .widget-body {
+    .admin-widget-body {
         padding: 0;
         margin: 0;
         box-sizing: border-box;
@@ -2880,7 +2638,7 @@
 }
 
 @media (min-width: 951px) and (max-width: 1024px) {
-    .widget-body {
+    .admin-widget-body {
         padding: 0;
         margin: 0;
         box-sizing: border-box;
@@ -2896,7 +2654,7 @@
     /* Add your tablet-specific styles here */
     /** Horizontal slider styles starts here*/
 
-    .widget-body {
+    .admin-widget-body {
         padding: 0;
         margin: 0;
         box-sizing: border-box;
@@ -2908,7 +2666,7 @@
         overflow: hidden; /* Prevent scrolling when the lightbox is open */
     }
 
-    .widget-body .slider-container {
+    .admin-widget-body .slider-container {
         display: flex;
         height: auto;
         overflow-x: auto;
@@ -2932,7 +2690,7 @@
         padding: 0;
     }
 
-    .opio-carousel {
+    .admin-opio-carousel {
         display: block;
         padding: 0;
         margin: 0;
@@ -2945,39 +2703,39 @@
     }
 
     /** Horizontal Carousel slider styles starts here */
-    .widget-body .c-rating-widget-container {
+    .admin-widget-body .c-rating-widget-container {
         flex-direction: row;
         flex-wrap: wrap;
         gap: 0px;
-        height: 160px;
+        height: auto;
     }
 
-    .widget-body .c-rating-row-1 {
+    .admin-widget-body .c-rating-row-1 {
         display: flex;
         align-items: center;
         margin-top: 30px;
     }
 
-    .widget-body .c-rating-row-2 {
+    .admin-widget-body .c-rating-row-2 {
         display: flex;
         flex-direction: column;
         margin-top: 24px;
     }
 
-    .widget-body .c-rating-row-3 {
+    .admin-widget-body .c-rating-row-3 {
         display: flex;
         margin-left: 20px;
         margin-top: 21px;
         justify-content: flex-start;
     }
 
-    .widget-body .c-rating-row-4 {
+    .admin-widget-body .c-rating-row-4 {
         display: flex;
         margin: 0 auto;
         margin-top: 24px;
     }
 
-    .widget-body .c-pwd-div {
+    .admin-widget-body .c-pwd-div {
         min-width: 80px;
         width: 80px; 
         min-height: 30px; 
@@ -2985,11 +2743,11 @@
         margin-left: 50px;
     }
 
-    .widget-body .c-rating-row-span {
+    .admin-widget-body .c-rating-row-span {
         font-size: 20px;
     }
 
-    .widget-body .c-vertical-divider {
+    .admin-widget-body .c-vertical-divider {
         display: block;
         height: 42px;
         width: 1px;
