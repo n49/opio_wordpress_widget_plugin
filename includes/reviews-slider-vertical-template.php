@@ -145,7 +145,7 @@
 
 <?php if(isset($filteredReviews) && count(array_slice($filteredReviews, 0, 7)) > 3) { ?>
 
-<div class="widget-body opio-vertical">
+<div class="widget-body opio-vertical nitro-exclude">
     <div class="v-header">
         <div class="v-h-col-1">
             <span style="font-size: 22px; font-weight: 700;">Our Reviews</span>

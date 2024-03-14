@@ -150,7 +150,7 @@
 
 <?php if(isset($filteredReviews) && count(array_slice($filteredReviews, 0, 8)) > 3) { ?>
 
-<div class="widget-body">
+<div class="widget-body nitro-exclude">
     <div class="slider-container h-testimonial-slider">
     <?php foreach (array_slice($filteredReviews, 0, 8) as $index => $review) { ?>
         <?php $currentReview = $review; ?>
