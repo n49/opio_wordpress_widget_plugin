@@ -151,7 +151,7 @@
 
 <?php if(isset($filteredReviews) && count(array_slice($filteredReviews, 0, 8)) > 3) { ?>
 
-<div class="widget-body opio-carousel">
+<div class="widget-body opio-carousel nitro-exclude">
     <div class="slider-container c-testimonial-slider">
     <?php
         // Display the first 9 reviews
