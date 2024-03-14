@@ -1,5 +1,5 @@
 <!-- reviews-slider-horizontal-carousel-template.php -->
-
+<div id="opio-carousel-widget" nitro-exclude>
 <?php 
     $review_feed_link = '#';
     if(isset($feed_object->review_feed_link)) {
@@ -151,7 +151,7 @@
 
 <?php if(isset($filteredReviews) && count(array_slice($filteredReviews, 0, 8)) > 3) { ?>
 
-<div class="widget-body opio-carousel" nitro-exclude>
+<div class="widget-body opio-carousel">
     <div class="slider-container c-testimonial-slider">
     <?php
         // Display the first 9 reviews
@@ -549,3 +549,4 @@
 
 <?php } ?>
 
+</div>

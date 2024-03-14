@@ -1,4 +1,6 @@
 <!-- reviews-slider-horizontal-template.php -->
+<div id="opio-horizontal-widget" nitro-exclude>
+
 <?php 
     $review_feed_link = '#';
     if(isset($feed_object->review_feed_link)) {
@@ -150,7 +152,7 @@
 
 <?php if(isset($filteredReviews) && count(array_slice($filteredReviews, 0, 8)) > 3) { ?>
 
-<div class="widget-body" nitro-exclude>
+<div class="widget-body">
     <div class="slider-container h-testimonial-slider">
     <?php foreach (array_slice($filteredReviews, 0, 8) as $index => $review) { ?>
         <?php $currentReview = $review; ?>
@@ -534,3 +536,4 @@
 <!-- JSON schema ends-->
 
 <?php } ?>
+</div>
