@@ -1,5 +1,5 @@
 <!-- reviews-slider-horizontal-template.php -->
-<div id="opio-horizontal-widget" nitro-exclude>
+<div id="opio-horizontal-widget">
 
 <?php 
     $review_feed_link = '#';

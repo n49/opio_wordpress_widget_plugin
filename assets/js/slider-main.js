@@ -443,7 +443,7 @@ jQuery(document).ready(function () {
     console.log('jQuery(document) is loaded....');
 
     // Initialize the Slick slider
-    var slider = jQuery('.c-testimonial-slider').slick({
+    var c_slider = jQuery('.c-testimonial-slider').slick({
         autoplay: true,
         autoplaySpeed: 2000,
         speed: 600,
@@ -478,21 +478,19 @@ jQuery(document).ready(function () {
         ]
     });
 
-    console.log('c-slider is loaded',slider);
-    var c_element = document.getElementsByClassName('c-testimonial-slider')[0];
-    if(c_element) {
-        c_element.style.display = "block";
-    }
+    console.log('c-slider is loaded',c_slider);
     jQuery('.c-testimonial-slider').slick('refresh');
+
+    console.log('c-slider is refreshed',c_slider);
 
     // Move to the next slide on clicking the ">" button
     jQuery('.c-slider-button.right').click(function () {
-        slider.slick('slickNext');
+        c_slider.slick('slickNext');
     });
 
     // Move to the previous slide on clicking the "<" button
     jQuery('.c-slider-button.left').click(function () {
-        slider.slick('slickPrev');
+        c_slider.slick('slickPrev');
     });
 });
 
@@ -500,7 +498,7 @@ jQuery(document).ready(function () {
     console.log('jQuery(document) is loaded....');
 
     // Initialize the Slick slider
-    var slider = jQuery('.v-testimonial-slider').slick({
+    var v_slider = jQuery('.v-testimonial-slider').slick({
         autoplay: true,
         autoplaySpeed: 4000,
         speed: 600,
@@ -512,21 +510,19 @@ jQuery(document).ready(function () {
         dots: false,
         vertical: true,
     });
-    console.log('v-slider is loaded',slider);
-    var v_element = document.getElementsByClassName('v-testimonial-slider')[0];
-    if(v_element) {
-        v_element.style.display = "block";
-    }
+    console.log('v-slider is loaded',v_slider);
+
     jQuery('.v-testimonial-slider').slick('refresh');
 
+    console.log('v-slider is refreshed',v_slider);
     // Move to the next slide on clicking the ">" button
     jQuery('.v-slider-button.right').click(function () {
-        slider.slick('slickNext');
+        v_slider.slick('slickNext');
     });
 
     // Move to the previous slide on clicking the "<" button
     jQuery('.v-slider-button.left').click(function () {
-        slider.slick('slickPrev');
+        v_slider.slick('slickPrev');
     });
 });
 
@@ -534,7 +530,7 @@ jQuery(document).ready(function () {
     console.log('jQuery(document) is loaded....');
 
     // Initialize the Slick slider
-    var slider = jQuery('.h-testimonial-slider').slick({
+    var h_slider = jQuery('.h-testimonial-slider').slick({
         autoplay: true,
         autoplaySpeed: 2000,
         speed: 600,
@@ -575,22 +571,19 @@ jQuery(document).ready(function () {
             }
         ]
     });
-    console.log('h-slider is loaded',slider);
-
-    var h_element = document.getElementsByClassName('h-testimonial-slider')[0];
-    if(h_element) {
-        h_element.style.display = "block";
-    }
+    console.log('h-slider is loaded',h_slider);
 
     jQuery('.h-testimonial-slider').slick('refresh');
 
+    console.log('h-slider is refreshed',h_slider);
+
     jQuery('.slider-button.right').click(function () {
-        slider.slick('slickNext');
+        h_slider.slick('slickNext');
     });
 
     // Move to the previous slide on clicking the "<" button
     jQuery('.slider-button.left').click(function () {
-        slider.slick('slickPrev');
+        h_slider.slick('slickPrev');
     });
 });
 
