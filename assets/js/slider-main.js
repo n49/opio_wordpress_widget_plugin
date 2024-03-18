@@ -483,6 +483,8 @@ jQuery(document).ready(function () {
     if(c_element) {
         c_element.style.display = "block";
     }
+    jQuery('.c-testimonial-slider').slick('refresh');
+
     // Move to the next slide on clicking the ">" button
     jQuery('.c-slider-button.right').click(function () {
         slider.slick('slickNext');
@@ -515,6 +517,7 @@ jQuery(document).ready(function () {
     if(v_element) {
         v_element.style.display = "block";
     }
+    jQuery('.v-testimonial-slider').slick('refresh');
 
     // Move to the next slide on clicking the ">" button
     jQuery('.v-slider-button.right').click(function () {
@@ -578,6 +581,9 @@ jQuery(document).ready(function () {
     if(h_element) {
         h_element.style.display = "block";
     }
+
+    jQuery('.h-testimonial-slider').slick('refresh');
+
     jQuery('.slider-button.right').click(function () {
         slider.slick('slickNext');
     });
