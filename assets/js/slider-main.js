@@ -105,16 +105,16 @@ function adjustLayout() {
     // hide powered by text based on the screen width
     if(screenWidth < 1024) {
         // hide the text
-        document.getElementById('powered-by-text').style.display = 'none'; 
+        if(document.getElementById('powered-by-text')) {
+            document.getElementById('powered-by-text').style.display = 'none'; 
+        }
     } else {
-        document.getElementById('powered-by-text').style.display = 'block'; 
+        if(document.getElementById('powered-by-text')) {
+            document.getElementById('powered-by-text').style.display = 'block'; 
+        }
     }
 
 }
-
-// Call the function on page load and window resize
-window.onload = adjustLayout;
-window.onresize = adjustLayout;
 
 async function openPhotoLightbox(reviewData) {
 
@@ -440,6 +440,8 @@ function closePhotoLightbox() {
 }
 
 jQuery(document).ready(function () {
+    console.log('jQuery(document) is loaded....');
+
     // Initialize the Slick slider
     var slider = jQuery('.c-testimonial-slider').slick({
         autoplay: true,
@@ -476,6 +478,11 @@ jQuery(document).ready(function () {
         ]
     });
 
+    console.log('c-slider is loaded',slider);
+    var c_element = document.getElementsByClassName('c-testimonial-slider')[0];
+    if(c_element) {
+        c_element.style.display = "block";
+    }
     // Move to the next slide on clicking the ">" button
     jQuery('.c-slider-button.right').click(function () {
         slider.slick('slickNext');
@@ -488,6 +495,8 @@ jQuery(document).ready(function () {
 });
 
 jQuery(document).ready(function () {
+    console.log('jQuery(document) is loaded....');
+
     // Initialize the Slick slider
     var slider = jQuery('.v-testimonial-slider').slick({
         autoplay: true,
@@ -501,6 +510,11 @@ jQuery(document).ready(function () {
         dots: false,
         vertical: true,
     });
+    console.log('v-slider is loaded',slider);
+    var v_element = document.getElementsByClassName('v-testimonial-slider')[0];
+    if(v_element) {
+        v_element.style.display = "block";
+    }
 
     // Move to the next slide on clicking the ">" button
     jQuery('.v-slider-button.right').click(function () {
@@ -514,6 +528,8 @@ jQuery(document).ready(function () {
 });
 
 jQuery(document).ready(function () {
+    console.log('jQuery(document) is loaded....');
+
     // Initialize the Slick slider
     var slider = jQuery('.h-testimonial-slider').slick({
         autoplay: true,
@@ -556,8 +572,12 @@ jQuery(document).ready(function () {
             }
         ]
     });
+    console.log('h-slider is loaded',slider);
 
-    // Move to the next slide on clicking the ">" button
+    var h_element = document.getElementsByClassName('h-testimonial-slider')[0];
+    if(h_element) {
+        h_element.style.display = "block";
+    }
     jQuery('.slider-button.right').click(function () {
         slider.slick('slickNext');
     });
@@ -581,3 +601,7 @@ window.addEventListener('keydown', function (event) {
         closePhotoLightbox();
     }
 });
+
+// Call the function on page load and window resize
+window.onload = adjustLayout;
+window.onresize = adjustLayout;
