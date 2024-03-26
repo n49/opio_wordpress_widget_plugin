@@ -74,7 +74,7 @@
     // Define the function to include the template with parameters
 
     // Make API call to get reviews
-    $api_url = 'https://op.io/api/entities/reviews-slider';
+    $api_url = 'https://op.io/api/entities/reviews-slider?cache=renew&hideWidget=true';
 
     $api_headers = [
         'Authorization' => 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjE2NDQzNDY2MzEsInVzZXJfaWQiOiJrdHN4dzlramxkZ3RzZDNqMSIsImV4cCI6MTI5NzY0NDM0NjYzMX0.FZeMMsZlix1eQ1aJFmQ0MV_L_ezFb4RhrqCIhceTT-w',
