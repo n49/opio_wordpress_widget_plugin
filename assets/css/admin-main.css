@@ -1054,7 +1054,7 @@
 .admin-widget-body .review-media-images {
     display: flex;
     gap: 10px;
-    position: fixed;
+    position: absolute;
     bottom: 0;
     margin-bottom: 15px;
 }
@@ -1087,7 +1087,7 @@
 .admin-widget-body .tile-tag-container {
     display: flex;
     gap: 10px;
-    position: fixed;
+    position: absolute;
     bottom: 0;
 }
 
