@@ -20,7 +20,6 @@ class Slider_Shortcode {
 
     public function init($atts) {
 
-        ob_start();
         if (get_option('opio_active') === '0') {
             return '';
         }
@@ -44,6 +43,8 @@ class Slider_Shortcode {
         $slider_type = $feed_object->slider_type;
         $review_feed_link = $feed_object->review_feed_link;
 
+		ob_start();
+
         if($slider_type == 'horizontal') {
             include_once 'reviews-slider-horizontal-template.php'; 
         } else if($slider_type == 'horizontal-carousel') {
@@ -51,11 +52,14 @@ class Slider_Shortcode {
         } else if($slider_type == 'vertical') {
             include_once 'reviews-slider-vertical-template.php'; 
         }
+        ob_get_contents();
+
+        ob_end_clean();
 
         $output = $this->slider_deserializer->prepareString($output);
-
+	
         echo wp_kses($output, $this->slider_deserializer->get_allowed_tags());
-        return ob_get_clean();
+
 
     }
 }

@@ -1,3 +1,8 @@
+<?php 
+
+ob_start();
+
+?>
 <!-- reviews-slider-horizontal-carousel-template.php -->
 <div id="opio-carousel-widget">
 <?php 
@@ -163,10 +168,10 @@
                     <div style="vertical-align: top;">
                         <div class="avatar-container">
                             <?php if(($review['propertyId'] === 1 || $review['propertyId'] === 2 || $review['propertyId'] === 3 || $review['propertyId'] === 5) && isset($review['user']['userPic'])) { ?>
-                                <div class="reviewer-avatar" style="background-image: url(&quot;<?php echo esc_attr($review['user']['userPic']);?>&quot;);">
+                                <div class="reviewer-avatar" style="background-image: url(<?php echo esc_attr($review['user']['userPic']);?>);">
                                 </div>  
                             <?php } else if(isset($review['user']['userPic']) && isset($review['user']['userPic']['imageId'])) { ?>
-                                <div class="reviewer-avatar" style="background-image: url(&quot;https://images.files.ca/200x200/<?php echo esc_attr($review['user']['userPic']['imageId']);?>.jpg?nocrop=1&quot;);">
+                                <div class="reviewer-avatar" style="background-image: url(https://images.files.ca/200x200/<?php echo esc_attr($review['user']['userPic']['imageId']);?>.jpg?nocrop=1);">
                                 </div>  
                             <?php } else if($review['user']['firstName']) { ?>
                                 <div class="reviewer-avatar" style="background-color: <?php echo esc_attr(randomColor()); ?>"><?php echo esc_attr(mb_substr(ucfirst($review['user']["firstName"]), 0, 1, 'utf-8')); ?></div>
@@ -258,10 +263,10 @@
                                 <?php foreach (array_slice($review['taggedEmployees'], 0, 4) as $index => $emp) { ?>
                                     <div class="review-tagged-emps">
                                         <?php if(isset($emp["userPic"]["imageId"])) { ?>
-                                            <div class="emp-avatar" style="background-image: url(&quot;https://images.files.ca/200x200/<?php echo esc_attr($emp["userPic"]["imageId"]); ?>.jpg?nocrop=1&quot;);"></div>
+                                            <div class="emp-avatar" style="background-image: url(https://images.files.ca/200x200/<?php echo esc_attr($emp["userPic"]["imageId"]); ?>.jpg?nocrop=1);"></div>
                                         <?php } else { ?>
                                         <?php if(isset($emp["userPic"]) && $emp["userPic"] != "") { ?>
-                                            <div class="emp-avatar" style="background-image: url(&quot;<?php echo esc_attr($emp["userPic"]); ?>&quot;);"></div>
+                                            <div class="emp-avatar" style="background-image: url(<?php echo esc_attr($emp["userPic"]); ?>);"></div>
                                         <?php } else { ?>
                                             <div class="emp-avatar" style="background-color: #dddddd"><?php echo esc_attr(mb_substr(ucfirst($emp["firstName"]), 0, 1, 'utf-8')); ?></div>
                                         <?php } } ?>
@@ -322,10 +327,10 @@
                             <?php foreach (array_slice($review['taggedEmployees'], 0, 4) as $index => $emp) { ?>
                                 <div class="review-tagged-emps">
                                     <?php if(isset($emp["userPic"]["imageId"])) { ?>
-                                        <div class="emp-avatar" style="background-image: url(&quot;https://images.files.ca/200x200/<?php echo esc_attr($emp["userPic"]["imageId"]); ?>.jpg?nocrop=1&quot;);"></div>
+                                        <div class="emp-avatar" style="background-image: url(https://images.files.ca/200x200/<?php echo esc_attr($emp["userPic"]["imageId"]); ?>.jpg?nocrop=1);"></div>
                                     <?php } else { ?>
                                     <?php if(isset($emp["userPic"]) && $emp["userPic"] != "") { ?>
-                                        <div class="emp-avatar" style="background-image: url(&quot;<?php echo esc_attr($emp["userPic"]); ?>&quot;);"></div>
+                                        <div class="emp-avatar" style="background-image: url(<?php echo esc_attr($emp["userPic"]); ?>);"></div>
                                     <?php } else { ?>
                                         <div class="emp-avatar" style="background-color: #dddddd"><?php echo esc_attr(mb_substr(ucfirst($emp["firstName"]), 0, 1, 'utf-8')); ?></div>
                                     <?php } } ?>
@@ -349,7 +354,7 @@
     </div>
     <div class="c-rating-widget-container">
         <div class="c-rating-row-1">
-            <span id="powered-by-text" class="c-pwd-span">Powered by</span><a href="https://www.opioapp.com"><div class="c-pwd-div" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>&quot;);"></div></a>
+            <span id="powered-by-text" class="c-pwd-span">Powered by</span><a href="https://www.opioapp.com"><div class="c-pwd-div" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>);"></div></a>
         </div>
         <div class="c-vertical-divider"></div>
         <div class="c-rating-row-2">
@@ -377,8 +382,8 @@
             </div>
         </div>
         <div class="c-rating-row-4">
-            <div class="c-slider-button left" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/left-arrow.svg'; ?>&quot;);" ></div>
-            <div class="c-slider-button right" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/right-arrow.svg'; ?>&quot;);" ></div>
+            <div class="c-slider-button left" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/left-arrow.svg'; ?>);" ></div>
+            <div class="c-slider-button right" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/right-arrow.svg'; ?>);" ></div>
         </div>
     </div>
 
@@ -550,3 +555,9 @@
 <?php } ?>
 
 </div>
+
+<?php 
+
+$output = ob_get_clean();
+echo $output;
+?>

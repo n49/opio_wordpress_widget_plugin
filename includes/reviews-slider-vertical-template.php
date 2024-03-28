@@ -1,3 +1,8 @@
+<?php 
+
+ob_start();
+
+?>
 <!-- reviews-slider-vertical-template.php -->
 <div id="opio-vertical-widget">
 
@@ -153,7 +158,7 @@
         </div>
         <div class="v-h-col-2">
             <span class="v-pwd-span">Powered by</span>
-            <a href="https://www.opioapp.com"><div class="v-h-opio-logo" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-white-logo.png'; ?>&quot;);"></div></a>
+            <a href="https://www.opioapp.com"><div class="v-h-opio-logo" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-white-logo.png'; ?>);"></div></a>
         </div>
     </div>
     <div class="v-rating-container">
@@ -176,10 +181,10 @@
                 <div id=<?php echo esc_attr($review["_id"]);?> class="v-review-tile-container">
                     <div class="v-rev-content">
                         <?php if(($review['propertyId'] === 1 || $review['propertyId'] === 2 || $review['propertyId'] === 3 || $review['propertyId'] === 5) && isset($review['user']['userPic'])) { ?>
-                            <div class="v-reviewer-avatar" style="background-image: url(&quot;<?php echo esc_attr($review['user']['userPic']);?>&quot;);">
+                            <div class="v-reviewer-avatar" style="background-image: url(<?php echo esc_attr($review['user']['userPic']);?>);">
                             </div>  
                         <?php } else if(isset($review['user']['userPic']) && isset($review['user']['userPic']['imageId'])) { ?>
-                            <div class="v-reviewer-avatar" style="background-image: url(&quot;https://images.files.ca/200x200/<?php echo esc_attr($review['user']['userPic']['imageId']);?>.jpg?nocrop=1&quot;);">
+                            <div class="v-reviewer-avatar" style="background-image: url(https://images.files.ca/200x200/<?php echo esc_attr($review['user']['userPic']['imageId']);?>.jpg?nocrop=1);">
                             </div>  
                         <?php } else if($review['user']['firstName']) { ?>
                             <div class="v-reviewer-avatar" style="background-color: <?php echo esc_attr(randomColor()); ?>"><?php echo esc_attr(mb_substr(ucfirst($review['user']["firstName"]), 0, 1, 'utf-8')); ?></div>
@@ -214,15 +219,15 @@
                     </div>
                     <div>
                         <?php if($review['propertyInfo']['name'] === 'facebook') { ?>
-                            <div class="v-facebook-logo" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/facebook-logo.png'; ?>&quot;);"></div>
+                            <div class="v-facebook-logo" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/facebook-logo.png'; ?>);"></div>
                         <?php } else if($review['propertyInfo']['name'] === 'google') { ?>
-                            <div class="v-google-logo" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/google-logo.svg'; ?>&quot;);"></div>
+                            <div class="v-google-logo" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/google-logo.svg'; ?>);"></div>
                         <?php } else if($review['propertyInfo']['name'] === 'yelp') { ?>
-                            <div class="v-yelp-logo" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/yelp-logo.png'; ?>&quot;);"></div>
+                            <div class="v-yelp-logo" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/yelp-logo.png'; ?>);"></div>
                         <?php } else if($review['propertyInfo']['name'] === 'Trip Advisor') { ?>
-                            <div class="v-tripadvisor-logo" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/tripadvisor-logo.png'; ?>&quot;);"></div>
+                            <div class="v-tripadvisor-logo" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/tripadvisor-logo.png'; ?>);"></div>
                         <?php } else { ?>
-                            <div class="v-opio-logo" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>&quot;);"></div>
+                            <div class="v-opio-logo" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>);"></div>
                         <?php } ?>
                     </div>
                 </div>
@@ -252,8 +257,8 @@
     </div>
     <div class="v-footer">
         <div class="v-f-col-1">
-            <div class="v-slider-button left" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/down-arrow.svg'; ?>&quot;);" ></div>
-            <div class="v-slider-button right" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/top-arrow.svg'; ?>&quot;);" ></div>
+            <div class="v-slider-button left" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/down-arrow.svg'; ?>);" ></div>
+            <div class="v-slider-button right" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/top-arrow.svg'; ?>);" ></div>
         </div>
         <div class="v-f-col-2">
             <div class="v-wrire-rev-container">
@@ -421,3 +426,9 @@
 <?php } ?>
 
 </div>
+
+<?php 
+
+$output = ob_get_clean();
+echo $output;
+?>

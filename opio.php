@@ -3,7 +3,7 @@
 Plugin Name: Widget for OPIO Reviews
 Plugin URI: 
 Description: Instantly add OPIO Reviews on your website to increase user confidence and SEO.
-Version: 1.0.47
+Version: 1.0.48
 Author: Dhiraj Timalsina <dhiraj@n49.com>
 Text Domain: widget-for-opio-reviews
 Domain Path: /languages
