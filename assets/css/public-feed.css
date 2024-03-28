@@ -796,7 +796,7 @@ height: unset !important;
 .widget-body .rating-container {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 2px;
 }
 
 .widget-body .fb-rating-div {
@@ -850,8 +850,8 @@ height: unset !important;
     cursor: pointer; 
     display: block; 
     float: left; 
-    width: 15px; 
-    height: 15px;
+    width: 17px; 
+    height: 18px;
 }
 
 .widget-body .rating-stars-v {
