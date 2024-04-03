@@ -350,7 +350,11 @@ ob_start();
     </div>
     <div class="rating-widget-part">
         <div class="w-opio-logo-container">
-            <span id="powered-by-text" class="w-pwd-text">Powered by</span><a href="https://www.opioapp.com"><div class="pwd-opio-logo" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>);"></div></a>
+            <?php if($isMobile) { ?>
+                <span id="powered-by-text" class="w-pwd-text"></span><a href="https://www.opioapp.com"><div class="pwd-opio-logo" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>);"></div></a>
+            <?php } else { ?>
+                <span id="powered-by-text" class="w-pwd-text">Powered by</span><a href="https://www.opioapp.com"><div class="pwd-opio-logo" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>);"></div></a>
+            <?php } ?>
         </div>
         <div class="vertical-divider"></div>
         <div class="rating-widget">
