@@ -103,16 +103,16 @@ function adjustLayout() {
     // });
 
     // hide powered by text based on the screen width
-    if(screenWidth < 1024) {
-        // hide the text
-        if(document.getElementById('powered-by-text')) {
-            document.getElementById('powered-by-text').style.display = 'none'; 
-        }
-    } else {
-        if(document.getElementById('powered-by-text')) {
-            document.getElementById('powered-by-text').style.display = 'block'; 
-        }
-    }
+    // if(screenWidth < 1024) {
+    //     // hide the text
+    //     if(document.getElementById('powered-by-text')) {
+    //         document.getElementById('powered-by-text').style.display = 'none'; 
+    //     }
+    // } else {
+    //     if(document.getElementById('powered-by-text')) {
+    //         document.getElementById('powered-by-text').style.display = 'block'; 
+    //     }
+    // }
 
 }
 
@@ -602,5 +602,5 @@ window.addEventListener('keydown', function (event) {
 });
 
 // Call the function on page load and window resize
-window.onload = adjustLayout;
-window.onresize = adjustLayout;
+// window.onload = adjustLayout;
+// window.onresize = adjustLayout;

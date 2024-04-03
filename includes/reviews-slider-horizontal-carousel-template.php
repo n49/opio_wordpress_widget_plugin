@@ -354,7 +354,11 @@ ob_start();
     </div>
     <div class="c-rating-widget-container">
         <div class="c-rating-row-1">
+        <?php if($isMobile) { ?>
+            <span id="powered-by-text" class="c-pwd-span"></span><a href="https://www.opioapp.com"><div class="c-pwd-div" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>);"></div></a>
+        <?php } else { ?>
             <span id="powered-by-text" class="c-pwd-span">Powered by</span><a href="https://www.opioapp.com"><div class="c-pwd-div" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>);"></div></a>
+        <?php } ?>
         </div>
         <div class="c-vertical-divider"></div>
         <div class="c-rating-row-2">
