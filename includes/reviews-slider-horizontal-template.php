@@ -453,6 +453,12 @@ ob_start();
         "@type": "LocalBusiness",
         "name": "<?php echo $business["name"]?>",
         "image": "<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "<?php echo esc_attr($business["address"]["address1"]); ?>",
+            "addressRegion": "<?php echo esc_attr($business["address"]["province"]); ?>",
+            "postalCode": "<?php echo esc_attr($business["address"]["postalCode"]); ?>"
+        },
         "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": "<?php echo esc_attr($aggregateRating); ?>",
@@ -498,12 +504,6 @@ ob_start();
         "@type": "Product",
         "name": "<?php echo $business["name"]?>",
         "image": "<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "<?php echo esc_attr($business["address"]["address1"]); ?>",
-            "addressRegion": "<?php echo esc_attr($business["address"]["province"]); ?>",
-            "postalCode": "<?php echo esc_attr($business["address"]["postalCode"]); ?>"
-        },
         "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": "<?php echo esc_attr($aggregateRating); ?>",
