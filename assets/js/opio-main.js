@@ -268,14 +268,14 @@ function addReview(rev, index, reviewFeedUrl, business) {
     reviewBuilder += `<div id="${rev._id}" style="display: flex; position: relative;"><div style="vertical-align: top; padding-right: 20px;"><div id="outer" style="display: inline-block;">`
     if(rev.reviewType === "google") {
         if(user.userPic) {
-            reviewBuilder += `<div id="inner" style="width: 50px; height: 50px; line-height: 50px; border-radius: 50%; color: '${reviewFontColor}'; font-size: 24px; text-align: center; background-size: cover; background-repeat: no-repeat; background-image: url(&quot;${user.userPic}&quot;);"></div>`;
+            reviewBuilder += `<div id="inner" style="width: 50px; height: 50px; line-height: 50px; border-radius: 50%; color: ${reviewFontColor}; font-size: 24px; text-align: center; background-size: cover; background-repeat: no-repeat; background-image: url(&quot;${user.userPic}&quot;);"></div>`;
         } else {
-            reviewBuilder += `<div id="inner" style="width: 50px; height: 50px; line-height: 50px; border-radius: 50%; color: '${reviewFontColor}'; font-size: 24px; text-align: center; background-size: cover; background-repeat: no-repeat; background-color: #dddddd">${user.firstName ? user.firstName.charAt(0).toUpperCase() : ''}</div>`
+            reviewBuilder += `<div id="inner" style="width: 50px; height: 50px; line-height: 50px; border-radius: 50%; color: ${reviewFontColor}; font-size: 24px; text-align: center; background-size: cover; background-repeat: no-repeat; background-color: #dddddd">${user.firstName ? user.firstName.charAt(0).toUpperCase() : ''}</div>`
         }
     } else if(user.userPic && user.userPic.imageId) {
-        reviewBuilder += `<div id="inner" style="width: 50px; height: 50px; line-height: 50px; border-radius: 50%; color: '${reviewFontColor}'; font-size: 24px; text-align: center; background-size: cover; background-repeat: no-repeat; background-image: url(&quot;https://images.files.ca/200x200/${user.userPic.imageId}.jpg?nocrop=1&quot;);"></div>`;
+        reviewBuilder += `<div id="inner" style="width: 50px; height: 50px; line-height: 50px; border-radius: 50%; color: ${reviewFontColor}; font-size: 24px; text-align: center; background-size: cover; background-repeat: no-repeat; background-image: url(&quot;https://images.files.ca/200x200/${user.userPic.imageId}.jpg?nocrop=1&quot;);"></div>`;
     } else {
-        reviewBuilder += `<div id="inner" style="width: 50px; height: 50px; line-height: 50px; border-radius: 50%; color: '${reviewFontColor}'; font-size: 24px; text-align: center; background-size: cover; background-repeat: no-repeat; background-color: #dddddd">${user.firstName ? user.firstName.charAt(0).toUpperCase() : ''}</div>`
+        reviewBuilder += `<div id="inner" style="width: 50px; height: 50px; line-height: 50px; border-radius: 50%; color: ${reviewFontColor}; font-size: 24px; text-align: center; background-size: cover; background-repeat: no-repeat; background-color: #dddddd">${user.firstName ? user.firstName.charAt(0).toUpperCase() : ''}</div>`
     }
     reviewBuilder += '</div></div>';
     reviewBuilder += `<div id="${rev._id}-reviewContainer" style="vertical-align: top; flex-grow: 1;"><div style="margin-bottom: 10px;"><div><div style="overflow: hidden; position: relative;">`;
@@ -332,7 +332,7 @@ function addReview(rev, index, reviewFeedUrl, business) {
         }
     }
     
-    reviewBuilder += `</div></div><div style="display: flex; flex-wrap: wrap; align-items: center;font-weight: 400; font-size: 12px; color: '${reviewFontColor}';"><span>By</span>`;
+    reviewBuilder += `</div></div><div style="display: flex; flex-wrap: wrap; align-items: center;font-weight: 400; font-size: 12px; color: ${reviewFontColor};"><span>By</span>`;
     
     /**Remove member link for guest reviews */
     const verifiedByStatus = getVerificationMethod(rev);
@@ -353,7 +353,7 @@ function addReview(rev, index, reviewFeedUrl, business) {
     reviewBuilder += `<div class="verifiedByContainer" >`;
     reviewBuilder += `<div style="display: flex; flex-wrap: wrap; align-items: center;">`;
     reviewBuilder += `<div style="display: flex; flex-wrap: wrap; align-items: center; width: 15px; height: 22px; vertical-align: middle; margin-right: 2px;">`;
-    reviewBuilder += `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14"><defs><style>.cls-1{fill: '${reviewFontColor}';}</style></defs><title>Asset 1</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M7,0a7,7,0,1,0,7,7A7,7,0,0,0,7,0Zm3.18,5.64L6.51,9.31a.67.67,0,0,1-.47.2.69.69,0,0,1-.48-.2L3.82,7.56a.63.63,0,0,1-.2-.47.68.68,0,0,1,1.15-.48L6,7.88,9.23,4.69a.68.68,0,0,1,1.15.48A.65.65,0,0,1,10.18,5.64Z"/></g></g></svg>`;
+    reviewBuilder += `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14"><defs><style>.cls-1{fill: ${reviewFontColor};}</style></defs><title>Asset 1</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M7,0a7,7,0,1,0,7,7A7,7,0,0,0,7,0Zm3.18,5.64L6.51,9.31a.67.67,0,0,1-.47.2.69.69,0,0,1-.48-.2L3.82,7.56a.63.63,0,0,1-.2-.47.68.68,0,0,1,1.15-.48L6,7.88,9.23,4.69a.68.68,0,0,1,1.15.48A.65.65,0,0,1,10.18,5.64Z"/></g></g></svg>`;
     reviewBuilder += `</div>`;
     
     if(verifiedByStatus == 'Guest') {
@@ -362,11 +362,11 @@ function addReview(rev, index, reviewFeedUrl, business) {
         reviewBuilder += `<span style="vertical-align: middle;">Verified by ${verifiedByStatus.toLowerCase()}</span></div>`;
     }
     reviewBuilder += `</div></div></div>`;
-    reviewBuilder += `<div style="margin-bottom: 10px;"></div><div class="reviewTextColor" style="white-space: pre-wrap; font-size: 14px; line-height: 1.5em; color: '${reviewFontColor}' ">${rev.content === null ? '' : rev.content}</div>`;
+    reviewBuilder += `<div style="margin-bottom: 10px;"></div><div class="reviewTextColor" style="white-space: pre-wrap; font-size: 14px; line-height: 1.5em; color: ${reviewFontColor} ">${rev.content === null ? '' : rev.content}</div>`;
     /**Tagged employees */
     if(taggedEmployees && taggedEmployees.length > 0) {
         reviewBuilder += taggedEmployeesBuilder(taggedEmployees, rev, reviewFontColor);
-        reviewBuilder += `<span style="font-size: 14px; font-weight: 500; color: '${reviewFontColor}'">Employees tagged in this review</span>`;
+        reviewBuilder += `<span style="font-size: 14px; font-weight: 500; color: ${reviewFontColor}">Employees tagged in this review</span>`;
     }
     if((rev.images === null || (rev.images && rev.images.length == 0)) && (rev.videos === null || (rev.videos && rev.videos.length == 0))) {
         reviewBuilder += `<div id="media-container" style="padding-bottom: 10px;"></div>`;
@@ -391,7 +391,7 @@ function addReview(rev, index, reviewFeedUrl, business) {
     reviewBuilder += `<div style="display: inline-block; margin-top: 10px; margin-bottom:10px;"></div>`;
     if(reviewFeedUrl){
         reviewBuilder += `<div style="color: rgb(170, 170, 170); height: 20px; line-height: 20px; display: flex; margin-top: 10px; float: right; right: 0px;">`;
-        reviewBuilder += `<span style="color: '${reviewFontColor}'; font-size: 14px;">Share</span>`;
+        reviewBuilder += `<span style="color: ${reviewFontColor}; font-size: 14px;">Share</span>`;
         reviewBuilder += `<a style="display: flex; cursor: pointer; margin-left: 5px;" onclick="shareFacebookUrl('${reviewFeedUrl}', '${rev._id}')">`;
         reviewBuilder += `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><defs><style>.cls-1{fill:<?php echo $reviewFontColor; ?>;}</style></defs><title>Asset 1</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M10,0A10,10,0,1,0,20,10,10,10,0,0,0,10,0Zm2.14,10h-1.4v5H8.66V10h-1V8.24h1V7.1A2,2,0,0,1,10.76,5H12.3V6.72H11.18a.42.42,0,0,0-.44.48v1h1.58Z"/></g></g></svg>`;
         reviewBuilder += `</a>`;
@@ -449,18 +449,18 @@ function taggedEmployeesBuilder(employees, review, reviewFontColor) {
         }
         let userImage = '';
         if (emp.userPic && emp.userPic.imageId) {
-            userImage += `<div id="inner" style="width: 35px; height: 35px; line-height: 35px; border-radius: 50%; color: '${reviewFontColor}'; font-size: 24px; text-align: center; background-size: cover; background-repeat: no-repeat; background-image: url('https://images.files.ca/200x200/${emp.userPic.imageId}.jpg?nocrop=1');"></div>`;
+            userImage += `<div id="inner" style="width: 35px; height: 35px; line-height: 35px; border-radius: 50%; color: ${reviewFontColor}; font-size: 24px; text-align: center; background-size: cover; background-repeat: no-repeat; background-image: url('https://images.files.ca/200x200/${emp.userPic.imageId}.jpg?nocrop=1');"></div>`;
         } else if (emp.userPic && emp.userPic !== "") {
-            userImage += `<div id="inner" style="width: 35px; height: 35px; line-height: 35px; border-radius: 50%; color: '${reviewFontColor}'; font-size: 24px; text-align: center; background-size: cover; background-repeat: no-repeat; background-image: url('${emp.userPic}');"></div>`;
+            userImage += `<div id="inner" style="width: 35px; height: 35px; line-height: 35px; border-radius: 50%; color: ${reviewFontColor}; font-size: 24px; text-align: center; background-size: cover; background-repeat: no-repeat; background-image: url('${emp.userPic}');"></div>`;
         } else {
-            userImage += `<div id="inner" style="width: 35px; height: 35px; line-height: 35px; border-radius: 50%; color: '${reviewFontColor}'; font-size: 24px; text-align: center; background-size: cover; background-repeat: no-repeat; background-color: #dddddd">${emp.firstName.charAt(0).toUpperCase()}</div>`;
+            userImage += `<div id="inner" style="width: 35px; height: 35px; line-height: 35px; border-radius: 50%; color: ${reviewFontColor}; font-size: 24px; text-align: center; background-size: cover; background-repeat: no-repeat; background-color: #dddddd">${emp.firstName.charAt(0).toUpperCase()}</div>`;
         }
         if (position === undefined || position === '') {
             taggedEmps += 
             `<div class="empTagCard">
             ${userImage}
             <div style="display: grid; grid-template-rows: 25px">
-            <span style="align-self: end; justify-self: left; margin-left: 10px; color: '${reviewFontColor}'; font-size: 14px">
+            <span style="align-self: end; justify-self: left; margin-left: 10px; color: ${reviewFontColor}; font-size: 14px">
             ${emp.firstName + ' ' + emp.lastName.charAt(0)}
             </span>
             </div>
@@ -470,10 +470,10 @@ function taggedEmployeesBuilder(employees, review, reviewFontColor) {
             `<div class="empTagCard">
             ${userImage}
             <div style="display: grid; grid-template-rows: 25px 20px">
-            <span style="align-self: end; justify-self: left; margin-left: 10px; color: '${reviewFontColor}'; font-size: 14px">
+            <span style="align-self: end; justify-self: left; margin-left: 10px; color: ${reviewFontColor}; font-size: 14px">
             ${emp.firstName + ' ' + emp.lastName.charAt(0)}
             </span>
-            <span style="align-self: top; justify-self: left; margin-left: 10px; margin-top: -2px; color: '${reviewFontColor}'; font-size: 12px">
+            <span style="align-self: top; justify-self: left; margin-left: 10px; margin-top: -2px; color: ${reviewFontColor}; font-size: 12px">
             ${position}
             </span>
             </div>
@@ -509,15 +509,15 @@ function addComments(comments, rev, business) {
         if(user.length) {
             if(comment.users[0].userPic && comment.users[0].userPic.imageId) {
                 var imageId = comment.users[0].userPic.imageId;
-                commentBuilder += `<div id="inner" style="width: 30px; height: 30px; line-height: 30px; border-radius: 50%; color: '${reviewFontColor}'; font-size: 18px; text-align: center; background-position: center center; background-size: contain; background-repeat: no-repeat; background-image: url(&quot;https://images.files.ca/200x200/${imageId}.jpg?nocrop=1&quot;);"></div>`
+                commentBuilder += `<div id="inner" style="width: 30px; height: 30px; line-height: 30px; border-radius: 50%; color: ${reviewFontColor}; font-size: 18px; text-align: center; background-position: center center; background-size: contain; background-repeat: no-repeat; background-image: url(&quot;https://images.files.ca/200x200/${imageId}.jpg?nocrop=1&quot;);"></div>`
             } else {
                 commentBuilder += '<div id="inner" style="width: 30px; height: 30px; line-height: 30px; border-radius: 50%; color: ' + reviewFontColor + '; font-size: 18px; text-align: center; background-position: center center; background-size: contain; background-repeat: no-repeat; background-color: ddddd"> '+user.firstName.charAt(0).toUpperCase()+' </div>';
             }
         } else if(rev.entityInfo.logo && rev.entityInfo.logo.imageId){
             var imageId = rev.entityInfo.logo.imageId;
-            commentBuilder += `<div id="inner" style="width: 30px; height: 30px; line-height: 30px; border-radius: 50%; color: '${reviewFontColor}'; font-size: 18px; text-align: center; background-position: center center; background-size: contain; background-repeat: no-repeat; background-image: url(&quot;https://images.files.ca/200x200/${imageId}.jpg?nocrop=1&quot;);"></div>`
+            commentBuilder += `<div id="inner" style="width: 30px; height: 30px; line-height: 30px; border-radius: 50%; color: ${reviewFontColor}; font-size: 18px; text-align: center; background-position: center center; background-size: contain; background-repeat: no-repeat; background-image: url(&quot;https://images.files.ca/200x200/${imageId}.jpg?nocrop=1&quot;);"></div>`
         } else {
-            commentBuilder += `<div id="inner" style="width: 30px; height: 30px; line-height: 30px; border-radius: 50%; color: '${reviewFontColor}'; font-size: 18px; text-align: center; background-position: center center; background-size: contain; background-repeat: no-repeat;"></div>`
+            commentBuilder += `<div id="inner" style="width: 30px; height: 30px; line-height: 30px; border-radius: 50%; color: ${reviewFontColor}; font-size: 18px; text-align: center; background-position: center center; background-size: contain; background-repeat: no-repeat;"></div>`
         }
         
         commentBuilder += '</div></div><div style="vertical-align: top; flex-grow: 1;"><div style="font-weight: 400; font-size: 12px; margin-bottom: 10px; color: ' + reviewFontColor + ';">By ';
