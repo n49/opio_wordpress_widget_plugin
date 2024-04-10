@@ -337,9 +337,16 @@ function addReview(rev, index, reviewFeedUrl, business) {
     /**Remove member link for guest reviews */
     const verifiedByStatus = getVerificationMethod(rev);
     if(verifiedByStatus == 'Guest' || user.verifiedStatus === 'guest' || rev.propertyId === 1 || rev.propertyId === 2) {
-        reviewBuilder += `<a class="nativefeed" style=" text-decoration: none; color: '${reviewFontColor}'; border-bottom: none; font-weight: 500"><span style="margin-left: 3px;">${user.firstName} ${user.lastName}</span></a><span style="margin-left: 3px;"> on ${moment(rev.dateCreated).format("MMM D, YYYY")}</span>`;
-    } else {
-        reviewBuilder += `<a class="nativefeed" target="_blank" href="https://op.io/member/${user.user_id}/" style=" text-decoration: none; color: '${reviewFontColor}'; border-bottom: none; font-weight: 500"><span style="margin-left: 3px;">${user.firstName} ${user.lastName}</span></a><span style="margin-left: 3px;"> on ${moment(rev.dateCreated).format("MMM D, YYYY")}</span>`;
+        reviewBuilder += `<a class="nativefeed" style=" text-decoration: none; color: ${reviewFontColor}; border-bottom: none; font-weight: 500"><span style="margin-left: 3px;">${user.firstName} ${user.lastName}</span></a><span style="margin-left: 3px;"> on ${moment(rev.dateCreated).format("MMM D, YYYY")}</span>`;
+    }
+    else if(rev.propertyId === 6) {
+        reviewBuilder += `<a class="nativefeed" target="_blank" href="${user.user_id}" style=" text-decoration: none; color: ${reviewFontColor}; border-bottom: none; font-weight: 500"><span style="margin-left: 3px;">${user.firstName} ${user.lastName}</span></a><span style="margin-left: 3px;"> on ${moment(rev.dateCreated).format("MMM D, YYYY")}</span>`;
+    } 
+    else if(rev.propertyId === 3) {
+        reviewBuilder += `<a class="nativefeed" target="_blank" href="https://www.yelp.ca/user_details?userid=${user.user_id}" style=" text-decoration: none; color: ${reviewFontColor}; border-bottom: none; font-weight: 500"><span style="margin-left: 3px;">${user.firstName} ${user.lastName}</span></a><span style="margin-left: 3px;"> on ${moment(rev.dateCreated).format("MMM D, YYYY")}</span>`;
+    }
+    else {
+        reviewBuilder += `<a class="nativefeed" target="_blank" href="https://op.io/member/${user.user_id}/" style=" text-decoration: none; color: ${reviewFontColor}; border-bottom: none; font-weight: 500"><span style="margin-left: 3px;">${user.firstName} ${user.lastName}</span></a><span style="margin-left: 3px;"> on ${moment(rev.dateCreated).format("MMM D, YYYY")}</span>`;
     }
     
     /**Place verified by here */
@@ -355,7 +362,7 @@ function addReview(rev, index, reviewFeedUrl, business) {
         reviewBuilder += `<span style="vertical-align: middle;">Verified by ${verifiedByStatus.toLowerCase()}</span></div>`;
     }
     reviewBuilder += `</div></div></div>`;
-    reviewBuilder += `<div style="margin-bottom: 10px;"></div><div class="reviewTextColor" style="white-space: pre-wrap; font-size: 14px; line-height: 1.5em;">${rev.content === null ? '' : rev.content}</div>`;
+    reviewBuilder += `<div style="margin-bottom: 10px;"></div><div class="reviewTextColor" style="white-space: pre-wrap; font-size: 14px; line-height: 1.5em; color: '${reviewFontColor}' ">${rev.content === null ? '' : rev.content}</div>`;
     /**Tagged employees */
     if(taggedEmployees && taggedEmployees.length > 0) {
         reviewBuilder += taggedEmployeesBuilder(taggedEmployees, rev, reviewFontColor);
@@ -516,9 +523,9 @@ function addComments(comments, rev, business) {
         commentBuilder += '</div></div><div style="vertical-align: top; flex-grow: 1;"><div style="font-weight: 400; font-size: 12px; margin-bottom: 10px; color: ' + reviewFontColor + ';">By ';
         
         if(user.length) {
-            commentBuilder += `<a class="nativefeed" style="font-weight: 500; text-decoration: none; color: '${reviewFontColor}'; border-bottom: none;">${comment.users[0].firstName} ${comment.users[0].lastName}</a> on  ${moment(comment.dateCreated).format("MMM D, YYYY")} `;
+            commentBuilder += `<a class="nativefeed" style="font-weight: 500; text-decoration: none; color: ${reviewFontColor}; border-bottom: none;">${comment.users[0].firstName} ${comment.users[0].lastName}</a> on  ${moment(comment.dateCreated).format("MMM D, YYYY")} `;
         } else {
-            commentBuilder += `<a class="nativefeed" style="font-weight: 500; text-decoration: none; color: '${reviewFontColor}'; border-bottom: none;">${rev.entityInfo.name}</a> on  ${moment(comment.dateCreated).format("MMM D, YYYY")} `;
+            commentBuilder += `<a class="nativefeed" style="font-weight: 500; text-decoration: none; color: ${reviewFontColor}; border-bottom: none;">${rev.entityInfo.name}</a> on  ${moment(comment.dateCreated).format("MMM D, YYYY")} `;
         }
         
         commentBuilder += `</div><div style="font-size: 14px; white-space: pre-wrap; line-height: 1.5em;">${comment.content}</div>`;
