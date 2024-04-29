@@ -91,7 +91,10 @@ class Slider_Deserializer {
                 'style' => true,
             ),
             'h1' => array(),
-            'p' => array(),
+            'p' => array(
+                'style' => true,
+                'class' => true
+            ),
             'strong' => array(),
             'em' => array(),
             'br' => array(),
