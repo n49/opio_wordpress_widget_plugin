@@ -54,11 +54,11 @@ class Slider_Shortcode {
         }
         ob_get_contents();
 
-        ob_end_clean();
+        $output = ob_get_clean(); // Capture the entire output of the function
 
         $output = $this->slider_deserializer->prepareString($output);
 	
-        echo wp_kses($output, $this->slider_deserializer->get_allowed_tags());
+        return wp_kses($output, $this->slider_deserializer->get_allowed_tags());
 
 
     }
