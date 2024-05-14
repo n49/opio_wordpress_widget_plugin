@@ -177,7 +177,7 @@ ob_start();
                     <?php } ?>    
                     <?php if($review['propertyInfo']['name'] === 'facebook') { ?>
                         <div class="facebook-logo" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/facebook-logo.png'; ?>);"></div>
-                    <?php } else if($review['propertyInfo']['name'] === 'google') { ?>
+                    <?php } else if($review['propertyInfo']['name'] === 'google' || $review['propertyInfo']['name'] === 'Google') { ?>
                         <div class="google-logo" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/google-logo.svg'; ?>);"></div>
                     <?php } else if($review['propertyInfo']['name'] === 'yelp') { ?>
                         <div class="yelp-logo" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/yelp-logo.png'; ?>);"></div>
