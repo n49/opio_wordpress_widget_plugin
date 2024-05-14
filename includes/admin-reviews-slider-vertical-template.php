@@ -214,7 +214,7 @@
                     <div>
                         <?php if($review['propertyInfo']['name'] === 'facebook') { ?>
                             <div class="v-facebook-logo" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/facebook-logo.png'; ?>&quot;);"></div>
-                        <?php } else if($review['propertyInfo']['name'] === 'google') { ?>
+                        <?php } else if($review['propertyInfo']['name'] === 'google' || $review['propertyInfo']['name'] === 'Google') { ?>
                             <div class="v-google-logo" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/google-logo.svg'; ?>&quot;);"></div>
                         <?php } else if($review['propertyInfo']['name'] === 'yelp') { ?>
                             <div class="v-yelp-logo" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/yelp-logo.png'; ?>&quot;);"></div>

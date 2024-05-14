@@ -173,7 +173,7 @@
                             <?php } ?>    
                             <?php if($review['propertyInfo']['name'] === 'facebook') { ?>
                                 <div class="c-facebook-logo"></div>
-                            <?php } else if($review['propertyInfo']['name'] === 'google') { ?>
+                            <?php } else if($review['propertyInfo']['name'] === 'google' || $review['propertyInfo']['name'] === 'Google') { ?>
                                 <div class="c-google-logo"></div>
                             <?php } else if($review['propertyInfo']['name'] === 'yelp') { ?>
                                 <div class="c-yelp-logo"></div>
