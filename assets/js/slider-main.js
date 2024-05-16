@@ -184,7 +184,7 @@ async function openPhotoLightbox(reviewData) {
         lbPropertyLogo.style.minWidth = '66px';
         lbPropertyLogo.style.minHeight = '26px';
         lbPropertyLogo.style.marginTop = '-5px';
-    } else if (reviewData.propertyInfo.name === 'google') {
+    } else if (reviewData.propertyInfo.name === 'google' || reviewData.propertyInfo.name === 'Google') {
         lbPropertyLogo.style.backgroundImage = 'url("../wp-content/plugins/widget-for-opio-reviews/assets/img/google-logo.svg")';
         lbPropertyLogo.style.width = '60px';
         lbPropertyLogo.style.height = '22px';
