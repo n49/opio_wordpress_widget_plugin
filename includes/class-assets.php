@@ -40,12 +40,12 @@ class Assets {
         add_action('wp_enqueue_scripts', array($this, 'register_scripts'));
 
         // load Roboto font from fonts fonts/roboto.css
-        wp_enqueue_style('roboto-font', $this->url . 'fonts/roboto.css', array(), $this->version);    
     }
 
     public function register_styles() {
         $styles = array('opio-admin-main-css', 'opio-public-main-css', 'opio-feed-css', 'opio-slick-theme-css', 'opio-slick-min-css');
         $this->register_styles_loop($styles);
+        wp_enqueue_style('roboto-font', $this->url . 'fonts/roboto.css', array(), $this->version);    
     }
 
     public function register_scripts() {

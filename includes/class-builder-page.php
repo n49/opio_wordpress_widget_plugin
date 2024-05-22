@@ -102,10 +102,15 @@ class Builder_Page {
                             }
                             else {
                                 $option = $review_option == "opio" ? "reviewFeed" : "allReviewFeed";
-                                $opio_handler = new Opio_Handler($biz_id, $option);
+                                $opio_handler = new Opio_Handler($biz_id, $option, $review_type, $org_id);
                                 $reviews = $opio_handler->get_business();
-                                $reviews = $this->feed_deserializer->prepareString($reviews);
-                                echo wp_kses($reviews, $this->feed_deserializer->get_allowed_tags());
+                                if($option == "allReviewFeed" && $review_type == "single") {
+                                    $reviews = $this->feed_deserializer->prepareString($reviews);
+                                    echo wp_kses($reviews, $this->feed_deserializer->get_allowed_tags());
+                                }
+                                else {
+                                    echo $reviews;
+                                }
                             }
                         // dd($biz_id);
                         ?>

@@ -4,21 +4,41 @@ namespace WP_Opio_Reviews\Includes;
 
 class Opio_Handler {
 
-    public function __construct($entity_id, $entity_type) {
+    public function __construct($entity_id, $entity_type, $review_type, $org_id) {
         $this->entity_id = $entity_id;
         $this->entity_type = $entity_type;
+        $this->review_type = $review_type;
+        $this->org_id = $org_id;
     }
 
     public function get_business() {
         $ent_id = $this->entity_id;
         $ent_type = $this->entity_type;
-        if($ent_type == 'allReviewFeed') {
+        $rev_type = $this->review_type;
+        $org_id = $this->org_id;
+        if($ent_type == 'allReviewFeed' && $rev_type == 'single') {
             $biz_url = "http://34.225.94.59/allReviewFeed?entId=${ent_id}&html=true";
             $business_string = wp_remote_get($biz_url);
         }
-        else {
-            $biz_url = "http://34.225.94.59/reviewFeed?entityid=${ent_id}&html=true";
+        else if($ent_type == 'reviewFeed' && $rev_type == 'single') {
+            $biz_url = "http://34.225.94.59/reviewFeed?entityid=${ent_id}";
             $business_string = wp_remote_get($biz_url);
+        }
+        else if($ent_type == 'reviewFeed' && $rev_type == 'multiple') {
+            $biz_url = "http://34.225.94.59/reviewFeed?entityid=${ent_id}";
+            $business_string = wp_remote_get($biz_url);
+        }
+        else if($ent_type == 'reviewFeed' && $rev_type == 'orgfeed') {
+            $biz_url = "http://34.225.94.59/multiReviewFeed?orgId=${org_id}&schema_enabled=true&schema_type=Local Business";
+            $business_string = wp_remote_get($biz_url);
+        }
+        else if($ent_type == 'allReviewFeed' && $rev_type == 'orgfeed') {
+            $biz_url = "http://34.225.94.59/multiReviewFeed/allReviews?orgId=${org_id}&schema_enabled=true&schema_type=Local Business";
+            $business_string = wp_remote_get($biz_url);
+        }
+        else {
+            echo esc_html("Invalid entity type");
+            return;
         }
         if (is_wp_error($business_string)) {
             $error_message = $business_string->get_error_message();
