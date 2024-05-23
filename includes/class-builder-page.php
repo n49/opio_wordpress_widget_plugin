@@ -104,7 +104,7 @@ class Builder_Page {
                                 $option = $review_option == "opio" ? "reviewFeed" : "allReviewFeed";
                                 $opio_handler = new Opio_Handler($biz_id, $option, $review_type, $org_id);
                                 $reviews = $opio_handler->get_business();
-                                if($option == "allReviewFeed" && $review_type == "single") {
+                                if($option == "allReviewFeeds" && $review_type == "singles") {
                                     $reviews = $this->feed_deserializer->prepareString($reviews);
                                     echo wp_kses($reviews, $this->feed_deserializer->get_allowed_tags());
                                 }

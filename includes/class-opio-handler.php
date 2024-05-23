@@ -17,7 +17,7 @@ class Opio_Handler {
         $rev_type = $this->review_type;
         $org_id = $this->org_id;
         if($ent_type == 'allReviewFeed' && $rev_type == 'single') {
-            $biz_url = "http://34.225.94.59/allReviewFeed?entId=${ent_id}&html=true";
+            $biz_url = "http://34.225.94.59/allReviewFeed?entId=${ent_id}";
             $business_string = wp_remote_get($biz_url);
         }
         else if($ent_type == 'reviewFeed' && $rev_type == 'single') {
