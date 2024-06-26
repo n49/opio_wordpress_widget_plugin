@@ -348,9 +348,21 @@
     ?>
     </div>
     <div class="c-rating-widget-container">
-        <div class="c-rating-row-1">
-            <span id="powered-by-text" class="c-pwd-span">Powered by</span><a href="https://www.opioapp.com"><div class="c-pwd-div" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>&quot;);"></div></a>
-        </div>
+        <?php if(isset($feed_object->opio_logo_color)) { ?>
+            <?php if($feed_object->opio_logo_color == 'blue' || $feed_object->opio_logo_color == '') { ?>
+                <div class="c-rating-row-1">
+                    <span id="powered-by-text" class="c-pwd-span">Powered by</span><a href="https://www.opioapp.com"><div class="c-pwd-div" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>&quot;);"></div></a>
+                </div>
+            <?php } else if($feed_object->opio_logo_color == 'white') { ?>
+                <div class="c-rating-row-1">
+                    <span id="powered-by-text" class="c-pwd-span">Powered by</span><a href="https://www.opioapp.com"><div class="c-pwd-div" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-white-logo.png'; ?>&quot;);"></div></a>
+                </div>
+            <?php } ?>
+        <?php } else { ?>
+            <div class="c-rating-row-1">
+                <span id="powered-by-text" class="c-pwd-span">Powered by</span><a href="https://www.opioapp.com"><div class="c-pwd-div" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>&quot;);"></div></a>
+            </div>        
+        <?php } ?>
         <div class="c-vertical-divider"></div>
         <div class="c-rating-row-2">
             <div style="display: flex; gap: 5px;">
@@ -430,7 +442,7 @@
     }
 
     <?php if(isset($feed_object->widget_background_color)) { ?>
-        .admin-widget-body {
+        .admin-widget-body, .slider-container.c-testimonial-slider {
             background-color: <?php echo esc_attr($feed_object->widget_background_color); ?>
         }
         .admin-widget-body .rating-widget-part {
@@ -438,6 +450,27 @@
         }
         .admin-widget-body .c-rating-widget-container {
             background-color: <?php echo esc_attr($feed_object->widget_background_color); ?>
+        }
+    <?php } ?>
+    <?php if(isset($feed_object->text_color)) { ?>
+        .admin-widget-body a {
+            color: <?php echo esc_attr($feed_object->text_color); ?>
+        }
+        .admin-widget-body .c-pwd-span {
+            color: <?php echo esc_attr($feed_object->text_color); ?>
+        }
+        .admin-widget-body .c-rating-row-span {
+            color: <?php echo esc_attr($feed_object->writereview_text_color); ?>
+        }
+    <?php } ?>
+    <?php if(isset($feed_object->writereview_button_color)) { ?>
+        .admin-widget-body .c-write-rev-outer-div {
+            background-color: <?php echo esc_attr($feed_object->writereview_button_color); ?>
+        }
+    <?php } ?>
+    <?php if(isset($feed_object->writereview_text_color)) { ?>
+        .admin-widget-body .c-write-rev-outer-div {
+            color: <?php echo esc_attr($feed_object->writereview_text_color); ?>
         }
     <?php } ?>
 </style>

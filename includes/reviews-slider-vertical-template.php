@@ -147,6 +147,19 @@ ob_start();
 
     }
 ?>
+
+<style>
+    <?php if(isset($feed_object->writereview_button_color)) { ?>
+        .widget-body .v-write-rev-div {
+            background-color: <?php echo esc_attr($feed_object->writereview_button_color); ?>
+        }
+    <?php } ?>
+    <?php if(isset($feed_object->writereview_text_color)) { ?>
+        .widget-body .v-write-rev-div {
+            color: <?php echo esc_attr($feed_object->writereview_text_color); ?>
+        }
+    <?php } ?>
+</style>
 <?php $currentReview = $review; ?>
 
 <?php if(isset($filteredReviews) && count(array_slice($filteredReviews, 0, 7)) > 3) { ?>

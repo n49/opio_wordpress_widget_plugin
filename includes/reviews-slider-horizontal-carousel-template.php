@@ -354,11 +354,27 @@ ob_start();
     </div>
     <div class="c-rating-widget-container">
         <div class="c-rating-row-1">
-        <?php if($isMobile) { ?>
-            <span id="powered-by-text" class="c-pwd-span"></span><a href="https://www.opioapp.com"><div class="c-pwd-div" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>);"></div></a>
-        <?php } else { ?>
-            <span id="powered-by-text" class="c-pwd-span">Powered by</span><a href="https://www.opioapp.com"><div class="c-pwd-div" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>);"></div></a>
-        <?php } ?>
+        <?php if(isset($feed_object->opio_logo_color)) { ?>
+            <?php if($feed_object->opio_logo_color == 'blue' || $feed_object->opio_logo_color == '') { ?>
+                <?php if($isMobile) { ?>
+                    <span id="powered-by-text" class="c-pwd-span"></span><a href="https://www.opioapp.com"><div class="c-pwd-div" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>);"></div></a>
+                <?php } else { ?>
+                    <span id="powered-by-text" class="c-pwd-span">Powered by</span><a href="https://www.opioapp.com"><div class="c-pwd-div" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>);"></div></a>
+                <?php } ?>
+            <?php } else if($feed_object->opio_logo_color == 'white') { ?>
+                <?php if($isMobile) { ?>
+                    <span id="powered-by-text" class="c-pwd-span"></span><a href="https://www.opioapp.com"><div class="c-pwd-div" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-white-logo.png'; ?>);"></div></a>
+                <?php } else { ?>
+                    <span id="powered-by-text" class="c-pwd-span">Powered by</span><a href="https://www.opioapp.com"><div class="c-pwd-div" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-white-logo.png'; ?>);"></div></a>
+                <?php } ?>
+            <?php } ?>
+            <?php } else { ?>
+                <?php if($isMobile) { ?>
+                    <span id="powered-by-text" class="c-pwd-span"></span><a href="https://www.opioapp.com"><div class="c-pwd-div" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>);"></div></a>
+                <?php } else { ?>
+                    <span id="powered-by-text" class="c-pwd-span">Powered by</span><a href="https://www.opioapp.com"><div class="c-pwd-div" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>);"></div></a>
+                <?php } ?>        
+            <?php } ?>
         </div>
         <div class="c-vertical-divider"></div>
         <div class="c-rating-row-2">
@@ -439,7 +455,7 @@ ob_start();
     }
 
     <?php if(isset($feed_object->widget_background_color)) { ?>
-        .widget-body {
+        .widget-body, .slider-container.c-testimonial-slider {
             background-color: <?php echo esc_attr($feed_object->widget_background_color); ?>
         }
         .widget-body .rating-widget-part {
@@ -447,6 +463,27 @@ ob_start();
         }
         .widget-body .c-rating-widget-container {
             background-color: <?php echo esc_attr($feed_object->widget_background_color); ?>
+        }
+    <?php } ?>
+    <?php if(isset($feed_object->text_color)) { ?>
+        .widget-body a {
+            color: <?php echo esc_attr($feed_object->text_color); ?>
+        }
+        .widget-body .c-rating-row-1 {
+            color: <?php echo esc_attr($feed_object->text_color); ?>
+        }
+        .widget-body .c-rating-row-2 {
+            color: <?php echo esc_attr($feed_object->text_color); ?>
+        }
+    <?php } ?>
+    <?php if(isset($feed_object->writereview_button_color)) { ?>
+        .widget-body .c-write-rev-outer-div {
+            background-color: <?php echo esc_attr($feed_object->writereview_button_color); ?>
+        }
+    <?php } ?>
+    <?php if(isset($feed_object->writereview_text_color)) { ?>
+        .widget-body .c-write-rev-outer-div {
+            color: <?php echo esc_attr($feed_object->writereview_text_color); ?>
         }
     <?php } ?>
 </style>
