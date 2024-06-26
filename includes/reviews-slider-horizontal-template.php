@@ -350,10 +350,26 @@ ob_start();
     </div>
     <div class="rating-widget-part">
         <div class="w-opio-logo-container">
-            <?php if($isMobile) { ?>
-                <span id="powered-by-text" class="w-pwd-text"></span><a href="https://www.opioapp.com"><div class="pwd-opio-logo" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>);"></div></a>
+            <?php if(isset($feed_object->opio_logo_color)) { ?>
+            <?php if($feed_object->opio_logo_color == 'blue' || $feed_object->opio_logo_color == '') { ?>
+                <?php if($isMobile) { ?>
+                    <span id="powered-by-text" class="w-pwd-text"></span><a href="https://www.opioapp.com"><div class="pwd-opio-logo" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>);"></div></a>
+                <?php } else { ?>
+                    <span id="powered-by-text" class="w-pwd-text">Powered by</span><a href="https://www.opioapp.com"><div class="pwd-opio-logo" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>);"></div></a>
+                <?php } ?>
+            <?php } else if($feed_object->opio_logo_color == 'white') { ?>
+                <?php if($isMobile) { ?>
+                    <span id="powered-by-text" class="w-pwd-text"></span><a href="https://www.opioapp.com"><div class="pwd-opio-logo" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-white-logo.png'; ?>);"></div></a>
+                <?php } else { ?>
+                    <span id="powered-by-text" class="w-pwd-text">Powered by</span><a href="https://www.opioapp.com"><div class="pwd-opio-logo" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-white-logo.png'; ?>);"></div></a>
+                <?php } ?>
+            <?php } ?>
             <?php } else { ?>
-                <span id="powered-by-text" class="w-pwd-text">Powered by</span><a href="https://www.opioapp.com"><div class="pwd-opio-logo" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>);"></div></a>
+                <?php if($isMobile) { ?>
+                    <span id="powered-by-text" class="w-pwd-text"></span><a href="https://www.opioapp.com"><div class="pwd-opio-logo" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>);"></div></a>
+                <?php } else { ?>
+                    <span id="powered-by-text" class="w-pwd-text">Powered by</span><a href="https://www.opioapp.com"><div class="pwd-opio-logo" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>);"></div></a>
+                <?php } ?>        
             <?php } ?>
         </div>
         <div class="vertical-divider"></div>
@@ -437,6 +453,24 @@ ob_start();
         }
         .widget-body .slider-container {
             background-color: <?php echo esc_attr($feed_object->widget_background_color); ?>
+        }
+    <?php } ?>
+    <?php if(isset($feed_object->text_color)) { ?>
+        .widget-body a {
+            color: <?php echo esc_attr($feed_object->text_color); ?>
+        }
+        .widget-body .rating-widget-part {
+            color: <?php echo esc_attr($feed_object->text_color); ?>
+        }
+    <?php } ?>
+    <?php if(isset($feed_object->writereview_button_color)) { ?>
+        .widget-body .write-review-btn {
+            background-color: <?php echo esc_attr($feed_object->writereview_button_color); ?>
+        }
+    <?php } ?>
+    <?php if(isset($feed_object->writereview_text_color)) { ?>
+        .widget-body .write-review-btn {
+            color: <?php echo esc_attr($feed_object->writereview_text_color); ?>
         }
     <?php } ?>
 </style>

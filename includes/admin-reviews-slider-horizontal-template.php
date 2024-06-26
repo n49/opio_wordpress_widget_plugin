@@ -341,7 +341,15 @@
     </div>
     <div class="rating-widget-part">
         <div class="w-opio-logo-container">
+        <?php if(isset($feed_object->opio_logo_color)) { ?>
+            <?php if($feed_object->opio_logo_color == 'blue' || $feed_object->opio_logo_color == '') { ?>
+                <span id="powered-by-text" class="w-pwd-text">Powered by</span><a href="https://www.opioapp.com"><div class="pwd-opio-logo" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>&quot;);"></div></a>
+            <?php } else if($feed_object->opio_logo_color == 'white') { ?>
+                <span id="powered-by-text" class="w-pwd-text">Powered by</span><a href="https://www.opioapp.com"><div class="pwd-opio-logo" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-white-logo.png'; ?>&quot;);"></div></a>
+            <?php } ?>
+        <?php } else { ?>
             <span id="powered-by-text" class="w-pwd-text">Powered by</span><a href="https://www.opioapp.com"><div class="pwd-opio-logo" style="background-image: url(&quot;<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>&quot;);"></div></a>
+        <?php } ?>
         </div>
         <div class="vertical-divider"></div>
         <div class="rating-widget">
@@ -424,6 +432,27 @@
         }
         .admin-widget-body .slider-container {
             background-color: <?php echo esc_attr($feed_object->widget_background_color); ?>
+        }
+    <?php } ?>
+    <?php if(isset($feed_object->text_color)) { ?>
+        .admin-widget-body a {
+            color: <?php echo esc_attr($feed_object->text_color); ?>
+        }
+        .admin-widget-body .w-pwd-text {
+            color: <?php echo esc_attr($feed_object->text_color); ?>
+        }
+    <?php } ?>
+    <?php if(isset($feed_object->writereview_button_color)) { ?>
+        .admin-widget-body .write-review-btn {
+            background-color: <?php echo esc_attr($feed_object->writereview_button_color); ?>
+        }
+    <?php } ?>
+    <?php if(isset($feed_object->writereview_text_color)) { ?>
+        .admin-widget-body .write-review-btn {
+            color: <?php echo esc_attr($feed_object->writereview_text_color); ?>
+        }
+        .admin-widget-body .rating-text {
+            color: <?php echo esc_attr($feed_object->writereview_text_color); ?>
         }
     <?php } ?>
 </style>

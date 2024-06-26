@@ -45,6 +45,10 @@ class Review_Slider {
         $business_name = '';
         $review_feed_link = '';
         $widget_background_color = '#ffffff';
+        $text_color = '#333333';
+        $writereview_button_color = '#0078ca';
+        $writereview_text_color = '#ffffff';
+        $opio_logo_color = '';
         $org_id = '';
         $feed_inited = false;
         $businesses = null;
@@ -61,6 +65,10 @@ class Review_Slider {
             $slider_type = $feed_object->slider_type;
             $review_feed_link = ($feed_object->review_feed_link);
             $widget_background_color = ($feed_object->widget_background_color);
+            $text_color = ($feed_object->text_color);
+            $writereview_button_color = ($feed_object->writereview_button_color);
+            $writereview_text_color = ($feed_object->writereview_text_color);
+            $opio_logo_color = $feed_object->opio_logo_color;
             $review_type = $feed_object->review_type;
             $review_option = $feed_object->review_option;
             if(isset($biz_org_id)  && $feed_object->review_type == "multiple") {
@@ -101,6 +109,9 @@ class Review_Slider {
                                 $slider_type = $feed_object->slider_type;
                                 $review_feed_link = $feed_object->review_feed_link;
                                 $widget_background_color = $feed_object->widget_background_color;
+                                $text_color = $feed_object->text_color;
+                                $writereview_button_color = $feed_object->writereview_button_color;
+                                $writereview_text_color = $feed_object->writereview_text_color;
                             ?>
                                 
                             <?php if($slider_type == 'horizontal') { ?>
@@ -191,8 +202,31 @@ class Review_Slider {
                     </div>
                  
                     <div class="opio-slider-inside">
-                        <div class="opio-slider-first">Widget Background Color</div>
-                        <input id="widget_background_color" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[widget_background_color]" value="<?php echo esc_attr($widget_background_color) ?>" type="text"/>
+                        <div class="opio-slider-first">Widget Background Color (HEX code)</div>
+                        <input id="" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[widget_background_color]" value="<?php echo esc_attr($widget_background_color) ?>" type="text"/>
+                    </div>
+
+                    <div class="opio-slider-inside">
+                        <div class="opio-slider-first">Text Color (HEX code)</div>
+                        <input id="text_color" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[text_color]" value="<?php echo esc_attr($text_color) ?>" type="text"/>
+                    </div>
+
+                    <div class="opio-slider-inside">
+                        <div class="opio-slider-first">Writereview Button Color (HEX code)</div>
+                        <input id="writereview_button_color" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[writereview_button_color]" value="<?php echo esc_attr($writereview_button_color) ?>" type="text"/>
+                    </div>
+
+                    <div class="opio-slider-inside">
+                        <div class="opio-slider-first">Writereview Text Color (HEX code)</div>
+                        <input id="writereview_text_color" name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[writereview_text_color]" value="<?php echo esc_attr($writereview_text_color) ?>" type="text"/>
+                    </div>
+
+                    <div class="opio-slider-inside">
+                        <div class="opio-slider-first">Opio Logo Color</div>
+                        <select name="<?php echo esc_attr(Post_Types::SLIDER_POST_TYPE); ?>[opio_logo_color]" value="<?php echo esc_attr($opio_logo_color) ?>">
+                            <option value="blue" <?php if ($opio_logo_color == 'blue') { echo esc_html('selected'); } ?>>Blue</option>
+                            <option value="white" <?php if ($opio_logo_color == 'white') { echo esc_html('selected'); } ?>>White</option>
+                            </select>
                     </div>
 
                     <div class="opio-slider-inside">
