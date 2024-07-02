@@ -1152,21 +1152,20 @@
 .admin-widget-body .see-all-text {
     display: flex; 
     font-size: 14px;
+    text-decoration: none;
 }
 
 .admin-widget-body a,
 .admin-widget-body a:visited {
     font-size: 14px;
     font-family: 'Roboto', sans-serif;
-    text-decoration: underline;
-    color: #333333;
     font-weight: 400;
     transition: color 0.3s ease;
 }
 
 .admin-widget-body a:hover,
 .admin-widget-body a:visited:hover {
-    color: #333333;
+    text-decoration: underline;
 }
 
 .admin-widget-body ::selection {
