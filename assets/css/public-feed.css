@@ -1066,21 +1066,20 @@ height: unset !important;
 .widget-body .see-all-text {
     display: flex; 
     font-size: 14px;
+    text-decoration: none;
 }
 
 .widget-body a,
 .widget-body a:visited {
     font-size: 14px;
     font-family: 'Roboto', sans-serif;
-    text-decoration: underline;
-    color: #333333;
     font-weight: 400;
     transition: color 0.3s ease;
 }
 
 .widget-body a:hover,
 .widget-body a:visited:hover {
-    color: #333333;
+    text-decoration: underline;
 }
 
 .widget-body ::selection {
@@ -1989,6 +1988,7 @@ height: unset !important;
     display: flex;
     font-size: 14px;
     align-items: flex-end;
+    text-decoration: none;
 }
 
 .widget-body .c-write-rev-container {
