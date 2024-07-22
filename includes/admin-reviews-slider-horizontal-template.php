@@ -520,6 +520,9 @@
             "addressRegion": "<?php echo esc_attr($business["address"]["province"]); ?>",
             "postalCode": "<?php echo esc_attr($business["address"]["postalCode"]); ?>"
         },
+        <?php if(isset($business['lowPriceRange']) && isset($business['highPriceRange']) && $business['lowPriceRange'] !== null && $business['highPriceRange'] !== null) { ?>
+            "priceRange": "$<?php echo $business['lowPriceRange']?> - $<?php echo $business['highPriceRange']?>",
+        <?php } ?>
         "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": "<?php echo esc_attr($aggregateRating); ?>",
