@@ -17,23 +17,23 @@ class Opio_Handler {
         $rev_type = $this->review_type;
         $org_id = $this->org_id;
         if($ent_type == 'allReviewFeed' && $rev_type == 'single') {
-            $biz_url = "http://34.225.94.59/allReviewFeed?entId=${ent_id}";
+            $biz_url = "https://feed.op.io/allReviewFeed?entId=${ent_id}";
             $business_string = wp_remote_get($biz_url);
         }
         else if($ent_type == 'reviewFeed' && $rev_type == 'single') {
-            $biz_url = "http://34.225.94.59/reviewFeed?entityid=${ent_id}";
+            $biz_url = "https://feed.op.io/reviewFeed?entityid=${ent_id}";
             $business_string = wp_remote_get($biz_url);
         }
         else if($ent_type == 'reviewFeed' && $rev_type == 'multiple') {
-            $biz_url = "http://34.225.94.59/reviewFeed?entityid=${ent_id}";
+            $biz_url = "https://feed.op.io/reviewFeed?entityid=${ent_id}";
             $business_string = wp_remote_get($biz_url);
         }
         else if($ent_type == 'reviewFeed' && $rev_type == 'orgfeed') {
-            $biz_url = "http://34.225.94.59/multiReviewFeed?orgId=${org_id}&schema_enabled=true&schema_type=Local Business";
+            $biz_url = "https://feed.op.io/multiReviewFeed?orgId=${org_id}&schema_enabled=true&schema_type=Local Business";
             $business_string = wp_remote_get($biz_url);
         }
         else if($ent_type == 'allReviewFeed' && $rev_type == 'orgfeed') {
-            $biz_url = "http://34.225.94.59/multiReviewFeed/allReviews?orgId=${org_id}&schema_enabled=true&schema_type=Local Business";
+            $biz_url = "https://feed.op.io/multiReviewFeed/allReviews?orgId=${org_id}&schema_enabled=true&schema_type=Local Business";
             $business_string = wp_remote_get($biz_url);
         }
         else {
