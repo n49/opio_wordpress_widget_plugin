@@ -400,7 +400,13 @@ ob_start();
             "reviewCount": "<?php echo esc_attr($totalReviews); ?>"
         },
         <?php if(isset($business['lowPriceRange']) && isset($business['highPriceRange']) && $business['lowPriceRange'] !== null && $business['highPriceRange'] !== null) { ?>
-            "priceRange": "$<?php echo $business['lowPriceRange']?> - $<?php echo $business['highPriceRange']?>",
+            "offers": {
+                "@type": "AggregateOffer",
+                "offerCount": 5,
+                "lowPrice": "<?php echo $business['lowPriceRange']?>",
+                "highPrice": "<?php echo $business['highPriceRange']?>",
+                "priceCurrency": "CAD"
+            },
         <?php } ?>
         "review": [
             <?php foreach(array_slice($filteredReviews, 0, 7) as $key => $review) { ?>
