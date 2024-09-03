@@ -24,8 +24,12 @@ class Opio_Handler {
             $biz_url = "https://feed.op.io/reviewFeed?entityid=${ent_id}";
             $business_string = wp_remote_get($biz_url);
         }
+        else if($ent_type == 'allReviewFeed' && $rev_type == 'multiple') {
+            $biz_url = "https://feed.op.io/allReviewFeed?entId=${ent_id}";
+            $business_string = wp_remote_get($biz_url);
+        }
         else if($ent_type == 'reviewFeed' && $rev_type == 'multiple') {
-            $biz_url = "https://feed.op.io/reviewFeed?entityid=${ent_id}";
+            $biz_url = "https://feed.op.io/reviewFeed?entId=${ent_id}";
             $business_string = wp_remote_get($biz_url);
         }
         else if($ent_type == 'reviewFeed' && $rev_type == 'orgfeed') {
