@@ -18,27 +18,27 @@ class Opio_Handler {
         $org_id = $this->org_id;
         if($ent_type == 'allReviewFeed' && $rev_type == 'single') {
             $biz_url = "https://feed.op.io/allReviewFeed?entId=${ent_id}";
-            $business_string = wp_remote_get($biz_url);
+            $business_string = file_get_contents($biz_url);
         }
         else if($ent_type == 'reviewFeed' && $rev_type == 'single') {
             $biz_url = "https://feed.op.io/reviewFeed?entityid=${ent_id}";
-            $business_string = wp_remote_get($biz_url);
+            $business_string = file_get_contents($biz_url);
         }
         else if($ent_type == 'allReviewFeed' && $rev_type == 'multiple') {
             $biz_url = "https://feed.op.io/allReviewFeed?entId=${ent_id}";
-            $business_string = wp_remote_get($biz_url);
+            $business_string = file_get_contents($biz_url);
         }
         else if($ent_type == 'reviewFeed' && $rev_type == 'multiple') {
             $biz_url = "https://feed.op.io/reviewFeed?entId=${ent_id}";
-            $business_string = wp_remote_get($biz_url);
+            $business_string = file_get_contents($biz_url);
         }
         else if($ent_type == 'reviewFeed' && $rev_type == 'orgfeed') {
             $biz_url = "https://feed.op.io/multiReviewFeed?orgId=${org_id}&schema_enabled=true&schema_type=Local Business";
-            $business_string = wp_remote_get($biz_url);
+            $business_string = file_get_contents($biz_url);
         }
         else if($ent_type == 'allReviewFeed' && $rev_type == 'orgfeed') {
             $biz_url = "https://feed.op.io/multiReviewFeed/allReviews?orgId=${org_id}&schema_enabled=true&schema_type=Local Business";
-            $business_string = wp_remote_get($biz_url);
+            $business_string = file_get_contents($biz_url);
         }
         else {
             echo esc_html("Invalid entity type");
@@ -53,6 +53,6 @@ class Opio_Handler {
             echo esc_html("Sorry! This entity doesn't have all reviews feed enabled");
             return;
         }
-        return $business_string['body'];
+        return $business_string;
     }
 }
