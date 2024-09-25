@@ -18,35 +18,29 @@ class Opio_Handler {
         $org_id = $this->org_id;
         if($ent_type == 'allReviewFeed' && $rev_type == 'single') {
             $biz_url = "https://feed.op.io/allReviewFeed?entId=${ent_id}";
-            $business_string = wp_remote_get($biz_url);
         }
         else if($ent_type == 'reviewFeed' && $rev_type == 'single') {
             $biz_url = "https://feed.op.io/reviewFeed?entityid=${ent_id}";
-            $business_string = wp_remote_get($biz_url);
         }
         else if($ent_type == 'allReviewFeed' && $rev_type == 'multiple') {
             $biz_url = "https://feed.op.io/allReviewFeed?entId=${ent_id}";
-            $business_string = wp_remote_get($biz_url);
         }
         else if($ent_type == 'reviewFeed' && $rev_type == 'multiple') {
             $biz_url = "https://feed.op.io/reviewFeed?entId=${ent_id}";
-            $business_string = wp_remote_get($biz_url);
         }
         else if($ent_type == 'reviewFeed' && $rev_type == 'orgfeed') {
             $biz_url = "https://feed.op.io/multiReviewFeed?orgId=${org_id}&schema_enabled=true&schema_type=Local Business";
-            $business_string = wp_remote_get($biz_url);
         }
         else if($ent_type == 'allReviewFeed' && $rev_type == 'orgfeed') {
             $biz_url = "https://feed.op.io/multiReviewFeed/allReviews?orgId=${org_id}&schema_enabled=true&schema_type=Local Business";
             // url encode the url
             $biz_url = str_replace(" ", "%20", $biz_url);
-            $business_string = wp_remote_get($biz_url);
         }
         else {
             echo esc_html("Invalid entity type");
             return;
         }
-// 		var_dump($biz_url);
+        $business_string = wp_remote_get($biz_url, ['timeout' => 20]);
         if (is_wp_error($business_string)) {
             $error_message = $business_string->get_error_message();
             echo esc_html("Something went wrong: $error_message");
