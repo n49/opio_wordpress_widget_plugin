@@ -439,11 +439,12 @@ function closePhotoLightbox() {
     document.cookie = 'reviewIndex=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 }
 
-jQuery(document).ready(function () {
+(function ($) {
+    $(document).ready(function () {
     console.log('jQuery(document) is loaded....');
 
     // Initialize the Slick slider
-    var c_slider = jQuery('.c-testimonial-slider').slick({
+    var c_slider = $('.c-testimonial-slider').slick({
         autoplay: true,
         autoplaySpeed: 2000,
         speed: 600,
@@ -462,7 +463,7 @@ jQuery(document).ready(function () {
                 }
             },
             {
-            breakpoint: 767, // Adjusted breakpoint for better mobile experience
+                breakpoint: 767, // Adjusted breakpoint for better mobile experience
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,
@@ -478,27 +479,29 @@ jQuery(document).ready(function () {
         ]
     });
 
-    console.log('c-slider is loaded',c_slider);
-    jQuery('.c-testimonial-slider').slick('refresh');
+    console.log('c-slider is loaded', c_slider);
+    $('.c-testimonial-slider').slick('refresh');
 
-    console.log('c-slider is refreshed',c_slider);
+    console.log('c-slider is refreshed', c_slider);
 
     // Move to the next slide on clicking the ">" button
-    jQuery('.c-slider-button.right').click(function () {
+    $('.c-slider-button.right').click(function () {
         c_slider.slick('slickNext');
     });
 
     // Move to the previous slide on clicking the "<" button
-    jQuery('.c-slider-button.left').click(function () {
+    $('.c-slider-button.left').click(function () {
         c_slider.slick('slickPrev');
     });
-});
+    });
+})(jQuery);
 
-jQuery(document).ready(function () {
+(function ($) {
+    $(document).ready(function () {
     console.log('jQuery(document) is loaded....');
 
     // Initialize the Slick slider
-    var v_slider = jQuery('.v-testimonial-slider').slick({
+    var v_slider = $('.v-testimonial-slider').slick({
         autoplay: true,
         autoplaySpeed: 4000,
         speed: 600,
@@ -510,27 +513,29 @@ jQuery(document).ready(function () {
         dots: false,
         vertical: true,
     });
-    console.log('v-slider is loaded',v_slider);
+    console.log('v-slider is loaded', v_slider);
 
-    jQuery('.v-testimonial-slider').slick('refresh');
+    $('.v-testimonial-slider').slick('refresh');
 
-    console.log('v-slider is refreshed',v_slider);
+    console.log('v-slider is refreshed', v_slider);
     // Move to the next slide on clicking the ">" button
-    jQuery('.v-slider-button.right').click(function () {
+    $('.v-slider-button.right').click(function () {
         v_slider.slick('slickNext');
     });
 
     // Move to the previous slide on clicking the "<" button
-    jQuery('.v-slider-button.left').click(function () {
+    $('.v-slider-button.left').click(function () {
         v_slider.slick('slickPrev');
     });
-});
+    });
+})(jQuery);
 
-jQuery(document).ready(function () {
+(function ($) {
+    $(document).ready(function () {
     console.log('jQuery(document) is loaded....');
 
     // Initialize the Slick slider
-    var h_slider = jQuery('.h-testimonial-slider').slick({
+    var h_slider = $('.h-testimonial-slider').slick({
         autoplay: true,
         autoplaySpeed: 2000,
         speed: 600,
@@ -571,21 +576,22 @@ jQuery(document).ready(function () {
             }
         ]
     });
-    console.log('h-slider is loaded',h_slider);
+    console.log('h-slider is loaded', h_slider);
 
-    jQuery('.h-testimonial-slider').slick('refresh');
+    $('.h-testimonial-slider').slick('refresh');
 
-    console.log('h-slider is refreshed',h_slider);
+    console.log('h-slider is refreshed', h_slider);
 
-    jQuery('.slider-button.right').click(function () {
+    $('.slider-button.right').click(function () {
         h_slider.slick('slickNext');
     });
 
     // Move to the previous slide on clicking the "<" button
-    jQuery('.slider-button.left').click(function () {
+    $('.slider-button.left').click(function () {
         h_slider.slick('slickPrev');
     });
-});
+    });
+})(jQuery);
 
 // Close lightbox when clicking outside the video container
 window.addEventListener('click', function (event) {
