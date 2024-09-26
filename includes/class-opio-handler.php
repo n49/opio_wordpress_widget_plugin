@@ -17,22 +17,22 @@ class Opio_Handler {
         $rev_type = $this->review_type;
         $org_id = $this->org_id;
         if($ent_type == 'allReviewFeed' && $rev_type == 'single') {
-            $biz_url = "https://feed.op.io/allReviewFeed?entId=${ent_id}";
+            $biz_url = "https://dashboard.n49.com/native/allReviewFeed?entId=${ent_id}";
         }
         else if($ent_type == 'reviewFeed' && $rev_type == 'single') {
-            $biz_url = "https://feed.op.io/reviewFeed?entityid=${ent_id}";
+            $biz_url = "https://dashboard.n49.com/native/reviewFeed?entityid=${ent_id}";
         }
         else if($ent_type == 'allReviewFeed' && $rev_type == 'multiple') {
-            $biz_url = "https://feed.op.io/allReviewFeed?entId=${ent_id}";
+            $biz_url = "https://dashboard.n49.com/native/allReviewFeed?entId=${ent_id}";
         }
         else if($ent_type == 'reviewFeed' && $rev_type == 'multiple') {
-            $biz_url = "https://feed.op.io/reviewFeed?entId=${ent_id}";
+            $biz_url = "https://dashboard.n49.com/native/reviewFeed?entId=${ent_id}";
         }
         else if($ent_type == 'reviewFeed' && $rev_type == 'orgfeed') {
-            $biz_url = "https://feed.op.io/multiReviewFeed?orgId=${org_id}&schema_enabled=true&schema_type=Local Business";
+            $biz_url = "https://dashboard.n49.com/native/multiReviewFeed?orgId=${org_id}&schema_enabled=true&schema_type=Local Business";
         }
         else if($ent_type == 'allReviewFeed' && $rev_type == 'orgfeed') {
-            $biz_url = "https://feed.op.io/multiReviewFeed/allReviews?orgId=${org_id}&schema_enabled=true&schema_type=Local Business";
+            $biz_url = "https://dashboard.n49.com/native/multiReviewFeed/allReviews?orgId=${org_id}&schema_enabled=true&schema_type=Local Business";
             // url encode the url
             $biz_url = str_replace(" ", "%20", $biz_url);
         }
