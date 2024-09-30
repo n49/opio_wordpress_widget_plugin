@@ -443,8 +443,11 @@ function closePhotoLightbox() {
     $(document).ready(function () {
     console.log('jQuery(document) is loaded....');
 
+    var opioSlick = $.fn.slick.noConflict();
+    console.log('opioSlick: ',opioSlick);
+
     // Initialize the Slick slider
-    var c_slider = $('.c-testimonial-slider').slick({
+    var c_slider = $('.c-testimonial-slider').opioSlick({
         autoplay: true,
         autoplaySpeed: 2000,
         speed: 600,
@@ -480,18 +483,18 @@ function closePhotoLightbox() {
     });
 
     console.log('c-slider is loaded', c_slider);
-    $('.c-testimonial-slider').slick('refresh');
+    $('.c-testimonial-slider').opioSlick('refresh');
 
     console.log('c-slider is refreshed', c_slider);
 
     // Move to the next slide on clicking the ">" button
     $('.c-slider-button.right').click(function () {
-        c_slider.slick('slickNext');
+        c_slider.opioSlick('slickNext');
     });
 
     // Move to the previous slide on clicking the "<" button
     $('.c-slider-button.left').click(function () {
-        c_slider.slick('slickPrev');
+        c_slider.opioSlick('slickPrev');
     });
     });
 })(jQuery);
@@ -500,8 +503,11 @@ function closePhotoLightbox() {
     $(document).ready(function () {
     console.log('jQuery(document) is loaded....');
 
+    var opioSlick = $.fn.slick.noConflict();
+    console.log('opioSlick: ',opioSlick);
+
     // Initialize the Slick slider
-    var v_slider = $('.v-testimonial-slider').slick({
+    var v_slider = $('.v-testimonial-slider').opioSlick({
         autoplay: true,
         autoplaySpeed: 4000,
         speed: 600,
@@ -515,17 +521,17 @@ function closePhotoLightbox() {
     });
     console.log('v-slider is loaded', v_slider);
 
-    $('.v-testimonial-slider').slick('refresh');
+    $('.v-testimonial-slider').opioSlick('refresh');
 
     console.log('v-slider is refreshed', v_slider);
     // Move to the next slide on clicking the ">" button
     $('.v-slider-button.right').click(function () {
-        v_slider.slick('slickNext');
+        v_slider.opioSlick('slickNext');
     });
 
     // Move to the previous slide on clicking the "<" button
     $('.v-slider-button.left').click(function () {
-        v_slider.slick('slickPrev');
+        v_slider.opioSlick('slickPrev');
     });
     });
 })(jQuery);
@@ -534,8 +540,11 @@ function closePhotoLightbox() {
     $(document).ready(function () {
     console.log('jQuery(document) is loaded....');
 
+    var opioSlick = $.fn.slick.noConflict();
+    console.log('opioSlick: ',opioSlick);
+
     // Initialize the Slick slider
-    var h_slider = $('.h-testimonial-slider').slick({
+    var h_slider = $('.h-testimonial-slider').opioSlick({
         autoplay: true,
         autoplaySpeed: 2000,
         speed: 600,
@@ -578,17 +587,17 @@ function closePhotoLightbox() {
     });
     console.log('h-slider is loaded', h_slider);
 
-    $('.h-testimonial-slider').slick('refresh');
+    $('.h-testimonial-slider').opioSlick('refresh');
 
     console.log('h-slider is refreshed', h_slider);
 
     $('.slider-button.right').click(function () {
-        h_slider.slick('slickNext');
+        h_slider.opioSlick('slickNext');
     });
 
     // Move to the previous slide on clicking the "<" button
     $('.slider-button.left').click(function () {
-        h_slider.slick('slickPrev');
+        h_slider.opioSlick('slickPrev');
     });
     });
 })(jQuery);
