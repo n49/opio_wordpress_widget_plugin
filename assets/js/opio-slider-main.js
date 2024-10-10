@@ -1,4 +1,3 @@
-console.log('slider-main.js file is loaded....');
 function getStarRatingJS(average) {
     var starColor = '#E6E8EB';
     if(average > 0.5) {
@@ -441,7 +440,6 @@ function closePhotoLightbox() {
 
 (function ($) {
     $(document).ready(function () {
-    console.log('jQuery(document) is loaded....');
 
     // Initialize the Slick slider
     var c_slider = $('.c-testimonial-slider').slick({
@@ -479,10 +477,7 @@ function closePhotoLightbox() {
         ]
     });
 
-    console.log('c-slider is loaded', c_slider);
     $('.c-testimonial-slider').slick('refresh');
-
-    console.log('c-slider is refreshed', c_slider);
 
     // Move to the next slide on clicking the ">" button
     $('.c-slider-button.right').click(function () {
@@ -498,7 +493,6 @@ function closePhotoLightbox() {
 
 (function ($) {
     $(document).ready(function () {
-    console.log('jQuery(document) is loaded....');
 
     // Initialize the Slick slider
     var v_slider = $('.v-testimonial-slider').slick({
@@ -513,11 +507,9 @@ function closePhotoLightbox() {
         dots: false,
         vertical: true,
     });
-    console.log('v-slider is loaded', v_slider);
 
     $('.v-testimonial-slider').slick('refresh');
 
-    console.log('v-slider is refreshed', v_slider);
     // Move to the next slide on clicking the ">" button
     $('.v-slider-button.right').click(function () {
         v_slider.slick('slickNext');
@@ -532,7 +524,6 @@ function closePhotoLightbox() {
 
 (function ($) {
     $(document).ready(function () {
-    console.log('jQuery(document) is loaded....');
 
     // Initialize the Slick slider
     var h_slider = $('.h-testimonial-slider').slick({
@@ -576,11 +567,8 @@ function closePhotoLightbox() {
             }
         ]
     });
-    console.log('h-slider is loaded', h_slider);
 
     $('.h-testimonial-slider').slick('refresh');
-
-    console.log('h-slider is refreshed', h_slider);
 
     $('.slider-button.right').click(function () {
         h_slider.slick('slickNext');
