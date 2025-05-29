@@ -325,6 +325,8 @@
     }
 </style>
 
+<?php if(isset($filteredReviews) && count(array_slice($filteredReviews, 0, 7)) > 3) { ?>
+
 <?php if(isset($feed_object->schema_enabled) && $feed_object->schema_enabled == 'yes') { ?>
 
 <!-- JSON schema starts-->
@@ -441,4 +443,5 @@
 
 <?php } ?>
 
+<?php } ?>
 
