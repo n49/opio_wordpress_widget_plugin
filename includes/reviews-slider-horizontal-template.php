@@ -475,6 +475,8 @@ ob_start();
     <?php } ?>
 </style>
 
+<?php if(isset($filteredReviews) && count(array_slice($filteredReviews, 0, 8)) > 3) { ?>
+
 <?php if(isset($feed_object->schema_enabled) && $feed_object->schema_enabled == 'yes') { ?>
 
 <!-- JSON schema starts-->
@@ -588,6 +590,8 @@ ob_start();
 <?php } ?>
 
 <!-- JSON schema ends-->
+
+<?php } ?>
 
 <?php } ?>
 </div>
