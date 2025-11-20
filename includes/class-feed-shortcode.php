@@ -13,8 +13,13 @@ class Feed_Shortcode {
         $this->feed_deserializer = $feed_deserializer;
         // Hook early to pre-process shortcodes and extract schemas before wp_head runs
         add_action('template_redirect', array($this, 'pre_process_schemas'), 1);
-        // Hook into wp_head to output schemas
+        // Start output buffering early to capture entire page output
+        // This must start BEFORE wp_head to capture it
+        add_action('template_redirect', array($this, 'start_output_buffering'), 999);
+        // Hook into wp_head to output schemas (if they were pre-processed)
         add_action('wp_head', array($this, 'output_schemas_to_head'), 1);
+        // Process buffer on shutdown to inject schemas (if they were found after wp_head)
+        add_action('shutdown', array($this, 'process_output_buffer'), 999);
     }
 
     function custom_esc($str) {
@@ -177,13 +182,109 @@ class Feed_Shortcode {
     }
 
     /**
+     * Start output buffering to capture page output
+     * This captures the entire page including wp_head so we can inject schemas if needed
+     */
+    public function start_output_buffering() {
+        // Only start buffering on front-end pages
+        if (is_admin() || wp_doing_ajax() || wp_is_json_request()) {
+            return;
+        }
+        
+        // Check if output buffering is already started (by another plugin)
+        // If so, we'll work with the existing buffer
+        if (ob_get_level() > 0) {
+            return;
+        }
+        
+        // Start output buffering with callback
+        ob_start(array($this, 'buffer_callback'));
+    }
+    
+    /**
+     * Process output buffer on shutdown
+     * When output buffering with a callback is used, WordPress automatically processes it
+     * But we need to ensure buffers are properly flushed
+     */
+    public function process_output_buffer() {
+        // Only process on front-end pages
+        if (is_admin() || wp_doing_ajax() || wp_is_json_request()) {
+            return;
+        }
+        
+        // If we started a buffer with a callback, WordPress will handle it
+        // But we need to ensure any remaining buffers are flushed
+        $buffer_level = ob_get_level();
+        if ($buffer_level > 0) {
+            // If we have schemas to inject, make sure the buffer is processed
+            // The callback will handle the injection
+            // WordPress will automatically call the callback when ob_end_flush is called
+            // But we need to make sure the buffer level is correct
+            // Note: If there are multiple buffers, we only want to flush ours
+            // WordPress typically handles the top-level buffer automatically
+        }
+    }
+    
+    /**
+     * Buffer callback - inject schemas into head section if they weren't output in wp_head
+     */
+    public function buffer_callback($buffer) {
+        // Only process if we have schemas
+        if (empty(self::$schema_scripts)) {
+            return $buffer;
+        }
+        
+        // Check if schemas are already in the head section
+        if (preg_match('/<head[^>]*>(.*?)<\/head>/is', $buffer, $head_match)) {
+            $head_content = $head_match[1];
+            // Check if head already contains our schemas
+            $has_our_schema = (stripos($head_content, 'id="jsonldSchema"') !== false);
+            if ($has_our_schema) {
+                // Schemas already in head, return as-is
+                return $buffer;
+            }
+        }
+        
+        // Find the closing </head> tag
+        $head_position = stripos($buffer, '</head>');
+        if ($head_position === false) {
+            // No head tag found, return as-is
+            return $buffer;
+        }
+        
+        // Get unique schemas (deduplicate)
+        $unique_schemas = array_unique(self::$schema_scripts, SORT_STRING);
+        
+        // Build schema HTML to inject
+        $schema_html = "\n";
+        foreach ($unique_schemas as $schema) {
+            $schema_html .= $schema . "\n";
+        }
+        
+        // Inject schemas before closing </head> tag
+        $buffer = substr_replace($buffer, $schema_html . '</head>', $head_position, 7);
+        
+        return $buffer;
+    }
+    
+    /**
      * Output all collected schemas to the head
      */
     public function output_schemas_to_head() {
-        if (!empty(self::$schema_scripts)) {
-            foreach (self::$schema_scripts as $schema) {
-                echo $schema . "\n";
-            }
+        // Use static flag to prevent duplicate output
+        static $already_output = false;
+        
+        if ($already_output || empty(self::$schema_scripts)) {
+            return;
+        }
+        
+        $already_output = true;
+        
+        // Deduplicate schemas
+        $unique_schemas = array_unique(self::$schema_scripts, SORT_STRING);
+        
+        foreach ($unique_schemas as $schema) {
+            echo $schema . "\n";
         }
     }
 
@@ -226,11 +327,10 @@ class Feed_Shortcode {
             $opio_handler = new Opio_Handler($biz_id, $option, $review_type, $org_id);
             $reviews = $opio_handler->get_business();
 
-            // Extract schema if not already processed (fallback for dynamically added shortcodes)
-            // Note: This won't add to head if wp_head already fired, but will remove from body
+            // Extract schema and store it (even if wp_head already fired - we'll inject via buffer)
             $schemas = $this->extract_schema_from_html($reviews);
-            if (!empty($schemas) && !did_action('wp_head')) {
-                // Only add if wp_head hasn't fired yet
+            if (!empty($schemas)) {
+                // Always store schemas - we'll inject them via output buffer if wp_head already fired
                 self::$schema_scripts = array_merge(self::$schema_scripts, $schemas);
             }
 
