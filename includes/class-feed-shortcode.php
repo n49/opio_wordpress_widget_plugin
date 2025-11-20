@@ -34,6 +34,7 @@ class Feed_Shortcode {
     /**
      * Extract all link and script tags from head section (everything except JSON-LD schema)
      * Prioritizes font links to ensure they load first
+     * Adds Nitropack exclusion attributes to prevent optimization issues
      */
     private function extract_head_resources($html) {
         $font_links = '';
@@ -49,8 +50,17 @@ class Feed_Shortcode {
                 foreach ($link_matches[0] as $link) {
                     // Prioritize font links (Google Fonts, etc.)
                     if (preg_match('/fonts\.(googleapis|gstatic)/i', $link) || preg_match('/font/i', $link)) {
+                        // Add Nitropack exclusion attributes to font links to prevent optimization issues
+                        if (strpos($link, 'data-nitro-exclude') === false) {
+                            // Insert data-nitro attributes before closing >
+                            $link = str_replace('>', ' data-nitro-exclude="all" data-nitro-ignore="true">', $link);
+                        }
                         $font_links .= $link . "\n";
                     } else {
+                        // Add Nitropack exclusion to other stylesheets as well
+                        if (strpos($link, 'rel="stylesheet"') !== false && strpos($link, 'data-nitro-exclude') === false) {
+                            $link = str_replace('>', ' data-nitro-exclude="all" data-nitro-ignore="true">', $link);
+                        }
                         $other_links .= $link . "\n";
                     }
                 }
@@ -129,7 +139,9 @@ class Feed_Shortcode {
                 echo $jsonld_schema;
             }
             
-            // 2. Head resources (links and scripts)
+            // 2. Head resources (links and scripts) - must come before div with "all: initial"
+            // Font links need to load before the CSS reset applies
+            // Note: Links and scripts in body are valid HTML5, but should be output early
             if (!empty($head_resources)) {
                 echo $head_resources;
             }
