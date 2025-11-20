@@ -8,6 +8,7 @@ class Feed_Shortcode {
 
     private static $schema_scripts = array();
     private static $schemas_processed = false;
+    private static $schemas_output_in_head = false; // Track if schemas were successfully output in head
 
     public function __construct(Feed_Deserializer $feed_deserializer) {
         $this->feed_deserializer = $feed_deserializer;
@@ -40,46 +41,109 @@ class Feed_Shortcode {
 
         global $wp_query, $post;
         
-        $content = '';
         $feed_ids = array();
+        $content_sources = array();
 
         // Check current post/page content
         if ($post && isset($post->post_content)) {
-            $content .= $post->post_content;
+            $content_sources[] = $post->post_content;
         }
 
         // Check all posts in the main query (for archive pages, etc.)
         if ($wp_query && isset($wp_query->posts) && is_array($wp_query->posts)) {
             foreach ($wp_query->posts as $query_post) {
                 if (isset($query_post->post_content)) {
-                    $content .= $query_post->post_content;
+                    $content_sources[] = $query_post->post_content;
                 }
             }
         }
 
-        // Extract all opio_feed shortcode IDs from content using regex
-        if (preg_match_all('/\[opio_feed[^\]]*id=["\']?(\d+)["\']?[^\]]*\]/i', $content, $matches)) {
-            if (!empty($matches[1])) {
-                $feed_ids = array_unique(array_map('intval', $matches[1]));
-            }
-        }
-
-        // Also try parsing shortcode attributes for cases where format might differ
-        if (has_shortcode($content, 'opio_feed')) {
-            // Use WordPress shortcode parser
-            preg_match_all('/\[opio_feed([^\]]*)\]/i', $content, $shortcode_matches);
-            if (!empty($shortcode_matches[1])) {
-                foreach ($shortcode_matches[1] as $atts_string) {
-                    $atts = shortcode_parse_atts($atts_string);
-                    if (isset($atts['id'])) {
-                        $feed_ids[] = intval($atts['id']);
+        // Check widget areas for shortcodes
+        // Widgets store content differently, so we need to check widget options
+        $all_widgets = wp_get_sidebars_widgets();
+        if (is_array($all_widgets)) {
+            foreach ($all_widgets as $sidebar_id => $widget_ids) {
+                if (!is_array($widget_ids)) continue;
+                
+                foreach ($widget_ids as $widget_id) {
+                    // Check text widgets (classic widget)
+                    if (preg_match('/^text-(\d+)$/', $widget_id, $text_match)) {
+                        $text_widgets = get_option('widget_text', array());
+                        if (is_array($text_widgets)) {
+                            foreach ($text_widgets as $widget_instance) {
+                                if (isset($widget_instance['text'])) {
+                                    $content_sources[] = $widget_instance['text'];
+                                }
+                            }
+                        }
+                    }
+                    
+                    // Check custom HTML widgets (WordPress 4.8+)
+                    if (preg_match('/^custom_html-(\d+)$/', $widget_id, $html_match)) {
+                        $html_widgets = get_option('widget_custom_html', array());
+                        if (is_array($html_widgets)) {
+                            foreach ($html_widgets as $widget_instance) {
+                                if (isset($widget_instance['content'])) {
+                                    $content_sources[] = $widget_instance['content'];
+                                }
+                            }
+                        }
+                    }
+                    
+                    // Check block widgets (WordPress 5.8+ / Full Site Editing)
+                    if (preg_match('/^block-(\d+)$/', $widget_id, $block_match)) {
+                        $block_widgets = get_option('widget_block', array());
+                        if (is_array($block_widgets)) {
+                            foreach ($block_widgets as $widget_instance) {
+                                if (isset($widget_instance['content'])) {
+                                    $content_sources[] = $widget_instance['content'];
+                                }
+                            }
+                        }
                     }
                 }
-                $feed_ids = array_unique($feed_ids);
             }
         }
 
-        // Process all found feed IDs
+        // Extract shortcodes from all content sources
+        foreach ($content_sources as $content) {
+            if (empty($content)) continue;
+            
+            // Match: [opio_feed id='52'], [opio_feed id="52"], [opio_feed id=52]
+            // This regex handles spaces and single/double quotes
+            if (preg_match_all('/\[opio_feed[^\]]*id\s*=\s*["\']?(\d+)["\']?[^\]]*\]/i', $content, $matches)) {
+                if (!empty($matches[1])) {
+                    foreach ($matches[1] as $feed_id_str) {
+                        $feed_id = absint($feed_id_str);
+                        if ($feed_id > 0) {
+                            $feed_ids[] = $feed_id;
+                        }
+                    }
+                }
+            }
+            
+            // Also use WordPress's shortcode parser for robustness
+            if (has_shortcode($content, 'opio_feed')) {
+                $pattern = get_shortcode_regex(array('opio_feed'));
+                if (preg_match_all('/' . $pattern . '/s', $content, $shortcode_matches)) {
+                    foreach ($shortcode_matches[3] as $atts_string) {
+                        if (empty($atts_string)) continue;
+                        $atts = shortcode_parse_atts($atts_string);
+                        if (isset($atts['id'])) {
+                            $feed_id = absint($atts['id']);
+                            if ($feed_id > 0) {
+                                $feed_ids[] = $feed_id;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Remove duplicates
+        $feed_ids = array_unique(array_filter($feed_ids));
+
+        // Process all found feed IDs - fetch schema from feed.op.io BEFORE wp_head
         foreach ($feed_ids as $feed_id) {
             if ($feed_id > 0) {
                 $this->fetch_and_extract_schema($feed_id);
@@ -167,12 +231,18 @@ class Feed_Shortcode {
      * Remove schema scripts from HTML content
      */
     private function remove_schema_from_html($html) {
+        // First, remove entire head sections that contain our schema (in case feed has nested head tags)
+        // Match head tags that contain our schema script
+        $head_with_schema_pattern = '/<head[^>]*>.*?<script[^>]*(?:id=["\']jsonldSchema["\'][^>]*type=["\']application\/ld\+json["\']|type=["\']application\/ld\+json["\'][^>]*id=["\']jsonldSchema["\'])[^>]*>.*?<\/script>.*?<\/head>/is';
+        $html = preg_replace($head_with_schema_pattern, '', $html);
+        
         // Remove script tags with id="jsonldSchema" and type="application/ld+json"
         // Handles attributes in any order and with single or double quotes
-        $pattern = '/<script[^>]*(?:id=["\']jsonldSchema["\'][^>]*type=["\']application\/ld\+json["\']|type=["\']application\/ld\+json["\'][^>]*id=["\']jsonldSchema["\'])[^>]*>.*?<\/script>/is';
-        $html = preg_replace($pattern, '', $html);
+        // This catches any remaining schema scripts (even outside head tags)
+        $schema_script_pattern = '/<script[^>]*(?:id=["\']jsonldSchema["\'][^>]*type=["\']application\/ld\+json["\']|type=["\']application\/ld\+json["\'][^>]*id=["\']jsonldSchema["\'])[^>]*>.*?<\/script>/is';
+        $html = preg_replace($schema_script_pattern, '', $html);
         
-        // Also remove any stray head tags that might be in the content
+        // Also remove any stray/empty head tags that might be in the content
         // Remove opening <head> tags
         $html = preg_replace('/<head[^>]*>/i', '', $html);
         // Remove closing </head> tags
@@ -192,12 +262,13 @@ class Feed_Shortcode {
         }
         
         // Check if output buffering is already started (by another plugin)
-        // If so, we'll work with the existing buffer
-        if (ob_get_level() > 0) {
-            return;
-        }
+        // If another plugin started buffering, we'll still add our own buffer on top
+        // This ensures our callback runs and can inject schemas
+        $existing_level = ob_get_level();
         
-        // Start output buffering with callback
+        // Start our own output buffering with callback
+        // Even if other buffers exist, our callback will be called when WordPress flushes
+        // The callback modifies the final HTML before it's sent, so Google crawler sees it
         ob_start(array($this, 'buffer_callback'));
     }
     
@@ -240,7 +311,8 @@ class Feed_Shortcode {
             // Check if head already contains our schemas
             $has_our_schema = (stripos($head_content, 'id="jsonldSchema"') !== false);
             if ($has_our_schema) {
-                // Schemas already in head, return as-is
+                // Schemas already in head, mark as successful
+                self::$schemas_output_in_head = true;
                 return $buffer;
             }
         }
@@ -248,7 +320,7 @@ class Feed_Shortcode {
         // Find the closing </head> tag
         $head_position = stripos($buffer, '</head>');
         if ($head_position === false) {
-            // No head tag found, return as-is
+            // No head tag found, return as-is (schema will remain in body)
             return $buffer;
         }
         
@@ -263,6 +335,9 @@ class Feed_Shortcode {
         
         // Inject schemas before closing </head> tag
         $buffer = substr_replace($buffer, $schema_html . '</head>', $head_position, 7);
+        
+        // Mark that schemas were successfully injected via buffer
+        self::$schemas_output_in_head = true;
         
         return $buffer;
     }
@@ -286,6 +361,9 @@ class Feed_Shortcode {
         foreach ($unique_schemas as $schema) {
             echo $schema . "\n";
         }
+        
+        // Mark that schemas were successfully output in head
+        self::$schemas_output_in_head = true;
     }
 
     public function init($atts) {
@@ -329,13 +407,22 @@ class Feed_Shortcode {
 
             // Extract schema and store it (even if wp_head already fired - we'll inject via buffer)
             $schemas = $this->extract_schema_from_html($reviews);
-            if (!empty($schemas)) {
+            $has_schema = !empty($schemas);
+            
+            if ($has_schema) {
                 // Always store schemas - we'll inject them via output buffer if wp_head already fired
                 self::$schema_scripts = array_merge(self::$schema_scripts, $schemas);
             }
 
-            // Always remove schema scripts from body content
-            $reviews = $this->remove_schema_from_html($reviews);
+            // Remove schema scripts from body content if we've collected schemas
+            // If schemas are in our collection, they will be (or already were) output in head
+            // Only keep schema in body if NO schemas were collected at all (safety fallback)
+            if ($has_schema || self::$schemas_output_in_head || !empty(self::$schema_scripts)) {
+                // We found schema in this feed OR schemas were already processed/output
+                // Remove schema from body since it will be (or was) in head
+                $reviews = $this->remove_schema_from_html($reviews);
+            }
+            // If no schemas were found and none are in collection, leave in body as fallback
 
             // Wrap entire feed content with Nitropack exclusion wrapper
             echo '<div data-nitro-exclude="all" data-nitro-ignore="true" data-nitro-no-optimize="true" data-nitro-preserve-ws="true">';
