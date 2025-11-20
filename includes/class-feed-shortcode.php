@@ -26,7 +26,8 @@ class Feed_Shortcode {
         if (preg_match('/<head[^>]*>.*?<script[^>]*id=["\']jsonldSchema["\'][^>]*type=["\']application\/ld\+json["\'][^>]*>(.*?)<\/script>.*?<\/head>/is', $html, $matches)) {
             // Remove JSON-LD schema from head
             $html = preg_replace('/<script[^>]*id=["\']jsonldSchema["\'][^>]*type=["\']application\/ld\+json["\'][^>]*>.*?<\/script>/is', '', $html);
-            return '<script id="jsonldSchema" type="application/ld+json">' . trim($matches[1]) . '</script>';
+            // Return with Nitropack exclusion attributes to prevent reordering and optimization
+            return '<script id="jsonldSchema" type="application/ld+json" data-nitro-exclude="all" data-nitro-ignore="true" data-nitro-no-optimize="true" data-nitro-preserve-ws="true">' . trim($matches[1]) . '</script>';
         }
         return '';
     }
@@ -37,6 +38,7 @@ class Feed_Shortcode {
      * Adds Nitropack exclusion attributes to prevent optimization issues
      */
     private function extract_head_resources($html) {
+        $preconnect_links = '';
         $font_links = '';
         $other_links = '';
         $scripts = '';
@@ -48,8 +50,15 @@ class Feed_Shortcode {
             // Extract all link tags
             if (preg_match_all('/<link[^>]*>/i', $head_content, $link_matches)) {
                 foreach ($link_matches[0] as $link) {
+                    // Prioritize preconnect links for fonts (must come before font links)
+                    if (preg_match('/rel=["\']preconnect["\']/i', $link)) {
+                        if (strpos($link, 'data-nitro-exclude') === false) {
+                            $link = str_replace('>', ' data-nitro-exclude="all" data-nitro-ignore="true">', $link);
+                        }
+                        $preconnect_links .= $link . "\n";
+                    }
                     // Prioritize font links (Google Fonts, etc.)
-                    if (preg_match('/fonts\.(googleapis|gstatic)/i', $link) || preg_match('/font/i', $link)) {
+                    else if (preg_match('/fonts\.(googleapis|gstatic)/i', $link) || (preg_match('/rel=["\']stylesheet["\']/i', $link) && preg_match('/font/i', $link))) {
                         // Add Nitropack exclusion attributes to font links to prevent optimization issues
                         if (strpos($link, 'data-nitro-exclude') === false) {
                             // Insert data-nitro attributes before closing >
@@ -72,8 +81,8 @@ class Feed_Shortcode {
             }
         }
         
-        // Return with font links first
-        return trim($font_links . $other_links . $scripts);
+        // Return with preconnect links first, then font links, then other resources
+        return trim($preconnect_links . $font_links . $other_links . $scripts);
     }
 
     /**
@@ -134,9 +143,15 @@ class Feed_Shortcode {
             $reviews = $this->remove_head_section($reviews);
             
             // Output in correct order:
-            // 1. JSON-LD schema first (for Google crawler/SEO)
+            // 1. JSON-LD schema first (for Google crawler/SEO) - wrapped to prevent Nitropack reordering
             if (!empty($jsonld_schema)) {
+                // Wrap schema in a container with Nitropack exclusion to preserve position
+                // Script tags are invisible, so this wrapper doesn't affect rendering but prevents reordering
+                echo '<!-- OPIO JSON-LD SCHEMA START -->';
+                echo '<div data-nitro-exclude="all" data-nitro-ignore="true" data-nitro-no-optimize="true" data-nitro-preserve-ws="true" data-nitro-preserve-order="true">';
                 echo $jsonld_schema;
+                echo '</div>';
+                echo '<!-- OPIO JSON-LD SCHEMA END -->';
             }
             
             // 2. Head resources (links and scripts) - must come before div with "all: initial"
