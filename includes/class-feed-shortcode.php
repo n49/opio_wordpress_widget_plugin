@@ -33,24 +33,37 @@ class Feed_Shortcode {
 
     /**
      * Extract all link and script tags from head section (everything except JSON-LD schema)
+     * Prioritizes font links to ensure they load first
      */
     private function extract_head_resources($html) {
-        $resources = '';
+        $font_links = '';
+        $other_links = '';
+        $scripts = '';
+        
         // Extract head content
         if (preg_match('/<head[^>]*>(.*?)<\/head>/is', $html, $head_matches)) {
             $head_content = $head_matches[1];
             
             // Extract all link tags
             if (preg_match_all('/<link[^>]*>/i', $head_content, $link_matches)) {
-                $resources .= implode("\n", $link_matches[0]) . "\n";
+                foreach ($link_matches[0] as $link) {
+                    // Prioritize font links (Google Fonts, etc.)
+                    if (preg_match('/fonts\.(googleapis|gstatic)/i', $link) || preg_match('/font/i', $link)) {
+                        $font_links .= $link . "\n";
+                    } else {
+                        $other_links .= $link . "\n";
+                    }
+                }
             }
             
             // Extract all script tags with src attribute (external scripts)
             if (preg_match_all('/<script[^>]*src=["\'][^"\']+["\'][^>]*><\/script>/i', $head_content, $script_matches)) {
-                $resources .= implode("\n", $script_matches[0]);
+                $scripts = implode("\n", $script_matches[0]);
             }
         }
-        return trim($resources);
+        
+        // Return with font links first
+        return trim($font_links . $other_links . $scripts);
     }
 
     /**
