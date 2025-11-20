@@ -9,19 +9,25 @@ class Feed_Shortcode {
     private static $schema_scripts = array();
     private static $schemas_processed = false;
     private static $processed_feed_ids = array(); // Track which feed IDs have been processed
+    private static $needs_buffer_injection = false; // Flag to indicate schemas need buffer injection
+    private static $schemas_output_in_head = false; // Track if schemas were output in wp_head
     private $extraction_debug = null; // Store debug info for schema extraction
 
     public function __construct(Feed_Deserializer $feed_deserializer) {
         $this->feed_deserializer = $feed_deserializer;
         // Hook early to pre-process shortcodes and extract schemas before wp_head runs
         add_action('template_redirect', array($this, 'pre_process_schemas'), 1);
+        // Start output buffering to capture page output and inject schemas
+        add_action('template_redirect', array($this, 'start_output_buffering'), 999);
         // Hook into wp_head to output schemas - use late priority to avoid conflicts with other plugins
         // Many SEO plugins output at priority 10, so we use 99 to go after them
         add_action('wp_head', array($this, 'output_schemas_to_head'), 99);
+        // Inject schemas into output buffer after wp_head (if schemas were found later)
+        add_action('wp_footer', array($this, 'inject_schemas_into_buffer'), 1);
         // Also try wp_footer as ultimate fallback in case wp_head is blocked
         add_action('wp_footer', array($this, 'output_schemas_to_footer_fallback'), 999);
-        // Track if we've successfully output schemas
-        add_action('shutdown', array($this, 'check_schema_output'), 999);
+        // Track if we've successfully output schemas and process output buffer
+        add_action('shutdown', array($this, 'process_output_buffer'), 999);
     }
 
     function custom_esc($str) {
@@ -506,6 +512,7 @@ class Feed_Shortcode {
         
         if (!empty($unique_schemas)) {
             $already_output = true; // Mark as output
+            self::$schemas_output_in_head = true; // Mark that schemas were output in head
             echo "<!-- OPIO DEBUG: START outputting schemas to head -->\n";
             foreach ($unique_schemas as $index => $schema) {
                 // Validate and sanitize schema before outputting
@@ -556,6 +563,94 @@ class Feed_Shortcode {
             // Note: We don't actually output here to avoid duplicates
             // Instead, we rely on the check_schema_output method to warn
         }
+    }
+    
+    /**
+     * Start output buffering to capture page output
+     */
+    public function start_output_buffering() {
+        if (!is_admin() && !wp_doing_ajax()) {
+            ob_start(array($this, 'buffer_callback'));
+        }
+    }
+    
+    /**
+     * Inject schemas into buffer if they weren't in head
+     */
+    public function inject_schemas_into_buffer() {
+        // Check if schemas exist but weren't output in head
+        if (!empty(self::$schema_scripts)) {
+            // Mark that we need to inject into buffer
+            self::$needs_buffer_injection = true;
+        }
+    }
+    
+    /**
+     * Process output buffer and inject schemas into head if needed
+     */
+    public function process_output_buffer() {
+        if (!is_admin() && !wp_doing_ajax() && ob_get_level() > 0) {
+            ob_end_flush();
+        }
+    }
+    
+    /**
+     * Buffer callback - inject schemas into head section
+     */
+    public function buffer_callback($buffer) {
+        // Only process if we have schemas
+        if (empty(self::$schema_scripts)) {
+            return $buffer;
+        }
+        
+        // If schemas were already output in wp_head, don't inject again
+        if (self::$schemas_output_in_head) {
+            return $buffer;
+        }
+        
+        // Check if schemas are already in the head section by looking for our debug comments or schema structure
+        if (stripos($buffer, 'OPIO DEBUG: START outputting schemas to head') !== false ||
+            stripos($buffer, 'OPIO: Injected schemas via output buffering') !== false) {
+            // Schemas already in head, don't inject again
+            return $buffer;
+        }
+        
+        // Check if any schema-like content is already in head
+        $head_section = '';
+        if (preg_match('/<head[^>]*>(.*?)<\/head>/is', $buffer, $head_match)) {
+            $head_section = $head_match[1];
+            // Check if head already contains JSON-LD schemas
+            if (stripos($head_section, 'id="jsonldSchema"') !== false || 
+                (stripos($head_section, 'type="application/ld+json"') !== false && stripos($head_section, '@context') !== false)) {
+                // Schemas already in head, don't inject
+                return $buffer;
+            }
+        }
+        
+        // Find the closing </head> tag
+        $head_position = stripos($buffer, '</head>');
+        if ($head_position === false) {
+            // No head tag found, return as-is
+            return $buffer;
+        }
+        
+        // Get unique schemas
+        $unique_schemas = array_unique(self::$schema_scripts, SORT_STRING);
+        
+        // Build schema HTML
+        $schema_html = "\n<!-- OPIO: Injected schemas via output buffering (wp_head already fired) -->\n";
+        foreach ($unique_schemas as $schema) {
+            $safe_schema = $this->sanitize_schema_output($schema);
+            if ($safe_schema) {
+                $schema_html .= $safe_schema . "\n";
+            }
+        }
+        $schema_html .= "<!-- OPIO: End injected schemas -->\n";
+        
+        // Inject schemas before closing </head> tag
+        $buffer = substr_replace($buffer, $schema_html . '</head>', $head_position, 7);
+        
+        return $buffer;
     }
     
     /**
