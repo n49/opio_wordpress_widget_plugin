@@ -18,81 +18,6 @@ class Feed_Shortcode {
         add_shortcode('opio_feed', array($this, 'init'));
     }
 
-    /**
-     * Extract JSON-LD schema from HTML head section and remove it from head
-     */
-    private function extract_jsonld_schema(&$html) {
-        // Extract the JSON-LD schema script from head
-        if (preg_match('/<head[^>]*>.*?<script[^>]*id=["\']jsonldSchema["\'][^>]*type=["\']application\/ld\+json["\'][^>]*>(.*?)<\/script>.*?<\/head>/is', $html, $matches)) {
-            // Remove JSON-LD schema from head
-            $html = preg_replace('/<script[^>]*id=["\']jsonldSchema["\'][^>]*type=["\']application\/ld\+json["\'][^>]*>.*?<\/script>/is', '', $html);
-            // Return with Nitropack exclusion attributes to prevent reordering and optimization
-            return '<script id="jsonldSchema" type="application/ld+json" data-nitro-exclude="all" data-nitro-ignore="true" data-nitro-no-optimize="true" data-nitro-preserve-ws="true">' . trim($matches[1]) . '</script>';
-        }
-        return '';
-    }
-
-    /**
-     * Extract all link and script tags from head section (everything except JSON-LD schema)
-     * Prioritizes font links to ensure they load first
-     * Adds Nitropack exclusion attributes to prevent optimization issues
-     */
-    private function extract_head_resources($html) {
-        $preconnect_links = '';
-        $font_links = '';
-        $other_links = '';
-        $scripts = '';
-        
-        // Extract head content
-        if (preg_match('/<head[^>]*>(.*?)<\/head>/is', $html, $head_matches)) {
-            $head_content = $head_matches[1];
-            
-            // Extract all link tags
-            if (preg_match_all('/<link[^>]*>/i', $head_content, $link_matches)) {
-                foreach ($link_matches[0] as $link) {
-                    // Prioritize preconnect links for fonts (must come before font links)
-                    if (preg_match('/rel=["\']preconnect["\']/i', $link)) {
-                        if (strpos($link, 'data-nitro-exclude') === false) {
-                            $link = str_replace('>', ' data-nitro-exclude="all" data-nitro-ignore="true">', $link);
-                        }
-                        $preconnect_links .= $link . "\n";
-                    }
-                    // Prioritize font links (Google Fonts, etc.)
-                    else if (preg_match('/fonts\.(googleapis|gstatic)/i', $link) || (preg_match('/rel=["\']stylesheet["\']/i', $link) && preg_match('/font/i', $link))) {
-                        // Add Nitropack exclusion attributes to font links to prevent optimization issues
-                        if (strpos($link, 'data-nitro-exclude') === false) {
-                            // Insert data-nitro attributes before closing >
-                            $link = str_replace('>', ' data-nitro-exclude="all" data-nitro-ignore="true">', $link);
-                        }
-                        $font_links .= $link . "\n";
-                    } else {
-                        // Add Nitropack exclusion to other stylesheets as well
-                        if (strpos($link, 'rel="stylesheet"') !== false && strpos($link, 'data-nitro-exclude') === false) {
-                            $link = str_replace('>', ' data-nitro-exclude="all" data-nitro-ignore="true">', $link);
-                        }
-                        $other_links .= $link . "\n";
-                    }
-                }
-            }
-            
-            // Extract all script tags with src attribute (external scripts)
-            if (preg_match_all('/<script[^>]*src=["\'][^"\']+["\'][^>]*><\/script>/i', $head_content, $script_matches)) {
-                $scripts = implode("\n", $script_matches[0]);
-            }
-        }
-        
-        // Return with preconnect links first, then font links, then other resources
-        return trim($preconnect_links . $font_links . $other_links . $scripts);
-    }
-
-    /**
-     * Remove head section from HTML, keeping only body content
-     */
-    private function remove_head_section($html) {
-        // Remove the entire head section
-        $html = preg_replace('/<head[^>]*>.*?<\/head>/is', '', $html);
-        return $html;
-    }
 
     public function init($atts) {
         if (get_option('opio_active') === '0') {
@@ -133,35 +58,7 @@ class Feed_Shortcode {
             $opio_handler = new Opio_Handler($biz_id, $option, $review_type, $org_id);
             $reviews = $opio_handler->get_business();
 
-            // Extract JSON-LD schema from head and remove it (schema must come first for SEO)
-            $jsonld_schema = $this->extract_jsonld_schema($reviews);
-            
-            // Extract remaining head resources (links and scripts)
-            $head_resources = $this->extract_head_resources($reviews);
-            
-            // Remove head section from the HTML (can't have <head> tag in body)
-            $reviews = $this->remove_head_section($reviews);
-            
-            // Output in correct order:
-            // 1. JSON-LD schema first (for Google crawler/SEO) - wrapped to prevent Nitropack reordering
-            if (!empty($jsonld_schema)) {
-                // Wrap schema in a container with Nitropack exclusion to preserve position
-                // Script tags are invisible, so this wrapper doesn't affect rendering but prevents reordering
-                echo '<!-- OPIO JSON-LD SCHEMA START -->';
-                echo '<div data-nitro-exclude="all" data-nitro-ignore="true" data-nitro-no-optimize="true" data-nitro-preserve-ws="true" data-nitro-preserve-order="true">';
-                echo $jsonld_schema;
-                echo '</div>';
-                echo '<!-- OPIO JSON-LD SCHEMA END -->';
-            }
-            
-            // 2. Head resources (links and scripts) - must come before div with "all: initial"
-            // Font links need to load before the CSS reset applies
-            // Note: Links and scripts in body are valid HTML5, but should be output early
-            if (!empty($head_resources)) {
-                echo $head_resources;
-            }
-
-            // Wrap body content with Nitropack exclusion wrapper
+            // Wrap entire feed content with Nitropack exclusion wrapper
             echo '<div data-nitro-exclude="all" data-nitro-ignore="true" data-nitro-no-optimize="true" data-nitro-preserve-ws="true">';
 
             if($option == "allReviewFeeds" && $review_type == "singles") {
