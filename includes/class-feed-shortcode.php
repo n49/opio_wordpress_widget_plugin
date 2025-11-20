@@ -18,6 +18,50 @@ class Feed_Shortcode {
         add_shortcode('opio_feed', array($this, 'init'));
     }
 
+    /**
+     * Extract JSON-LD schema from HTML head section and remove it from head
+     */
+    private function extract_jsonld_schema(&$html) {
+        // Extract the JSON-LD schema script from head
+        if (preg_match('/<head[^>]*>.*?<script[^>]*id=["\']jsonldSchema["\'][^>]*type=["\']application\/ld\+json["\'][^>]*>(.*?)<\/script>.*?<\/head>/is', $html, $matches)) {
+            // Remove JSON-LD schema from head
+            $html = preg_replace('/<script[^>]*id=["\']jsonldSchema["\'][^>]*type=["\']application\/ld\+json["\'][^>]*>.*?<\/script>/is', '', $html);
+            return '<script id="jsonldSchema" type="application/ld+json">' . trim($matches[1]) . '</script>';
+        }
+        return '';
+    }
+
+    /**
+     * Extract all link and script tags from head section (everything except JSON-LD schema)
+     */
+    private function extract_head_resources($html) {
+        $resources = '';
+        // Extract head content
+        if (preg_match('/<head[^>]*>(.*?)<\/head>/is', $html, $head_matches)) {
+            $head_content = $head_matches[1];
+            
+            // Extract all link tags
+            if (preg_match_all('/<link[^>]*>/i', $head_content, $link_matches)) {
+                $resources .= implode("\n", $link_matches[0]) . "\n";
+            }
+            
+            // Extract all script tags with src attribute (external scripts)
+            if (preg_match_all('/<script[^>]*src=["\'][^"\']+["\'][^>]*><\/script>/i', $head_content, $script_matches)) {
+                $resources .= implode("\n", $script_matches[0]);
+            }
+        }
+        return trim($resources);
+    }
+
+    /**
+     * Remove head section from HTML, keeping only body content
+     */
+    private function remove_head_section($html) {
+        // Remove the entire head section
+        $html = preg_replace('/<head[^>]*>.*?<\/head>/is', '', $html);
+        return $html;
+    }
+
     public function init($atts) {
         if (get_option('opio_active') === '0') {
             return '';
@@ -57,7 +101,27 @@ class Feed_Shortcode {
             $opio_handler = new Opio_Handler($biz_id, $option, $review_type, $org_id);
             $reviews = $opio_handler->get_business();
 
-            // Wrap output with Nitropack exclusion wrapper
+            // Extract JSON-LD schema from head and remove it (schema must come first for SEO)
+            $jsonld_schema = $this->extract_jsonld_schema($reviews);
+            
+            // Extract remaining head resources (links and scripts)
+            $head_resources = $this->extract_head_resources($reviews);
+            
+            // Remove head section from the HTML (can't have <head> tag in body)
+            $reviews = $this->remove_head_section($reviews);
+            
+            // Output in correct order:
+            // 1. JSON-LD schema first (for Google crawler/SEO)
+            if (!empty($jsonld_schema)) {
+                echo $jsonld_schema;
+            }
+            
+            // 2. Head resources (links and scripts)
+            if (!empty($head_resources)) {
+                echo $head_resources;
+            }
+
+            // Wrap body content with Nitropack exclusion wrapper
             echo '<div data-nitro-exclude="all" data-nitro-ignore="true" data-nitro-no-optimize="true" data-nitro-preserve-ws="true">';
 
             if($option == "allReviewFeeds" && $review_type == "singles") {
