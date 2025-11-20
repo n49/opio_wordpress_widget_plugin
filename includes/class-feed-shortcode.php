@@ -56,6 +56,10 @@ class Feed_Shortcode {
             $option = $review_option == "opio" ? "reviewFeed" : "allReviewFeed";
             $opio_handler = new Opio_Handler($biz_id, $option, $review_type, $org_id);
             $reviews = $opio_handler->get_business();
+
+            // Wrap output with Nitropack exclusion wrapper
+            echo '<div data-nitro-exclude="all" data-nitro-ignore="true" data-nitro-no-optimize="true" data-nitro-preserve-ws="true">';
+
             if($option == "allReviewFeeds" && $review_type == "singles") {
                 $reviews = $this->feed_deserializer->prepareString($reviews);
                 echo wp_kses($reviews, $this->feed_deserializer->get_allowed_tags());
@@ -63,6 +67,7 @@ class Feed_Shortcode {
             else {
                 echo $reviews;
             }
+            echo '</div>';
             return ob_get_clean();
         }
     }
