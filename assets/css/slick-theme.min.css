@@ -1,7 +1,7 @@
 @charset 'UTF-8';
 
 .widget-body .slick-loading .slick-list {
-    background: #fff url(ajax-loader.gif) center center no-repeat
+    background: #fff center center no-repeat
 }
 
 @font-face {
@@ -172,7 +172,7 @@
 /** Admin preview css */
 
 .admin-widget-body .slick-loading .slick-list {
-    background: #fff url(ajax-loader.gif) center center no-repeat
+    background: #fff center center no-repeat
 }
 
 .admin-widget-body .slick-next,

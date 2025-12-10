@@ -193,7 +193,10 @@ ob_start();
             <div class="testimonial-slide review-tile-vertical" data-review-index="<?php echo esc_attr($index); ?>" onclick="openPhotoLightbox(<?php echo esc_attr(json_encode($currentReview)); ?>)">
                 <div id=<?php echo esc_attr($review["_id"]);?> class="v-review-tile-container">
                     <div class="v-rev-content">
-                        <?php if(($review['propertyId'] === 1 || $review['propertyId'] === 2 || $review['propertyId'] === 3 || $review['propertyId'] === 5) && isset($review['user']['userPic'])) { ?>
+                        <?php if($review['propertyId'] === 2 && isset($review['user']['userPic'])) { ?>
+                            <div class="v-reviewer-avatar" data-fb-avatar="<?php echo esc_attr($review['user']['userPic']); ?>">
+                            </div>
+                        <?php } else if(($review['propertyId'] === 1 || $review['propertyId'] === 3 || $review['propertyId'] === 5) && isset($review['user']['userPic'])) { ?>
                             <div class="v-reviewer-avatar" style="background-image: url(<?php echo esc_attr($review['user']['userPic']);?>);">
                             </div>  
                         <?php } else if(isset($review['user']['userPic']) && isset($review['user']['userPic']['imageId'])) { ?>
@@ -316,6 +319,19 @@ ob_start();
         <div class="close-button" onclick="closePhotoLightbox()">x</div>
     </div>
 </div>
+
+<script>
+    (function() {
+        // Set background images for all Facebook avatars
+        var avatars = document.querySelectorAll('.v-reviewer-avatar[data-fb-avatar]');
+        avatars.forEach(function(avatar) {
+            var url = avatar.getAttribute('data-fb-avatar');
+            if (url) {
+                avatar.style.backgroundImage = 'url("' + url + '")';
+            }
+        });
+    })();
+</script>
 
 <?php } else { ?>
     <div class="opio-more-reviews-required">

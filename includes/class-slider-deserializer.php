@@ -59,6 +59,7 @@ class Slider_Deserializer {
                 'style' => true,
                 'class' => true,
                 'data-glide-el' => true,
+                'data-fb-avatar' => true,
                 'onclick' => true,
             ),
             'section' => array(),
