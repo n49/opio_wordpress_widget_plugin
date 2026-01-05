@@ -138,7 +138,7 @@ function loadMore(business_id) {
         }
     };
     var ent_id = business_id;
-    var path = `https://op.io/api/entities/mixreviews?entityId=${ent_id}&cache=renew`;
+    var path = `https://op.io/api/entities/mixreviews?entityId=${ent_id}&cache=renew&hideWidget=true&hideFeed=true`;
     xhttp.open("POST", path, true);
     var adminApiKey = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjE2NDQzNDY2MzEsInVzZXJfaWQiOiJrdHN4dzlramxkZ3RzZDNqMSIsImV4cCI6MTI5NzY0NDM0NjYzMX0.FZeMMsZlix1eQ1aJFmQ0MV_L_ezFb4RhrqCIhceTT-w';
     xhttp.setRequestHeader("Content-Type", "application/json");
