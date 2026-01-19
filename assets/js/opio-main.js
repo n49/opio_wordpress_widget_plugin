@@ -32,7 +32,51 @@ function opioToggleStuff() {
 //custom js functions
 function displayLargeImage(imageId, revId) {
     var elem = document.querySelector(`#largerevimg-${revId}`);
-    elem.innerHTML = '<div style="display: inline-block; width: 98.5%; height: 400px; background-position: center center; background-size: cover; background-repeat: no-repeat; margin: 5px; text-align: center; background-image: url(&quot;https://images.files.ca/800x800/'+imageId+'.jpg?nocrop=1&quot;); opacity: 1; transition: opacity 1s ease 0s;"></div><div><div style="position: absolute; z-index: 1; top: 40%; right: 0px; width: 5%; margin: 25px;"></div><div style="display: none;"></div></div>';
+    if (!elem) return;
+    var imgUrl = 'https://images.files.ca/800x800/' + imageId + '.jpg?nocrop=1';
+    elem.innerHTML = '<div style="display: inline-block; width: 98.5%; height: 400px; background-color: #f0f0f0; margin: 5px; text-align: center; display: flex; align-items: center; justify-content: center;">Loading...</div>';
+    var img = new Image();
+    img.onload = function() {
+        var containerWidth = elem.offsetWidth ? elem.offsetWidth * 0.985 : 300;
+        var aspectRatio = img.naturalHeight / img.naturalWidth;
+        var calculatedHeight = Math.min(containerWidth * aspectRatio, 400);
+        var isPortrait = img.naturalHeight > img.naturalWidth;
+        var bgPosition = isPortrait ? 'left center' : 'center center';
+        elem.innerHTML = '<div style="display: inline-block; width: 98.5%; height: ' + calculatedHeight + 'px; background-position: ' + bgPosition + '; background-size: contain; background-repeat: no-repeat; margin: 5px; text-align: center; background-image: url(&quot;' + imgUrl + '&quot;); opacity: 1; transition: opacity 1s ease 0s; border-radius: 4px;"></div>';
+    };
+    img.onerror = function() {
+        elem.innerHTML = '<div style="display: inline-block; width: 98.5%; height: 400px; background-position: center center; background-size: contain; background-repeat: no-repeat; margin: 5px; text-align: center; background-image: url(&quot;' + imgUrl + '&quot;); opacity: 1; transition: opacity 1s ease 0s;"></div>';
+    };
+    img.src = imgUrl;
+}
+
+function displayEmbed(embed, revId) {
+    try {
+        if (!embed || typeof embed !== 'object') return;
+        var elem = document.querySelector(`#largerevimg-${revId}`);
+        if (!elem) return;
+        var maxHeight = 400;
+        var containerWidth = elem.offsetWidth ? elem.offsetWidth * 0.985 : 300;
+        var platform = (embed.platform || 'youtube').toLowerCase().trim();
+        if (platform === 'youtube' && embed.videoId && typeof embed.videoId === 'string') {
+            var videoId = embed.videoId.trim();
+            if (!videoId) return;
+            var isShort = embed.embedType === 'short' || (embed.url && typeof embed.url === 'string' && embed.url.indexOf('/shorts/') !== -1);
+            var iframeHtml;
+            if (isShort) {
+                var shortWidth = maxHeight * (9 / 16);
+                iframeHtml = '<div style="display: inline-block; width: ' + shortWidth + 'px; height: ' + maxHeight + 'px; margin: 5px; position: relative; background: #000; border-radius: 4px; overflow: hidden; vertical-align: top;"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&modestbranding=1&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0;"></iframe></div>';
+            } else {
+                var videoHeight = Math.min(containerWidth * 0.5625, maxHeight);
+                iframeHtml = '<div style="width: 98.5%; height: ' + videoHeight + 'px; margin: 5px; position: relative; background: #000; border-radius: 4px; overflow: hidden;"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&modestbranding=1&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0;"></iframe></div>';
+            }
+            elem.innerHTML = iframeHtml;
+        } else if (embed.url && typeof embed.url === 'string' && embed.url.trim()) {
+            window.open(embed.url.trim(), '_blank');
+        }
+    } catch (e) {
+        console.error('displayEmbed error:', e);
+    }
 }
 
 function writeComment(revId) {
@@ -110,10 +154,30 @@ function shareTwitterUrl(reviewFeedUrl, reviewId) {
 
 function loadMore(business_id) {
     var elem = document.querySelector(`#loadMoreOpioDivButton`);
-    elem.style.backgroundColor='rgb(192, 199, 205)'; 
+    // Handle case where event object is passed instead of business_id
+    if (!business_id || typeof business_id === 'object') {
+        // Try data attribute first
+        business_id = elem ? elem.getAttribute('data-entity-id') : null;
+        // Fallback: try global variable set by feed
+        if (!business_id && typeof window.opioEntityId !== 'undefined') {
+            business_id = window.opioEntityId;
+        }
+        // Fallback: try to find from feed container
+        if (!business_id) {
+            var feedContainer = document.querySelector('[data-opio-entity-id]');
+            if (feedContainer) {
+                business_id = feedContainer.getAttribute('data-opio-entity-id');
+            }
+        }
+    }
+    if (!business_id) {
+        console.error('loadMore: missing business_id');
+        return;
+    }
+    elem.style.backgroundColor='rgb(192, 199, 205)';
     elem.style.cursor = 'not-allowed';
     elem.innerHTML='Loading ...';
-    
+
     var body = {};
     var xhttp = new XMLHttpRequest();
     // window.nextPageToken = LastEvaluatedKey;
@@ -127,7 +191,7 @@ function loadMore(business_id) {
                 return ;
             }
             var reviewFeedUrl = newReviews.reviews[0].entityInfo.reviewFeedUrls['5734f48a0b64d7382829fdf7'];
-            
+
             // newReviews = newReviews.reviews.filter((review) => {
             // 	return review.propertyId == '5734f48a0b64d7382829fdf7' && (review.status == 'published' || review.status == 'guest') && review.deleted == false;
             // });
@@ -143,7 +207,7 @@ function loadMore(business_id) {
     var adminApiKey = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjE2NDQzNDY2MzEsInVzZXJfaWQiOiJrdHN4dzlramxkZ3RzZDNqMSIsImV4cCI6MTI5NzY0NDM0NjYzMX0.FZeMMsZlix1eQ1aJFmQ0MV_L_ezFb4RhrqCIhceTT-w';
     xhttp.setRequestHeader("Content-Type", "application/json");
     xhttp.setRequestHeader("authorization", `Bearer ${adminApiKey}`);
-    xhttp.send(JSON.stringify({LastEvaluatedKey: window.nextPageToken}));`<div id="opio-review-feed" >`
+    xhttp.send(JSON.stringify({LastEvaluatedKey: window.nextPageToken}));
 }
 
 function insertDivs(newReviews, reviewsDiv, loadMoreDiv, reviewFeedUrl, business) {
@@ -352,24 +416,35 @@ function addReview(rev, index, reviewFeedUrl, business) {
         reviewBuilder += taggedEmployeesBuilder(taggedEmployees, rev, reviewFontColor);
         reviewBuilder += `<span style="font-size: 14px; font-weight: 500; color: ${reviewFontColor}">Employees tagged in this review</span>`;
     }
-    if((rev.images === null || (rev.images && rev.images.length == 0)) && (rev.videos === null || (rev.videos && rev.videos.length == 0))) {
+    var hasMedia = (rev.images && rev.images.length > 0) || (rev.videos && rev.videos.length > 0) || (rev.embeds && rev.embeds.length > 0);
+    if(!hasMedia) {
         reviewBuilder += `<div id="media-container" style="padding-bottom: 10px;"></div>`;
     } else {
         reviewBuilder += `<div id="media-container" style="padding-bottom: 10px;">`;
+        reviewBuilder += `<div id="largerevimg-${rev._id}"></div>`;
         if(rev.images) {
-            reviewBuilder += `<div id="largerevimg-${rev._id}"></div>`;
             rev.images.forEach(image => {
-                reviewBuilder += `<a onclick="displayLargeImage(${image.imageId}, ${rev._id})"><div style="display: inline-block; width: 72px; height: 72px; background-position: center center; background-size: cover; background-repeat: no-repeat; margin: 5px; text-align: center; background-image: url(&quot;https://images.files.ca/200x200/${image.imageId}.jpg?nocrop=1&quot;);">
-                </div></a>`;
+                reviewBuilder += `<a onclick="displayLargeImage('${image.imageId}', '${rev._id}')" style="cursor: pointer; text-decoration: none;"><div style="display: inline-block; width: 72px; height: 72px; background-position: center center; background-size: cover; background-repeat: no-repeat; margin: 5px; text-align: center; background-image: url(&quot;https://images.files.ca/200x200/${image.imageId}.jpg?nocrop=1&quot;); border-radius: 4px;"></div></a>`;
             });
         }
-        
+
         if(rev.videos) {
             rev.videos.forEach(video =>  {
                 reviewBuilder += `<div><video preload="auto" controls="" style="height: auto; margin: 5px; width: 100%; transition: width 1s ease-out 0s, height 1s ease-out 0s;"><source src="https://videocdn.n49.ca/mp4sdpad480p/${video.videoId}.mp4#t=0.1" type="video/mp4"></video></div>`;
             });
-        }		
-        
+        }
+
+        if(rev.embeds) {
+            rev.embeds.slice(0, 3).forEach(embed => {
+                var thumbUrl = embed.thumbnailUrl || '';
+                if(!thumbUrl && embed.platform === 'youtube' && embed.videoId) {
+                    thumbUrl = 'https://img.youtube.com/vi/' + embed.videoId + '/hqdefault.jpg';
+                }
+                var embedData = JSON.stringify({platform: embed.platform || 'youtube', videoId: embed.videoId || '', embedType: embed.embedType || 'video', url: embed.url || ''}).replace(/'/g, "\\'");
+                reviewBuilder += `<a onclick="displayEmbed(JSON.parse('${embedData}'), '${rev._id}')" style="cursor: pointer; text-decoration: none;"><div style="display: inline-block; width: 72px; height: 72px; background-position: center center; background-size: cover; background-repeat: no-repeat; margin: 5px; text-align: center; background-image: url(&quot;${thumbUrl}&quot;); position: relative; border-radius: 4px; background-color: #f0f0f0;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 24px; height: 24px; background: rgba(225,232,237,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="rgb(99,114,130)" style="margin-left: 2px;"><path d="M8 5v14l11-7z"/></svg></div></div></a>`;
+            });
+        }
+
         reviewBuilder += '</div>';
     }
     reviewBuilder += `<div style="display: inline-block; margin-top: 10px; margin-bottom:10px;"></div>`;

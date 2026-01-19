@@ -427,6 +427,12 @@ class Feed_Shortcode {
             // Wrap entire feed content with Nitropack exclusion wrapper
             echo '<div data-nitro-exclude="all" data-nitro-ignore="true" data-nitro-no-optimize="true" data-nitro-preserve-ws="true">';
 
+            // Set entity ID for loadMore function
+            $entity_id = !empty($biz_id) ? $biz_id : $org_id;
+            if (!empty($entity_id)) {
+                echo '<script>window.opioEntityId = "' . esc_js($entity_id) . '";</script>';
+            }
+
             if($option == "allReviewFeeds" && $review_type == "singles") {
                 $reviews = $this->feed_deserializer->prepareString($reviews);
                 echo wp_kses($reviews, $this->feed_deserializer->get_allowed_tags());

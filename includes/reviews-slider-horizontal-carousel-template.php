@@ -231,8 +231,9 @@ ob_start();
                         }
                     ?>
                     <div class="location-name"><?php echo esc_attr($review['entityInfo']['name']); ?></div>
-                        <?php if((isset($review['images']) && is_array($review['images']) && count($review['images']) > 0) || 
-                                (isset($review['videos']) && is_array($review['videos']) && count($review['videos']) > 0)) { ?>
+                        <?php if((isset($review['images']) && is_array($review['images']) && count($review['images']) > 0) ||
+                                (isset($review['videos']) && is_array($review['videos']) && count($review['videos']) > 0) ||
+                                (isset($review['embeds']) && is_array($review['embeds']) && count($review['embeds']) > 0)) { ?>
                         <div class="review-content" id="reviewContent-<?php echo esc_attr($index); ?>" style="margin-top: 0px;">
                             <?php if (strlen($review['content']) > $contentWithMedia_org) { ?>
                                 <?php echo esc_attr(mb_substr($review['content'], 0, $contentWithMedia_org, 'UTF-8')); ?> <u>Read more</u>
@@ -244,7 +245,7 @@ ob_start();
                         <?php if(isset($review['images']) && is_array($review['images']) && count($review['images']) > 0) { ?>
                             <?php foreach (array_slice($review['images'], 0, 3) as $image) {?>
                                 <div>
-                                    <img class="review-img" src="https://op.io/dashboard/api/reviews/get-image/<?php echo esc_attr($image['imageId']); ?>?width=200&height=200">
+                                    <img class="review-img" src="https://op.io/dashboard/api/reviews/get-image/<?php echo esc_attr($image['imageId']); ?>?width=400&height=400">
                                 </div>
                             <?php } ?>
                         <?php } ?>
@@ -252,6 +253,21 @@ ob_start();
                                 <div class="video-icon">
                                     <div class="play-button"></div>
                                 </div>
+                            <?php } ?>
+                            <?php if(isset($review['embeds']) && is_array($review['embeds']) && count($review['embeds']) > 0) { ?>
+                                <?php foreach (array_slice($review['embeds'], 0, 3) as $embed) {
+                                    $thumbUrl = isset($embed['thumbnailUrl']) ? $embed['thumbnailUrl'] : '';
+                                    if(empty($thumbUrl) && isset($embed['platform']) && $embed['platform'] === 'youtube' && isset($embed['videoId'])) {
+                                        $thumbUrl = 'https://img.youtube.com/vi/' . $embed['videoId'] . '/hqdefault.jpg';
+                                    }
+                                ?>
+                                    <div style="position: relative; display: inline-block;">
+                                        <img class="review-img" src="<?php echo esc_attr($thumbUrl); ?>" style="background-color: #f0f0f0; object-fit: cover; object-position: center;">
+                                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20px; height: 20px; background: rgba(225,232,237,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                            <svg width="10" height="10" viewBox="0 0 24 24" fill="rgb(99,114,130)" style="margin-left: 2px;"><path d="M8 5v14l11-7z"/></svg>
+                                        </div>
+                                    </div>
+                                <?php } ?>
                             <?php } ?>
                         </div>
                         <?php } else if(isset($review['taggedEmployees']) && is_array($review['taggedEmployees']) && count($review['taggedEmployees']) > 0) { ?>
@@ -295,8 +311,9 @@ ob_start();
                             $contentWithoutMedia_biz = 170;
                         }
                     ?>
-                    <?php if((isset($review['images']) && is_array($review['images']) && count($review['images']) > 0) || 
-                            (isset($review['videos']) && is_array($review['videos']) && count($review['videos']) > 0)) { ?>
+                    <?php if((isset($review['images']) && is_array($review['images']) && count($review['images']) > 0) ||
+                            (isset($review['videos']) && is_array($review['videos']) && count($review['videos']) > 0) ||
+                            (isset($review['embeds']) && is_array($review['embeds']) && count($review['embeds']) > 0)) { ?>
                     <div class="review-content" id="reviewContent-<?php echo esc_attr($index); ?>">
                         <?php if (strlen($review['content']) > $contentWithMedia_biz) { ?>
                             <?php echo esc_attr(mb_substr($review['content'], 0, $contentWithMedia_biz, 'UTF-8')); ?> <u>Read more</u>
@@ -308,7 +325,7 @@ ob_start();
                     <?php if(isset($review['images']) && is_array($review['images']) && count($review['images']) > 0) { ?>
                         <?php foreach (array_slice($review['images'], 0, 3) as $image) {?>
                             <div>
-                                <img class="review-img" src="https://op.io/dashboard/api/reviews/get-image/<?php echo esc_attr($image['imageId']); ?>?width=200&height=200">
+                                <img class="review-img" src="https://op.io/dashboard/api/reviews/get-image/<?php echo esc_attr($image['imageId']); ?>?width=400&height=400">
                             </div>
                         <?php } ?>
                     <?php } ?>
@@ -316,6 +333,21 @@ ob_start();
                             <div class="video-icon">
                                 <div class="play-button"></div>
                             </div>
+                        <?php } ?>
+                        <?php if(isset($review['embeds']) && is_array($review['embeds']) && count($review['embeds']) > 0) { ?>
+                            <?php foreach (array_slice($review['embeds'], 0, 3) as $embed) {
+                                $thumbUrl = isset($embed['thumbnailUrl']) ? $embed['thumbnailUrl'] : '';
+                                if(empty($thumbUrl) && isset($embed['platform']) && $embed['platform'] === 'youtube' && isset($embed['videoId'])) {
+                                    $thumbUrl = 'https://img.youtube.com/vi/' . $embed['videoId'] . '/hqdefault.jpg';
+                                }
+                            ?>
+                                <div style="position: relative; display: inline-block;">
+                                    <img class="review-img" src="<?php echo esc_attr($thumbUrl); ?>" style="background-color: #f0f0f0; object-fit: cover; object-position: center;">
+                                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20px; height: 20px; background: rgba(225,232,237,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                        <svg width="10" height="10" viewBox="0 0 24 24" fill="rgb(99,114,130)" style="margin-left: 2px;"><path d="M8 5v14l11-7z"/></svg>
+                                    </div>
+                                </div>
+                            <?php } ?>
                         <?php } ?>
                     </div>
                     <?php } else if(isset($review['taggedEmployees']) && is_array($review['taggedEmployees']) && count($review['taggedEmployees']) > 0) { ?>
