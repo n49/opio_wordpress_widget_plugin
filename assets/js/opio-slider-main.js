@@ -46,6 +46,27 @@ function randomColor() {
 
 function displayLargeImage(imageId, revId) {
     var photoContainer = document.querySelector(`#lb-photo-container`);
+    if (!photoContainer) {
+        // Fallback for pages without lightbox (e.g., review feed)
+        var elem = document.querySelector(`#largerevimg-${revId}`);
+        if (!elem) return;
+        var imgUrl = 'https://images.files.ca/800x800/' + imageId + '.jpg?nocrop=1';
+        elem.innerHTML = '<div style="display: inline-block; width: 98.5%; height: 400px; background-color: #f0f0f0; margin: 5px; text-align: center; display: flex; align-items: center; justify-content: center;">Loading...</div>';
+        var img = new Image();
+        img.onload = function() {
+            var containerWidth = elem.offsetWidth ? elem.offsetWidth * 0.985 : 300;
+            var aspectRatio = img.naturalHeight / img.naturalWidth;
+            var calculatedHeight = Math.min(containerWidth * aspectRatio, 400);
+            var isPortrait = img.naturalHeight > img.naturalWidth;
+            var bgPosition = isPortrait ? 'left center' : 'center center';
+            elem.innerHTML = '<div style="display: inline-block; width: 98.5%; height: ' + calculatedHeight + 'px; background-position: ' + bgPosition + '; background-size: contain; background-repeat: no-repeat; margin: 5px; text-align: center; background-image: url(&quot;' + imgUrl + '&quot;); opacity: 1; transition: opacity 1s ease 0s; border-radius: 4px;"></div>';
+        };
+        img.onerror = function() {
+            elem.innerHTML = '<div style="display: inline-block; width: 98.5%; height: 400px; background-position: center center; background-size: contain; background-repeat: no-repeat; margin: 5px; text-align: center; background-image: url(&quot;' + imgUrl + '&quot;); opacity: 1; transition: opacity 1s ease 0s;"></div>';
+        };
+        img.src = imgUrl;
+        return;
+    }
     photoContainer.style.display = 'block';
 
     // Select all elements with the class name 'photo-a-tag'
@@ -57,13 +78,68 @@ function displayLargeImage(imageId, revId) {
     });
 
     var elem = document.querySelector(`#largerevimg-${revId}`);
+    if (!elem) return;
     elem.style.display = 'flex';
-    elem.innerHTML = `
-        <div onClick="hideLargeImage('${revId}')" class="lb-large-img" style="background-image: url('https://images.files.ca/800x800/${imageId}.jpg?nocrop=1');"></div>
-        <div>
-            <div class="lb-large-img-div"></div>
-            <div style="display: none;"></div>
-        </div>`;
+    var imgUrl = 'https://images.files.ca/800x800/' + imageId + '.jpg?nocrop=1';
+    elem.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 400px; background-color: #f0f0f0;">Loading...</div>';
+    var img = new Image();
+    img.onload = function() {
+        var containerWidth = elem.offsetWidth || 300;
+        var aspectRatio = img.naturalHeight / img.naturalWidth;
+        var calculatedHeight = Math.min(containerWidth * aspectRatio, 400);
+        var isPortrait = img.naturalHeight > img.naturalWidth;
+        var bgPosition = isPortrait ? 'left center' : 'center center';
+        elem.innerHTML = `
+            <div onClick="hideLargeImage('${revId}')" class="lb-large-img" style="background-image: url('${imgUrl}'); height: ${calculatedHeight}px; background-size: contain; background-position: ${bgPosition}; background-repeat: no-repeat;"></div>
+            <div>
+                <div class="lb-large-img-div"></div>
+                <div style="display: none;"></div>
+            </div>`;
+    };
+    img.onerror = function() {
+        elem.innerHTML = `
+            <div onClick="hideLargeImage('${revId}')" class="lb-large-img" style="background-image: url('${imgUrl}'); background-size: contain; background-position: center center; background-repeat: no-repeat;"></div>
+            <div>
+                <div class="lb-large-img-div"></div>
+                <div style="display: none;"></div>
+            </div>`;
+    };
+    img.src = imgUrl;
+}
+
+function displayEmbed(embed, revId) {
+    try {
+        if (!embed || typeof embed !== 'object') return;
+        var elem = document.querySelector(`#largerevimg-${revId}`);
+        if (!elem) return;
+
+        var photoContainer = document.querySelector(`#lb-photo-container`);
+        if (photoContainer) photoContainer.style.display = 'block';
+
+        elem.style.display = 'flex';
+        var maxHeight = 400;
+        var containerWidth = elem.offsetWidth || 300;
+        var platform = (embed.platform || 'youtube').toLowerCase().trim();
+
+        if (platform === 'youtube' && embed.videoId && typeof embed.videoId === 'string') {
+            var videoId = embed.videoId.trim();
+            if (!videoId) return;
+            var isShort = embed.embedType === 'short' || (embed.url && typeof embed.url === 'string' && embed.url.indexOf('/shorts/') !== -1);
+            var iframeHtml;
+            if (isShort) {
+                var shortWidth = maxHeight * (9 / 16);
+                iframeHtml = '<div style="display: inline-block; width: ' + shortWidth + 'px; height: ' + maxHeight + 'px; margin: 5px; position: relative; background: #000; border-radius: 4px; overflow: hidden; vertical-align: top;"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&modestbranding=1&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0;"></iframe></div>';
+            } else {
+                var videoHeight = Math.min(containerWidth * 0.5625, maxHeight);
+                iframeHtml = '<div style="width: 100%; height: ' + videoHeight + 'px; margin: 5px 0; position: relative; background: #000; border-radius: 4px; overflow: hidden;"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&modestbranding=1&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0;"></iframe></div>';
+            }
+            elem.innerHTML = iframeHtml;
+        } else if (embed.url && typeof embed.url === 'string' && embed.url.trim()) {
+            window.open(embed.url.trim(), '_blank');
+        }
+    } catch (e) {
+        console.error('displayEmbed error:', e);
+    }
 }
 
 function hideLargeImage(revId) {
@@ -319,63 +395,79 @@ async function openPhotoLightbox(reviewData) {
         reviewContainer.appendChild(empTagContainer);
     }
 
-    // Update photos
-    if(reviewData.images && reviewData.images.length > 0) {
-        // Creating a div for the larger image with the specified id
-        var revId = reviewData._id; // Replace with the actual revId
-        var photoContainer = document.getElementById(`lb-photo-container`); // Replace with the actual container id
-        photoContainer.innerHTML = '';
+    // Update all media in single container (like feed does)
+    var revId = reviewData._id;
+    var photoContainer = document.getElementById('lb-photo-container');
+    photoContainer.innerHTML = '';
 
-        var largerImageDiv = document.createElement("div");
-        largerImageDiv.id = `largerevimg-${revId}`;
-        largerImageDiv.style.display = "none"; // Initially set to hidden
-        photoContainer.appendChild(largerImageDiv);
-        reviewData.images.map(img => {
-            // Assuming this is inside a loop for each image
-            // Replace $image['imageId'] and $_rev['_id'] with appropriate JavaScript variables
-            var imageId = img.imageId; // Replace with the actual imageId
+    // Create large image display div
+    var largerImageDiv = document.createElement("div");
+    largerImageDiv.id = `largerevimg-${revId}`;
+    largerImageDiv.style.display = "none";
+    photoContainer.appendChild(largerImageDiv);
 
+    // Create thumbnails container
+    var thumbsContainer = document.createElement("div");
+    thumbsContainer.style.cssText = 'display: flex; flex-wrap: wrap; gap: 5px;';
+    photoContainer.appendChild(thumbsContainer);
+
+    // Add image thumbnails
+    if (reviewData.images && reviewData.images.length > 0) {
+        reviewData.images.forEach(function(img) {
+            var imageId = img.imageId;
             var anchor = document.createElement("a");
             anchor.setAttribute("onclick", `displayLargeImage('${imageId}', '${revId}')`);
-            anchor.style.borderBottom = "none";
-            anchor.style.display = "flex";
+            anchor.style.cssText = 'cursor: pointer; text-decoration: none;';
             anchor.classList.add("photo-a-tag");
 
             var imageDiv = document.createElement("div");
             imageDiv.classList.add("lb-small-img");
-            // imageDiv.style.display = "inline-block";
-            // imageDiv.style.width = "72px";
-            // imageDiv.style.height = "72px";
-            // imageDiv.style.backgroundPosition = "center center";
-            // imageDiv.style.backgroundSize = "cover";
-            // imageDiv.style.backgroundRepeat = "no-repeat";
-            // imageDiv.style.margin = "5px";
-            // imageDiv.style.textAlign = "center";
             imageDiv.style.backgroundImage = `url('https://images.files.ca/200x200/${imageId}.jpg?nocrop=1')`;
 
             anchor.appendChild(imageDiv);
-            photoContainer.appendChild(anchor);
-        })
-    }
-
-
-    // Update videos
-    if (reviewData.videos && reviewData.videos.length > 0) {
-        var mediaContainer = document.getElementById('lb-video-container');
-        mediaContainer.innerHTML = '';
-
-        reviewData.videos.forEach(video => {
-            // Create a temporary container
-            var tempContainer = document.createElement('div');
-
-            // Set the HTML string as its innerHTML
-            tempContainer.innerHTML = `<div><video preload="auto" controls="" class="lb-video-player"><source src="https://videocdn.n49.ca/mp4sdpad480p/${video['videoId']}.mp4#t=0.1" type="video/mp4"></video></div>`;
-
-            // Append the child of the temporary container to the mediaContainer
-            mediaContainer.appendChild(tempContainer.firstChild);
+            thumbsContainer.appendChild(anchor);
         });
-
     }
+
+    // Add video thumbnails
+    if (reviewData.videos && reviewData.videos.length > 0) {
+        reviewData.videos.forEach(function(video) {
+            var thumbUrl = video.thumbnailUrl || 'https://videocdn.n49.ca/thumb/' + video.videoId + '.jpg';
+            var videoThumb = document.createElement("div");
+            videoThumb.style.cssText = 'display: inline-block; width: 72px; height: 72px; background-color: #333; background-image: url(' + thumbUrl + '); background-size: cover; background-position: center; margin: 5px; cursor: pointer; position: relative; border-radius: 4px;';
+            videoThumb.innerHTML = '<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 24px; height: 24px; background: rgba(225,232,237,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="rgb(99,114,130)" style="margin-left: 2px;"><path d="M8 5v14l11-7z"/></svg></div>';
+            videoThumb.onclick = function() {
+                var elem = document.querySelector(`#largerevimg-${revId}`);
+                if (elem) {
+                    elem.style.display = 'block';
+                    elem.innerHTML = `<div><video preload="auto" controls="" autoplay style="width: 100%; max-height: 400px;"><source src="https://videocdn.n49.ca/mp4sdpad480p/${video.videoId}.mp4#t=0.1" type="video/mp4"></video></div>`;
+                }
+            };
+            thumbsContainer.appendChild(videoThumb);
+        });
+    }
+
+    // Add embed thumbnails
+    if (reviewData.embeds && reviewData.embeds.length > 0) {
+        reviewData.embeds.forEach(function(embed) {
+            var thumbUrl = embed.thumbnailUrl || '';
+            if (!thumbUrl && embed.platform === 'youtube' && embed.videoId) {
+                thumbUrl = 'https://img.youtube.com/vi/' + embed.videoId + '/hqdefault.jpg';
+            }
+            var embedDiv = document.createElement('div');
+            embedDiv.style.cssText = 'display: inline-block; width: 72px; height: 72px; background-position: center center; background-size: cover; background-repeat: no-repeat; margin: 5px; cursor: pointer; position: relative; border-radius: 4px; background-color: #f0f0f0;';
+            embedDiv.style.backgroundImage = "url('" + thumbUrl + "')";
+            embedDiv.innerHTML = '<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 24px; height: 24px; background: rgba(225,232,237,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="rgb(99,114,130)" style="margin-left: 2px;"><path d="M8 5v14l11-7z"/></svg></div>';
+            embedDiv.onclick = function() { displayEmbed(embed, revId); };
+            thumbsContainer.appendChild(embedDiv);
+        });
+    }
+
+    // Clear unused containers
+    var videoContainer = document.getElementById('lb-video-container');
+    if (videoContainer) videoContainer.innerHTML = '';
+    var embedContainer = document.getElementById('lb-embed-container');
+    if (embedContainer) embedContainer.innerHTML = '';
 
      // Update comments
      if(reviewData.comments && reviewData.comments.length > 0) {
@@ -431,6 +523,8 @@ function closePhotoLightbox() {
     photoContainer.innerHTML = '';
     var mediaContainer = document.getElementById('lb-video-container');
     mediaContainer.innerHTML = '';
+    var embedContainer = document.getElementById('lb-embed-container');
+    if (embedContainer) embedContainer.innerHTML = '';
     var commentContainer = document.getElementById('lb-comment-container');
     commentContainer.innerHTML = '';
     document.getElementById('photo-lightbox').style.display = 'none';

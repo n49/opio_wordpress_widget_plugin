@@ -974,8 +974,10 @@ height: unset !important;
 }
 
 .widget-body .review-img{
-    width: 48px; 
+    width: 48px;
     height: 48px;
+    object-fit: cover;
+    border-radius: 4px;
 }
 
 .widget-body .video-icon {
@@ -1246,7 +1248,7 @@ height: unset !important;
 }
 
 .lb-photo-div {
-    display: flex; 
+    display: flex;
 }
 
 .lb-review-property {
@@ -1452,6 +1454,7 @@ height: unset !important;
     background-repeat: no-repeat;
     margin: 5px;
     text-align: center;
+    border-radius: 4px;
 }
 
 .lb-video-player {
@@ -2670,4 +2673,13 @@ height: unset !important;
         margin: 0px 10px;
     }
 
+}
+
+/* Override WordPress theme anchor underline for media thumbnails */
+#opio-review-feed a,
+.outer a,
+#root a,
+#media-container a,
+[data-nitro-exclude] a {
+    text-decoration: none !important;
 }
