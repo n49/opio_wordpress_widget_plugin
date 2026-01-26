@@ -327,124 +327,27 @@
 
 <?php if(isset($filteredReviews) && count(array_slice($filteredReviews, 0, 7)) > 3) { ?>
 
-<?php if(isset($feed_object->schema_enabled) && $feed_object->schema_enabled == 'yes' 
-         && isset($business) && !empty($business["name"]) 
-         && isset($aggregateRating) && $aggregateRating > 0
-         && isset($totalReviews) && $totalReviews > 0) { ?>
-
-<!-- JSON schema starts-->
-
-<?php if(isset($feed_object->schema_type) && $feed_object->schema_type == 'local') { ?>
-    <script id="jsonldSchema" type="application/ld+json">
-    <?php $count=1; ?>
-    {
-        "@context": "http://schema.org",
-        "@type": "LocalBusiness",
-        "name": "<?php echo $business["name"]?>",
-        "image": "<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "<?php echo esc_attr($business["address"]["address1"]); ?>",
-            "addressRegion": "<?php echo esc_attr($business["address"]["province"]); ?>",
-            "postalCode": "<?php echo esc_attr($business["address"]["postalCode"]); ?>"
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "<?php echo esc_attr($aggregateRating); ?>",
-            "reviewCount": "<?php echo esc_attr($totalReviews); ?>"
-        },
-        "review": [
-            <?php foreach(array_slice($filteredReviews, 0, 7) as $key => $review) { ?>
-            {
-                "@type": "Review",
-                <?php if(isset($review['user']['firstName'])) { ?>
-                "author": {
-                    "@type": "Person",
-                    "name": "<?php echo esc_attr($review['user']['firstName']); ?>"
-                },
-                <?php } ?>
-                "datePublished": "<?php echo esc_attr(date('M d, Y', $review["dateCreated"]/1000)); ?>",
-                "reviewBody": "<?php echo esc_attr($review['content']); ?>",
-                "reviewRating": {
-                    "@type": "Rating",
-                    "ratingValue": <?php echo esc_attr($review['propertyInfo']['name'] === 'facebook' ? $review['rating'] === 'positive' ? 5 : 1 : $review['rating']); ?>
-                },
-                "publisher": {
-                    "@type": "Organization",
-                    "name": "op.io",
-                    "sameAs": "https://www.op.io"
-                }
-            }
-            <?php if($count < count(array_slice($filteredReviews, 0, 7))){
-                echo ",";
-            } 
-            ?>
-            <?php $count = $count + 1; ?>
-            <?php } ?>
-        ]
+<?php if(isset($feed_object->schema_enabled) && $feed_object->schema_enabled == 'yes') {
+    $schema_url = 'https://op.io/review-schema.json/?entid=' . $feed_object->biz_id;
+    if($review_type === 'orgfeed') {
+        $schema_url = 'https://op.io/review-schema.json/?orgid=' . $feed_object->org_id;
     }
-    </script>
-
-<?php } else { ?>
-    <script id="jsonldSchema" type="application/ld+json">
-    <?php $count=1; ?>
-    {
-        "@context": "http://schema.org",
-        "@type": "Product",
-        "name": "<?php echo $business["name"]?>",
-        "image": "<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-blue-logo.png'; ?>",
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "<?php echo esc_attr($aggregateRating); ?>",
-            "reviewCount": "<?php echo esc_attr($totalReviews); ?>"
-        },
-        <?php if(isset($business['lowPriceRange']) && isset($business['highPriceRange']) && $business['lowPriceRange'] !== null && $business['highPriceRange'] !== null) { ?>
-            "offers": {
-                "@type": "AggregateOffer",
-                "offerCount": 5,
-                "lowPrice": "<?php echo $business['lowPriceRange']?>",
-                "highPrice": "<?php echo $business['highPriceRange']?>",
-                "priceCurrency": "CAD"
-            },
-        <?php } ?>
-        "review": [
-            <?php foreach(array_slice($filteredReviews, 0, 7) as $key => $review) { ?>
-
-            {
-                "@type": "Review",
-                <?php if(isset($review['user']['firstName'])) { ?>
-                "author": {
-                    "@type": "Person",
-                    "name": "<?php echo esc_attr($review['user']['firstName']); ?>"
-                },
-                <?php } ?>
-                "datePublished": "<?php echo esc_attr(date('M d, Y', $review["dateCreated"]/1000)); ?>",
-                "reviewBody": "<?php echo esc_attr($review['content']); ?>",
-                "reviewRating": {
-                    "@type": "Rating",
-                    "ratingValue":  <?php echo esc_attr($review['propertyInfo']['name'] === 'facebook' ? $review['rating'] === 'positive' ? 5 : 1 : $review['rating']); ?>
-                },
-                "publisher": {
-                    "@type": "Organization",
-                    "name": "op.io",
-                    "sameAs": "https://www.op.io"
-                }
-            }
-            <?php if($count < count(array_slice($filteredReviews, 0, 7))){
-                echo ",";
-            } 
-            ?>
-            <?php $count = $count + 1; ?>
-            
-            <?php } ?>
-        ]
+    if(isset($feed_object->schema_type) && $feed_object->schema_type == 'local') {
+        $schema_url .= '&type=local';
     }
+    $schema_response = wp_remote_get($schema_url, ['timeout' => 5]);
+    if(!is_wp_error($schema_response) && $schema_response['response']['code'] === 200) {
+        $schema_json = $schema_response['body'];
+        if(!empty($schema_json) && $schema_json !== '{}' && $schema_json !== 'null') {
+?>
+<!-- JSON schema from op.io API -->
+<script type="application/ld+json">
+<?php echo $schema_json; ?>
 </script>
-<?php } ?>
-
-<!-- JSON schema ends-->
-
-<?php } ?>
+<?php
+        }
+    }
+} ?>
 
 <?php } ?>
 
