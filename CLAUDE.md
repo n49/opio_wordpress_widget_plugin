@@ -6,7 +6,7 @@ Be extremely concise in all interactions.
 
 ## Overview
 
-WordPress plugin ("Widget for OPIO Reviews") for embedding OPIO review feeds and sliders on client websites. Displays reviews from the op.io aggregation service. Current version: **1.1.14**.
+WordPress plugin ("Widget for OPIO Reviews") for embedding OPIO review feeds and sliders on client websites. Displays reviews from the op.io aggregation service. Current version: **1.1.15**.
 
 ## Build & Development
 
@@ -15,6 +15,11 @@ WordPress plugin ("Widget for OPIO Reviews") for embedding OPIO review feeds and
 **Testing:** No automated tests. Manual testing only via WordPress admin preview.
 
 **Deployment:** GitHub Actions (`.github/workflows/main.yml`) deploys to WordPress.org SVN on git tag push using `10up/action-wordpress-plugin-deploy`. Slug: `widget-for-opio-reviews`.
+
+**Version bump checklist** — update all three locations when releasing:
+1. `opio.php` — `Version:` in plugin header comment
+2. `opio.php` — `OPIO_PLUGIN_VERSION` constant
+3. `readme.txt` — `Stable tag:`
 
 **Debug mode:** Set WP option `opio_debug_mode` to `'1'` to load unminified assets from `assets/src/` instead of `assets/`.
 
