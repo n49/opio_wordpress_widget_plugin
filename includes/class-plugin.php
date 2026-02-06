@@ -100,6 +100,9 @@ final class Plugin {
         $feed_shortcode = new Feed_Shortcode($feed_deserializer);
         $feed_shortcode->register();
 
+        $feed_optimized_shortcode = new Feed_Optimized_Shortcode($feed_deserializer);
+        $feed_optimized_shortcode->register();
+
         $slider_shortcode = new Slider_Shortcode($slider_deserializer);
         $slider_shortcode->register();
 
