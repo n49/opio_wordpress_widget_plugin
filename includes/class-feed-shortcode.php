@@ -231,23 +231,14 @@ class Feed_Shortcode {
      * Remove schema scripts from HTML content
      */
     private function remove_schema_from_html($html) {
-        // First, remove entire head sections that contain our schema (in case feed has nested head tags)
-        // Match head tags that contain our schema script
-        $head_with_schema_pattern = '/<head[^>]*>.*?<script[^>]*(?:id=["\']jsonldSchema["\'][^>]*type=["\']application\/ld\+json["\']|type=["\']application\/ld\+json["\'][^>]*id=["\']jsonldSchema["\'])[^>]*>.*?<\/script>.*?<\/head>/is';
-        $html = preg_replace($head_with_schema_pattern, '', $html);
-        
-        // Remove script tags with id="jsonldSchema" and type="application/ld+json"
-        // Handles attributes in any order and with single or double quotes
-        // This catches any remaining schema scripts (even outside head tags)
+        // Remove schema script tags only — preserve other <head> contents (Glide CSS/JS, fonts)
         $schema_script_pattern = '/<script[^>]*(?:id=["\']jsonldSchema["\'][^>]*type=["\']application\/ld\+json["\']|type=["\']application\/ld\+json["\'][^>]*id=["\']jsonldSchema["\'])[^>]*>.*?<\/script>/is';
         $html = preg_replace($schema_script_pattern, '', $html);
-        
-        // Also remove any stray/empty head tags that might be in the content
-        // Remove opening <head> tags
+
+        // Strip <head>/<\/head> wrapper tags but keep their contents
         $html = preg_replace('/<head[^>]*>/i', '', $html);
-        // Remove closing </head> tags
         $html = preg_replace('/<\/head>/i', '', $html);
-        
+
         return $html;
     }
 
@@ -300,7 +291,15 @@ class Feed_Shortcode {
      * Buffer callback - inject schemas into head section if they weren't output in wp_head
      */
     public function buffer_callback($buffer) {
-        // Only process if we have schemas
+        // Fix &#038; entities that wptexturize injects inside <script> blocks
+        // Applies to all feed types: reviewFeed, allReviewFeed, multiReviewFeed
+        if (strpos($buffer, 'opioEntityId') !== false) {
+            $buffer = preg_replace_callback('/<script\b[^>]*>(.*?)<\/script>/is', function($m) {
+                return str_replace($m[1], html_entity_decode($m[1], ENT_QUOTES | ENT_HTML5, 'UTF-8'), $m[0]);
+            }, $buffer);
+        }
+
+        // Only process schemas if we have them
         if (empty(self::$schema_scripts)) {
             return $buffer;
         }
