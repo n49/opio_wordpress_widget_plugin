@@ -8,7 +8,7 @@ if (!isset($opio_translator)) { $opio_translator = null; }
 ?>
 <!-- reviews-slider-horizontal-template.php -->
 
-<div id="opio-horizontal-widget">
+<div id="opio-horizontal-widget" style="direction: ltr;">
 
 <?php 
 
