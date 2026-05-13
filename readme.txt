@@ -2,7 +2,7 @@
 Author: Dhiraj Timalsina
 Tags: Widget for OPIO Reviews, opio, reviews, rating, widget, google business, testimonials
 Tested up to: 6.4
-Stable tag: 1.1.20
+Stable tag: 1.1.21
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,6 +85,9 @@ Any other ISO 639-1 code (e.g., `sw`, `nb`, `fi`, `cs`) will translate review co
 Full developer documentation, filter hooks for raising translation quota, and instructions for adding a 31st hand-curated language are in `LANGUAGES.md` in the plugin folder.
 
 == Changelog ==
+
+= 1.1.21 =
+* Fix: slider tiles invisible on RTL host pages (Arabic / Persian / Urdu / Hebrew). The slider's outer wrapper now declares `direction: ltr` so page-level RTL inheritance doesn't break Slick carousel's internal positioning math. Arabic/Persian/Urdu/Hebrew text inside tiles still renders right-to-left via Unicode bidi.
 
 = 1.1.20 =
 * Docs: Mark which 4 of the 30 supported languages are right-to-left (`ar`, `fa`, `ur`, `he`) in `LANGUAGES.md`, `readme.txt`, and the in-admin Support tab.

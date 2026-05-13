@@ -43,6 +43,7 @@ class Slider_Deserializer {
             $styles[] = 'all';
             $styles[] = 'url';
             $styles[] = 'float';
+            $styles[] = 'direction';
             return $styles;
         });
 

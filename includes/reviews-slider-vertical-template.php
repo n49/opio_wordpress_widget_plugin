@@ -7,7 +7,7 @@ if (!isset($opio_translator)) { $opio_translator = null; }
 
 ?>
 <!-- reviews-slider-vertical-template.php -->
-<div id="opio-vertical-widget">
+<div id="opio-vertical-widget" style="direction: ltr;">
 
 <?php 
     $review_feed_link = '#';
