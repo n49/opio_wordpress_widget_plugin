@@ -2,7 +2,7 @@
 Author: Dhiraj Timalsina
 Tags: Widget for OPIO Reviews, opio, reviews, rating, widget, google business, testimonials
 Tested up to: 6.4
-Stable tag: 1.1.17
+Stable tag: 1.1.18
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,3 +35,60 @@ Official way to show OPIO Reviews on WordPress site without manual code settings
 This plugin displays **OPIO Reviews** on your WordPress website through a public and approved by OPIO API without crawling and other unofficial methods. With this plugin, you can be sure of the right way for showing **OPIO Reviews**.
 
 Displaying **OPIO Rating** and Reviews on your site is the easiest and most effective way to increase your customer confidence, show stars and increase conversion!
+
+== Multilingual / Slider Translation ==
+
+The `[opio_slider]` shortcode accepts an optional `lang` attribute to render the slider in another language. UI labels translate from shipped translation files; review content + comments + JSON-LD schema translate via a free machine-translation service (cached after first load).
+
+**Usage:**
+
+`[opio_slider id="37" lang="fr"]`
+
+Omit `lang=` to keep English. Setup-agnostic — no Polylang/WPML/`get_locale()` coupling. Works on any WordPress site without installing extra locale files.
+
+**30 languages ship with hand-curated UI translations:**
+
+| Code | Language |
+|------|----------|
+| `fr` | French — Français |
+| `es` | Spanish — Español |
+| `pt` | Portuguese — Português |
+| `de` | German — Deutsch |
+| `it` | Italian — Italiano |
+| `nl` | Dutch — Nederlands |
+| `tr` | Turkish — Türkçe |
+| `pl` | Polish — Polski |
+| `el` | Greek — Ελληνικά |
+| `sv` | Swedish — Svenska |
+| `uk` | Ukrainian — Українська |
+| `ru` | Russian — Русский |
+| `he` | Hebrew — עברית |
+| `ar` | Arabic — العربية |
+| `fa` | Persian / Farsi — فارسی |
+| `ur` | Urdu — اردو |
+| `hi` | Hindi — हिन्दी |
+| `pa` | Punjabi — ਪੰਜਾਬੀ |
+| `bn` | Bengali — বাংলা |
+| `ta` | Tamil — தமிழ் |
+| `ja` | Japanese — 日本語 |
+| `ko` | Korean — 한국어 |
+| `zh` | Mandarin (Simplified Chinese) — 普通话 |
+| `hk` | Cantonese (Traditional Chinese) — 粵語 |
+| `vi` | Vietnamese — Tiếng Việt |
+| `tl` | Tagalog — Filipino |
+| `id` | Indonesian — Bahasa Indonesia |
+| `ms` | Malay — Bahasa Melayu |
+| `th` | Thai — ไทย |
+
+Any other ISO 639-1 code (e.g., `sw`, `nb`, `fi`, `cs`) will translate review content via the machine-translation API, while UI labels stay English. Invalid codes silently fall back to English everywhere.
+
+Full developer documentation, filter hooks for raising translation quota, and instructions for adding a 31st hand-curated language are in `LANGUAGES.md` in the plugin folder.
+
+== Changelog ==
+
+= 1.1.18 =
+* Add slider translation support — `[opio_slider id='X' lang='fr']` (and 29 other languages).
+* Translate UI labels (Read more, Powered by, Write a review, etc.) via shipped `.mo` files.
+* Translate review content, comments, and JSON-LD `reviewBody`/`description` via free MyMemory API with per-chunk transient caching.
+* Add `inLanguage` to JSON-LD Review nodes for SEO.
+* JSON-LD schema now also emits from the vertical and horizontal-carousel layouts (previously only horizontal).

@@ -1,0 +1,53 @@
+# bn_BD translation for Widget for OPIO Reviews
+msgid ""
+msgstr ""
+"Project-Id-Version: Widget for OPIO Reviews 1.1.18\n"
+"Language: bn_BD\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: widget-for-opio-reviews\n"
+
+msgid "Recommends"
+msgstr "সুপারিশ করে"
+
+msgid "Doesn't Recommend"
+msgstr "সুপারিশ করে না"
+
+msgid "Read more"
+msgstr "আরও পড়ুন"
+
+msgid "Powered by"
+msgstr "চালিত"
+
+msgid "See all %s Reviews"
+msgstr "সমস্ত %s পর্যালোচনা দেখুন"
+
+msgid "Write a review"
+msgstr "একটি পর্যালোচনা লিখুন"
+
+msgid "on"
+msgstr "তারিখে"
+
+msgid "M d, Y"
+msgstr "d M Y"
+
+msgid "MMM D, YYYY"
+msgstr "D MMM YYYY"
+
+msgid "Error: More than 3 reviews are required for the widget"
+msgstr "ত্রুটি: উইজেটের জন্য ৩টির বেশি পর্যালোচনা প্রয়োজন"
+
+msgid "Comments"
+msgstr "মন্তব্য"
+
+msgid "By"
+msgstr "দ্বারা"
+
+msgid "Employees mentions:"
+msgstr "উল্লিখিত কর্মচারীরা:"
+
+msgid "Our Reviews"
+msgstr "আমাদের পর্যালোচনা"
+

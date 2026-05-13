@@ -1,0 +1,53 @@
+# es_ES translation for Widget for OPIO Reviews
+msgid ""
+msgstr ""
+"Project-Id-Version: Widget for OPIO Reviews 1.1.18\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: widget-for-opio-reviews\n"
+
+msgid "Recommends"
+msgstr "Recomienda"
+
+msgid "Doesn't Recommend"
+msgstr "No recomienda"
+
+msgid "Read more"
+msgstr "Leer más"
+
+msgid "Powered by"
+msgstr "Con tecnología de"
+
+msgid "See all %s Reviews"
+msgstr "Ver las %s reseñas"
+
+msgid "Write a review"
+msgstr "Escribir una reseña"
+
+msgid "on"
+msgstr "el"
+
+msgid "M d, Y"
+msgstr "d M Y"
+
+msgid "MMM D, YYYY"
+msgstr "D MMM YYYY"
+
+msgid "Error: More than 3 reviews are required for the widget"
+msgstr "Error: se requieren más de 3 reseñas para mostrar el widget"
+
+msgid "Comments"
+msgstr "Comentarios"
+
+msgid "By"
+msgstr "Por"
+
+msgid "Employees mentions:"
+msgstr "Empleados mencionados:"
+
+msgid "Our Reviews"
+msgstr "Nuestras reseñas"
+

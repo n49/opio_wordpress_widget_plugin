@@ -1,0 +1,53 @@
+# ta_IN translation for Widget for OPIO Reviews
+msgid ""
+msgstr ""
+"Project-Id-Version: Widget for OPIO Reviews 1.1.18\n"
+"Language: ta_IN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: widget-for-opio-reviews\n"
+
+msgid "Recommends"
+msgstr "பரிந்துரைக்கிறார்"
+
+msgid "Doesn't Recommend"
+msgstr "பரிந்துரைக்கவில்லை"
+
+msgid "Read more"
+msgstr "மேலும் படிக்க"
+
+msgid "Powered by"
+msgstr "இயக்குநர்"
+
+msgid "See all %s Reviews"
+msgstr "அனைத்து %s மதிப்புரைகளையும் காண்க"
+
+msgid "Write a review"
+msgstr "மதிப்புரை எழுதவும்"
+
+msgid "on"
+msgstr "அன்று"
+
+msgid "M d, Y"
+msgstr "d M Y"
+
+msgid "MMM D, YYYY"
+msgstr "D MMM YYYY"
+
+msgid "Error: More than 3 reviews are required for the widget"
+msgstr "பிழை: விட்ஜெட்டுக்கு 3-க்கு மேற்பட்ட மதிப்புரைகள் தேவை"
+
+msgid "Comments"
+msgstr "கருத்துகள்"
+
+msgid "By"
+msgstr "ஆல்"
+
+msgid "Employees mentions:"
+msgstr "குறிப்பிட்ட ஊழியர்கள்:"
+
+msgid "Our Reviews"
+msgstr "எங்கள் மதிப்புரைகள்"
+

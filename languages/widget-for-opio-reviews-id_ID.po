@@ -1,0 +1,53 @@
+# id_ID translation for Widget for OPIO Reviews
+msgid ""
+msgstr ""
+"Project-Id-Version: Widget for OPIO Reviews 1.1.18\n"
+"Language: id_ID\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Domain: widget-for-opio-reviews\n"
+
+msgid "Recommends"
+msgstr "Merekomendasikan"
+
+msgid "Doesn't Recommend"
+msgstr "Tidak merekomendasikan"
+
+msgid "Read more"
+msgstr "Baca selengkapnya"
+
+msgid "Powered by"
+msgstr "Didukung oleh"
+
+msgid "See all %s Reviews"
+msgstr "Lihat semua %s ulasan"
+
+msgid "Write a review"
+msgstr "Tulis ulasan"
+
+msgid "on"
+msgstr "pada"
+
+msgid "M d, Y"
+msgstr "d M Y"
+
+msgid "MMM D, YYYY"
+msgstr "D MMM YYYY"
+
+msgid "Error: More than 3 reviews are required for the widget"
+msgstr "Kesalahan: Lebih dari 3 ulasan diperlukan untuk widget"
+
+msgid "Comments"
+msgstr "Komentar"
+
+msgid "By"
+msgstr "Oleh"
+
+msgid "Employees mentions:"
+msgstr "Karyawan yang disebutkan:"
+
+msgid "Our Reviews"
+msgstr "Ulasan kami"
+

@@ -1,3 +1,13 @@
+function opioI18n(s) {
+    var hasMap = (typeof window !== 'undefined' && !!window.opioSliderI18nActive);
+    var hit = hasMap && Object.prototype.hasOwnProperty.call(window.opioSliderI18nActive, s);
+    var out = hit ? window.opioSliderI18nActive[s] : s;
+    if (typeof console !== 'undefined' && console.debug) {
+        console.debug('[OPIO slider i18n]', { key: s, hasMap: hasMap, hit: hit, value: out });
+    }
+    return out;
+}
+
 function getStarRatingJS(average) {
     var starColor = '#E6E8EB';
     if(average > 0.5) {
@@ -276,13 +286,13 @@ async function openPhotoLightbox(reviewData) {
             ratingElement.innerHTML = `
             <div class="lb-fb-rating-div">
                 <img class="lb-fb-rating-img" src="<?php echo esc_url(OPIO_ASSETS_URL) . 'img/facebook-recommends.png'; ?>"/>
-                <p class="lb-fb-rating-text-p">Recommends</p>
+                <p class="lb-fb-rating-text-p">${opioI18n('Recommends')}</p>
             </div>`;
         } else {
             ratingElement.innerHTML = `
             <div class="lb-fb-rating-div>
                 <img class="lb-fb-rating-img" src="<?php echo esc_url(OPIO_ASSETS_URL) . 'img/facebook-recommends-grey.png'; ?>" />
-                <p class="lb-fb-rating-text-n">Doesn't Recommend</p>
+                <p class="lb-fb-rating-text-n">${opioI18n("Doesn't Recommend")}</p>
             </div>`;
         }
     } else {
@@ -291,7 +301,7 @@ async function openPhotoLightbox(reviewData) {
     }
 
     // Update reviewer name
-    document.getElementById('reviewer-details').innerHTML = `<span id="lb-reviewer-name" class="lb-reviewer-name">${reviewData.user.firstName} ${reviewData.user.lastName}</span> on ${moment(reviewData.dateCreated).format("MMM D, YYYY")}`;
+    document.getElementById('reviewer-details').innerHTML = `<span id="lb-reviewer-name" class="lb-reviewer-name">${reviewData.user.firstName} ${reviewData.user.lastName}</span> ${opioI18n('on')} ${moment(reviewData.dateCreated).format(opioI18n('MMM D, YYYY'))}`;
 
     // Update review content
     document.getElementById('lb-review-content').textContent = reviewData.content;
@@ -439,7 +449,7 @@ async function openPhotoLightbox(reviewData) {
 
             empTagContainer.appendChild(empTagCard);
         });
-        reviewContainer.innerHTML = `<span class="lb-emp-mention">Employees mentions:</span>`;
+        reviewContainer.innerHTML = `<span class="lb-emp-mention">${opioI18n('Employees mentions:')}</span>`;
         reviewContainer.appendChild(empTagContainer);
     }
 
@@ -573,7 +583,7 @@ async function openPhotoLightbox(reviewData) {
 
         var commentHeader = document.createElement("div");
         commentHeader.classList.add('lb-comment-header');
-        commentHeader.textContent = 'Comments';
+        commentHeader.textContent = opioI18n('Comments');
         commentContainer.appendChild(commentHeader);
 
         var commentBox = document.createElement("div");
@@ -600,7 +610,7 @@ async function openPhotoLightbox(reviewData) {
         var byCommentName = document.createElement("div");
         byCommentName.classList.add("lb-by-comment-name");
 
-        byCommentName.innerHTML = `<span>By</span>&nbsp;<span class="lb-by-name-span">${commenterName} </span>&nbsp;on ${moment(reviewData.comments[0].dateCreated).format("MMM D, YYYY")}`;
+        byCommentName.innerHTML = `<span>${opioI18n('By')}</span>&nbsp;<span class="lb-by-name-span">${commenterName} </span>&nbsp;${opioI18n('on')} ${moment(reviewData.comments[0].dateCreated).format(opioI18n('MMM D, YYYY'))}`;
         commentContentDiv.appendChild(byCommentName);
 
         var commentContent = document.createElement("div");

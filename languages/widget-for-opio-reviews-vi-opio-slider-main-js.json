@@ -1,0 +1,35 @@
+{
+    "translation-revision-date": "2026-05-13 00:00:00+0000",
+    "generator": "OPIO manual",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "vi",
+                "plural-forms": "nplurals=1; plural=0;"
+            },
+            "Recommends": [
+                "Đề xuất"
+            ],
+            "Doesn't Recommend": [
+                "Không đề xuất"
+            ],
+            "on": [
+                "vào"
+            ],
+            "MMM D, YYYY": [
+                "D MMM YYYY"
+            ],
+            "Comments": [
+                "Bình luận"
+            ],
+            "By": [
+                "Bởi"
+            ],
+            "Employees mentions:": [
+                "Nhân viên được nhắc đến:"
+            ]
+        }
+    }
+}

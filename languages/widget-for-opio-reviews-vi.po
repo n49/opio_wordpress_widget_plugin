@@ -1,0 +1,53 @@
+# vi translation for Widget for OPIO Reviews
+msgid ""
+msgstr ""
+"Project-Id-Version: Widget for OPIO Reviews 1.1.18\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Domain: widget-for-opio-reviews\n"
+
+msgid "Recommends"
+msgstr "Đề xuất"
+
+msgid "Doesn't Recommend"
+msgstr "Không đề xuất"
+
+msgid "Read more"
+msgstr "Đọc thêm"
+
+msgid "Powered by"
+msgstr "Cung cấp bởi"
+
+msgid "See all %s Reviews"
+msgstr "Xem tất cả %s đánh giá"
+
+msgid "Write a review"
+msgstr "Viết đánh giá"
+
+msgid "on"
+msgstr "vào"
+
+msgid "M d, Y"
+msgstr "d M Y"
+
+msgid "MMM D, YYYY"
+msgstr "D MMM YYYY"
+
+msgid "Error: More than 3 reviews are required for the widget"
+msgstr "Lỗi: Cần hơn 3 đánh giá để hiển thị widget"
+
+msgid "Comments"
+msgstr "Bình luận"
+
+msgid "By"
+msgstr "Bởi"
+
+msgid "Employees mentions:"
+msgstr "Nhân viên được nhắc đến:"
+
+msgid "Our Reviews"
+msgstr "Đánh giá của chúng tôi"
+

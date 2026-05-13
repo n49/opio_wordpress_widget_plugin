@@ -1,0 +1,53 @@
+# fa_IR translation for Widget for OPIO Reviews
+msgid ""
+msgstr ""
+"Project-Id-Version: Widget for OPIO Reviews 1.1.18\n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Domain: widget-for-opio-reviews\n"
+
+msgid "Recommends"
+msgstr "توصیه می‌کند"
+
+msgid "Doesn't Recommend"
+msgstr "توصیه نمی‌کند"
+
+msgid "Read more"
+msgstr "بیشتر بخوانید"
+
+msgid "Powered by"
+msgstr "قدرت‌گرفته از"
+
+msgid "See all %s Reviews"
+msgstr "مشاهده همه %s نظر"
+
+msgid "Write a review"
+msgstr "نوشتن نظر"
+
+msgid "on"
+msgstr "در"
+
+msgid "M d, Y"
+msgstr "d M Y"
+
+msgid "MMM D, YYYY"
+msgstr "D MMM YYYY"
+
+msgid "Error: More than 3 reviews are required for the widget"
+msgstr "خطا: برای نمایش ویجت بیش از ۳ نظر لازم است"
+
+msgid "Comments"
+msgstr "نظرات"
+
+msgid "By"
+msgstr "توسط"
+
+msgid "Employees mentions:"
+msgstr "کارمندان ذکرشده:"
+
+msgid "Our Reviews"
+msgstr "نظرات ما"
+

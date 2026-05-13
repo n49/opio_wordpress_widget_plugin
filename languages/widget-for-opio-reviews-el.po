@@ -1,0 +1,53 @@
+# el translation for Widget for OPIO Reviews
+msgid ""
+msgstr ""
+"Project-Id-Version: Widget for OPIO Reviews 1.1.18\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: widget-for-opio-reviews\n"
+
+msgid "Recommends"
+msgstr "Συνιστά"
+
+msgid "Doesn't Recommend"
+msgstr "Δεν συνιστά"
+
+msgid "Read more"
+msgstr "Διαβάστε περισσότερα"
+
+msgid "Powered by"
+msgstr "Με την υποστήριξη"
+
+msgid "See all %s Reviews"
+msgstr "Δείτε όλες τις %s κριτικές"
+
+msgid "Write a review"
+msgstr "Γράψτε μια κριτική"
+
+msgid "on"
+msgstr "στις"
+
+msgid "M d, Y"
+msgstr "d M Y"
+
+msgid "MMM D, YYYY"
+msgstr "D MMM YYYY"
+
+msgid "Error: More than 3 reviews are required for the widget"
+msgstr "Σφάλμα: Απαιτούνται περισσότερες από 3 κριτικές για το widget"
+
+msgid "Comments"
+msgstr "Σχόλια"
+
+msgid "By"
+msgstr "Από"
+
+msgid "Employees mentions:"
+msgstr "Αναφερόμενοι υπάλληλοι:"
+
+msgid "Our Reviews"
+msgstr "Οι κριτικές μας"
+

@@ -1,6 +1,9 @@
-<?php 
+<?php
 
 ob_start();
+
+if (!isset($opio_target_lang)) { $opio_target_lang = ''; }
+if (!isset($opio_translator)) { $opio_translator = null; }
 
 ?>
 <!-- reviews-slider-vertical-template.php -->
@@ -167,10 +170,10 @@ ob_start();
 <div class="widget-body opio-vertical">
     <div class="v-header">
         <div class="v-h-col-1">
-            <span style="font-size: 22px; font-weight: 700;">Our Reviews</span>
+            <span style="font-size: 22px; font-weight: 700;"><?php esc_html_e('Our Reviews', 'widget-for-opio-reviews'); ?></span>
         </div>
         <div class="v-h-col-2">
-            <span class="v-pwd-span">Powered by</span>
+            <span class="v-pwd-span"><?php esc_html_e('Powered by', 'widget-for-opio-reviews'); ?></span>
             <a href="https://www.opioapp.com"><div class="v-h-opio-logo" style="background-image: url(<?php echo esc_url(OPIO_ASSETS_URL) . 'img/opio-white-logo.png'; ?>);"></div></a>
         </div>
     </div>
@@ -179,7 +182,7 @@ ob_start();
             <div class="v-r-row-1">
                 <?php echo wp_kses(getStarRatingWidget($aggregateRating), $this->slider_deserializer->get_allowed_tags()); ?>
             </div>
-            <span class="v-see-all-span"><a href="<?php echo esc_attr($review_feed_link); ?>">See all <?php echo esc_attr($totalReviews); ?> Reviews</a></span>
+            <span class="v-see-all-span"><a href="<?php echo esc_attr($review_feed_link); ?>"><?php echo esc_html(sprintf(__('See all %s Reviews', 'widget-for-opio-reviews'), number_format_i18n($totalReviews))); ?></a></span>
         </div>
         <div class="v-r-col-2">
             <div class="v-r-row-1"><span class="v-rating-span"><?php echo esc_attr($aggregateRating); ?>/5</span></div>
@@ -189,7 +192,21 @@ ob_start();
     <?php
         foreach (array_slice($filteredReviews, 0, 7) as $review) {
     ?>
-        <?php $currentReview = $review; ?>
+        <?php
+            $currentReview  = $review;
+            $review_content = isset($review['content']) ? $review['content'] : '';
+            if (!empty($opio_target_lang) && $opio_translator) {
+                $review_content = $opio_translator->translate_review_content($review_content, $opio_target_lang);
+                $currentReview['content'] = $review_content;
+                if (isset($currentReview['comments']) && is_array($currentReview['comments'])) {
+                    foreach ($currentReview['comments'] as $cmt_i => $cmt) {
+                        if (isset($cmt['content']) && is_string($cmt['content']) && $cmt['content'] !== '') {
+                            $currentReview['comments'][$cmt_i]['content'] = $opio_translator->translate_review_content($cmt['content'], $opio_target_lang);
+                        }
+                    }
+                }
+            }
+        ?>
             <div class="testimonial-slide review-tile-vertical" data-review-index="<?php echo esc_attr($index); ?>" onclick="openPhotoLightbox(<?php echo esc_attr(json_encode($currentReview)); ?>)">
                 <div id=<?php echo esc_attr($review["_id"]);?> class="v-review-tile-container">
                     <div class="v-rev-content">
@@ -212,12 +229,12 @@ ob_start();
                             <?php if($review['rating'] === "positive") { ?>
                                 <div class="fb-rating-div">
                                     <img class="fb-rating-img" src="<?php echo esc_url(OPIO_ASSETS_URL) . 'img/facebook-recommends.png'; ?>" />
-                                    <p class="fb-rating-text-p">Recommends</p>
+                                    <p class="fb-rating-text-p"><?php esc_html_e('Recommends', 'widget-for-opio-reviews'); ?></p>
                                 </div>
                             <?php } else { ?>
                                 <div class="fb-rating-div">
                                     <img class="fb-rating-img" src="<?php echo esc_url(OPIO_ASSETS_URL) . 'img/facebook-recommends-grey.png'; ?>"/>
-                                    <p class="fb-rating-text-n">Doesn't Recommend</p>
+                                    <p class="fb-rating-text-n"><?php esc_html_e("Doesn't Recommend", 'widget-for-opio-reviews'); ?></p>
                                 </div>
                             <?php } ?>  
                         <?php } else { ?>
@@ -231,7 +248,7 @@ ob_start();
                                 $reviewer_name = mb_substr($reviewer_name, 0, 12, 'UTF-8');
                             }
                         ?>
-                        <div class="reviewer-name-container"><span class="reviewer-name"><?php echo esc_attr($reviewer_name); ?></span> on <?php echo esc_attr(date('M d, Y', $review['dateCreated']/1000)); ?></div>
+                        <div class="reviewer-name-container"><span class="reviewer-name"><?php echo esc_attr($reviewer_name); ?></span> <?php esc_html_e('on', 'widget-for-opio-reviews'); ?> <?php echo esc_attr(date_i18n(__('M d, Y', 'widget-for-opio-reviews'), intval($review['dateCreated']/1000))); ?></div>
                     </div>
                     <div>
                         <?php if($review['propertyInfo']['name'] === 'facebook') { ?>
@@ -251,18 +268,18 @@ ob_start();
                 <?php if($review_type === 'orgfeed') { ?>
                     <div class="location-name"><?php echo esc_attr($review['entityInfo']['name']); ?></div>
                     <div class="review-content" id="v-reviewContent">
-                    <?php if (strlen($review['content']) > 55) { ?>
-                        <?php echo esc_attr(mb_substr($review['content'], 0, 55, 'UTF-8')); ?> <u>Read more</u>
+                    <?php if (strlen($review_content) > 55) { ?>
+                        <?php echo esc_attr(mb_substr($review_content, 0, 55, 'UTF-8')); ?> <u><?php esc_html_e('Read more', 'widget-for-opio-reviews'); ?></u>
                     <?php } else { ?>
-                        <?php echo esc_attr($review['content']); ?>
+                        <?php echo esc_attr($review_content); ?>
                     <?php } ?>
                     </div>
                 <?php } else { ?>
                     <div class="review-content" id="v-reviewContent">
-                    <?php if (strlen($review['content']) > 60) { ?>
-                        <?php echo esc_attr(mb_substr($review['content'], 0, 60, 'UTF-8')); ?> <u>Read more</u>
+                    <?php if (strlen($review_content) > 60) { ?>
+                        <?php echo esc_attr(mb_substr($review_content, 0, 60, 'UTF-8')); ?> <u><?php esc_html_e('Read more', 'widget-for-opio-reviews'); ?></u>
                     <?php } else { ?>
-                        <?php echo esc_attr($review['content']); ?>
+                        <?php echo esc_attr($review_content); ?>
                     <?php } ?>
                     </div>
                 <?php } ?>
@@ -281,7 +298,7 @@ ob_start();
                 <a class="v-wrire-rev-a" target="_blank" href="<?php echo esc_attr($writeReviewUrl); ?>">
                     <div class="v-write-rev-div">
                         <div class="v-write-rev-div-2">
-                            <span>Write a review</span>
+                            <span><?php esc_html_e('Write a review', 'widget-for-opio-reviews'); ?></span>
                         </div>
                     </div>
                 </a>
@@ -301,10 +318,13 @@ ob_start();
                     <div id="lb-fb-review-rating" class="lb-review-rating">
                     </div>
                     <div class="lb-reviwer-box">
-                        <div id="reviewer-details" class="lb-reviewer-div"><span id="lb-reviewer-name" class="lb-reviewer-name"><?php echo esc_attr($filteredReviews[$reviewIndex]['user']['firstName']);?></span> on <?php echo esc_attr(date('M d, Y', $review['dateCreated']/1000)); ?></div>
+                        <div id="reviewer-details" class="lb-reviewer-div"><span id="lb-reviewer-name" class="lb-reviewer-name"><?php echo esc_attr($filteredReviews[$reviewIndex]['user']['firstName']);?></span> <?php esc_html_e('on', 'widget-for-opio-reviews'); ?> <?php echo esc_attr(date_i18n(__('M d, Y', 'widget-for-opio-reviews'), intval($review['dateCreated']/1000))); ?></div>
                     </div>
                     <div class="lb-reviewtext">
-                        <div id="lb-review-content" class="lb-review-content"><?php echo esc_attr($filteredReviews[$reviewIndex]['content']); ?></div>
+                        <div id="lb-review-content" class="lb-review-content"><?php
+                            $lb_content = isset($filteredReviews[$reviewIndex]['content']) ? $filteredReviews[$reviewIndex]['content'] : '';
+                            echo esc_attr(\WP_Opio_Reviews\Includes\Slider_Translator::maybe_translate($lb_content, $opio_translator, $opio_target_lang));
+                        ?></div>
                     </div>
                     <div class="lb-emp-tag" id="lb-empTag"></div>
                     <div id="lb-photo-container" class="lb-photo-div"></div>
@@ -333,9 +353,19 @@ ob_start();
     })();
 </script>
 
+<?php
+if ($opio_translator) {
+    $opio_schema_json = $opio_translator->fetch_and_translate_schema($feed_object, $review_type, $opio_target_lang);
+    if (!empty($opio_schema_json)) {
+        echo '<!-- JSON schema from op.io API -->';
+        echo '<script type="application/ld+json">' . $opio_schema_json . '</script>';
+    }
+}
+?>
+
 <?php } else { ?>
     <div class="opio-more-reviews-required">
-        <p class="opio-more-error-note">Error: More than 3 reviews are required for the widget</p>
+        <p class="opio-more-error-note"><?php esc_html_e('Error: More than 3 reviews are required for the widget', 'widget-for-opio-reviews'); ?></p>
     </div>
 <?php } ?>
 <style>

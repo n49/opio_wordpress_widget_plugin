@@ -23,6 +23,15 @@ final class Plugin {
 
     public function register() {
         add_action('plugins_loaded', array($this, 'register_services'));
+        add_action('plugins_loaded', array($this, 'load_textdomain'));
+    }
+
+    public function load_textdomain() {
+        load_plugin_textdomain(
+            'widget-for-opio-reviews',
+            false,
+            dirname(plugin_basename(OPIO_PLUGIN_FILE)) . '/languages'
+        );
     }
 
     public function init_rest_endpoint() {
@@ -106,7 +115,9 @@ final class Plugin {
         $feed_french_shortcode = new Feed_French_Shortcode($feed_deserializer);
         $feed_french_shortcode->register();
 
-        $slider_shortcode = new Slider_Shortcode($slider_deserializer);
+        $slider_translator = new Slider_Translator();
+
+        $slider_shortcode = new Slider_Shortcode($slider_deserializer, $slider_translator);
         $slider_shortcode->register();
 
         if (is_admin()) {

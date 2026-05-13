@@ -1,0 +1,53 @@
+# tr_TR translation for Widget for OPIO Reviews
+msgid ""
+msgstr ""
+"Project-Id-Version: Widget for OPIO Reviews 1.1.18\n"
+"Language: tr_TR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Domain: widget-for-opio-reviews\n"
+
+msgid "Recommends"
+msgstr "Tavsiye ediyor"
+
+msgid "Doesn't Recommend"
+msgstr "Tavsiye etmiyor"
+
+msgid "Read more"
+msgstr "Devamını oku"
+
+msgid "Powered by"
+msgstr "Sağlayıcı:"
+
+msgid "See all %s Reviews"
+msgstr "Tüm %s yorumu görüntüle"
+
+msgid "Write a review"
+msgstr "Yorum yaz"
+
+msgid "on"
+msgstr "tarihinde"
+
+msgid "M d, Y"
+msgstr "d M Y"
+
+msgid "MMM D, YYYY"
+msgstr "D MMM YYYY"
+
+msgid "Error: More than 3 reviews are required for the widget"
+msgstr "Hata: Widget için 3'ten fazla yorum gerekli"
+
+msgid "Comments"
+msgstr "Yorumlar"
+
+msgid "By"
+msgstr "Yazan:"
+
+msgid "Employees mentions:"
+msgstr "Bahsedilen çalışanlar:"
+
+msgid "Our Reviews"
+msgstr "Yorumlarımız"
+

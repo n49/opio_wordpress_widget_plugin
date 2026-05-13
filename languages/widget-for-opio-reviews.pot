@@ -1,0 +1,51 @@
+# Copyright (C) 2026 OPIO
+# This file is distributed under the same license as the Widget for OPIO Reviews plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Widget for OPIO Reviews 1.1.18\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Domain: widget-for-opio-reviews\n"
+
+msgid "Recommends"
+msgstr ""
+
+msgid "Doesn't Recommend"
+msgstr ""
+
+msgid "Read more"
+msgstr ""
+
+msgid "Powered by"
+msgstr ""
+
+msgid "See all %s Reviews"
+msgstr ""
+
+msgid "Write a review"
+msgstr ""
+
+msgid "on"
+msgstr ""
+
+msgid "M d, Y"
+msgstr ""
+
+msgid "MMM D, YYYY"
+msgstr ""
+
+msgid "Error: More than 3 reviews are required for the widget"
+msgstr ""
+
+msgid "Comments"
+msgstr ""
+
+msgid "By"
+msgstr ""
+
+msgid "Employees mentions:"
+msgstr ""
+
+msgid "Our Reviews"
+msgstr ""
+

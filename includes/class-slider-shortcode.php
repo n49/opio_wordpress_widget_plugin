@@ -6,8 +6,11 @@ use WP_Opio_Reviews\Includes\Core\Core;
 
 class Slider_Shortcode {
 
-    public function __construct(Slider_Deserializer $slider_deserializer) {
+    private $slider_translator;
+
+    public function __construct(Slider_Deserializer $slider_deserializer, Slider_Translator $slider_translator) {
         $this->slider_deserializer = $slider_deserializer;
+        $this->slider_translator   = $slider_translator;
     }
 
     function custom_esc($str) {
@@ -43,21 +46,58 @@ class Slider_Shortcode {
         $slider_type = $feed_object->slider_type;
         $review_feed_link = $feed_object->review_feed_link;
 
+        $lang_attr        = isset($atts['lang']) ? $atts['lang'] : '';
+        $target_locale    = $this->slider_translator->normalize_lang($lang_attr);
+        $opio_translator  = $this->slider_translator;
+        $opio_target_lang = $target_locale ? $this->slider_translator->translator_lang_code($target_locale) : '';
+        $did_load_mo      = false;
+        $mo_file          = '';
+        $js_translations  = array();
+        if ($target_locale) {
+            $mo_file = plugin_dir_path(OPIO_PLUGIN_FILE) . 'languages/widget-for-opio-reviews-' . $target_locale . '.mo';
+            if (file_exists($mo_file)) {
+                unload_textdomain('widget-for-opio-reviews');
+                $did_load_mo = load_textdomain('widget-for-opio-reviews', $mo_file);
+            }
+            $js_translations = $this->slider_translator->get_js_translations($target_locale);
+        }
+
 		ob_start();
 
+        $debug = array(
+            'lang_attr'                => (string) $lang_attr,
+            'target_locale'            => (string) $target_locale,
+            'opio_target_lang'         => (string) $opio_target_lang,
+            'mo_file'                  => (string) $mo_file,
+            'mo_file_exists'           => $mo_file ? file_exists($mo_file) : false,
+            'did_load_mo'              => (bool) $did_load_mo,
+            'js_translations_count'    => count($js_translations),
+            'plugin_textdomain_loaded' => is_textdomain_loaded('widget-for-opio-reviews'),
+            'read_more_translated'     => __('Read more', 'widget-for-opio-reviews'),
+        );
+        echo '<script type="text/javascript" id="opio-slider-debug">console.log("[OPIO slider]", ' . wp_json_encode($debug) . ');</script>';
+
+        if (!empty($js_translations)) {
+            echo '<script type="text/javascript" id="opio-slider-i18n">window.opioSliderI18nActive = ' . wp_json_encode($js_translations) . ';</script>';
+        }
+
         if($slider_type == 'horizontal') {
-            include_once 'reviews-slider-horizontal-template.php'; 
+            include_once 'reviews-slider-horizontal-template.php';
         } else if($slider_type == 'horizontal-carousel') {
-            include_once 'reviews-slider-horizontal-carousel-template.php'; 
+            include_once 'reviews-slider-horizontal-carousel-template.php';
         } else if($slider_type == 'vertical') {
-            include_once 'reviews-slider-vertical-template.php'; 
+            include_once 'reviews-slider-vertical-template.php';
         }
         ob_get_contents();
 
         $output = ob_get_clean(); // Capture the entire output of the function
 
+        if ($did_load_mo) {
+            unload_textdomain('widget-for-opio-reviews');
+        }
+
         $output = $this->slider_deserializer->prepareString($output);
-	
+
         return wp_kses($output, $this->slider_deserializer->get_allowed_tags());
 
 

@@ -1,0 +1,53 @@
+# tl_PH translation for Widget for OPIO Reviews
+msgid ""
+msgstr ""
+"Project-Id-Version: Widget for OPIO Reviews 1.1.18\n"
+"Language: tl_PH\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Domain: widget-for-opio-reviews\n"
+
+msgid "Recommends"
+msgstr "Inirerekomenda"
+
+msgid "Doesn't Recommend"
+msgstr "Hindi inirerekomenda"
+
+msgid "Read more"
+msgstr "Magbasa pa"
+
+msgid "Powered by"
+msgstr "Pinapatakbo ng"
+
+msgid "See all %s Reviews"
+msgstr "Tingnan ang lahat ng %s na review"
+
+msgid "Write a review"
+msgstr "Magsulat ng review"
+
+msgid "on"
+msgstr "noong"
+
+msgid "M d, Y"
+msgstr "d M Y"
+
+msgid "MMM D, YYYY"
+msgstr "D MMM YYYY"
+
+msgid "Error: More than 3 reviews are required for the widget"
+msgstr "Error: Higit sa 3 review ang kailangan para sa widget"
+
+msgid "Comments"
+msgstr "Mga Komento"
+
+msgid "By"
+msgstr "Ni"
+
+msgid "Employees mentions:"
+msgstr "Mga binanggit na empleyado:"
+
+msgid "Our Reviews"
+msgstr "Aming mga review"
+

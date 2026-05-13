@@ -1,0 +1,53 @@
+# ur_PK translation for Widget for OPIO Reviews
+msgid ""
+msgstr ""
+"Project-Id-Version: Widget for OPIO Reviews 1.1.18\n"
+"Language: ur_PK\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: widget-for-opio-reviews\n"
+
+msgid "Recommends"
+msgstr "تجویز کرتا ہے"
+
+msgid "Doesn't Recommend"
+msgstr "تجویز نہیں کرتا"
+
+msgid "Read more"
+msgstr "مزید پڑھیں"
+
+msgid "Powered by"
+msgstr "سے چلتا ہے"
+
+msgid "See all %s Reviews"
+msgstr "تمام %s جائزے دیکھیں"
+
+msgid "Write a review"
+msgstr "جائزہ لکھیں"
+
+msgid "on"
+msgstr "بتاریخ"
+
+msgid "M d, Y"
+msgstr "d M Y"
+
+msgid "MMM D, YYYY"
+msgstr "D MMM YYYY"
+
+msgid "Error: More than 3 reviews are required for the widget"
+msgstr "خرابی: ویجٹ کے لیے 3 سے زیادہ جائزے درکار ہیں"
+
+msgid "Comments"
+msgstr "تبصرے"
+
+msgid "By"
+msgstr "بذریعہ"
+
+msgid "Employees mentions:"
+msgstr "مذکورہ ملازمین:"
+
+msgid "Our Reviews"
+msgstr "ہمارے جائزے"
+

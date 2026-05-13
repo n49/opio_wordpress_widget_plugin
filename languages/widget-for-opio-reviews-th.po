@@ -1,0 +1,53 @@
+# th translation for Widget for OPIO Reviews
+msgid ""
+msgstr ""
+"Project-Id-Version: Widget for OPIO Reviews 1.1.18\n"
+"Language: th\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Domain: widget-for-opio-reviews\n"
+
+msgid "Recommends"
+msgstr "แนะนำ"
+
+msgid "Doesn't Recommend"
+msgstr "ไม่แนะนำ"
+
+msgid "Read more"
+msgstr "อ่านเพิ่มเติม"
+
+msgid "Powered by"
+msgstr "ขับเคลื่อนโดย"
+
+msgid "See all %s Reviews"
+msgstr "ดูรีวิวทั้งหมด %s รายการ"
+
+msgid "Write a review"
+msgstr "เขียนรีวิว"
+
+msgid "on"
+msgstr "เมื่อ"
+
+msgid "M d, Y"
+msgstr "d M Y"
+
+msgid "MMM D, YYYY"
+msgstr "D MMM YYYY"
+
+msgid "Error: More than 3 reviews are required for the widget"
+msgstr "ข้อผิดพลาด: ต้องมีรีวิวมากกว่า 3 รายการสำหรับวิดเจ็ต"
+
+msgid "Comments"
+msgstr "ความคิดเห็น"
+
+msgid "By"
+msgstr "โดย"
+
+msgid "Employees mentions:"
+msgstr "พนักงานที่กล่าวถึง:"
+
+msgid "Our Reviews"
+msgstr "รีวิวของเรา"
+
