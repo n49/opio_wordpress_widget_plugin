@@ -2,7 +2,7 @@
 Author: Dhiraj Timalsina
 Tags: Widget for OPIO Reviews, opio, reviews, rating, widget, google business, testimonials
 Tested up to: 6.4
-Stable tag: 1.1.19
+Stable tag: 1.1.20
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -62,10 +62,10 @@ Omit `lang=` to keep English. Setup-agnostic — no Polylang/WPML/`get_locale()`
 | `sv` | Swedish — Svenska |
 | `uk` | Ukrainian — Українська |
 | `ru` | Russian — Русский |
-| `he` | Hebrew — עברית |
-| `ar` | Arabic — العربية |
-| `fa` | Persian / Farsi — فارسی |
-| `ur` | Urdu — اردو |
+| `he` | Hebrew — עברית *(RTL)* |
+| `ar` | Arabic — العربية *(RTL)* |
+| `fa` | Persian / Farsi — فارسی *(RTL)* |
+| `ur` | Urdu — اردو *(RTL)* |
 | `hi` | Hindi — हिन्दी |
 | `pa` | Punjabi — ਪੰਜਾਬੀ |
 | `bn` | Bengali — বাংলা |
@@ -85,6 +85,9 @@ Any other ISO 639-1 code (e.g., `sw`, `nb`, `fi`, `cs`) will translate review co
 Full developer documentation, filter hooks for raising translation quota, and instructions for adding a 31st hand-curated language are in `LANGUAGES.md` in the plugin folder.
 
 == Changelog ==
+
+= 1.1.20 =
+* Docs: Mark which 4 of the 30 supported languages are right-to-left (`ar`, `fa`, `ur`, `he`) in `LANGUAGES.md`, `readme.txt`, and the in-admin Support tab.
 
 = 1.1.19 =
 * Docs: Support tab now pairs each language with its short code (e.g. "French — fr") for easier copy/paste.
