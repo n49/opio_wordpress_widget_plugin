@@ -5,9 +5,40 @@
     <div class="opio-flex-col">
         <div class="opio-support-question">
             <h3>How do I display the slider in another language?</h3>
-            <p>Add a <code>lang</code> attribute to the slider shortcode, for example: <code>[opio_slider id="X" lang="fr"]</code> for French, <code>lang="de"</code> for German, <code>lang="ja"</code> for Japanese, etc. Omit <code>lang</code> to render English.</p>
-            <p><strong>30 languages ship with hand-curated UI translations:</strong> fr, es, pt, de, it, nl, tr, pl, el, sv, uk, ru, he, ar, fa, ur, hi, pa, bn, ta, ja, ko, zh (Mandarin), hk (Cantonese), vi, tl, id, ms, th.</p>
-            <p>Any other ISO 639-1 code (sw, nb, fi, cs, ro, etc.) will translate <em>review content</em> via a free machine-translation service while UI labels stay English. Invalid codes silently fall back to English everywhere.</p>
+            <p>Add a <code>lang</code> attribute to the slider shortcode. Example: <code>[opio_slider id="X" lang="fr"]</code> renders the slider in French. Omit <code>lang</code> to render English.</p>
+            <p><strong>30 languages ship with hand-curated UI translations:</strong></p>
+            <p>
+                French — <code>fr</code>,
+                Spanish — <code>es</code>,
+                Portuguese — <code>pt</code>,
+                German — <code>de</code>,
+                Italian — <code>it</code>,
+                Dutch — <code>nl</code>,
+                Turkish — <code>tr</code>,
+                Polish — <code>pl</code>,
+                Greek — <code>el</code>,
+                Swedish — <code>sv</code>,
+                Ukrainian — <code>uk</code>,
+                Russian — <code>ru</code>,
+                Hebrew — <code>he</code>,
+                Arabic — <code>ar</code>,
+                Persian / Farsi — <code>fa</code>,
+                Urdu — <code>ur</code>,
+                Hindi — <code>hi</code>,
+                Punjabi — <code>pa</code>,
+                Bengali — <code>bn</code>,
+                Tamil — <code>ta</code>,
+                Japanese — <code>ja</code>,
+                Korean — <code>ko</code>,
+                Mandarin (Simplified Chinese) — <code>zh</code>,
+                Cantonese (Traditional Chinese) — <code>hk</code>,
+                Vietnamese — <code>vi</code>,
+                Tagalog (Filipino) — <code>tl</code>,
+                Indonesian — <code>id</code>,
+                Malay — <code>ms</code>,
+                Thai — <code>th</code>.
+            </p>
+            <p>Any other ISO 639-1 code (Swahili <code>sw</code>, Norwegian <code>nb</code>, Finnish <code>fi</code>, Czech <code>cs</code>, Romanian <code>ro</code>, etc.) will translate <em>review content</em> via a free machine-translation service while UI labels stay English. Invalid codes silently fall back to English everywhere.</p>
             <p>No external plugin (Polylang, WPML, etc.) required. The <code>lang</code> attribute is the single source of truth. See <code>LANGUAGES.md</code> in the plugin folder for the full developer reference.</p>
         </div>
     </div>
