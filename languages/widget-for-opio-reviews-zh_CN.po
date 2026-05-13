@@ -1,0 +1,53 @@
+# zh_CN translation for Widget for OPIO Reviews
+msgid ""
+msgstr ""
+"Project-Id-Version: Widget for OPIO Reviews 1.1.18\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Domain: widget-for-opio-reviews\n"
+
+msgid "Recommends"
+msgstr "推荐"
+
+msgid "Doesn't Recommend"
+msgstr "不推荐"
+
+msgid "Read more"
+msgstr "阅读更多"
+
+msgid "Powered by"
+msgstr "技术支持"
+
+msgid "See all %s Reviews"
+msgstr "查看全部 %s 条评论"
+
+msgid "Write a review"
+msgstr "撰写评论"
+
+msgid "on"
+msgstr "于"
+
+msgid "M d, Y"
+msgstr "Y年m月d日"
+
+msgid "MMM D, YYYY"
+msgstr "YYYY年MMM D日"
+
+msgid "Error: More than 3 reviews are required for the widget"
+msgstr "错误：小部件需要超过 3 条评论"
+
+msgid "Comments"
+msgstr "评论"
+
+msgid "By"
+msgstr "作者"
+
+msgid "Employees mentions:"
+msgstr "提及的员工："
+
+msgid "Our Reviews"
+msgstr "我们的评论"
+

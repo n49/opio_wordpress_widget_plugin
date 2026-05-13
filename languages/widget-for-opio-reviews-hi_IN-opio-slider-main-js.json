@@ -1,0 +1,35 @@
+{
+    "translation-revision-date": "2026-05-13 00:00:00+0000",
+    "generator": "OPIO manual",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "hi_IN",
+                "plural-forms": "nplurals=2; plural=(n != 1);"
+            },
+            "Recommends": [
+                "अनुशंसा करता है"
+            ],
+            "Doesn't Recommend": [
+                "अनुशंसा नहीं करता"
+            ],
+            "on": [
+                "को"
+            ],
+            "MMM D, YYYY": [
+                "D MMM YYYY"
+            ],
+            "Comments": [
+                "टिप्पणियाँ"
+            ],
+            "By": [
+                "द्वारा"
+            ],
+            "Employees mentions:": [
+                "उल्लिखित कर्मचारी:"
+            ]
+        }
+    }
+}

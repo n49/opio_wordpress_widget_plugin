@@ -1,0 +1,35 @@
+{
+    "translation-revision-date": "2026-05-13 00:00:00+0000",
+    "generator": "OPIO manual",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "el",
+                "plural-forms": "nplurals=2; plural=(n != 1);"
+            },
+            "Recommends": [
+                "Συνιστά"
+            ],
+            "Doesn't Recommend": [
+                "Δεν συνιστά"
+            ],
+            "on": [
+                "στις"
+            ],
+            "MMM D, YYYY": [
+                "D MMM YYYY"
+            ],
+            "Comments": [
+                "Σχόλια"
+            ],
+            "By": [
+                "Από"
+            ],
+            "Employees mentions:": [
+                "Αναφερόμενοι υπάλληλοι:"
+            ]
+        }
+    }
+}

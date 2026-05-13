@@ -1,0 +1,53 @@
+# ar translation for Widget for OPIO Reviews
+msgid ""
+msgstr ""
+"Project-Id-Version: Widget for OPIO Reviews 1.1.18\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5);\n"
+"X-Domain: widget-for-opio-reviews\n"
+
+msgid "Recommends"
+msgstr "يوصي"
+
+msgid "Doesn't Recommend"
+msgstr "لا يوصي"
+
+msgid "Read more"
+msgstr "اقرأ المزيد"
+
+msgid "Powered by"
+msgstr "مدعوم من"
+
+msgid "See all %s Reviews"
+msgstr "عرض جميع %s المراجعات"
+
+msgid "Write a review"
+msgstr "اكتب مراجعة"
+
+msgid "on"
+msgstr "في"
+
+msgid "M d, Y"
+msgstr "d M Y"
+
+msgid "MMM D, YYYY"
+msgstr "D MMM YYYY"
+
+msgid "Error: More than 3 reviews are required for the widget"
+msgstr "خطأ: مطلوب أكثر من 3 مراجعات لعرض الويدجت"
+
+msgid "Comments"
+msgstr "تعليقات"
+
+msgid "By"
+msgstr "بواسطة"
+
+msgid "Employees mentions:"
+msgstr "الموظفون المذكورون:"
+
+msgid "Our Reviews"
+msgstr "مراجعاتنا"
+

@@ -1,0 +1,53 @@
+# ko_KR translation for Widget for OPIO Reviews
+msgid ""
+msgstr ""
+"Project-Id-Version: Widget for OPIO Reviews 1.1.18\n"
+"Language: ko_KR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Domain: widget-for-opio-reviews\n"
+
+msgid "Recommends"
+msgstr "추천함"
+
+msgid "Doesn't Recommend"
+msgstr "추천하지 않음"
+
+msgid "Read more"
+msgstr "더 읽기"
+
+msgid "Powered by"
+msgstr "제공:"
+
+msgid "See all %s Reviews"
+msgstr "전체 %s개 리뷰 보기"
+
+msgid "Write a review"
+msgstr "리뷰 작성"
+
+msgid "on"
+msgstr "일자:"
+
+msgid "M d, Y"
+msgstr "Y. m. d."
+
+msgid "MMM D, YYYY"
+msgstr "YYYY. MMM D."
+
+msgid "Error: More than 3 reviews are required for the widget"
+msgstr "오류: 위젯에는 3개 이상의 리뷰가 필요합니다"
+
+msgid "Comments"
+msgstr "댓글"
+
+msgid "By"
+msgstr "작성자:"
+
+msgid "Employees mentions:"
+msgstr "언급된 직원:"
+
+msgid "Our Reviews"
+msgstr "우리의 리뷰"
+

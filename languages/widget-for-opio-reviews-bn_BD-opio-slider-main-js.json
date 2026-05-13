@@ -1,0 +1,35 @@
+{
+    "translation-revision-date": "2026-05-13 00:00:00+0000",
+    "generator": "OPIO manual",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "bn_BD",
+                "plural-forms": "nplurals=2; plural=(n != 1);"
+            },
+            "Recommends": [
+                "সুপারিশ করে"
+            ],
+            "Doesn't Recommend": [
+                "সুপারিশ করে না"
+            ],
+            "on": [
+                "তারিখে"
+            ],
+            "MMM D, YYYY": [
+                "D MMM YYYY"
+            ],
+            "Comments": [
+                "মন্তব্য"
+            ],
+            "By": [
+                "দ্বারা"
+            ],
+            "Employees mentions:": [
+                "উল্লিখিত কর্মচারীরা:"
+            ]
+        }
+    }
+}

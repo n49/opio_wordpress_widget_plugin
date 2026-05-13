@@ -1,0 +1,53 @@
+# pa_IN translation for Widget for OPIO Reviews
+msgid ""
+msgstr ""
+"Project-Id-Version: Widget for OPIO Reviews 1.1.18\n"
+"Language: pa_IN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: widget-for-opio-reviews\n"
+
+msgid "Recommends"
+msgstr "ਸਿਫਾਰਸ਼ ਕਰਦਾ ਹੈ"
+
+msgid "Doesn't Recommend"
+msgstr "ਸਿਫਾਰਸ਼ ਨਹੀਂ ਕਰਦਾ"
+
+msgid "Read more"
+msgstr "ਹੋਰ ਪੜ੍ਹੋ"
+
+msgid "Powered by"
+msgstr "ਦੁਆਰਾ ਸੰਚਾਲਿਤ"
+
+msgid "See all %s Reviews"
+msgstr "ਸਾਰੀਆਂ %s ਸਮੀਖਿਆਵਾਂ ਦੇਖੋ"
+
+msgid "Write a review"
+msgstr "ਸਮੀਖਿਆ ਲਿਖੋ"
+
+msgid "on"
+msgstr "ਨੂੰ"
+
+msgid "M d, Y"
+msgstr "d M Y"
+
+msgid "MMM D, YYYY"
+msgstr "D MMM YYYY"
+
+msgid "Error: More than 3 reviews are required for the widget"
+msgstr "ਗਲਤੀ: ਵਿਜੇਟ ਲਈ 3 ਤੋਂ ਵੱਧ ਸਮੀਖਿਆਵਾਂ ਦੀ ਲੋੜ ਹੈ"
+
+msgid "Comments"
+msgstr "ਟਿੱਪਣੀਆਂ"
+
+msgid "By"
+msgstr "ਦੁਆਰਾ"
+
+msgid "Employees mentions:"
+msgstr "ਜ਼ਿਕਰ ਕੀਤੇ ਕਰਮਚਾਰੀ:"
+
+msgid "Our Reviews"
+msgstr "ਸਾਡੀਆਂ ਸਮੀਖਿਆਵਾਂ"
+

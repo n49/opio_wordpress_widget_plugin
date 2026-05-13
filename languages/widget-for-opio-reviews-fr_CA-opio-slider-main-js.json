@@ -1,0 +1,35 @@
+{
+    "translation-revision-date": "2026-05-13 00:00:00+0000",
+    "generator": "OPIO manual",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "fr_CA",
+                "plural-forms": "nplurals=2; plural=(n > 1);"
+            },
+            "Recommends": [
+                "Recommande"
+            ],
+            "Doesn't Recommend": [
+                "Ne recommande pas"
+            ],
+            "on": [
+                "le"
+            ],
+            "MMM D, YYYY": [
+                "D MMM YYYY"
+            ],
+            "Comments": [
+                "Commentaires"
+            ],
+            "By": [
+                "Par"
+            ],
+            "Employees mentions:": [
+                "Employés mentionnés :"
+            ]
+        }
+    }
+}

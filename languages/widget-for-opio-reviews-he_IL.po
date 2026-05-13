@@ -1,0 +1,53 @@
+# he_IL translation for Widget for OPIO Reviews
+msgid ""
+msgstr ""
+"Project-Id-Version: Widget for OPIO Reviews 1.1.18\n"
+"Language: he_IL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: widget-for-opio-reviews\n"
+
+msgid "Recommends"
+msgstr "ממליץ"
+
+msgid "Doesn't Recommend"
+msgstr "לא ממליץ"
+
+msgid "Read more"
+msgstr "קרא עוד"
+
+msgid "Powered by"
+msgstr "מופעל על ידי"
+
+msgid "See all %s Reviews"
+msgstr "צפה בכל %s הביקורות"
+
+msgid "Write a review"
+msgstr "כתוב ביקורת"
+
+msgid "on"
+msgstr "ב-"
+
+msgid "M d, Y"
+msgstr "d M Y"
+
+msgid "MMM D, YYYY"
+msgstr "D MMM YYYY"
+
+msgid "Error: More than 3 reviews are required for the widget"
+msgstr "שגיאה: נדרשות יותר מ-3 ביקורות עבור הווידג'ט"
+
+msgid "Comments"
+msgstr "תגובות"
+
+msgid "By"
+msgstr "מאת"
+
+msgid "Employees mentions:"
+msgstr "עובדים שהוזכרו:"
+
+msgid "Our Reviews"
+msgstr "הביקורות שלנו"
+

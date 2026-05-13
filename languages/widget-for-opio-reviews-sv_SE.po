@@ -1,0 +1,53 @@
+# sv_SE translation for Widget for OPIO Reviews
+msgid ""
+msgstr ""
+"Project-Id-Version: Widget for OPIO Reviews 1.1.18\n"
+"Language: sv_SE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: widget-for-opio-reviews\n"
+
+msgid "Recommends"
+msgstr "Rekommenderar"
+
+msgid "Doesn't Recommend"
+msgstr "Rekommenderar inte"
+
+msgid "Read more"
+msgstr "Läs mer"
+
+msgid "Powered by"
+msgstr "Drivs av"
+
+msgid "See all %s Reviews"
+msgstr "Se alla %s recensioner"
+
+msgid "Write a review"
+msgstr "Skriv en recension"
+
+msgid "on"
+msgstr "den"
+
+msgid "M d, Y"
+msgstr "d M Y"
+
+msgid "MMM D, YYYY"
+msgstr "D MMM YYYY"
+
+msgid "Error: More than 3 reviews are required for the widget"
+msgstr "Fel: Mer än 3 recensioner krävs för widgeten"
+
+msgid "Comments"
+msgstr "Kommentarer"
+
+msgid "By"
+msgstr "Av"
+
+msgid "Employees mentions:"
+msgstr "Omnämnda anställda:"
+
+msgid "Our Reviews"
+msgstr "Våra recensioner"
+

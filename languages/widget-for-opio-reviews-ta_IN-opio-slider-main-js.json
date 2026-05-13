@@ -1,0 +1,35 @@
+{
+    "translation-revision-date": "2026-05-13 00:00:00+0000",
+    "generator": "OPIO manual",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "ta_IN",
+                "plural-forms": "nplurals=2; plural=(n != 1);"
+            },
+            "Recommends": [
+                "பரிந்துரைக்கிறார்"
+            ],
+            "Doesn't Recommend": [
+                "பரிந்துரைக்கவில்லை"
+            ],
+            "on": [
+                "அன்று"
+            ],
+            "MMM D, YYYY": [
+                "D MMM YYYY"
+            ],
+            "Comments": [
+                "கருத்துகள்"
+            ],
+            "By": [
+                "ஆல்"
+            ],
+            "Employees mentions:": [
+                "குறிப்பிட்ட ஊழியர்கள்:"
+            ]
+        }
+    }
+}

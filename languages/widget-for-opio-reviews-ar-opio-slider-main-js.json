@@ -1,0 +1,35 @@
+{
+    "translation-revision-date": "2026-05-13 00:00:00+0000",
+    "generator": "OPIO manual",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "ar",
+                "plural-forms": "nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5);"
+            },
+            "Recommends": [
+                "يوصي"
+            ],
+            "Doesn't Recommend": [
+                "لا يوصي"
+            ],
+            "on": [
+                "في"
+            ],
+            "MMM D, YYYY": [
+                "D MMM YYYY"
+            ],
+            "Comments": [
+                "تعليقات"
+            ],
+            "By": [
+                "بواسطة"
+            ],
+            "Employees mentions:": [
+                "الموظفون المذكورون:"
+            ]
+        }
+    }
+}
