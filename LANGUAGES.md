@@ -31,10 +31,10 @@ Copy/paste any of these into a page or post — replace `id="37"` with your slid
 | `[opio_slider id="37" lang="sv"]` | Swedish — Svenska |
 | `[opio_slider id="37" lang="uk"]` | Ukrainian — Українська |
 | `[opio_slider id="37" lang="ru"]` | Russian — Русский |
-| `[opio_slider id="37" lang="he"]` | Hebrew — עברית |
-| `[opio_slider id="37" lang="ar"]` | Arabic — العربية |
-| `[opio_slider id="37" lang="fa"]` | Persian / Farsi — فارسی |
-| `[opio_slider id="37" lang="ur"]` | Urdu — اردو |
+| `[opio_slider id="37" lang="he"]` | Hebrew — עברית *(RTL)* |
+| `[opio_slider id="37" lang="ar"]` | Arabic — العربية *(RTL)* |
+| `[opio_slider id="37" lang="fa"]` | Persian / Farsi — فارسی *(RTL)* |
+| `[opio_slider id="37" lang="ur"]` | Urdu — اردو *(RTL)* |
 | `[opio_slider id="37" lang="hi"]` | Hindi — हिन्दी |
 | `[opio_slider id="37" lang="pa"]` | Punjabi — ਪੰਜਾਬੀ |
 | `[opio_slider id="37" lang="bn"]` | Bengali — বাংলা |
