@@ -2,7 +2,7 @@
 Author: Dhiraj Timalsina
 Tags: Widget for OPIO Reviews, opio, reviews, rating, widget, google business, testimonials
 Tested up to: 6.4
-Stable tag: 1.1.18
+Stable tag: 1.1.19
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,6 +85,10 @@ Any other ISO 639-1 code (e.g., `sw`, `nb`, `fi`, `cs`) will translate review co
 Full developer documentation, filter hooks for raising translation quota, and instructions for adding a 31st hand-curated language are in `LANGUAGES.md` in the plugin folder.
 
 == Changelog ==
+
+= 1.1.19 =
+* Docs: Support tab now pairs each language with its short code (e.g. "French — fr") for easier copy/paste.
+* Docs: Add `TRANSLATION-PROVIDERS.md` covering MyMemory limits, scalability ceilings, and paid-provider comparison.
 
 = 1.1.18 =
 * Add slider translation support — `[opio_slider id='X' lang='fr']` (and 29 other languages).
