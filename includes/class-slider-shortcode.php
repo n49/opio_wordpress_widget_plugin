@@ -65,6 +65,7 @@ class Slider_Shortcode {
 		ob_start();
 
         $debug = array(
+            'plugin_version'           => defined('OPIO_PLUGIN_VERSION') ? OPIO_PLUGIN_VERSION : '',
             'lang_attr'                => (string) $lang_attr,
             'target_locale'            => (string) $target_locale,
             'opio_target_lang'         => (string) $opio_target_lang,
@@ -74,6 +75,7 @@ class Slider_Shortcode {
             'js_translations_count'    => count($js_translations),
             'plugin_textdomain_loaded' => is_textdomain_loaded('widget-for-opio-reviews'),
             'read_more_translated'     => __('Read more', 'widget-for-opio-reviews'),
+            'translation_stats'        => $opio_translator ? $opio_translator->get_stats() : null,
         );
         echo '<script type="text/javascript" id="opio-slider-debug">console.log("[OPIO slider]", ' . wp_json_encode($debug) . ');</script>';
 
@@ -89,6 +91,15 @@ class Slider_Shortcode {
             include_once 'reviews-slider-vertical-template.php';
         }
         ob_get_contents();
+
+        // Post-render stats — counters were populated during template execution above.
+        if ($opio_translator) {
+            $post_stats = array(
+                'translation_stats' => $opio_translator->get_stats(),
+                'render_phase'      => 'post',
+            );
+            echo '<script type="text/javascript" id="opio-slider-debug-post">console.log("[OPIO slider stats]", ' . wp_json_encode($post_stats) . ');</script>';
+        }
 
         $output = ob_get_clean(); // Capture the entire output of the function
 
