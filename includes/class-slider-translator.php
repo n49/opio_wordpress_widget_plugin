@@ -22,6 +22,7 @@ class Slider_Translator {
         'last_error'          => null,
         'last_http_code'      => null,
         'last_endpoint_host'  => null,
+        'provider'            => null,
         'email_filter'        => 'empty',
         'circuit_breaker'     => null,
         'schema_fetched'      => false,
@@ -214,6 +215,27 @@ class Slider_Translator {
             return false;
         }
 
+        $provider = apply_filters('opio_translation_provider', 'mymemory');
+        $this->stats['provider'] = $provider;
+
+        $this->stats['api_calls']++;
+
+        if ($provider === 'azure') {
+            $translated = $this->translate_chunk_azure($text, $target_lang_code);
+        } else {
+            $translated = $this->translate_chunk_mymemory($text, $target_lang_code);
+        }
+
+        if ($translated === false) {
+            return false;
+        }
+
+        $this->stats['api_success']++;
+        set_transient($chunk_key, $translated, self::TRANSIENT_TTL);
+        return $translated;
+    }
+
+    private function translate_chunk_mymemory($text, $target_lang_code) {
         $endpoint = apply_filters('opio_translation_endpoint', 'https://api.mymemory.translated.net/get');
         $email    = apply_filters('opio_translation_email', '');
         $this->stats['last_endpoint_host'] = parse_url($endpoint, PHP_URL_HOST);
@@ -226,8 +248,6 @@ class Slider_Translator {
             $query['de'] = $email;
         }
 
-        $this->stats['api_calls']++;
-
         $response = wp_remote_get(add_query_arg($query, $endpoint), array(
             'timeout' => self::REQUEST_TIMEOUT,
         ));
@@ -235,7 +255,7 @@ class Slider_Translator {
         if (is_wp_error($response)) {
             $err = 'wp_error: ' . $response->get_error_message();
             $this->record_error($err);
-            error_log('[OPIO slider] translation request error (lang=' . $target_lang_code . ', host=' . $this->stats['last_endpoint_host'] . '): ' . $response->get_error_message());
+            error_log('[OPIO slider][mymemory] request error (lang=' . $target_lang_code . ', host=' . $this->stats['last_endpoint_host'] . '): ' . $response->get_error_message());
             return false;
         }
 
@@ -244,9 +264,9 @@ class Slider_Translator {
 
         if ($http_code !== 200) {
             $this->record_error('http_' . $http_code);
-            error_log('[OPIO slider] translation HTTP ' . $http_code . ' (lang=' . $target_lang_code . ', host=' . $this->stats['last_endpoint_host'] . ')');
+            error_log('[OPIO slider][mymemory] HTTP ' . $http_code . ' (lang=' . $target_lang_code . ', host=' . $this->stats['last_endpoint_host'] . ')');
             if ($http_code === 429 || $http_code === 503) {
-                $this->trip_circuit_breaker('http_' . $http_code);
+                $this->trip_circuit_breaker('mymemory_http_' . $http_code);
             }
             return false;
         }
@@ -255,7 +275,7 @@ class Slider_Translator {
         $decoded = json_decode($body, true);
         if (!is_array($decoded) || empty($decoded['responseData']['translatedText']) || !is_string($decoded['responseData']['translatedText'])) {
             $this->record_error('unexpected_response: ' . substr($body, 0, 100));
-            error_log('[OPIO slider] translation response unexpected (lang=' . $target_lang_code . '): ' . substr($body, 0, 200));
+            error_log('[OPIO slider][mymemory] response unexpected (lang=' . $target_lang_code . '): ' . substr($body, 0, 200));
             return false;
         }
 
@@ -264,16 +284,99 @@ class Slider_Translator {
             || stripos($translated, 'MYMEMORY WARNING') !== false
             || stripos($translated, 'INVALID LANGUAGE PAIR') !== false) {
             $this->record_error('api_warning: ' . substr($translated, 0, 100));
-            error_log('[OPIO slider] translation API warning (lang=' . $target_lang_code . '): ' . $translated);
+            error_log('[OPIO slider][mymemory] API warning (lang=' . $target_lang_code . '): ' . $translated);
             if (stripos($translated, 'MYMEMORY WARNING') !== false) {
                 $this->trip_circuit_breaker('mymemory_quota_warning');
             }
             return false;
         }
 
-        $this->stats['api_success']++;
-        set_transient($chunk_key, $translated, self::TRANSIENT_TTL);
         return $translated;
+    }
+
+    private function translate_chunk_azure($text, $target_lang_code) {
+        $endpoint = apply_filters('opio_translation_azure_endpoint', 'https://api.cognitive.microsofttranslator.com/translate');
+        $key      = apply_filters('opio_translation_azure_key', '');
+        $region   = apply_filters('opio_translation_azure_region', '');
+        $this->stats['last_endpoint_host'] = parse_url($endpoint, PHP_URL_HOST);
+
+        if (empty($key)) {
+            $this->record_error('azure_key_missing');
+            error_log('[OPIO slider][azure] no API key. Set opio_translation_azure_key filter.');
+            // Trip the breaker so we don't repeat the misconfiguration error 23+
+            // times in a single render. Bumping the plugin version (or manually
+            // deleting the transient) re-tests once the key is in place.
+            $this->trip_circuit_breaker('azure_key_missing');
+            return false;
+        }
+
+        $azure_target = $this->azure_lang_code($target_lang_code);
+        $url          = add_query_arg(array(
+            'api-version' => '3.0',
+            'from'        => 'en',
+            'to'          => $azure_target,
+        ), $endpoint);
+
+        $headers = array(
+            'Ocp-Apim-Subscription-Key' => $key,
+            'Content-Type'              => 'application/json',
+        );
+        if (!empty($region)) {
+            $headers['Ocp-Apim-Subscription-Region'] = $region;
+        }
+
+        $response = wp_remote_post($url, array(
+            'timeout' => self::REQUEST_TIMEOUT,
+            'headers' => $headers,
+            'body'    => wp_json_encode(array(array('Text' => $text))),
+        ));
+
+        if (is_wp_error($response)) {
+            $err = 'wp_error: ' . $response->get_error_message();
+            $this->record_error($err);
+            error_log('[OPIO slider][azure] request error (lang=' . $target_lang_code . '): ' . $response->get_error_message());
+            return false;
+        }
+
+        $http_code = wp_remote_retrieve_response_code($response);
+        $this->stats['last_http_code'] = $http_code;
+
+        if ($http_code !== 200) {
+            $body = wp_remote_retrieve_body($response);
+            $this->record_error('http_' . $http_code . ': ' . substr($body, 0, 100));
+            error_log('[OPIO slider][azure] HTTP ' . $http_code . ' (lang=' . $target_lang_code . '): ' . substr($body, 0, 200));
+            if ($http_code === 429 || $http_code === 503) {
+                $this->trip_circuit_breaker('azure_http_' . $http_code);
+            }
+            // 401/403 = bad key or missing/wrong region. Stop hammering Azure
+            // with bad credentials; a version bump (or manual transient delete)
+            // re-tests once the key is fixed.
+            if ($http_code === 401 || $http_code === 403) {
+                $this->trip_circuit_breaker('azure_auth_' . $http_code);
+            }
+            return false;
+        }
+
+        $body    = wp_remote_retrieve_body($response);
+        $decoded = json_decode($body, true);
+        if (!is_array($decoded) || empty($decoded[0]['translations'][0]['text']) || !is_string($decoded[0]['translations'][0]['text'])) {
+            $this->record_error('unexpected_response: ' . substr($body, 0, 100));
+            error_log('[OPIO slider][azure] response unexpected (lang=' . $target_lang_code . '): ' . substr($body, 0, 200));
+            return false;
+        }
+
+        return $decoded[0]['translations'][0]['text'];
+    }
+
+    private function azure_lang_code($code) {
+        // The few cases where Azure's language identifier differs from the
+        // ISO 639-1 codes MyMemory uses.
+        $overrides = array(
+            'zh'    => 'zh-Hans', // Mandarin (Simplified)
+            'zh-TW' => 'zh-Hant', // Traditional Chinese (written Cantonese)
+            'tl'    => 'fil',     // Tagalog → Filipino
+        );
+        return isset($overrides[$code]) ? $overrides[$code] : $code;
     }
 
     private function chunk_text($text, $max_len) {

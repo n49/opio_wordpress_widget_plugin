@@ -67,28 +67,48 @@ For the typical OPIO client locale set (heavy on Arabic, Persian, Punjabi, Tamil
 - **Best for European-only sites:** DeepL Pro (highest fluency for fr/es/de/it/nl/pt) — but wrong fit for our standard locale mix
 - **Current default:** MyMemory — adequate for English-source business reviews, variable for nuanced or technical content
 
-## What it would take to swap providers
+## Switching providers (v1.1.25+)
 
-The current `Slider_Translator::translate_chunk()` is hardcoded to MyMemory's GET endpoint format (`?q=...&langpair=en|fr`). Switching providers needs more than a URL swap because:
+`Slider_Translator::translate_chunk()` dispatches to a per-provider implementation via the `opio_translation_provider` filter. Currently shipped: `mymemory` (default) and `azure`. Adding `google` or `deepl` later means a new `translate_chunk_<provider>()` method plus a switch arm — no architectural change.
 
-- **Auth styles differ:** MyMemory uses `?de=email`; DeepL uses `Authorization: DeepL-Auth-Key <key>`; Azure uses `Ocp-Apim-Subscription-Key <key>`; Google v3 uses query-string API key or OAuth
-- **Request methods/formats:** Azure POSTs JSON with an array of texts; Google v3 POSTs a structured payload; DeepL uses form-encoded POST
-- **Response shapes:** different JSON paths to the translated string in each
-- **Language code conventions:** small differences (Azure uses `zh-Hans`, Google uses `zh-CN`, DeepL uses `ZH`)
+### Activate Azure on a single site
 
-**Estimated work:** adapter pattern with a `Slider_Translator_Provider` interface and four implementations (MyMemory / Azure / Google / DeepL). Site admin picks via an `opio_translation_provider` filter accepting `'mymemory'`, `'azure'`, `'google'`, `'deepl'`. API keys via separate filters. ~1 day of work.
+Drop this into the site's `functions.php` (or an mu-plugin):
 
-**Default:** keep MyMemory so existing installs see zero behavior change.
+```php
+add_filter('opio_translation_provider', function() { return 'azure'; });
+add_filter('opio_translation_azure_key', function() { return 'xxxxxxxx-your-subscription-key-xxxxxxxx'; });
+// Required for *regional* resources (most are). Omit only for the global endpoint.
+add_filter('opio_translation_azure_region', function() { return 'eastus'; });
+```
+
+To use a custom Azure endpoint (e.g., for a private link or custom subdomain):
+
+```php
+add_filter('opio_translation_azure_endpoint', function() {
+    return 'https://my-translator.cognitiveservices.azure.com/translate';
+});
+```
+
+### Provisioning the Azure side
+
+1. Azure Portal → Create resource → "Translator" → pick a region → Free F0 tier (2M chars/month forever).
+2. Resource → Keys and Endpoint → copy KEY 1 + Location (region).
+3. Paste both into the filters above.
+
+### Behavior details
+
+- Bad / missing key returns HTTP 401/403 → trips the 1-hour circuit breaker so the slider doesn't hammer Azure 23 times per render with bad creds. Bump the plugin version (or delete the `opio_translation_rate_limited` transient) after fixing the key to re-test immediately.
+- HTTP 429 / 503 → also trips the breaker. Self-recovers after 60 minutes.
+- Language code differences are handled internally: `zh` → `zh-Hans` (Mandarin Simplified), `zh-TW` → `zh-Hant` (Traditional Chinese / written Cantonese), `tl` → `fil` (Filipino).
+- Stats log gains a `provider` field showing which backend was used (`mymemory` or `azure`).
+- Transient cache is provider-agnostic by design — switching providers doesn't invalidate cached translations. If you want fresh translations from a new provider, bump the version or change the cache prefix.
 
 ## Recommendation
 
-- **Keep MyMemory as the default** — for small/medium sites it costs $0 and Just Works thanks to the transient cache.
-- **Add Azure Translator support** when the multi-site / enterprise tier becomes a real need. Azure's permanent 2 M/month free tier covers most clients indefinitely; the $10/M paid rate is the cheapest in the market; full language coverage; SLA-backed.
-- **Skip DeepL** for OPIO's locale mix — the missing languages (Punjabi, Tamil, Urdu, Cantonese, Persian, Tagalog) are exactly the ones our clients use.
-
-## Implementation deferred
-
-No code change in v1.1.18. When a client outgrows MyMemory, the architecture work above is the path forward. Until then, `opio_translation_email` plus the per-chunk transient cache keeps the free tier viable for almost every realistic deployment.
+- **Default for the WP.org install base: MyMemory.** Zero config, $0 cost, Just Works for small sites.
+- **High-volume clients: Azure.** Activate via the three-line `functions.php` filter on a per-site basis. Permanent 2M chars/month free tier; client's egress IP doesn't share quota with random other WP installs on the same host.
+- **Skip DeepL** for OPIO's locale mix — the 6 unsupported languages (Punjabi, Tamil, Urdu, Cantonese, Persian, Tagalog) are exactly the ones our clients use.
 
 ## Sources
 
