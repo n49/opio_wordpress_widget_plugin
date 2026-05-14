@@ -17,6 +17,38 @@ class Slider_Shortcode {
         return ($str);
     }
 
+    /**
+     * Derive a one-word outcome label from translator stats so the render log
+     * answers "did translation work?" at a glance.
+     *
+     *   OK              — every translation call was satisfied (cache or API)
+     *   BREAKER_OPEN    — circuit breaker blocked the API; review content shown in English
+     *   API_FAILED      — API was called and returned errors
+     *   CACHE_ONLY      — all served from cache, no API hit this render (typical steady state)
+     *   NO_OP           — translator wasn't exercised (e.g., empty feed)
+     */
+    private function summarize_translation_outcome($stats) {
+        $calls    = isset($stats['translation_calls']) ? (int) $stats['translation_calls'] : 0;
+        $skipped  = isset($stats['api_skipped'])       ? (int) $stats['api_skipped']       : 0;
+        $errors   = isset($stats['api_errors'])        ? (int) $stats['api_errors']        : 0;
+        $api      = isset($stats['api_calls'])         ? (int) $stats['api_calls']         : 0;
+        $cache    = isset($stats['cache_full_hits'])   ? (int) $stats['cache_full_hits']   : 0;
+
+        if ($calls === 0) {
+            return 'NO_OP';
+        }
+        if ($skipped > 0) {
+            return 'BREAKER_OPEN';
+        }
+        if ($errors > 0) {
+            return 'API_FAILED';
+        }
+        if ($api === 0 && $cache > 0) {
+            return 'CACHE_ONLY';
+        }
+        return 'OK';
+    }
+
     public function register() {
         add_shortcode('opio_slider', array($this, 'init'));
     }
@@ -127,11 +159,40 @@ class Slider_Shortcode {
 
         // Post-render stats — counters were populated during template execution above.
         if ($opio_translator) {
+            $stats = $opio_translator->get_stats();
             $post_stats = array(
-                'translation_stats' => $opio_translator->get_stats(),
+                'translation_stats' => $stats,
                 'render_phase'      => 'post',
             );
             echo '<script type="text/javascript" id="opio-slider-debug-post">console.log("[OPIO slider stats]", ' . wp_json_encode($post_stats) . ');</script>';
+
+            // One always-on server log per slider render that touched the
+            // translation pipeline. Shows config used + outcome counters so
+            // production can diagnose "is it working, and if not why" without
+            // toggling a debug flag. English renders skip this (nothing to
+            // translate, nothing to log).
+            if (!empty($opio_target_lang)) {
+                $key_present = !empty($stats['azure_key_present']);
+                $provider    = isset($stats['provider_resolved']) ? $stats['provider_resolved'] : 'mymemory';
+                $outcome     = $this->summarize_translation_outcome($stats);
+                error_log(sprintf(
+                    '[OPIO slider] render lang=%s provider=%s key=%s region=%s breaker=%s outcome=%s calls=%d cache_hits=%d api_calls=%d success=%d errors=%d skipped=%d last_http=%s last_error=%s',
+                    $opio_target_lang,
+                    $provider,
+                    $key_present ? ('set:' . (isset($stats['azure_key_last4']) ? $stats['azure_key_last4'] : '????')) : 'unset',
+                    !empty($stats['azure_region']) ? $stats['azure_region'] : 'unset',
+                    !empty($stats['circuit_breaker']) ? $stats['circuit_breaker'] : 'clear',
+                    $outcome,
+                    isset($stats['translation_calls']) ? (int) $stats['translation_calls'] : 0,
+                    isset($stats['cache_full_hits'])   ? (int) $stats['cache_full_hits']   : 0,
+                    isset($stats['api_calls'])         ? (int) $stats['api_calls']         : 0,
+                    isset($stats['api_success'])       ? (int) $stats['api_success']       : 0,
+                    isset($stats['api_errors'])        ? (int) $stats['api_errors']        : 0,
+                    isset($stats['api_skipped'])       ? (int) $stats['api_skipped']       : 0,
+                    isset($stats['last_http_code']) && $stats['last_http_code'] !== null ? (string) $stats['last_http_code'] : 'null',
+                    isset($stats['last_error']) && $stats['last_error'] !== null ? '"' . str_replace(array("\r", "\n", '"'), array(' ', ' ', "'"), substr((string) $stats['last_error'], 0, 200)) . '"' : 'null'
+                ));
+            }
         }
 
         $output = ob_get_clean(); // Capture the entire output of the function

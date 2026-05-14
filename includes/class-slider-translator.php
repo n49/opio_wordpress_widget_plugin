@@ -37,7 +37,18 @@ class Slider_Translator {
         $this->stats['circuit_breaker'] = $unblock_at
             ? ('blocked_until_' . (int) $unblock_at)
             : null;
-        $this->stats['email_filter'] = empty(apply_filters('opio_translation_email', '')) ? 'empty' : 'set';
+        $this->stats['breaker_unblock_iso'] = $unblock_at
+            ? gmdate('c', (int) $unblock_at)
+            : null;
+
+        $this->stats['email_filter']      = empty(apply_filters('opio_translation_email', '')) ? 'empty' : 'set';
+        $this->stats['provider_resolved'] = apply_filters('opio_translation_provider', 'mymemory');
+
+        $azure_key                       = apply_filters('opio_translation_azure_key', '');
+        $this->stats['azure_key_present'] = !empty($azure_key);
+        $this->stats['azure_key_last4']   = !empty($azure_key) ? substr($azure_key, -4) : null;
+        $this->stats['azure_region']      = apply_filters('opio_translation_azure_region', '');
+
         return $this->stats;
     }
 
