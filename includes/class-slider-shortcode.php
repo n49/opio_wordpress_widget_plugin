@@ -83,6 +83,39 @@ class Slider_Shortcode {
             echo '<script type="text/javascript" id="opio-slider-i18n">window.opioSliderI18nActive = ' . wp_json_encode($js_translations) . ';</script>';
         }
 
+        // Compact CSS for the rating widget area. Translated strings (especially
+        // "Powered by" → "Con tecnología de" / "Bereitgestellt von" /
+        // "Pinapatakbo ng") are much longer than English and wrap across the
+        // narrow widget column. Shrink the font and force nowrap on the worst
+        // offenders so longer translations stay inline.
+        if (!empty($opio_target_lang)) {
+            echo '<style id="opio-slider-compact-css">'
+                . '#opio-horizontal-widget .rating-widget-part,'
+                . '#opio-carousel-widget .c-rating-widget-container,'
+                . '#opio-vertical-widget .v-rating-widget-container {'
+                . ' font-size: 12px;'
+                . '}'
+                . '#opio-horizontal-widget .w-pwd-text,'
+                . '#opio-carousel-widget .c-pwd-span,'
+                . '#opio-vertical-widget .v-pwd-span {'
+                . ' font-size: 10px;'
+                . ' white-space: nowrap;'
+                . '}'
+                . '#opio-horizontal-widget .see-all-text a,'
+                . '#opio-carousel-widget .c-see-all-div a,'
+                . '#opio-vertical-widget .v-see-all-span a {'
+                . ' font-size: 11px;'
+                . ' white-space: nowrap;'
+                . '}'
+                . '#opio-horizontal-widget .write-review-text span,'
+                . '#opio-carousel-widget .c-write-rev-inner-div span,'
+                . '#opio-vertical-widget .v-write-rev-div span {'
+                . ' font-size: 12px;'
+                . ' white-space: nowrap;'
+                . '}'
+                . '</style>';
+        }
+
         if($slider_type == 'horizontal') {
             include_once 'reviews-slider-horizontal-template.php';
         } else if($slider_type == 'horizontal-carousel') {

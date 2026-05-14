@@ -2,7 +2,7 @@
 Author: Dhiraj Timalsina
 Tags: Widget for OPIO Reviews, opio, reviews, rating, widget, google business, testimonials
 Tested up to: 6.4
-Stable tag: 1.1.22
+Stable tag: 1.1.23
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,6 +85,11 @@ Any other ISO 639-1 code (e.g., `sw`, `nb`, `fi`, `cs`) will translate review co
 Full developer documentation, filter hooks for raising translation quota, and instructions for adding a 31st hand-curated language are in `LANGUAGES.md` in the plugin folder.
 
 == Changelog ==
+
+= 1.1.23 =
+* Add MyMemory circuit breaker. On `HTTP 429`, `HTTP 503`, or a `MYMEMORY WARNING` payload, sets a 1-hour transient (`opio_translation_rate_limited`) that short-circuits subsequent API calls. Stops the slider from firing 23+ doomed requests per render and burning more quota when the limit eventually resets. Counter `api_skipped` and field `circuit_breaker` in the stats log reflect the live state.
+* Add `email_filter` indicator to the translation stats so you can confirm whether the `opio_translation_email` filter actually loaded ("set" or "empty").
+* Compact CSS for the rating widget area when a `lang` attribute is active — shorter font sizes and `white-space: nowrap` on "Powered by" / "See all X Reviews" / "Write a review" so longer translated strings (Spanish "Con tecnología de", German "Bereitgestellt von", Tagalog "Pinapatakbo ng", etc.) don't wrap across multiple lines or get cut off.
 
 = 1.1.22 =
 * Add translation telemetry. Browser console now logs `[OPIO slider stats]` after each render with counters: `translation_calls`, `cache_full_hits`, `chunk_cache_hits`, `chunks_total`, `api_calls`, `api_success`, `api_errors`, `last_error`, `last_http_code`, `last_endpoint_host`, `schema_fetched`, `schema_fetch_success`, `schema_translated`. Lets you diagnose translation failures (rate limits, network blocks, API errors) from the browser without server access.

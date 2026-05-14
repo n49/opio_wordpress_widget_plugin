@@ -4,9 +4,11 @@ namespace WP_Opio_Reviews\Includes;
 
 class Slider_Translator {
 
-    const TRANSIENT_PREFIX = 'opio_tr2_';
-    const TRANSIENT_TTL    = 2592000; // 30 days
-    const REQUEST_TIMEOUT  = 5;
+    const TRANSIENT_PREFIX        = 'opio_tr2_';
+    const TRANSIENT_TTL           = 2592000; // 30 days
+    const REQUEST_TIMEOUT         = 5;
+    const CIRCUIT_BREAKER_KEY     = 'opio_translation_rate_limited';
+    const CIRCUIT_BREAKER_SECONDS = 3600; // 1 hour
 
     private $stats = array(
         'translation_calls'   => 0,
@@ -16,21 +18,41 @@ class Slider_Translator {
         'api_calls'           => 0,
         'api_success'         => 0,
         'api_errors'          => 0,
+        'api_skipped'         => 0,
         'last_error'          => null,
         'last_http_code'      => null,
         'last_endpoint_host'  => null,
+        'email_filter'        => 'empty',
+        'circuit_breaker'     => null,
         'schema_fetched'      => false,
         'schema_fetch_success'=> false,
         'schema_translated'   => false,
     );
 
     public function get_stats() {
+        // Surface the live circuit-breaker state at read time so the debug log
+        // reflects exactly what was true during render.
+        $unblock_at = get_transient(self::CIRCUIT_BREAKER_KEY);
+        $this->stats['circuit_breaker'] = $unblock_at
+            ? ('blocked_until_' . (int) $unblock_at)
+            : null;
+        $this->stats['email_filter'] = empty(apply_filters('opio_translation_email', '')) ? 'empty' : 'set';
         return $this->stats;
     }
 
     private function record_error($message) {
         $this->stats['api_errors']++;
         $this->stats['last_error'] = is_string($message) ? substr($message, 0, 200) : 'unknown_error';
+    }
+
+    private function trip_circuit_breaker($reason) {
+        $unblock_at = time() + self::CIRCUIT_BREAKER_SECONDS;
+        set_transient(self::CIRCUIT_BREAKER_KEY, $unblock_at, self::CIRCUIT_BREAKER_SECONDS);
+        error_log('[OPIO slider] circuit breaker TRIPPED for ' . self::CIRCUIT_BREAKER_SECONDS . 's (reason: ' . $reason . '). Future translation requests will be skipped until ' . gmdate('Y-m-d H:i:s', $unblock_at) . ' UTC.');
+    }
+
+    private function is_circuit_breaker_open() {
+        return (bool) get_transient(self::CIRCUIT_BREAKER_KEY);
     }
 
     private static $locale_map = array(
@@ -184,6 +206,14 @@ class Slider_Translator {
             return $cached;
         }
 
+        // Circuit breaker: if we recently hit a rate-limit or quota cap, skip
+        // the API entirely and let the caller fall back to original text. This
+        // prevents 23+ doomed requests per render burning quota for nothing.
+        if ($this->is_circuit_breaker_open()) {
+            $this->stats['api_skipped']++;
+            return false;
+        }
+
         $endpoint = apply_filters('opio_translation_endpoint', 'https://api.mymemory.translated.net/get');
         $email    = apply_filters('opio_translation_email', '');
         $this->stats['last_endpoint_host'] = parse_url($endpoint, PHP_URL_HOST);
@@ -215,6 +245,9 @@ class Slider_Translator {
         if ($http_code !== 200) {
             $this->record_error('http_' . $http_code);
             error_log('[OPIO slider] translation HTTP ' . $http_code . ' (lang=' . $target_lang_code . ', host=' . $this->stats['last_endpoint_host'] . ')');
+            if ($http_code === 429 || $http_code === 503) {
+                $this->trip_circuit_breaker('http_' . $http_code);
+            }
             return false;
         }
 
@@ -232,6 +265,9 @@ class Slider_Translator {
             || stripos($translated, 'INVALID LANGUAGE PAIR') !== false) {
             $this->record_error('api_warning: ' . substr($translated, 0, 100));
             error_log('[OPIO slider] translation API warning (lang=' . $target_lang_code . '): ' . $translated);
+            if (stripos($translated, 'MYMEMORY WARNING') !== false) {
+                $this->trip_circuit_breaker('mymemory_quota_warning');
+            }
             return false;
         }
 
