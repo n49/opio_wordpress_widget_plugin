@@ -83,7 +83,16 @@ final class Plugin {
              }
 
     public function register_services() {
-  
+
+        // On plugin version change, clear the translation rate-limit circuit
+        // breaker so a fresh deploy can attempt MyMemory again immediately.
+        // If the rate limit is still active, the breaker re-trips on the next
+        // 429; if quota has reset, translations resume normally.
+        if (get_option('opio_translation_cache_version') !== OPIO_PLUGIN_VERSION) {
+            delete_transient(Slider_Translator::CIRCUIT_BREAKER_KEY);
+            update_option('opio_translation_cache_version', OPIO_PLUGIN_VERSION);
+        }
+
         $assets = new Assets(OPIO_ASSETS_URL, $this->version, get_option('opio_debug_mode') == '1');
         $assets->register();
 

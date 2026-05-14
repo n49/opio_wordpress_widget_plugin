@@ -2,7 +2,7 @@
 Author: Dhiraj Timalsina
 Tags: Widget for OPIO Reviews, opio, reviews, rating, widget, google business, testimonials
 Tested up to: 6.4
-Stable tag: 1.1.23
+Stable tag: 1.1.24
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,6 +85,9 @@ Any other ISO 639-1 code (e.g., `sw`, `nb`, `fi`, `cs`) will translate review co
 Full developer documentation, filter hooks for raising translation quota, and instructions for adding a 31st hand-curated language are in `LANGUAGES.md` in the plugin folder.
 
 == Changelog ==
+
+= 1.1.24 =
+* Auto-clear the translation rate-limit circuit breaker on every plugin version change. Each deploy gets a fresh chance to reach MyMemory; if quota is still exhausted, the breaker re-trips automatically on the next 429.
 
 = 1.1.23 =
 * Add MyMemory circuit breaker. On `HTTP 429`, `HTTP 503`, or a `MYMEMORY WARNING` payload, sets a 1-hour transient (`opio_translation_rate_limited`) that short-circuits subsequent API calls. Stops the slider from firing 23+ doomed requests per render and burning more quota when the limit eventually resets. Counter `api_skipped` and field `circuit_breaker` in the stats log reflect the live state.
