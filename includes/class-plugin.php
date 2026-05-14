@@ -124,6 +124,11 @@ final class Plugin {
         $feed_french_shortcode = new Feed_French_Shortcode($feed_deserializer);
         $feed_french_shortcode->register();
 
+        // Bridge wp_options into Slider_Translator filters. Runs on every
+        // request (frontend + admin) so slider rendering picks up the saved
+        // provider/Azure key from the settings page.
+        Plugin_Settings::register_filter_bridges();
+
         $slider_translator = new Slider_Translator();
 
         $slider_shortcode = new Slider_Shortcode($slider_deserializer, $slider_translator);
@@ -150,6 +155,9 @@ final class Plugin {
 
             $plugin_support = new Plugin_Support();
             $plugin_support->register();
+
+            $plugin_settings = new Plugin_Settings();
+            $plugin_settings->register();
 
         }
 

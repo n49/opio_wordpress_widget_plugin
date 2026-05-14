@@ -47,6 +47,15 @@ class Admin_Menu {
         );
         $slider_page->add_page();
 
+        $translation_settings_page = new Admin_Page(
+            'opio',
+            'Translation Settings',
+            'Settings',
+            'manage_options',
+            'opio-settings'
+        );
+        $translation_settings_page->add_page();
+
         $setting_page = new Admin_Page(
             'opio',
             'Support',
