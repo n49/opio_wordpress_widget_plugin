@@ -8,6 +8,31 @@ class Slider_Translator {
     const TRANSIENT_TTL    = 2592000; // 30 days
     const REQUEST_TIMEOUT  = 5;
 
+    private $stats = array(
+        'translation_calls'   => 0,
+        'cache_full_hits'     => 0,
+        'chunks_total'        => 0,
+        'chunk_cache_hits'    => 0,
+        'api_calls'           => 0,
+        'api_success'         => 0,
+        'api_errors'          => 0,
+        'last_error'          => null,
+        'last_http_code'      => null,
+        'last_endpoint_host'  => null,
+        'schema_fetched'      => false,
+        'schema_fetch_success'=> false,
+        'schema_translated'   => false,
+    );
+
+    public function get_stats() {
+        return $this->stats;
+    }
+
+    private function record_error($message) {
+        $this->stats['api_errors']++;
+        $this->stats['last_error'] = is_string($message) ? substr($message, 0, 200) : 'unknown_error';
+    }
+
     private static $locale_map = array(
         'en' => 'en_US',
         'fr' => 'fr_CA',
@@ -126,13 +151,17 @@ class Slider_Translator {
             return $text;
         }
 
+        $this->stats['translation_calls']++;
+
         $cache_key = self::TRANSIENT_PREFIX . md5($text . '|' . $target_lang_code);
         $cached    = get_transient($cache_key);
         if ($cached !== false) {
+            $this->stats['cache_full_hits']++;
             return $cached;
         }
 
         $chunks = $this->chunk_text($text, self::CHUNK_MAX_LEN);
+        $this->stats['chunks_total'] += count($chunks);
         $translated_chunks = array();
         foreach ($chunks as $chunk) {
             $translated = $this->translate_chunk($chunk, $target_lang_code);
@@ -151,11 +180,13 @@ class Slider_Translator {
         $chunk_key = self::TRANSIENT_PREFIX . 'c_' . md5($text . '|' . $target_lang_code);
         $cached    = get_transient($chunk_key);
         if ($cached !== false) {
+            $this->stats['chunk_cache_hits']++;
             return $cached;
         }
 
         $endpoint = apply_filters('opio_translation_endpoint', 'https://api.mymemory.translated.net/get');
         $email    = apply_filters('opio_translation_email', '');
+        $this->stats['last_endpoint_host'] = parse_url($endpoint, PHP_URL_HOST);
 
         $query = array(
             'q'        => $text,
@@ -165,23 +196,33 @@ class Slider_Translator {
             $query['de'] = $email;
         }
 
+        $this->stats['api_calls']++;
+
         $response = wp_remote_get(add_query_arg($query, $endpoint), array(
             'timeout' => self::REQUEST_TIMEOUT,
         ));
 
         if (is_wp_error($response)) {
-            error_log('[OPIO slider] translation request error: ' . $response->get_error_message());
+            $err = 'wp_error: ' . $response->get_error_message();
+            $this->record_error($err);
+            error_log('[OPIO slider] translation request error (lang=' . $target_lang_code . ', host=' . $this->stats['last_endpoint_host'] . '): ' . $response->get_error_message());
             return false;
         }
-        if (wp_remote_retrieve_response_code($response) !== 200) {
-            error_log('[OPIO slider] translation HTTP ' . wp_remote_retrieve_response_code($response));
+
+        $http_code = wp_remote_retrieve_response_code($response);
+        $this->stats['last_http_code'] = $http_code;
+
+        if ($http_code !== 200) {
+            $this->record_error('http_' . $http_code);
+            error_log('[OPIO slider] translation HTTP ' . $http_code . ' (lang=' . $target_lang_code . ', host=' . $this->stats['last_endpoint_host'] . ')');
             return false;
         }
 
         $body    = wp_remote_retrieve_body($response);
         $decoded = json_decode($body, true);
         if (!is_array($decoded) || empty($decoded['responseData']['translatedText']) || !is_string($decoded['responseData']['translatedText'])) {
-            error_log('[OPIO slider] translation response unexpected: ' . substr($body, 0, 200));
+            $this->record_error('unexpected_response: ' . substr($body, 0, 100));
+            error_log('[OPIO slider] translation response unexpected (lang=' . $target_lang_code . '): ' . substr($body, 0, 200));
             return false;
         }
 
@@ -189,10 +230,12 @@ class Slider_Translator {
         if (stripos($translated, 'QUERY LENGTH LIMIT EXCEEDED') !== false
             || stripos($translated, 'MYMEMORY WARNING') !== false
             || stripos($translated, 'INVALID LANGUAGE PAIR') !== false) {
-            error_log('[OPIO slider] translation API warning: ' . $translated);
+            $this->record_error('api_warning: ' . substr($translated, 0, 100));
+            error_log('[OPIO slider] translation API warning (lang=' . $target_lang_code . '): ' . $translated);
             return false;
         }
 
+        $this->stats['api_success']++;
         set_transient($chunk_key, $translated, self::TRANSIENT_TTL);
         return $translated;
     }
@@ -277,8 +320,15 @@ class Slider_Translator {
             $schema_url .= '&type=local';
         }
 
+        $this->stats['schema_fetched'] = true;
         $response = wp_remote_get($schema_url, array('timeout' => self::REQUEST_TIMEOUT));
-        if (is_wp_error($response) || wp_remote_retrieve_response_code($response) !== 200) {
+        if (is_wp_error($response)) {
+            error_log('[OPIO slider] schema fetch error: ' . $response->get_error_message());
+            return null;
+        }
+        $http_code = wp_remote_retrieve_response_code($response);
+        if ($http_code !== 200) {
+            error_log('[OPIO slider] schema fetch HTTP ' . $http_code);
             return null;
         }
 
@@ -286,9 +336,11 @@ class Slider_Translator {
         if (empty($schema_json) || $schema_json === '{}' || $schema_json === 'null') {
             return null;
         }
+        $this->stats['schema_fetch_success'] = true;
 
         if (!empty($target_lang_code)) {
             $schema_json = $this->translate_schema_json($schema_json, $target_lang_code);
+            $this->stats['schema_translated'] = true;
         }
 
         return $schema_json;
