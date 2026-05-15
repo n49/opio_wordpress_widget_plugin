@@ -588,28 +588,6 @@ if ($opio_translator) {
     <?php } ?>
 </style>
 
-<?php if(isset($feed_object->schema_enabled) && $feed_object->schema_enabled == 'yes') {
-    $schema_url = 'https://op.io/review-schema.json/?entid=' . $feed_object->biz_id;
-    if($review_type === 'orgfeed') {
-        $schema_url = 'https://op.io/review-schema.json/?orgid=' . $feed_object->org_id;
-    }
-    if(isset($feed_object->schema_type) && $feed_object->schema_type == 'local') {
-        $schema_url .= '&type=local';
-    }
-    $schema_response = wp_remote_get($schema_url, ['timeout' => 5]);
-    if(!is_wp_error($schema_response) && $schema_response['response']['code'] === 200) {
-        $schema_json = $schema_response['body'];
-        if(!empty($schema_json) && $schema_json !== '{}' && $schema_json !== 'null') {
-?>
-<!-- JSON schema from op.io API -->
-<script type="application/ld+json">
-<?php echo $schema_json; ?>
-</script>
-<?php
-        }
-    }
-} ?>
-
 </div>
 
 <?php 
