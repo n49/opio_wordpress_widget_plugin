@@ -20,13 +20,16 @@ if (!isset($opio_translator)) { $opio_translator = null; }
 
 <?php
     // Function to check if the user is on a mobile device
+    if (!function_exists('isMobileDevice')) {
     function isMobileDevice() {
         return (isset($_SERVER['HTTP_USER_AGENT']) && 
                 preg_match('/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i', $_SERVER['HTTP_USER_AGENT']));
     }
+    }
     // Check if it's a mobile device
     $isMobile = isMobileDevice();
 
+    if (!function_exists('getStarRating')) {
     function getStarRating($average) {
         $starColor = ($average > 0.5) ? '#ffc600' : '#E6E8EB';
         $starGrey = '#E6E8EB';
@@ -45,7 +48,9 @@ if (!isset($opio_translator)) { $opio_translator = null; }
         }
         return $stars;
     }
+    }
 
+    if (!function_exists('getStarRatingWidget')) {
     function getStarRatingWidget($average) {
         $starColor = ($average > 0.5) ? '#ffc600' : '#E6E8EB';
         $starGrey = '#E6E8EB';
@@ -64,7 +69,9 @@ if (!isset($opio_translator)) { $opio_translator = null; }
         }
         return $stars;
     }
+    }
 
+    if (!function_exists('randomColor')) {
     function randomColor() {
         $colors = [
             '#2c3e50', // Dark Blue
@@ -80,6 +87,7 @@ if (!isset($opio_translator)) { $opio_translator = null; }
 
         $randomIndex = mt_rand(0, count($colors) - 1);
         return $colors[$randomIndex];
+    }
     }
     // Define the function to include the template with parameters
 
