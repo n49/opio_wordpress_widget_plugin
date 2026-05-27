@@ -55,35 +55,6 @@ class Slider_Shortcode {
 
     public function init($atts) {
 
-        // === OPIO DEBUG (TEMP) — track per-request invocations of this shortcode
-        static $invocation_count = 0;
-        $invocation_count++;
-        $debug_call = array(
-            't_start_ms'           => round(microtime(true) * 1000, 2),
-            'invocation'           => $invocation_count,
-            'pid'                  => function_exists('getmypid') ? getmypid() : null,
-            'ob_level_at_entry'    => ob_get_level(),
-            'mem_mb'               => round(memory_get_usage(true) / 1048576, 2),
-            'mem_peak_mb'          => round(memory_get_peak_usage(true) / 1048576, 2),
-            'atts'                 => $atts,
-            // who invoked us — short backtrace identifies Yoast vs theme vs other
-            'backtrace'            => array_map(function($f){
-                return (isset($f['class']) ? $f['class'] . $f['type'] : '')
-                     . (isset($f['function']) ? $f['function'] : '')
-                     . (isset($f['file']) ? ' @ ' . basename($f['file']) . ':' . (isset($f['line']) ? $f['line'] : '') : '');
-            }, array_slice(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), 0, 12)),
-            'helper_fns_already_defined' => array(
-                'getStarRating'       => function_exists('getStarRating'),
-                'getStarRatingWidget' => function_exists('getStarRatingWidget'),
-                'randomColor'         => function_exists('randomColor'),
-                'isMobileDevice'      => function_exists('isMobileDevice'),
-            ),
-            'current_filter'       => current_filter(),
-            'doing_filter_the_content' => doing_filter('the_content'),
-            'is_admin'             => is_admin(),
-        );
-        // === END OPIO DEBUG
-
         if (get_option('opio_active') === '0') {
             return '';
         }
@@ -183,20 +154,6 @@ class Slider_Shortcode {
         // calls, leaving the slider markup empty. Helper functions inside
         // each template are guarded with function_exists() so repeat-include
         // does not fatal.
-        // === OPIO DEBUG (TEMP) — capture template execution
-        $debug_template = array(
-            'slider_type'        => (string) $slider_type,
-            'feed_id_attr'       => isset($atts['id']) ? $atts['id'] : null,
-            'feed_loaded'        => $feed != null,
-            'feed_post_status'   => $feed ? $feed->post_status : null,
-            'feed_object_keys'   => $feed_object ? array_keys((array) $feed_object) : null,
-            'ob_level_before_include' => ob_get_level(),
-            'buffer_len_before_include' => function_exists('ob_get_length') && ob_get_length() !== false ? ob_get_length() : null,
-        );
-        $marker_before_include = "\n<!-- OPIO_DEBUG_MARKER_BEFORE_INCLUDE -->\n";
-        echo $marker_before_include;
-        // === END OPIO DEBUG
-
         if($slider_type == 'horizontal') {
             include 'reviews-slider-horizontal-template.php';
         } else if($slider_type == 'horizontal-carousel') {
@@ -205,19 +162,6 @@ class Slider_Shortcode {
             include 'reviews-slider-vertical-template.php';
         }
         ob_get_contents();
-
-        // === OPIO DEBUG (TEMP) — capture state after template ran
-        $marker_after_include = "\n<!-- OPIO_DEBUG_MARKER_AFTER_INCLUDE -->\n";
-        echo $marker_after_include;
-        $debug_template['ob_level_after_include']  = ob_get_level();
-        $debug_template['buffer_len_after_include'] = function_exists('ob_get_length') && ob_get_length() !== false ? ob_get_length() : null;
-        $debug_template['helper_fns_defined_after_include'] = array(
-            'getStarRating'       => function_exists('getStarRating'),
-            'getStarRatingWidget' => function_exists('getStarRatingWidget'),
-            'randomColor'         => function_exists('randomColor'),
-            'isMobileDevice'      => function_exists('isMobileDevice'),
-        );
-        // === END OPIO DEBUG
 
         // Post-render stats — counters were populated during template execution above.
         if ($opio_translator) {
@@ -263,85 +207,9 @@ class Slider_Shortcode {
             unload_textdomain('widget-for-opio-reviews');
         }
 
-        // === OPIO DEBUG (TEMP) — remove after diagnosis ===
-        $raw_output      = $output;
-        $prepared_output = $this->slider_deserializer->prepareString($output);
-        $kses_output     = wp_kses($prepared_output, $this->slider_deserializer->get_allowed_tags());
+        $output = $this->slider_deserializer->prepareString($output);
 
-        $count_tags = function($html) {
-            preg_match_all('/<([a-zA-Z0-9]+)\b/', $html, $m);
-            $counts = array_count_values(array_map('strtolower', $m[1]));
-            ksort($counts);
-            return $counts;
-        };
-
-        // Was the marker actually rendered by the buffer? Detects whether
-        // template output ended up in our parent buffer or somewhere else.
-        $debug_template['contains_marker_before'] = strpos($raw_output, 'OPIO_DEBUG_MARKER_BEFORE_INCLUDE') !== false;
-        $debug_template['contains_marker_after']  = strpos($raw_output, 'OPIO_DEBUG_MARKER_AFTER_INCLUDE') !== false;
-        $debug_template['chars_between_markers']  = $debug_template['contains_marker_before'] && $debug_template['contains_marker_after']
-            ? strpos($raw_output, 'OPIO_DEBUG_MARKER_AFTER_INCLUDE') - strpos($raw_output, 'OPIO_DEBUG_MARKER_BEFORE_INCLUDE') - strlen('<!-- OPIO_DEBUG_MARKER_BEFORE_INCLUDE -->')
-            : null;
-        $debug_call['t_end_ms']     = round(microtime(true) * 1000, 2);
-        $debug_call['elapsed_ms']   = round($debug_call['t_end_ms'] - $debug_call['t_start_ms'], 2);
-        $debug_call['ob_level_at_exit'] = ob_get_level();
-
-        $debug = array(
-            'call'            => $debug_call,
-            'template'        => $debug_template,
-            'raw_length'      => strlen($raw_output),
-            'prepared_length' => strlen($prepared_output),
-            'kses_length'     => strlen($kses_output),
-            'raw_tags'        => $count_tags($raw_output),
-            'prepared_tags'   => $count_tags($prepared_output),
-            'kses_tags'       => $count_tags($kses_output),
-            'raw_b64'         => base64_encode($raw_output),
-            'prepared_b64'    => base64_encode($prepared_output),
-            'kses_b64'        => base64_encode($kses_output),
-        );
-
-        // Use a unique window var per invocation so a 2nd shortcode call
-        // doesn't clobber the 1st in the browser.
-        $invo_suffix = '_' . $invocation_count;
-        $debug_script = '<script type="text/javascript" id="opio-kses-debug' . esc_attr($invo_suffix) . '">'
-            . 'window.opioDebug' . esc_attr($invo_suffix) . ' = ' . wp_json_encode($debug) . ';'
-            . '(function(d){'
-            .     'console.group("[OPIO debug] invocation #" + d.call.invocation + " (" + d.call.current_filter + ")");'
-            .     'console.log("call context", d.call);'
-            .     'console.log("template context", d.template);'
-            .     'console.log("lengths", {raw: d.raw_length, prepared: d.prepared_length, kses: d.kses_length});'
-            .     'console.log("tag counts RAW", d.raw_tags);'
-            .     'console.log("tag counts PREPARED", d.prepared_tags);'
-            .     'console.log("tag counts POST-KSES", d.kses_tags);'
-            .     'console.log("backtrace", d.call.backtrace);'
-            .     'console.log("--- RAW HTML ---");'
-            .     'console.log(atob(d.raw_b64));'
-            .     'console.log("--- PREPARED HTML ---");'
-            .     'console.log(atob(d.prepared_b64));'
-            .     'console.log("--- POST-KSES HTML ---");'
-            .     'console.log(atob(d.kses_b64));'
-            .     'console.groupEnd();'
-            . '})(window.opioDebug' . esc_attr($invo_suffix) . ');'
-            . '</script>';
-
-        // Also emit to PHP error log so the call sequence is visible
-        // server-side (useful when JS is mid-page and console output gets
-        // tangled with cache layers).
-        error_log(sprintf(
-            '[OPIO debug] invocation=%d current_filter=%s raw_len=%d kses_len=%d marker_before=%s marker_after=%s feed_loaded=%s slider_type=%s elapsed_ms=%s',
-            $debug_call['invocation'],
-            $debug_call['current_filter'] ?: '(none)',
-            strlen($raw_output),
-            strlen($kses_output),
-            $debug_template['contains_marker_before'] ? 'yes' : 'NO',
-            $debug_template['contains_marker_after']  ? 'yes' : 'NO',
-            $debug_template['feed_loaded'] ? 'yes' : 'no',
-            $debug_template['slider_type'],
-            $debug_call['elapsed_ms']
-        ));
-
-        return $debug_script . $kses_output;
-        // === END OPIO DEBUG ===
+        return wp_kses($output, $this->slider_deserializer->get_allowed_tags());
 
 
     }
