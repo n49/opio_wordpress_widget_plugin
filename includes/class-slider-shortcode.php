@@ -201,9 +201,48 @@ class Slider_Shortcode {
             unload_textdomain('widget-for-opio-reviews');
         }
 
-        $output = $this->slider_deserializer->prepareString($output);
+        // === OPIO DEBUG (TEMP) — remove after diagnosis ===
+        $raw_output      = $output;
+        $prepared_output = $this->slider_deserializer->prepareString($output);
+        $kses_output     = wp_kses($prepared_output, $this->slider_deserializer->get_allowed_tags());
 
-        return wp_kses($output, $this->slider_deserializer->get_allowed_tags());
+        $count_tags = function($html) {
+            preg_match_all('/<([a-zA-Z0-9]+)\b/', $html, $m);
+            $counts = array_count_values(array_map('strtolower', $m[1]));
+            ksort($counts);
+            return $counts;
+        };
+
+        $debug = array(
+            'raw_length'      => strlen($raw_output),
+            'prepared_length' => strlen($prepared_output),
+            'kses_length'     => strlen($kses_output),
+            'raw_tags'        => $count_tags($raw_output),
+            'prepared_tags'   => $count_tags($prepared_output),
+            'kses_tags'       => $count_tags($kses_output),
+            'raw_b64'         => base64_encode($raw_output),
+            'prepared_b64'    => base64_encode($prepared_output),
+            'kses_b64'        => base64_encode($kses_output),
+        );
+
+        $debug_script = '<script type="text/javascript" id="opio-kses-debug">'
+            . 'window.opioDebug = ' . wp_json_encode($debug) . ';'
+            . 'console.group("[OPIO kses debug]");'
+            . 'console.log("lengths", {raw: window.opioDebug.raw_length, prepared: window.opioDebug.prepared_length, kses: window.opioDebug.kses_length});'
+            . 'console.log("tag counts RAW", window.opioDebug.raw_tags);'
+            . 'console.log("tag counts PREPARED", window.opioDebug.prepared_tags);'
+            . 'console.log("tag counts POST-KSES", window.opioDebug.kses_tags);'
+            . 'console.log("--- RAW HTML ---");'
+            . 'console.log(atob(window.opioDebug.raw_b64));'
+            . 'console.log("--- PREPARED HTML (after prepareString) ---");'
+            . 'console.log(atob(window.opioDebug.prepared_b64));'
+            . 'console.log("--- POST-KSES HTML ---");'
+            . 'console.log(atob(window.opioDebug.kses_b64));'
+            . 'console.groupEnd();'
+            . '</script>';
+
+        return $debug_script . $kses_output;
+        // === END OPIO DEBUG ===
 
 
     }
