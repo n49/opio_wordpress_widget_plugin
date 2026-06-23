@@ -76,7 +76,7 @@ function displayLargeImage(imageId, revId) {
         // Fallback for pages without lightbox (e.g., review feed)
         var elem = document.querySelector(`#largerevimg-${revId}`);
         if (!elem) return;
-        var imgUrl = 'https://images.files.ca/800x800/' + imageId + '.jpg?nocrop=1';
+        var imgUrl = (imageId && String(imageId).indexOf('http') === 0) ? imageId : 'https://images.files.ca/800x800/' + imageId + '.jpg?nocrop=1';
         elem.innerHTML = '<div style="display: inline-block; width: 98.5%; height: 400px; background-color: #f0f0f0; margin: 5px; text-align: center; display: flex; align-items: center; justify-content: center;">Loading...</div>';
         var img = new Image();
         img.onload = function() {
@@ -106,7 +106,7 @@ function displayLargeImage(imageId, revId) {
     var elem = document.querySelector(`#largerevimg-${revId}`);
     if (!elem) return;
     elem.style.display = 'flex';
-    var imgUrl = 'https://images.files.ca/800x800/' + imageId + '.jpg?nocrop=1';
+    var imgUrl = (imageId && String(imageId).indexOf('http') === 0) ? imageId : 'https://images.files.ca/800x800/' + imageId + '.jpg?nocrop=1';
     elem.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 400px; background-color: #f0f0f0;">Loading...</div>';
     var img = new Image();
     img.onload = function() {
@@ -131,6 +131,25 @@ function displayLargeImage(imageId, revId) {
             </div>`;
     };
     img.src = imgUrl;
+}
+
+// Build the large-display HTML for a review video. Native opio videos use videocdn;
+// Google review videos carry a direct `url` and are hotlink-protected (429 on cross-site
+// Referer), so they render inside a no-referrer iframe to strip the referrer.
+function buildSliderVideoHtml(video, autoplay) {
+    var src = video.url || video.videoUrl || (video.videoId ? 'https://videocdn.n49.ca/mp4sdpad480p/' + video.videoId + '.mp4#t=0.1' : '');
+    if (!src) return '';
+    var poster = video.thumbnailUrl || '';
+    var isGoogle = src.indexOf('googleusercontent.com') !== -1 || src.indexOf('googlevideo.com') !== -1;
+    if (isGoogle) {
+        var autoAttr = autoplay ? ' autoplay' : '';
+        var posterAttr = poster ? ' poster="' + poster + '"' : '';
+        var doc = '<!DOCTYPE html><html><head><meta name="referrer" content="no-referrer"><style>html,body{margin:0;height:100%;background:#000}video{width:100%;height:100%;object-fit:contain}</style></head><body><video controls playsinline' + autoAttr + posterAttr + ' src="' + src + '"></video></body></html>';
+        return '<div style="position:relative;width:100%;height:400px;border-radius:4px;overflow:hidden;background:#000;"><iframe referrerpolicy="no-referrer" srcdoc=\'' + doc + '\' style="width:100%;height:100%;border:0;" allow="autoplay; fullscreen" allowfullscreen></iframe></div>';
+    }
+    var nAutoAttr = autoplay ? ' autoplay' : '';
+    var nPosterAttr = poster ? ' poster="' + poster + '"' : '';
+    return '<div><video preload="auto" controls' + nAutoAttr + nPosterAttr + ' style="width: 100%; max-height: 400px; border-radius: 4px;"><source src="' + src + '" type="video/mp4"></video></div>';
 }
 
 function displayEmbed(embed, revId) {
@@ -509,19 +528,21 @@ async function openPhotoLightbox(reviewData) {
     // Add image thumbnails
     if (reviewData.images && reviewData.images.length > 0) {
         reviewData.images.forEach(function(img) {
-            var imageId = img.imageId;
-            var mediaId = 'img-' + imageId;
+            // Google review images carry thumbnailUrl/url (full URLs) instead of an imageId
+            var imageRef = img.imageId || img.url || img.thumbnailUrl;
+            var thumbBg = img.imageId ? 'https://images.files.ca/200x200/' + img.imageId + '.jpg?nocrop=1' : (img.thumbnailUrl || img.url);
+            var mediaId = 'img-' + imageRef;
             var imageDiv = document.createElement("div");
             imageDiv.className = 'media-thumb lb-small-img';
             imageDiv.setAttribute('data-media-id', mediaId);
             imageDiv.style.cssText = 'display: inline-block; width: 72px; height: 72px; background-position: center center; background-size: cover; background-repeat: no-repeat; margin: 5px; cursor: pointer; border-radius: 4px; border: 2px solid transparent; box-sizing: border-box; vertical-align: top;';
-            imageDiv.style.backgroundImage = 'url(https://images.files.ca/200x200/' + imageId + '.jpg?nocrop=1)';
-            imageDiv.onclick = function() { displayLargeImage(imageId, revId); updateLbThumbnailSelection(revId, mediaId); };
+            imageDiv.style.backgroundImage = 'url(' + thumbBg + ')';
+            imageDiv.onclick = function() { displayLargeImage(imageRef, revId); updateLbThumbnailSelection(revId, mediaId); };
             thumbsContainer.appendChild(imageDiv);
 
             // Track first image if no embed
             if (!firstMedia) {
-                firstMedia = { type: 'image', data: imageId, mediaId: mediaId };
+                firstMedia = { type: 'image', data: imageRef, mediaId: mediaId };
             }
         });
     }
@@ -529,7 +550,7 @@ async function openPhotoLightbox(reviewData) {
     // Add video thumbnails
     if (reviewData.videos && reviewData.videos.length > 0) {
         reviewData.videos.forEach(function(video) {
-            var mediaId = 'vid-' + video.videoId;
+            var mediaId = 'vid-' + (video.videoId || video.url || video._id);
             var thumbUrl = video.thumbnailUrl || 'https://videocdn.n49.ca/thumb/' + video.videoId + '.jpg';
             var videoThumb = document.createElement("div");
             videoThumb.className = 'media-thumb';
@@ -539,7 +560,7 @@ async function openPhotoLightbox(reviewData) {
             videoThumb.onclick = function() {
                 var elem = document.querySelector('#largerevimg-' + revId);
                 if (elem) {
-                    elem.innerHTML = '<div><video preload="auto" controls autoplay style="width: 100%; max-height: 400px; border-radius: 4px;"><source src="https://videocdn.n49.ca/mp4sdpad480p/' + video.videoId + '.mp4#t=0.1" type="video/mp4"></video></div>';
+                    elem.innerHTML = buildSliderVideoHtml(video, true);
                 }
                 updateLbThumbnailSelection(revId, mediaId);
             };
@@ -547,7 +568,7 @@ async function openPhotoLightbox(reviewData) {
 
             // Track first video if no embed or image
             if (!firstMedia) {
-                firstMedia = { type: 'video', data: video.videoId, mediaId: mediaId };
+                firstMedia = { type: 'video', data: video, mediaId: mediaId };
             }
         });
     }
@@ -562,7 +583,7 @@ async function openPhotoLightbox(reviewData) {
             } else if (firstMedia.type === 'video') {
                 var elem = document.querySelector('#largerevimg-' + revId);
                 if (elem) {
-                    elem.innerHTML = '<div><video preload="auto" controls style="width: 100%; max-height: 400px; border-radius: 4px;"><source src="https://videocdn.n49.ca/mp4sdpad480p/' + firstMedia.data + '.mp4#t=0.1" type="video/mp4"></video></div>';
+                    elem.innerHTML = buildSliderVideoHtml(firstMedia.data, false);
                 }
             }
             updateLbThumbnailSelection(revId, firstMedia.mediaId);
