@@ -2,7 +2,7 @@
 Author: Dhiraj Timalsina
 Tags: Widget for OPIO Reviews, opio, reviews, rating, widget, google business, testimonials
 Tested up to: 6.4
-Stable tag: 1.1.31
+Stable tag: 1.1.32
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,6 +85,9 @@ Any other ISO 639-1 code (e.g., `sw`, `nb`, `fi`, `cs`) will translate review co
 Full developer documentation, filter hooks for raising translation quota, and instructions for adding a 31st hand-curated language are in `LANGUAGES.md` in the plugin folder.
 
 == Changelog ==
+
+= 1.1.32 =
+* Slider: support Google reviews with photos and videos. Google media carries direct URLs (`thumbnailUrl`/`url`) instead of opio image/video IDs, so the slider now renders these directly. Google videos play inside a no-referrer iframe to bypass Google's cross-site hotlink protection.
 
 = 1.1.25 =
 * Add Microsoft Azure Translator as a second translation provider alongside MyMemory. Activate per-site with `add_filter('opio_translation_provider', fn() => 'azure');` plus `opio_translation_azure_key` (subscription key) and optionally `opio_translation_azure_region` (regional resource) in the site's `functions.php`. MyMemory remains the default — existing installs unchanged. Azure gives a 2 M chars/month permanent free tier (vs. MyMemory's 50K/day per IP) and isolates each client's quota from other plugin users sharing the same hosting egress IP.

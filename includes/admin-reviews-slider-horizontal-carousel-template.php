@@ -237,7 +237,7 @@
                         <?php if(isset($review['images']) && is_array($review['images']) && count($review['images']) > 0) { ?>
                             <?php foreach (array_slice($review['images'], 0, 3) as $image) {?>
                                 <div>
-                                    <img class="review-img" src="https://op.io/dashboard/api/reviews/get-image/<?php echo esc_attr($image['imageId']); ?>?width=400&height=400">
+                                    <?php if(isset($image['imageId'])) { ?><img class="review-img" src="https://op.io/dashboard/api/reviews/get-image/<?php echo esc_attr($image['imageId']); ?>?width=400&height=400"><?php } else if(isset($image['thumbnailUrl']) || isset($image['url'])) { ?><img class="review-img" src="<?php echo esc_url(isset($image['thumbnailUrl']) ? $image['thumbnailUrl'] : $image['url']); ?>"><?php } ?>
                                 </div>
                             <?php } ?>
                         <?php } ?>
@@ -317,7 +317,7 @@
                     <?php if(isset($review['images']) && is_array($review['images']) && count($review['images']) > 0) { ?>
                         <?php foreach (array_slice($review['images'], 0, 3) as $image) {?>
                             <div>
-                                <img class="review-img" src="https://op.io/dashboard/api/reviews/get-image/<?php echo esc_attr($image['imageId']); ?>?width=400&height=400">
+                                <?php if(isset($image['imageId'])) { ?><img class="review-img" src="https://op.io/dashboard/api/reviews/get-image/<?php echo esc_attr($image['imageId']); ?>?width=400&height=400"><?php } else if(isset($image['thumbnailUrl']) || isset($image['url'])) { ?><img class="review-img" src="<?php echo esc_url(isset($image['thumbnailUrl']) ? $image['thumbnailUrl'] : $image['url']); ?>"><?php } ?>
                             </div>
                         <?php } ?>
                     <?php } ?>
