@@ -2,7 +2,7 @@
 Author: Dhiraj Timalsina
 Tags: Widget for OPIO Reviews, opio, reviews, rating, widget, google business, testimonials
 Tested up to: 6.4
-Stable tag: 1.1.32
+Stable tag: 1.1.33
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,6 +85,9 @@ Any other ISO 639-1 code (e.g., `sw`, `nb`, `fi`, `cs`) will translate review co
 Full developer documentation, filter hooks for raising translation quota, and instructions for adding a 31st hand-curated language are in `LANGUAGES.md` in the plugin folder.
 
 == Changelog ==
+
+= 1.1.33 =
+* Slider: hide review media images that fail to load (e.g. expired or removed Google review photos) instead of rendering broken/blank tiles. A delegated error handler also covers carousel-cloned slides, and the media gallery collapses if no images remain.
 
 = 1.1.32 =
 * Slider: support Google reviews with photos and videos. Google media carries direct URLs (`thumbnailUrl`/`url`) instead of opio image/video IDs, so the slider now renders these directly. Google videos play inside a no-referrer iframe to bypass Google's cross-site hotlink protection.

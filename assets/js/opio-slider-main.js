@@ -1,3 +1,35 @@
+// Hide review media images that fail to load (e.g. expired/removed Google review photos) so they
+// don't render as broken/blank tiles. A capture-phase 'error' listener catches every .review-img
+// failure — including slick-cloned slides and async-built nodes — and the DOM-ready sweep handles
+// images that already errored before this script ran. Collapses the gallery if it empties.
+(function () {
+    function opioHideBrokenReviewImg(img) {
+        if (!img || img.getAttribute('data-opio-hidden') === '1') return;
+        img.setAttribute('data-opio-hidden', '1');
+        var gallery = img.closest ? img.closest('.review-media-images') : null;
+        var cell = img.parentNode;
+        if (cell && cell.parentNode) { cell.parentNode.removeChild(cell); }
+        else { img.style.display = 'none'; }
+        if (gallery && !gallery.querySelector('img.review-img, .video-icon')) {
+            gallery.style.display = 'none';
+        }
+    }
+    if (typeof document !== 'undefined') {
+        document.addEventListener('error', function (e) {
+            var t = e && e.target;
+            if (t && t.tagName === 'IMG' && (' ' + (t.className || '') + ' ').indexOf(' review-img ') !== -1) {
+                opioHideBrokenReviewImg(t);
+            }
+        }, true);
+        document.addEventListener('DOMContentLoaded', function () {
+            var imgs = document.querySelectorAll('img.review-img');
+            for (var i = 0; i < imgs.length; i++) {
+                if (imgs[i].complete && imgs[i].naturalWidth === 0) { opioHideBrokenReviewImg(imgs[i]); }
+            }
+        });
+    }
+})();
+
 function opioI18n(s) {
     var hasMap = (typeof window !== 'undefined' && !!window.opioSliderI18nActive);
     var hit = hasMap && Object.prototype.hasOwnProperty.call(window.opioSliderI18nActive, s);
