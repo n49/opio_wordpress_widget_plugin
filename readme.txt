@@ -2,7 +2,7 @@
 Author: Dhiraj Timalsina
 Tags: Widget for OPIO Reviews, opio, reviews, rating, widget, google business, testimonials
 Tested up to: 6.4
-Stable tag: 1.1.33
+Stable tag: 1.1.34
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,6 +85,9 @@ Any other ISO 639-1 code (e.g., `sw`, `nb`, `fi`, `cs`) will translate review co
 Full developer documentation, filter hooks for raising translation quota, and instructions for adding a 31st hand-curated language are in `LANGUAGES.md` in the plugin folder.
 
 == Changelog ==
+
+= 1.1.34 =
+* Fix: only load the plugin's CSS/JS (including its bundled Slick carousel) on pages that actually use an OPIO shortcode. Previously the bundle loaded site-wide and its global jQuery.fn.slick overwrote the active theme's own Slick build, breaking unrelated theme sliders/galleries.
 
 = 1.1.33 =
 * Slider: hide review media images that fail to load (e.g. expired or removed Google review photos) instead of rendering broken/blank tiles. A delegated error handler also covers carousel-cloned slides, and the media gallery collapses if no images remain.

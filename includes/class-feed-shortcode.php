@@ -369,6 +369,7 @@ class Feed_Shortcode {
         if (get_option('opio_active') === '0') {
             return '';
         }
+        do_action('opio_enqueue_assets');
         ob_start();
         $feed = $this->feed_deserializer->get_feed($atts['id']);
         $feed_id = '';

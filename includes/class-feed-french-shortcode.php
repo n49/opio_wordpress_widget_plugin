@@ -44,6 +44,7 @@ class Feed_French_Shortcode {
         if (get_option('opio_active') === '0') {
             return '';
         }
+        do_action('opio_enqueue_assets');
 
         $feed = $this->feed_deserializer->get_feed($atts['id']);
         if ($feed == null) {
