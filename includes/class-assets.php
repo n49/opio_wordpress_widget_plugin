@@ -72,6 +72,13 @@ class Assets {
         }
     }
 
+    // Dependency handle the jQuery-dependent scripts should declare. Prefer
+    // WordPress core jQuery (always registered by wp_enqueue_scripts time);
+    // fall back to the bundled copy only when core jQuery isn't registered.
+    private function jquery_dep_handle() {
+        return wp_script_is('jquery', 'registered') ? 'jquery' : 'jQuery-opio-3.6.0-js';
+    }
+
     public function enqueue_admin_styles() {
         wp_enqueue_style('wp-jquery-ui-dialog');
         wp_enqueue_style('roboto-font', $this->url . 'fonts/roboto.css', array(), $this->version);
@@ -116,10 +123,11 @@ class Assets {
     }
 
     private function enqueue_public_scripts() {
+        // Declared dependencies (see register_scripts_loop) make WordPress pull
+        // in and order jQuery for us: core jQuery for the feed script, and the
+        // isolated bundled jQuery + Slick for the slider, regardless of where
+        // the theme enqueues its own jQuery.
         $scripts = array('opio-main-js', 'moment-opio-js', 'slick-opio-carousel-js', 'opio-slider-main-js');
-        if (!wp_script_is('jquery', 'enqueued')) {
-            array_unshift($scripts, 'jQuery-opio-3.6.0-js');
-        }
         foreach ($scripts as $script) {
             wp_enqueue_script($script);
         }
@@ -148,8 +156,28 @@ class Assets {
     }
 
     private function register_scripts_loop($scripts) {
+        // Slick writes jQuery.fn.slick onto whatever jQuery is global when it
+        // runs. To coexist with a theme's own jQuery/Slick we load Slick
+        // against OPIO's *bundled* jQuery (never the page's) and isolate the
+        // result into window.opioJQ via a shim at the end of the Slick file.
+        // The dependency chain forces: core jQuery -> bundled jQuery -> Slick
+        // (+shim) -> slider init, so the page's jQuery.fn.slick is never
+        // overwritten and our slider still gets a working .slick().
+        $core_jq = wp_script_is('jquery', 'registered') ? array('jquery') : array();
+        $deps = array(
+            // Feed lightbox: plain jQuery, no Slick — safe on page/core jQuery.
+            'opio-main-js'           => array($this->jquery_dep_handle()),
+            'moment-opio-js'         => array(),
+            // Bundled jQuery loads AFTER core so the shim's noConflict(true)
+            // can hand the page's jQuery back once Slick attaches to our copy.
+            'jQuery-opio-3.6.0-js'   => $core_jq,
+            // Slick MUST attach to the bundled jQuery, not the page's.
+            'slick-opio-carousel-js' => array('jQuery-opio-3.6.0-js'),
+            'opio-slider-main-js'    => array('slick-opio-carousel-js', 'moment-opio-js'),
+        );
         foreach ($scripts as $script) {
-            wp_register_script($script, $this->get_js_asset($script), array(), $this->version);
+            $script_deps = isset($deps[$script]) ? $deps[$script] : array();
+            wp_register_script($script, $this->get_js_asset($script), $script_deps, $this->version);
         }
     }
 

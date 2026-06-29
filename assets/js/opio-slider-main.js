@@ -691,6 +691,10 @@ function closePhotoLightbox() {
     document.cookie = 'reviewIndex=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 }
 
+// Slider init runs against window.opioJQ — OPIO's private, isolated jQuery
+// instance that carries our bundled Slick (jQuery.fn.slick). This avoids
+// touching the page's own jQuery / theme Slick. Falls back to global jQuery
+// only if the isolation shim didn't run.
 (function ($) {
     $(document).ready(function () {
 
@@ -742,7 +746,7 @@ function closePhotoLightbox() {
         c_slider.slick('slickPrev');
     });
     });
-})(jQuery);
+})(window.opioJQ || window.jQuery);
 
 (function ($) {
     $(document).ready(function () {
@@ -773,7 +777,7 @@ function closePhotoLightbox() {
         v_slider.slick('slickPrev');
     });
     });
-})(jQuery);
+})(window.opioJQ || window.jQuery);
 
 (function ($) {
     $(document).ready(function () {
@@ -832,7 +836,7 @@ function closePhotoLightbox() {
         h_slider.slick('slickPrev');
     });
     });
-})(jQuery);
+})(window.opioJQ || window.jQuery);
 
 // Close lightbox when clicking outside the video container
 window.addEventListener('click', function (event) {
