@@ -120,6 +120,17 @@ class Assets {
         foreach ($styles as $style) {
             wp_enqueue_style($style);
         }
+        // Render-time fallback (widget / page-builder / template do_shortcode)
+        // fires after wp_head has already printed. These are head-group styles,
+        // so WordPress' footer late-style pass skips them -> the slider loads
+        // unstyled (scripts still print in the footer, so Slick initializes but
+        // there is no layout CSS and every slide stacks vertically). When we're
+        // already past wp_head, emit the <link> tags inline at the render point.
+        // wp_print_styles() marks them done, so the head/footer passes won't
+        // double-print, and <link> inside <body> is valid HTML5.
+        if (did_action('wp_head')) {
+            wp_print_styles($styles);
+        }
     }
 
     private function enqueue_public_scripts() {
