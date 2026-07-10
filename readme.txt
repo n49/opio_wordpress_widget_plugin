@@ -2,7 +2,7 @@
 Author: Dhiraj Timalsina
 Tags: Widget for OPIO Reviews, opio, reviews, rating, widget, google business, testimonials
 Tested up to: 6.4
-Stable tag: 1.1.36
+Stable tag: 1.1.37
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,6 +85,12 @@ Any other ISO 639-1 code (e.g., `sw`, `nb`, `fi`, `cs`) will translate review co
 Full developer documentation, filter hooks for raising translation quota, and instructions for adding a 31st hand-curated language are in `LANGUAGES.md` in the plugin folder.
 
 == Changelog ==
+
+= 1.1.37 =
+* Fix: slider rendered unstyled (slides stacked in a tall column) when placed via a widget, page builder, or template do_shortcode. The render-time asset fallback runs after wp_head, so the plugin's stylesheets were skipped by WordPress' footer late-style pass while the scripts still loaded. The styles are now emitted inline at render time when past wp_head.
+
+= 1.1.36 =
+* Fix: isolate the plugin's bundled Slick onto a private jQuery instance (window.opioJQ via noConflict) and declare real jQuery dependencies, so slider init no longer depends on script ordering and never overwrites the theme's own jQuery/Slick.
 
 = 1.1.35 =
 * Maintenance re-release (no functional changes since 1.1.34) to ensure the update is delivered to existing installations.
