@@ -2,7 +2,7 @@
 Author: Dhiraj Timalsina
 Tags: Widget for OPIO Reviews, opio, reviews, rating, widget, google business, testimonials
 Tested up to: 6.4
-Stable tag: 1.1.37
+Stable tag: 1.1.38
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,6 +85,9 @@ Any other ISO 639-1 code (e.g., `sw`, `nb`, `fi`, `cs`) will translate review co
 Full developer documentation, filter hooks for raising translation quota, and instructions for adding a 31st hand-curated language are in `LANGUAGES.md` in the plugin folder.
 
 == Changelog ==
+
+= 1.1.38 =
+* Fix: YouTube Shorts/videos and TikTok/Instagram embeds no longer autoplay when a review's first media auto-loads (e.g. after Load More in the slider). Removed the hardcoded autoplay=1 and the autoplay permission from embed iframes; playback now waits for an explicit user click.
 
 = 1.1.37 =
 * Fix: slider rendered unstyled (slides stacked in a tall column) when placed via a widget, page builder, or template do_shortcode. The render-time asset fallback runs after wp_head, so the plugin's stylesheets were skipped by WordPress' footer late-style pass while the scripts still loaded. The styles are now emitted inline at render time when past wp_head.
