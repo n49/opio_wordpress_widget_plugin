@@ -65,10 +65,10 @@ function displayEmbed(embed, revId) {
             var iframeHtml;
             if (isShort) {
                 var shortWidth = maxHeight * (9 / 16);
-                iframeHtml = '<div style="display: inline-block; width: ' + shortWidth + 'px; height: ' + maxHeight + 'px; margin: 5px; position: relative; background: #000; border-radius: 4px; overflow: hidden; vertical-align: top;"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&modestbranding=1&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0;"></iframe></div>';
+                iframeHtml = '<div style="display: inline-block; width: ' + shortWidth + 'px; height: ' + maxHeight + 'px; margin: 5px; position: relative; background: #000; border-radius: 4px; overflow: hidden; vertical-align: top;"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/' + videoId + '?modestbranding=1&rel=0" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0;"></iframe></div>';
             } else {
                 var videoHeight = Math.min(containerWidth * 0.5625, maxHeight);
-                iframeHtml = '<div style="width: 98.5%; height: ' + videoHeight + 'px; margin: 5px; position: relative; background: #000; border-radius: 4px; overflow: hidden;"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&modestbranding=1&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0;"></iframe></div>';
+                iframeHtml = '<div style="width: 98.5%; height: ' + videoHeight + 'px; margin: 5px; position: relative; background: #000; border-radius: 4px; overflow: hidden;"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/' + videoId + '?modestbranding=1&rel=0" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0;"></iframe></div>';
             }
             elem.innerHTML = iframeHtml;
         } else if (embed.url && typeof embed.url === 'string' && embed.url.trim()) {

@@ -205,10 +205,10 @@ function displayEmbed(embed, revId) {
             var iframeHtml;
             if (isShort) {
                 var shortWidth = maxHeight * (9 / 16);
-                iframeHtml = '<div style="display: inline-block; width: ' + shortWidth + 'px; height: ' + maxHeight + 'px; margin: 5px; position: relative; background: #000; border-radius: 4px; overflow: hidden; vertical-align: top;"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&modestbranding=1&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0;"></iframe></div>';
+                iframeHtml = '<div style="display: inline-block; width: ' + shortWidth + 'px; height: ' + maxHeight + 'px; margin: 5px; position: relative; background: #000; border-radius: 4px; overflow: hidden; vertical-align: top;"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/' + videoId + '?modestbranding=1&rel=0" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0;"></iframe></div>';
             } else {
                 var videoHeight = Math.min(containerWidth * 0.5625, maxHeight);
-                iframeHtml = '<div style="width: 100%; height: ' + videoHeight + 'px; margin: 5px 0; position: relative; background: #000; border-radius: 4px; overflow: hidden;"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&modestbranding=1&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0;"></iframe></div>';
+                iframeHtml = '<div style="width: 100%; height: ' + videoHeight + 'px; margin: 5px 0; position: relative; background: #000; border-radius: 4px; overflow: hidden;"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/' + videoId + '?modestbranding=1&rel=0" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0;"></iframe></div>';
             }
             elem.innerHTML = iframeHtml;
         } else if (platform === 'tiktok') {
@@ -224,7 +224,7 @@ function displayEmbed(embed, revId) {
             var tiktokWidth = window.innerWidth < 768 ? Math.min(window.innerWidth * 0.985, 380) : 340;
             tiktokWidth = Math.max(tiktokWidth, 320);
             var tiktokHeight = window.innerWidth < 768 ? 700 : 740;
-            var tiktokHtml = '<div style="display: inline-block; width: ' + tiktokWidth + 'px; height: ' + tiktokHeight + 'px; margin: 5px auto; position: relative; background: #000; border-radius: 4px; overflow: hidden; vertical-align: top;"><iframe width="100%" height="100%" src="https://www.tiktok.com/embed/v2/' + tiktokVideoId + '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen scrolling="no" style="position: absolute; top: 0; left: 0;"></iframe></div>';
+            var tiktokHtml = '<div style="display: inline-block; width: ' + tiktokWidth + 'px; height: ' + tiktokHeight + 'px; margin: 5px auto; position: relative; background: #000; border-radius: 4px; overflow: hidden; vertical-align: top;"><iframe width="100%" height="100%" src="https://www.tiktok.com/embed/v2/' + tiktokVideoId + '" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen scrolling="no" style="position: absolute; top: 0; left: 0;"></iframe></div>';
             elem.innerHTML = tiktokHtml;
         } else if (platform === 'instagram') {
             var igPostId = embed.postId || '';
@@ -241,7 +241,7 @@ function displayEmbed(embed, revId) {
             igWidth = Math.max(igWidth, 320);
             var igHeight = isReel ? (window.innerWidth < 768 ? 700 : 740) : (igWidth * 1.25 + 98);
             var igSrc = 'https://www.instagram.com/' + (isReel ? 'reel' : 'p') + '/' + igPostId + '/embed/?hidecaption=true';
-            var igHtml = '<div style="display: inline-block; width: ' + igWidth + 'px; height: ' + igHeight + 'px; margin: 5px auto; position: relative; background: #fafafa; border-radius: 4px; overflow: hidden; vertical-align: top;"><iframe width="100%" height="100%" src="' + igSrc + '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen scrolling="no" style="position: absolute; top: 0; left: 0;"></iframe></div>';
+            var igHtml = '<div style="display: inline-block; width: ' + igWidth + 'px; height: ' + igHeight + 'px; margin: 5px auto; position: relative; background: #fafafa; border-radius: 4px; overflow: hidden; vertical-align: top;"><iframe width="100%" height="100%" src="' + igSrc + '" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen scrolling="no" style="position: absolute; top: 0; left: 0;"></iframe></div>';
             elem.innerHTML = igHtml;
         } else if (embed.url && typeof embed.url === 'string' && embed.url.trim()) {
             window.open(embed.url.trim(), '_blank');
