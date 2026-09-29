@@ -2,7 +2,7 @@
 Author: Dhiraj Timalsina
 Tags: Widget for OPIO Reviews, opio, reviews, rating, widget, google business, testimonials
 Tested up to: 6.4
-Stable tag: 1.1.38
+Stable tag: 1.1.39
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,7 +44,7 @@ The `[opio_slider]` shortcode accepts an optional `lang` attribute to render the
 
 `[opio_slider id="37" lang="fr"]`
 
-Omit `lang=` to keep English. Setup-agnostic — no Polylang/WPML/`get_locale()` coupling. Works on any WordPress site without installing extra locale files.
+Omit `lang=` to follow the current page's language (Polylang, WPML, TranslatePress, Weglot or the site language); English pages stay English. Use `lang="en"` to force English on a translated page.
 
 **30 languages ship with hand-curated UI translations:**
 
@@ -85,6 +85,9 @@ Any other ISO 639-1 code (e.g., `sw`, `nb`, `fi`, `cs`) will translate review co
 Full developer documentation, filter hooks for raising translation quota, and instructions for adding a 31st hand-curated language are in `LANGUAGES.md` in the plugin folder.
 
 == Changelog ==
+
+= 1.1.39 =
+* Fix: on multilingual sites (Polylang, WPML, TranslatePress, Weglot), review text stayed English while the slider's UI labels followed the page language. When `lang` is omitted, the slider now uses the current page's language, so review content, comments and schema are translated too. An explicit `lang` still takes precedence; `lang="en"` forces English.
 
 = 1.1.38 =
 * Fix: YouTube Shorts/videos and TikTok/Instagram embeds no longer autoplay when a review's first media auto-loads (e.g. after Load More in the slider). Removed the hardcoded autoplay=1 and the autoplay permission from embed iframes; playback now waits for an explicit user click.

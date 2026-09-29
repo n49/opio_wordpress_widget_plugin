@@ -5,7 +5,7 @@
     <div class="opio-flex-col">
         <div class="opio-support-question">
             <h3>How do I display the slider in another language?</h3>
-            <p>Add a <code>lang</code> attribute to the slider shortcode. Example: <code>[opio_slider id="X" lang="fr"]</code> renders the slider in French. Omit <code>lang</code> to render English.</p>
+            <p>Add a <code>lang</code> attribute to the slider shortcode. Example: <code>[opio_slider id="X" lang="fr"]</code> renders the slider in French. Omit <code>lang</code> to follow the current page's language (Polylang, WPML, TranslatePress, Weglot or the site language); use <code>lang="en"</code> to force English.</p>
             <p><strong>30 languages ship with hand-curated UI translations:</strong></p>
             <p>
                 French — <code>fr</code>,
@@ -39,7 +39,7 @@
                 Thai — <code>th</code>.
             </p>
             <p>Any other ISO 639-1 code (Swahili <code>sw</code>, Norwegian <code>nb</code>, Finnish <code>fi</code>, Czech <code>cs</code>, Romanian <code>ro</code>, etc.) will translate <em>review content</em> via a free machine-translation service while UI labels stay English. Invalid codes silently fall back to English everywhere.</p>
-            <p>No external plugin (Polylang, WPML, etc.) required. The <code>lang</code> attribute is the single source of truth. See <code>LANGUAGES.md</code> in the plugin folder for the full developer reference.</p>
+            <p>No external plugin (Polylang, WPML, etc.) required, but when one is active the slider follows its page language automatically. An explicit <code>lang</code> attribute always wins. See <code>LANGUAGES.md</code> in the plugin folder for the full developer reference.</p>
         </div>
     </div>
     <div class="opio-flex-col">

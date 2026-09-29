@@ -49,6 +49,25 @@ class Slider_Shortcode {
         return 'OK';
     }
 
+    private function get_page_locale() {
+        if (function_exists('pll_current_language')) {
+            $pll_locale = pll_current_language('locale');
+            if (!empty($pll_locale)) {
+                return $pll_locale;
+            }
+        }
+        // Weglot translates the output without switching the WP locale.
+        if (function_exists('weglot_get_current_language')) {
+            $weglot_lang = weglot_get_current_language();
+            if (!empty($weglot_lang)) {
+                // Weglot uses 'tw' for Traditional Chinese.
+                return $weglot_lang === 'tw' ? 'zh_HK' : $weglot_lang;
+            }
+        }
+        // WPML and TranslatePress filter the locale, so this covers them too.
+        return function_exists('determine_locale') ? determine_locale() : get_locale();
+    }
+
     public function register() {
         add_shortcode('opio_slider', array($this, 'init'));
     }
@@ -79,7 +98,15 @@ class Slider_Shortcode {
         $slider_type = $feed_object->slider_type;
         $review_feed_link = $feed_object->review_feed_link;
 
-        $lang_attr        = isset($atts['lang']) ? $atts['lang'] : '';
+        // Explicit lang= wins (lang="en" forces English). When omitted, follow
+        // the page's language so multilingual sites (Polylang/WPML) get
+        // translated review content without editing every shortcode.
+        $lang_attr        = isset($atts['lang']) ? trim((string) $atts['lang']) : '';
+        $lang_source      = 'attr';
+        if ($lang_attr === '') {
+            $lang_attr   = $this->get_page_locale();
+            $lang_source = 'page_locale';
+        }
         $target_locale    = $this->slider_translator->normalize_lang($lang_attr);
         $opio_translator  = $this->slider_translator;
         $opio_target_lang = $target_locale ? $this->slider_translator->translator_lang_code($target_locale) : '';
@@ -100,6 +127,7 @@ class Slider_Shortcode {
         $debug = array(
             'plugin_version'           => defined('OPIO_PLUGIN_VERSION') ? OPIO_PLUGIN_VERSION : '',
             'lang_attr'                => (string) $lang_attr,
+            'lang_source'              => $lang_source,
             'target_locale'            => (string) $target_locale,
             'opio_target_lang'         => (string) $opio_target_lang,
             'mo_file'                  => (string) $mo_file,

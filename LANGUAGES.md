@@ -8,9 +8,9 @@ The `[opio_slider]` shortcode accepts an optional `lang` attribute to translate 
 [opio_slider id="37" lang="fr"]
 ```
 
-- Omit `lang` to render English (no translation overhead).
+- Omit `lang` to follow the current page's language (Polylang `pll_current_language()`, Weglot `weglot_get_current_language()`, otherwise `determine_locale()`, which covers WPML and TranslatePress). Browser-only translators (Google Translate widget, free GTranslate) can't be detected server-side. English pages render English with no translation overhead. Use `lang="en"` to force English.
 - `lang=` accepts ISO 639-1 short codes (`fr`, `de`, etc.) or full WordPress locales (`fr_CA`, `de_DE`). BCP 47 dash form (`pt-BR`) is auto-normalised to underscore (`pt_BR`).
-- No coupling to Polylang / WPML / `get_locale()`. The shortcode attribute is the single source of truth.
+- An explicit `lang` attribute always takes precedence over the page language.
 
 ## Shortcodes for all hand-curated locales
 
@@ -18,7 +18,8 @@ Copy/paste any of these into a page or post — replace `id="37"` with your slid
 
 | Shortcode | Language |
 |-----------|----------|
-| `[opio_slider id="37"]` *(or `lang="en"`)* | English (default) |
+| `[opio_slider id="37" lang="en"]` | English |
+| `[opio_slider id="37"]` | Current page language (English on English pages) |
 | `[opio_slider id="37" lang="fr"]` | French — Français |
 | `[opio_slider id="37" lang="es"]` | Spanish — Español |
 | `[opio_slider id="37" lang="pt"]` | Portuguese — Português |
