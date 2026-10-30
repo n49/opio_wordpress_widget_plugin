@@ -119,7 +119,7 @@ if (!isset($opio_translator)) { $opio_translator = null; }
     }
 
     $api_response = wp_remote_post($api_url, [
-        'headers' => $api_headers,
+        'headers' => array_merge($api_headers, \WP_Opio_Reviews\opio_page_headers()),
         'body'    => $body_params,
         'timeout' => 15
     ]);

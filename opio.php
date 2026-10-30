@@ -3,7 +3,7 @@
 Plugin Name: Widget for OPIO Reviews
 Plugin URI: 
 Description: Instantly add OPIO Reviews on your website to increase user confidence and SEO.
-Version: 1.1.39
+Version: 1.1.40
 Author: Dhiraj Timalsina <dhiraj@n49.com>
 Text Domain: widget-for-opio-reviews
 Domain Path: /languages
@@ -22,12 +22,26 @@ if (!defined('ABSPATH')) {
 
 require(ABSPATH . 'wp-includes/version.php');
 
-define('OPIO_PLUGIN_VERSION'   , '1.1.39');
+define('OPIO_PLUGIN_VERSION'   , '1.1.40');
 define('OPIO_PLUGIN_FILE'      , __FILE__);
 define('OPIO_PLUGIN_URL'       , plugins_url(basename(plugin_dir_path(__FILE__ )), basename(__FILE__)));
 define('OPIO_ASSETS_URL'       , OPIO_PLUGIN_URL . '/assets/');
 
 require_once __DIR__ . '/autoloader.php';
+
+/*
+ * Header for server-side feed/slider fetches: the URL of the page being rendered, so opio can
+ * show which page of the site the feed is on (the WordPress user-agent only carries the home
+ * URL). Not sent from wp-admin previews or ajax, which aren't live embeds.
+ */
+function opio_page_headers() {
+    if (is_admin() || wp_doing_ajax()) {
+        return array();
+    }
+    global $wp;
+    $path = (isset($wp) && isset($wp->request)) ? $wp->request : '';
+    return array('X-Opio-Page' => home_url($path ? user_trailingslashit($path) : '/'));
+}
 
 /*-------------------------------- Links --------------------------------*/
 function opio_plugin_action_links($links, $file) {

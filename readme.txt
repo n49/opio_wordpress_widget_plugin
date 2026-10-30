@@ -2,7 +2,7 @@
 Author: Dhiraj Timalsina
 Tags: Widget for OPIO Reviews, opio, reviews, rating, widget, google business, testimonials
 Tested up to: 6.4
-Stable tag: 1.1.39
+Stable tag: 1.1.40
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,6 +85,9 @@ Any other ISO 639-1 code (e.g., `sw`, `nb`, `fi`, `cs`) will translate review co
 Full developer documentation, filter hooks for raising translation quota, and instructions for adding a 31st hand-curated language are in `LANGUAGES.md` in the plugin folder.
 
 == Changelog ==
+
+= 1.1.40 =
+* Improvement: feed and slider requests now tell OPIO which page they're shown on, so the OPIO dashboard can show the exact page (e.g. a location page) instead of just the site's home URL. No change to how reviews display.
 
 = 1.1.39 =
 * Fix: on multilingual sites (Polylang, WPML, TranslatePress, Weglot), review text stayed English while the slider's UI labels followed the page language. When `lang` is omitted, the slider now uses the current page's language, so review content, comments and schema are translated too. An explicit `lang` still takes precedence; `lang="en"` forces English.

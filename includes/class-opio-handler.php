@@ -40,7 +40,7 @@ class Opio_Handler {
             echo esc_html("Invalid entity type");
             return;
         }
-        $business_string = wp_remote_get($biz_url);
+        $business_string = wp_remote_get($biz_url, array('headers' => \WP_Opio_Reviews\opio_page_headers()));
         if (is_wp_error($business_string)) {
             $error_message = $business_string->get_error_message();
             echo esc_html("Something went wrong: $error_message");

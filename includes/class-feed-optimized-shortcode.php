@@ -53,7 +53,7 @@ class Feed_Optimized_Shortcode {
      * Fetch HTML from feed.op.io.
      */
     private function fetch_feed($url) {
-        $response = wp_remote_get($url);
+        $response = wp_remote_get($url, array('headers' => \WP_Opio_Reviews\opio_page_headers()));
         if (is_wp_error($response)) {
             return null;
         }
